@@ -1,0 +1,14 @@
+{
+  "pages": [
+    "pages/bill/index",
+    "pages/bill/details",
+    "pages/bill/search",
+    "pages/bill/edit"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationStyle": "custom",
+    "navigationBarTextStyle": "black"
+  },
+  "usingComponents": {}
+}

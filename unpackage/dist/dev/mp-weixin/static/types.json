@@ -1,0 +1,133 @@
+{
+    	"expenditure": [{
+    			"type": 1,
+    			"value": "a14",
+    			"label": "生活",
+    			"iconclass": "iconshenghuo-"
+    		},
+    		{
+    			"type": 1,
+    			"value": "a2",
+    			"label": "转账",
+    			"iconclass": "iconzijinzhuanzhang"
+    		},
+    		{
+    			"type": 1,
+    			"value": "a3",
+    			"label": "餐饮",
+    			"iconclass": "iconcanyincanju"
+    		},
+    		{
+    			"type": 1,
+    			"value": "a4",
+    			"label": "交通",
+    			"iconclass": "iconqiche"
+    		},
+    		{
+    			"type": 1,
+    			"value": "a5",
+    			"label": "娱乐",
+    			"iconclass": "iconyule"
+    		},
+    		{
+    			"type": 1,
+    			"value": "a6",
+    			"label": "购物",
+    			"iconclass": "icongouwu"
+    		},
+    		{
+    			"type": 1,
+    			"value": "a7",
+    			"label": "通讯",
+    			"iconclass": "iconshouji"
+    		},
+
+    		{
+    			"type": 1,
+    			"value": "a9",
+    			"label": "红包",
+    			"iconclass": "iconhongbao"
+    		},
+    		{
+    			"type": 1,
+    			"value": "a10",
+    			"label": "取款",
+    			"iconclass": "iconshuaqiaqiapianyinhangqia"
+    		},
+    		{
+    			"type": 1,
+    			"value": "a11",
+    			"label": "租房",
+    			"iconclass": "iconfangzi"
+    		},
+    		{
+    			"type": 1,
+    			"value": "a12",
+    			"label": "医疗",
+    			"iconclass": "iconjia"
+    		},
+    		{
+    			"type": 1,
+    			"value": "a13",
+    			"label": "教育",
+    			"iconclass": "iconjiaoyu"
+    		},
+    		{
+    			"type": 1,
+    			"value": "a14",
+    			"label": "其它",
+    			"iconclass": "iconqita"
+    		}, {
+    			"type": 2,
+    			"value": "b1",
+    			"label": "薪资",
+    			"iconclass": "iconshuaqiaqiapianyinhangqia"
+    		}, {
+    			"type": 2,
+    			"value": "b2",
+    			"label": "奖金",
+    			"iconclass": "iconhuiyuanjiangjin"
+    		}, {
+    			"type": 2,
+    			"value": "b3",
+    			"label": "借入",
+    			"iconclass": "iconjiekuan"
+    		}, {
+    			"type": 2,
+    			"value": "b4",
+    			"label": "收债",
+    			"iconclass": "icondkw_jiekuan"
+    		}, {
+    			"type": 2,
+    			"value": "b5",
+    			"label": "投资",
+    			"iconclass": "icontouzixiangmu"
+    		}, {
+    			"type": 2,
+    			"value": "b6",
+    			"label": "其它",
+    			"iconclass": "iconqita"
+    		}
+    	],
+    	"paytype": [{
+    			"value": 5,
+    			"label": "现金"
+    		},
+    		{
+    			"value": 1,
+    			"label": "微信"
+    		}, {
+    			"value": 2,
+    			"label": "支付宝"
+    		}, {
+    			"value": 3,
+    			"label": "银行卡"
+    		}, {
+    			"value": 4,
+    			"label": "信用卡"
+    		}, {
+    			"value": 6,
+    			"label": "其它"
+    		}
+    	]
+    }

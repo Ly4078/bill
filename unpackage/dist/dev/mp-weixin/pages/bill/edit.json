@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "uni-icons": "/node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-icons/uni-icons",
+    "uni-nav-bar": "/node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-nav-bar/uni-nav-bar",
+    "uni-popup": "/node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-popup/uni-popup",
+    "simple-datetime-picker": "/node-modules/_@buuug7_uniapp-components@0.7.0@@buuug7/uniapp-components/lib/simple-datetime-picker/index"
+  }
+}
