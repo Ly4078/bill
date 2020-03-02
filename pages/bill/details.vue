@@ -81,12 +81,9 @@
 			}
 		},
 		onLoad: function(option) {
-
 			if (option.item) {
 				this.listdata = JSON.parse(option.item);
 			}
-
-
 		},
 		props: {},
 		data() {
@@ -212,13 +209,14 @@
 
 			.delbox,
 			.editbox {
-				width: 50%;
+				width: 49.5%;
 				height: 100%;
 				float: left;
 			}
 
 			.delbox {
 				color: $uni-color-error;
+				border-right: 2upx solid $uni-color-warning;
 			}
 		}
 	}

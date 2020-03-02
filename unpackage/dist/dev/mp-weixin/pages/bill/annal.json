@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "uni-list": "/node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-list/uni-list",
+    "uni-list-item": "/node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-list-item/uni-list-item",
+    "uni-popup": "/node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-popup/uni-popup",
+    "uni-nav-bar": "/node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-nav-bar/uni-nav-bar"
+  }
+}

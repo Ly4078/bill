@@ -2,7 +2,7 @@
 const db = uniCloud.database()
 exports.main = async (event, context) => {
 	const dbCmd = db.command
-	const res = await db.collection('list').where({
+	const res = await db.collection('listdata').where({
 		_id: event.dataId
 	}).remove().then(function(res) {})
 	return {

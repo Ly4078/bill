@@ -38,14 +38,15 @@
 				</view>
 		</view>
 		<button type="primary" class="savebut" @click="saveData">保存</button>
+		<!-- <button type="primary" class="savebut" @click="firstAgin">开始</button> -->
 		<uni-popup ref="popup" type="bottom">
 			<view class="tables" v-if="ismolnum==2">
-				<view class="payitem" v-for="(item,index) in paytype" :key="index+'ismdel'" @click="handlepay(item)">
+				<view class="payitem" v-for="(item,index) in paytype" :key="index" @click="handlepay(item)">
 					<text>{{item.label}}</text>
 				</view>
 			</view>
 			<view class="tables2" v-if="ismolnum==1">
-				<view class="titem" v-for="(item,index) in typeitems" :key="index+'index'" @click="handleType(item)">
+				<view class="titem" v-for="(item,index) in typeitems" :key="index" @click="handleType(item)">
 					<view :class="['iconfont',dataobj.genre==1?'exclass':'inclass',item.iconclass]"></view>
 					<text>{{item.label}}</text>
 				</view>
@@ -72,9 +73,19 @@
 		},
 		data(){
 			return{
+				statusDay:"2020-03-01 0:0",
+				endDay:'2020-03-01 23:59',
+				startTime:'',
+				endTime:'',
+				second:86400000,
+				fives:18000000,
+				twenty:82800000,
+				executionNum:0,
+				isAgain:false,
 				ismodel:false,
 				ismolnum:1,
 				paytype:[],
+				idArr:[],
 				types: {
 					collect: [],
 					branch: []
@@ -91,16 +102,19 @@
 			}
 		},
 		onLoad: function(option) {
-			this.paytype={ ...this.GlobalJson.paytype };
+			let _paytype={ ...this.GlobalJson.paytype };
 			let _types = { ...this.GlobalJson.expenditure };
+			for(let j in _paytype){
+				this.paytype.push(_paytype[j])
+			}
 			for (let i in _types) {
 				if (_types[i].type == 1) {
 					this.types.collect.push(_types[i]);
-					
 				} else if (_types[i].type == 2) {
 					this.types.branch.push(_types[i]);
 				}
 			}
+			
 			this.typeitems= this.types.collect;
 			if(option.item){
 				let _dataobj = JSON.parse(option.item);
@@ -115,6 +129,66 @@
 				uni.navigateBack({
 					delta: 1
 				});
+			},
+			firstAgin(){
+				this.startTime=new Date();
+				this.first();
+			},
+			first(){
+				const _this=this;
+				let userdate=(new Date((new Date(this.statusDay).getTime()+this.second)))
+				this.statusDay=this.utils.Format(userdate);
+				console.log("=====================================",this.statusDay)
+				// console.log(new Date(this.endDay).getTime(),new Date(this.statusDay).getTime())
+				if(new Date(this.endDay).getTime()<new Date(this.statusDay).getTime()){
+					this.endTime=new Date();
+					let second = parseInt((new Date().getTime() - this.startTime.getTime()) / 1000);
+					let waste = this.utils.formatSeconds(second)
+					console.log("共执行"+this.executionNum+"次任务,耗时"+waste)
+					console.log(this.idArr)
+					uni.showModal({
+					    title: '提示',
+					    content: '任务完成',
+					    success: function (res) {
+					        if (res.confirm) {
+					            console.log('用户点击确定');
+					        } else if (res.cancel) {
+					            console.log('用户点击取消');
+					        }
+					    }
+					});
+				}else{
+					let _num = this.utils.randomNum(5,9),ind=0;
+					let t1=new Date(this.statusDay).getTime()+this.fives;
+					let t2=new Date(this.statusDay).getTime()+this.twenty;
+					
+					let timer= setInterval(()=>{
+						if(ind<_num){
+							ind++;
+							let useDate= this.utils.randomNum(t1,t2);
+							_this.start(new Date(useDate));
+						}else{
+							clearInterval(timer);
+							_this.first()
+						}
+					},1200)
+				}
+			},
+			start(useDate){
+				let val= this.utils.randomNum(1,2);
+				let num = this.utils.randomNum(1,13);
+				this.dataobj.genre=val;
+				this.dataobj.createTime=useDate.getTime();
+				this.dataobj.amount=this.utils.randomNum(0.01,40.99);
+				this.dataobj.remarks=num>5?Math.random().toString(36).slice(-num):'';
+				if(val == 1){
+					this.dataobj.useType=this.types.collect[this.utils.randomNum(0,this.types.collect.length-1)];
+				}else{
+					this.dataobj.useType=this.types.branch[this.utils.randomNum(0,this.types.branch.length-1)];
+				}
+				this.dataobj.payType=this.paytype[this.utils.randomNum(0,this.paytype.length-1)];
+				this.dataobj.useDate=this.utils.Format(useDate);
+				this.saveData();
 			},
 			//切换收入支出
 			handleexin(val){
@@ -134,8 +208,6 @@
 					_Obj.useDate=this.utils.Format(new Date());
 					this.dataobj=_Obj;
 				}
-				
-				
 				if(val==1){
 					this.typeitems= this.types.collect;
 				}else{
@@ -154,38 +226,53 @@
 					mask:true
 				  })
 				  let _data={...this.dataobj},eventName='',_this=this;
-				  _data.useDategetTime=new Date(_data.useDate).getTime()
+				  _data.useDategetTime=new Date(_data.useDate).getTime();
+				  let dateArr=_data.useDate.split(' ');
+				  let dateArr2 = dateArr[0].split('-');
+				  _data.useYear=dateArr2[0];
+				  	_data.useMonth=dateArr2[1];
+				  	_data.useDay=dateArr2[2];
+					_data.useHour=dateArr[1];
 				  if(_data._id){
 					  eventName="update";
-					  // _data.changeTime=Date.now();
-					  _data.dataId=_data._id;
-					  delete _data._id;
 				  }else{
 					  eventName="add";
-					  // _data.createTime=Date.now();
 				  }
+		
 				  uniCloud.callFunction({
 				    name: eventName,
 				    data: _data
 				  }).then((res) => {
-				    uni.hideLoading()
-				    uni.showToast({
-				    	title:'数据保存成功',
-						mask:true,
-						duration:2000
-				    })
-					if(_data.dataId){
-						_data._id=_data.dataId;
-						delete _data.dataId;
-						try {
-						    uni.setStorageSync('editData', _data);
-						} catch (e) {
-						    // error
-						}
-					}
-					setTimeout(()=>{
-						_this.toback();
-					},2500)
+					  console.log(res)
+					  if(res.result.id){
+						  this.idArr.push(res.result.id);
+						    this.executionNum++;
+						  uni.hideLoading()
+						  uni.showToast({
+						  	title:'数据保存成功',
+						  	mask:true,
+						  	duration:2000
+						  })
+						  if(_data.dataId){
+						  	_data._id=_data.dataId;
+						  	delete _data.dataId;
+						  	try {
+						  	    uni.setStorageSync('editData', _data);
+						  	} catch (e) {
+						  	    // error
+						  	}
+						  }
+						  // setTimeout(()=>{
+						  // 	_this.toback();
+						  // },2500)
+					  }else{
+						  uni.showToast({
+						  	title:'保存失败，请重新输入',
+							icon:'none',
+						  	mask:true,
+						  	duration:2000
+						  })
+					  }
 				  }).catch((err) => {
 				    uni.hideLoading()
 				    uni.showToast({
@@ -217,7 +304,7 @@
 			},
 			// 确定选择的日期时间
 			handleSubmit(e) {
-				//console.log(e); // {year: "2019", month: "07", day: "17", hour: "15", minute: "21"}
+				// console.log(e); // {year: "2019", month: "07", day: "17", hour: "15", minute: "21"}
 				if (e.year && e.month && e.day) {
 					this.dataobj.useDate = `${e.year}-${e.month}-${e.day} ${e.hour}:${e.minute}`;
 				}

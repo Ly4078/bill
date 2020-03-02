@@ -95,11 +95,12 @@
 }
 .details .fixdbox .delbox.data-v-4e345653,
   .details .fixdbox .editbox.data-v-4e345653 {
-    width: 50%;
+    width: 49.5%;
     height: 100%;
     float: left;
 }
 .details .fixdbox .delbox.data-v-4e345653 {
     color: #dd524d;
+    border-right: 2rpx solid #f0ad4e;
 }
 

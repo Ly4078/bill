@@ -6,9 +6,9 @@
 				<uni-icons type="back" size="30"></uni-icons>
 			</view>
 		</uni-nav-bar>
-		<view class="" v-if="keys.length>0 && listData.length<1 && issearch_log">
+		<view class="" v-if="keys.length>0 && listData.total<1 && issearch_log">
 			<view class="search_log">
-				<view class="logs" v-for="(item,index) in keys" :key="index" @click="handlesey(item)">
+				<view class="logs" v-for="(item,index) in keys" :key="index" @click="handlesey(item,index)">
 					<text>{{item}}</text>
 					<uni-icons type="clear" color="#808080" size="28" @click.stop="handledel(item,index)"></uni-icons>
 				</view>
@@ -18,13 +18,20 @@
 			</view>
 		</view>
 
-		<uni-list v-show="listData.length">
+		<uni-list v-if="listData.total>0">
+			<!-- 占位 -->
 			<uni-list-item :show-arrow="false"></uni-list-item>
-			<uni-list-item v-for="(items,indexs) in listData" :key="indexs" @click="handleItem(items)" @longpress="handleLong(items)"
-			 :title="items.useType.label" :note="`${items.payType.label}`" :remarks="items.remarks" :amount="items.amount"
-			 :datetime="items.weekday" :icons="items.useType.iconclass" :genre="items.genre" :show-arrow="false"></uni-list-item>
+			<!-- 数据渲染 -->
+			<block v-for="(items,indexs) in listData.list" :key="indexs">
+				<uni-list-item @click="handleItem(items)" @longpress="handleLong(items,indexs)" :title="items.useType.label" :note="`${items.payType.label}`"
+				 :remarks="items.remarks" :amount="items.amount" :datetime="items.useDate" :icons="items.useType.iconclass" :genre="items.genre"
+				 :show-arrow="false"></uni-list-item>
+
+			</block>
+			<uni-load-more :status="status" :show-icon="true" v-if="showLoadMore"></uni-load-more>
 		</uni-list>
-		<view class="nodata" v-show="listData.length<1 && !issearch_log">
+
+		<view class="nodata" v-show="listData.total<1 && !issearch_log" @click="search">
 			<image class="" src="../../static/untils/icons/nodata.png" mode="aspectFit"></image>
 			<view class="notxt">
 				数据为空，点我重试~
@@ -49,6 +56,7 @@
 		uniListItem,
 		uniNavBar,
 		uniPopup,
+		uniLoadMore,
 		uniIcons
 	} from '@dcloudio/uni-ui';
 	let delayTimer;
@@ -58,6 +66,7 @@
 			uniListItem,
 			uniNavBar,
 			uniPopup,
+			uniLoadMore,
 			uniIcons
 		},
 		onLoad() {
@@ -65,13 +74,47 @@
 		},
 		data() {
 			return {
+				inds:'',
+				pageNum: 0,
 				issearch_log: true,
-				opearObj:{},
+				opearObj: {},
 				valueInput: "",
 				keys: [],
 				search_keys: [],
-				listData: []
+				listData: {},
+				status: 'more',
+				showLoadMore: true,
+				loadMoreText: "加载中..."
 			}
+		},
+		// 监听页面卸载  
+		onUnload() {
+			this.listData = {};
+			this.pageNum = 0;
+			this.status = "more";
+			this.showLoadMore = false;
+		},
+		// 上拉加载  
+		onReachBottom() {
+			this.pageNum += 1;
+			if (this.pageNum * 100 > this.listData.total) {
+				uni.showToast({
+					icon: 'none',
+					duration: 2000,
+					title: '没有更多数据了'
+				})
+			} else {
+				this.status = 'loading';
+				this.showLoadMore = true;
+				this.search();
+			}
+		},
+		// 下拉刷新  
+		onPullDownRefresh() {
+			this.status = 'loading';
+			this.showLoadMore = true;
+			this.pageNum = 0;
+			this.search();
 		},
 		methods: {
 			//返回上一页面
@@ -82,7 +125,6 @@
 			},
 			// 监听输入框 
 			inputValue(e) {
-				console.log(e.target.value)
 				let _value = e.target.value;
 				let i = 0;
 				if (delayTimer) {
@@ -104,6 +146,7 @@
 							} catch (e) {
 								// error
 							}
+							this.pageNum = 0;
 							this.search();
 						}
 					}
@@ -117,26 +160,31 @@
 				uniCloud.callFunction({
 					name: 'get',
 					data: {
-						useTypeLabel: this.valueInput
+						pageNum: this.pageNum,
+						label: this.valueInput
 					}
 				}).then((res) => {
 					uni.hideLoading()
 					this.issearch_log = false;
-					if (res.result.affectedDocs > 0) {
-						res.result.data.forEach(el => {
-							el.weekday = this.utils.getMyDay(el.useDate);
-						})
-						this.listData = [...res.result.data];
-						
+					this.showLoadMore = false;
+					if (res.result.list.length > 0) {
+						const _data = [...res.result.list];
+						if (this.pageNum == 0) {
+							this.listData = res.result;
+						} else {
+							this.listData.list = this.listData.list.concat(_data)
+						}
 					} else {
-						this.listData = [];
+						if (this.pageNum == 0) {
+							this.listData = {};
+						}
+						let msg = this.pageNum > 0 ? '没有更多数据了' : res.result.data.msg;
 						uni.showToast({
 							icon: 'none',
 							duration: 2000,
-							title: res.result.data.msg
+							title: msg
 						})
 					}
-					console.log('res:', res)
 				}).catch((err) => {
 					uni.hideLoading()
 					uni.showToast({
@@ -161,13 +209,11 @@
 			},
 			// 选择某个记录搜索
 			handlesey(item) {
-				console.log("handlesey:", item)
 				this.valueInput = item;
 				this.search();
 			},
 			// 删除某条记录
 			handledel(item, index) {
-				console.log("handledel")
 				this.keys.splice(index, 1)
 				let txt = this.keys.join(',')
 				try {
@@ -193,7 +239,8 @@
 				});
 			},
 			// 长按某条记录
-			handleLong(item) {
+			handleLong(item,index) {
+				this.inds=index;
 				this.opearObj = item;
 				this.$refs.searchPopup.open();
 			},
@@ -202,17 +249,14 @@
 				const _this = this;
 				if (val == 1) {
 					this.handleItem(this.opearObj)
-			
 				} else {
-					
 					uni.showModal({
 						title: '提示',
 						content: '是否确认删除此条数据？',
 						success: function(res) {
-							
 							if (res.confirm) {
 								uni.showLoading({
-									title:"数据删除中..."
+									title: "数据删除中..."
 								})
 								uniCloud.callFunction({
 									name: 'remove',
@@ -222,10 +266,11 @@
 								}).then((res) => {
 									uni.hideLoading();
 									uni.showToast({
-										title: `${res.result.msg}`,
+										title: res.result.msg,
 										duration: 2000
 									});
-									_this.search();
+									// _this.search();
+									_this.listData.list.splice(_this.inds,1);
 								}).catch((err) => {
 									uni.hideLoading();
 									uni.showModal({
@@ -234,14 +279,14 @@
 									})
 									console.error(err)
 								})
-			
+
 							} else if (res.cancel) {
 								console.log('用户点击取消');
 							}
 						}
 					});
 				}
-				
+
 				this.$refs.searchPopup.close();
 			},
 		},
@@ -276,7 +321,8 @@
 		text-align: center;
 		color: $uni-color-primary;
 	}
-	.nodata{
+
+	.nodata {
 		width: 100%;
 		margin: 25% 0;
 		// background: red;

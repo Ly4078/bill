@@ -14,7 +14,7 @@
 
 <style lang="scss">
 	
-	@import './static/fonticon.css';
+	@import './static/icons.css';
 	/*每个页面公共css */
 	body{
 		background-color: $uni-bg-color-hover;

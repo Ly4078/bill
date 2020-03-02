@@ -12,6 +12,18 @@
 		}, {
 			"path": "pages/bill/edit",
 			"style": {}
+		}, {
+			"path": "pages/bill/about",
+			"style": {}
+		}, {
+			"path": "pages/bill/site",
+			"style": {}
+		}, {
+			"path": "pages/bill/annal",
+			"style": {}
+		}, {
+			"path": "pages/bill/chart",
+			"style": {}
 		}
 	],
 	"globalStyle": {

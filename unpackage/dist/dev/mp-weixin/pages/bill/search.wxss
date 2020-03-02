@@ -52,4 +52,9 @@
   text-align: center;
   color: #007aff;
 }
+.nodata.data-v-475faea7 {
+  width: 100%;
+  margin: 25% 0;
+  text-align: center;
+}
 

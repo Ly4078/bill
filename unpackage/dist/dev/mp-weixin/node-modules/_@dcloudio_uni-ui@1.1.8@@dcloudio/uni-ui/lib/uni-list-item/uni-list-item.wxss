@@ -99,14 +99,14 @@
   color: #3b4144;
 }
 .amout_datetime.data-v-52da9bfc {
-  max-width: 30%;
+  max-width: 32%;
   text-align: right;
   color: #007aff;
 }
 .item-budget.data-v-52da9bfc {
   text-align: right;
   font-weight: bold;
-  color: #000;
+  color: #007aff;
 }
 .uni-list-item__content-title.data-v-52da9bfc {
   font-size: 28rpx;

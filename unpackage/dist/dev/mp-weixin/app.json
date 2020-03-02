@@ -3,12 +3,17 @@
     "pages/bill/index",
     "pages/bill/details",
     "pages/bill/search",
-    "pages/bill/edit"
+    "pages/bill/edit",
+    "pages/bill/about",
+    "pages/bill/site",
+    "pages/bill/annal",
+    "pages/bill/chart"
   ],
   "subPackages": [],
   "window": {
     "navigationStyle": "custom",
     "navigationBarTextStyle": "black"
   },
-  "usingComponents": {}
+  "usingComponents": {},
+  "sitemapLocation": "sitemap49.json"
 }

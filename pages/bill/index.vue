@@ -14,21 +14,22 @@
 		<uni-card mode="basic">
 			<view class="expenses">本月支出</view>
 			<view class="card-expen">
-				<view class="expenses-amount">{{iseye?'****':`¥ ${summary.expenses}`}}</view>
+				<view class="expenses-amount">{{iseye?'****':`¥ ${summary.exAmount}`}}</view>
 				<text :class="iseye?'iconfont iconyanjing':'iconfont iconyanjing1'" @click="iseye = !iseye"></text>
 			</view>
 			<view class="card-expen">
 				<view class="amout">
-					本月收入<text>{{iseye?'****':`¥ ${summary.income}`}}</text>
+					本月收入<text>{{iseye?'****':`¥ ${summary.inAmount}`}}</text>
 				</view>
 				<view class="amout" @click="setbudget">
-					预算剩余<text>{{iseye?'****':`¥ ${summary.budgetotal-summary.expenses}`}}</text>
+					预算剩余<text>{{iseye?'****':`¥ ${summary.budgetotal-summary.exAmount}`}}</text>
 				</view>
 			</view>
 			<view class="chartsbut">
-				<!-- <uni-icons type="loop" size="18" color="#4cd964"></uni-icons> -->
-				<text class="iconfont iconweibiaoti--"></text>
-				查看图表分析
+				<navigator url="./chart">
+					<text class="iconfont iconweibiaoti--"></text>
+					查看图表分析
+				</navigator>
 			</view>
 		</uni-card>
 		<uni-list v-for="(item,index) in lists" :key="index">
@@ -46,7 +47,7 @@
 						记一笔
 					</navigator>
 				</view>
-				<view class="more" @click="handleNavs">
+				<view class="more" @click="openNavs">
 					<uni-icons type="bars" size="30" color="#fff"></uni-icons>
 				</view>
 			</view>
@@ -64,6 +65,17 @@
 				<view class="" @click="moreOper(2)">
 					删除
 				</view>
+			</view>
+		</uni-popup>
+		<uni-popup ref="navs" type="bottom">
+			<view class="navsbox">
+				<view class="navsitem" v-for="item in navs" :key="item.id" @click="handleNav(item)">
+					<view :class="['iconfont',item.iconsClass]">
+
+					</view>
+					<text>{{item.value}}</text>
+				</view>
+
 			</view>
 		</uni-popup>
 	</view>
@@ -92,10 +104,13 @@
 			uniNavBar
 		},
 		onLoad() {
+			this.navs = [...this.Navs.navs];
 			const myDate = new Date();
-			this.nowdate.year = myDate.getFullYear();
-			this.nowdate.month = myDate.getMonth() + 1;
-			this.nowdate.day = myDate.getDate();
+			this.nowdate = {
+				year: myDate.getFullYear(),
+				month: myDate.getMonth() + 1,
+				day: myDate.getDate()
+			}
 		},
 		onShow() {
 			this.getSummary();
@@ -103,39 +118,42 @@
 		},
 		data() {
 			return {
+				navs: [],
+				lists: [],
+				budget: '',
+				pageNum: 0,
+				opearObj: {},
 				iseye: false,
 				isbudget: false,
 				isoperat: false,
-				budget: '',
-				opearObj: {},
 				nowdate: {
 					year: "",
 					month: "",
-					day: ""
-				},
-				pattern: {
-					buttonColor: "#4cd964",
-					color: "#fff"
+					day: "",
+					startTime: "",
+					endTime: ""
 				},
 				summary: {
 					budgetotal: 0, //当月预算金额
 					budgetId: '', // 当月预算金额数据ID
-					expenses: 0, //当月支出总额
-					income: 0 //当月收入总额
-				},
-				datalist: [],
-				lists: []
+					exAmount: 0, //当月支出总额
+					inAmount: 0 //当月收入总额
+				}
 			}
 		},
 		methods: {
 			// 获取汇总数据
 			getSummary() {
-				const _createTime = this.nowdate.year + '-' + this.nowdate.month + '-1';
-				const _yearMonth = this.nowdate.year + '-' + this.nowdate.month;
+				let _month = this.nowdate.month < 10 ? '0' + this.nowdate.month : this.nowdate.month;
+				this.nowdate.startTime = this.utils.monthDay(this.nowdate.year, this.nowdate.month, 1);
+				this.nowdate.endTime = this.utils.monthDay(this.nowdate.year, this.nowdate.month, 2);
 				const dataobj = {
-					yearMonth: new Date(_yearMonth).getTime(),
-					createTime: new Date(_createTime).getTime()
+					range: "month",
+					yearMonth: this.nowdate.year + '-' + this.nowdate.month,
+					startTime: this.nowdate.startTime,
+					endTime: this.nowdate.endTime
 				}
+				
 				uniCloud.callFunction({
 					name: 'summary',
 					data: dataobj
@@ -152,32 +170,33 @@
 			},
 			//获取列表数据
 			getData() {
-				const _date = this.nowdate.year + '-' + this.nowdate.month + '-' + this.nowdate.day;
-				const _createTime = new Date(_date).getTime();
+				this.nowdate.startTime = this.utils.monthDay(this.nowdate.year, this.nowdate.month, 1);
 				uniCloud.callFunction({
 					name: 'get',
 					data: {
-						createTime: _createTime
+						pageNum: this.pageNum,
+						range: 'day'
 					}
 				}).then((res) => {
 					let extotal = 0,
 						intotal = 0;
-					res.result.data.forEach(el => {
-						el.weekday = this.utils.getMyDay(el.useDate);
-						if (el.genre == 1) {
-							extotal += Number(el.amount)
-						} else if (el.genre == 2) {
-							intotal += Number(el.amount)
+					if (res.result.list.length > 0) {
+						res.result.list.forEach(el => {
+							el.weekday = this.utils.getMyDay(el.useDate);
+							if (el.genre == 1) {
+								extotal += Number(el.amount)
+							} else if (el.genre == 2) {
+								intotal += Number(el.amount)
+							}
+						})
+						let obj = {
+							datetime: `${this.nowdate.year}-${this.nowdate.month}-${this.nowdate.day}`,
+							budget: `收入：${intotal} 支出：${extotal}`,
+							listItem: res.result.list
 						}
-					})
-					let obj = {
-						datetime: `${this.nowdate.year}-${this.nowdate.month}-${this.nowdate.day}`,
-						budget: `收入：${intotal} 支出：${extotal}`,
-						listItem: res.result.data
+						this.lists = [];
+						this.lists.push(obj);
 					}
-					this.lists = [];
-					this.lists.push(obj);
-					
 				}).catch((err) => {
 					uni.showModal({
 						content: `查询失败，错误信息为：${err.message}`,
@@ -196,7 +215,6 @@
 				uni.showLoading({
 					title: '处理中...'
 				})
-
 				let nowmonth = this.nowdate.year + '-' + this.nowdate.month;
 				let eventName = "",
 					postData = {
@@ -235,21 +253,22 @@
 					console.error(err)
 				})
 			},
-			// 点击搜索按钮
+			// 点击顶部搜索按钮
 			clickSearch() {
+				this.$refs.navs.close();
 				this.$refs.indpopup.close();
 				uni.navigateTo({
 					url: './search'
 				});
 			},
-			//   点击某条记录
+			//  点击某条记录
 			handleItem(item) {
 				let _item = JSON.stringify(item)
 				uni.navigateTo({
 					url: './details?item=' + _item
 				});
 			},
-			// 长按某条记录
+			// 长按某条记录，选择下一步操作
 			handleLong(item) {
 				this.opearObj = item;
 				this.isoperat = true;
@@ -261,17 +280,14 @@
 				const _this = this;
 				if (val == 1) {
 					this.handleItem(this.opearObj)
-
 				} else {
-					
 					uni.showModal({
 						title: '提示',
 						content: '是否确认删除此条数据？',
 						success: function(res) {
-							
 							if (res.confirm) {
 								uni.showLoading({
-									title:"数据删除中..."
+									title: "数据删除中..."
 								})
 								uniCloud.callFunction({
 									name: 'remove',
@@ -281,7 +297,8 @@
 								}).then((res) => {
 									uni.hideLoading();
 									uni.showToast({
-										title: `${res.result.msg}`,
+										title: res.result.msg,
+										icon:'none',
 										duration: 2000
 									});
 									_this.getData();
@@ -304,8 +321,30 @@
 				this.$refs.indpopup.close();
 			},
 			//点击菜单按钮
-			handleNavs() {
-				console.log('navs')
+			openNavs() {
+				this.$refs.navs.open();
+			},
+			// 点击某个菜单跳转到相应页面
+			handleNav(item) {
+				console.log(item)
+				this.$refs.navs.close();
+				if (item.id == 1) {
+					uni.navigateTo({
+						url: './about'
+					});
+				} else if (item.id == 2) {
+					uni.navigateTo({
+						url: './site'
+					});
+				} else if (item.id == 3) {
+					uni.navigateTo({
+						url: './annal'
+					});
+				} else if (item.id == 4) {
+					uni.navigateTo({
+						url: './chart'
+					});
+				}
 			}
 		}
 	}
@@ -416,5 +455,36 @@
 	.butbox {
 		width: 100%;
 		height: 100upx;
+	}
+
+	.navsbox {
+		padding: 30upx;
+		background-color: $uni-text-color-disable;
+		border-top-right-radius: 60upx;
+		border-top-left-radius: 60upx;
+		display: flex;
+		justify-content: space-around;
+		align-items: left;
+		flex-wrap: wrap;
+
+		.navsitem {
+			width: 28%;
+			height: 180upx;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-around;
+			align-items: center;
+			font-size: 40upx;
+			margin: 20upx 10upx;
+			border-radius: 30upx;
+			background-color: $uni-text-color-inverse;
+
+			.iconfont {
+				font-size: 80upx;
+				font-weight: bold;
+				color: $uni-text-color-placeholder;
+			}
+		}
+
 	}
 </style>
