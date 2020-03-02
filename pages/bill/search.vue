@@ -69,8 +69,13 @@
 			uniLoadMore,
 			uniIcons
 		},
-		onLoad() {
-			this.getkeys();
+		onLoad(option) {
+			if(option.label){
+				this.valueInput=option.label;
+				this.search();
+			}else{
+				this.getkeys();
+			}
 		},
 		data() {
 			return {

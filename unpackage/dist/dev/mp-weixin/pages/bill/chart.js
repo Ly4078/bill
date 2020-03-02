@@ -133,7 +133,46 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni, uniCloud) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _uniNavBar = function _uniNavBar() {return __webpack_require__.e(/*! import() | node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-nav-bar/uni-nav-bar */ "node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-nav-bar/uni-nav-bar").then(__webpack_require__.bind(null, /*! @dcloudio/uni-ui/lib/uni-nav-bar/uni-nav-bar */ 79));};var _uniIcons = function _uniIcons() {return Promise.all(/*! import() | node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @dcloudio/uni-ui/lib/uni-icons/uni-icons */ 93));};var _uniCard = function _uniCard() {return __webpack_require__.e(/*! import() | node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-card/uni-card */ "node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-card/uni-card").then(__webpack_require__.bind(null, /*! @dcloudio/uni-ui/lib/uni-card/uni-card */ 122));};var _default =
+/* WEBPACK VAR INJECTION */(function(uni, uniCloud) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance");}function _iterableToArray(iter) {if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;}}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var _uniNavBar = function _uniNavBar() {return __webpack_require__.e(/*! import() | node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-nav-bar/uni-nav-bar */ "node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-nav-bar/uni-nav-bar").then(__webpack_require__.bind(null, /*! @dcloudio/uni-ui/lib/uni-nav-bar/uni-nav-bar */ 79));};var _uniIcons = function _uniIcons() {return Promise.all(/*! import() | node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @dcloudio/uni-ui/lib/uni-icons/uni-icons */ 93));};var _uniCard = function _uniCard() {return __webpack_require__.e(/*! import() | node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-card/uni-card */ "node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-card/uni-card").then(__webpack_require__.bind(null, /*! @dcloudio/uni-ui/lib/uni-card/uni-card */ 122));};var HistogramChart = function HistogramChart() {return Promise.all(/*! import() | components/stan-ucharts/HistogramChart */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/stan-ucharts/HistogramChart")]).then(__webpack_require__.bind(null, /*! @/components/stan-ucharts/HistogramChart.vue */ 143));};var PieChart = function PieChart() {return Promise.all(/*! import() | components/stan-ucharts/PieChart */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/stan-ucharts/PieChart")]).then(__webpack_require__.bind(null, /*! @/components/stan-ucharts/PieChart.vue */ 149));};var _default =
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -169,11 +208,16 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     uniCard: _uniCard,
     uniIcons: _uniIcons,
-    uniNavBar: _uniNavBar },
+    uniNavBar: _uniNavBar,
+    HistogramChart: HistogramChart,
+    PieChart: PieChart },
 
   data: function data() {
     return {
-      yearormonth: true, // true 按年查询  false 按月查询
+      genre: 1,
+      resultData: {},
+      typedata: [],
+      yearormonth: false, // true 按年查询  false 按月查询
       nowdate: {
         year: "",
         month: "",
@@ -188,13 +232,28 @@ __webpack_require__.r(__webpack_exports__);
         extotal: 0,
         budgetotal: 0 },
 
-      cardtitle: "" };
+      cardtitle: "",
+
+      histogramData: {
+        //总模板
+        categories: [],
+        series: [{
+          name: '', //数据名称
+          data: [],
+          show: true, //图形显示状态，配合点击图例显示状态，也可默认指定是否显示
+          color: '#FF7600', //	图形颜色 不传入则使用系统默认配色方案 即统一柱状图颜色
+          textSize: 12 //图形上方标注文字的字体大小
+        }] },
+
+
+      pieData: {
+        series: [] } };
+
 
   },
   onLoad: function onLoad(option) {
     var myDate = new Date();
     var _day = myDate.getDate();
-    console.log("option:", option);
     if (option.year) {
       this.nowdate = {
         year: option.year,
@@ -214,11 +273,14 @@ __webpack_require__.r(__webpack_exports__);
   },
   onShow: function onShow() {
     this.getSummary();
+    this.getchartData();
+  },
+  created: function created() {
+    // this.Drawing();
   },
   methods: {
     // 返回上一页面
     toback: function toback() {
-      console.log("back");
       uni.navigateBack({
         delta: 1,
         animationType: 'pop-out',
@@ -233,6 +295,7 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         this.cardtitle = "".concat(this.nowdate.year, "\u5E74").concat(this.nowdate.month, "\u6708");
       }
+      this.getchartData();
       this.getSummary();
     },
     // 点击card上方向图标，查询前/后一月/年的汇总数据
@@ -254,7 +317,6 @@ __webpack_require__.r(__webpack_exports__);
           }
         } else if (val == 2) {
           this.nowdate.month++;
-          console.log(this.nowdate.month);
           if (this.nowdate.month == 13) {
             this.nowdate.month = 1;
             this.nowdate.year++;
@@ -264,10 +326,27 @@ __webpack_require__.r(__webpack_exports__);
       }
       setTimeout(function () {
         _this.getSummary();
+        _this.getchartData();
       }, 500);
+    },
+    // 切换支出/收入
+    handinex: function handinex(val) {
+      this.genre = val;
+      this.getchartData();
+    },
+    // 点击某个类别，查看详情数据
+    handletype: function handletype(obj) {
+      var label = obj.useType.label;
+      uni.navigateTo({
+        url: './search?label=' + label });
+
     },
     // 获取汇总数据
     getSummary: function getSummary() {var _this2 = this;
+      uni.showLoading({
+        title: '数据加载中....',
+        mask: true });
+
       var _month = this.nowdate.month < 10 ? '0' + this.nowdate.month : this.nowdate.month;
       if (this.yearormonth) {
         this.nowdate.startTime = this.utils.monthYear(this.nowdate.year, 1);
@@ -283,20 +362,110 @@ __webpack_require__.r(__webpack_exports__);
         startTime: this.nowdate.startTime,
         endTime: this.nowdate.endTime };
 
-      console.log('dataobj:', dataobj);
+
       uniCloud.callFunction({
         name: 'summary',
         data: dataobj }).
       then(function (res) {
-        console.log("res:", res);
+        uni.hideLoading();
         _this2.summary = res.result;
-        console.log("summary:", _this2.summary);
       }).catch(function (err) {
+        uni.hideLoading();
         uni.showModal({
           content: "\u67E5\u8BE2\u5931\u8D25\uFF0C\u9519\u8BEF\u4FE1\u606F\u4E3A\uFF1A".concat(err.message),
           showCancel: false });
 
         console.error(err);
+      });
+    },
+    //获取图表数据
+    getchartData: function getchartData() {var _this3 = this;
+      uni.showLoading({
+        title: '数据加载中...',
+        mask: true });
+
+      var postData = {
+        genre: this.genre,
+        range: this.yearormonth ? 'year' : 'month',
+        year: this.nowdate.year };
+
+      if (!this.yearormonth) {
+        var _month = this.nowdate.month < 10 ? '0' + this.nowdate.month : this.nowdate.month;
+        postData.month = _month;
+      }
+      uniCloud.callFunction({
+        name: 'getchart',
+        data: postData }).
+      then(function (res) {
+        var use = _this3.yearormonth ? 'useMonth' : 'useDay';
+        res.result.histogramData.data = res.result.histogramData.data.sort(_this3.utils.compare(use));
+        res.result.pieData.data = res.result.pieData.data.sort(_this3.utils.compare('scale'));
+        _this3.resultData = _objectSpread({}, res.result);
+
+        _this3.typedata = _toConsumableArray(res.result.pieData.data);
+        _this3.working();
+      }).catch(function (err) {
+        uni.hideLoading();
+        uni.showModal({
+          content: "\u67E5\u8BE2\u5931\u8D25\uFF0C\u9519\u8BEF\u4FE1\u606F\u4E3A\uFF1A".concat(err.message),
+          showCancel: false });
+
+      });
+    },
+    // 数据加工处理
+    working: function working() {
+      var _histogramData = {
+        categories: [],
+        series: [] },
+
+      _pieData = {
+        series: [] },
+
+      Histog = _toConsumableArray(this.resultData.histogramData.data),
+      Pie = _toConsumableArray(this.resultData.pieData.data),
+      hisName = this.genre == 1 ? '支出' : '收入',
+      hisdata = [];
+
+      for (var i in Histog) {
+        var _month = '';
+        if (this.yearormonth) {
+          _month = Number(Histog[i].useMonth) + '月';
+        } else {
+          _month = Number(Histog[i].useDay) + '日';
+        }
+        _histogramData.categories.push(_month);
+        var _value = this.genre == 1 ? Histog[i].extotal : Histog[i].intotal;
+        hisdata.push(_value);
+      }
+      _histogramData.series = [{
+        name: hisName,
+        data: hisdata,
+        show: true, //图形显示状态，配合点击图例显示状态，也可默认指定是否显示
+        textSize: 12 //图形上方标注文字的字体大小
+      }];
+      this.histogramData = _objectSpread({}, _histogramData);
+
+
+      for (var _i in Pie) {
+        var _obj = {
+          name: Pie[_i].useType.label,
+          data: this.genre == 1 ? Pie[_i].extotal : Pie[_i].intotal };
+
+        _pieData.series.push(_obj);
+      }
+      this.pieData = _objectSpread({}, _pieData);
+
+      this.Drawing();
+    },
+    // 绘图
+    Drawing: function Drawing() {
+      uni.hideLoading();
+      var _this = this;
+      this.$nextTick(function () {
+        //柱状图
+        _this.$refs['histogramData'].showCharts();
+        // 饼状图
+        _this.$refs['pieChart'].showCharts();
       });
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/uni-cloud/dist/index.js */ 24)["default"]))

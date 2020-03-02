@@ -204,8 +204,13 @@ var delayTimer;var _default =
     uniLoadMore: _uniLoadMore,
     uniIcons: _uniIcons },
 
-  onLoad: function onLoad() {
-    this.getkeys();
+  onLoad: function onLoad(option) {
+    if (option.label) {
+      this.valueInput = option.label;
+      this.search();
+    } else {
+      this.getkeys();
+    }
   },
   data: function data() {
     return {

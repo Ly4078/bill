@@ -21,6 +21,43 @@
 				<text class="surplus">结余¥{{summary.budgetotal-summary.exAmount}}</text>
 			</view>
 		</uni-card>
+
+		<view class="inorex">
+			<view :class="genre==1?'selectbox':''" @click="handinex(1)">
+				支出
+			</view>
+			<view :class="genre==2?'selectbox':''" @click="handinex(2)">
+				收入
+			</view>
+		</view>
+
+		<!-- Number柱状图Compent1 -->
+		<view>
+			<histogram-chart ref="histogramData" :dataAs="histogramData" canvasId="ht0" />
+			<view style="text-align: center;line-height: 40px;">{{yearormonth?'月':'日'}}{{genre==1?'支出':'收入'}}汇总数据</view>
+		</view>
+
+		<!-- 饼状图 -->
+		<view class="pie_chart">
+			<pie-chart ref="pieChart" :dataAs="pieData" canvasId="index_pie_1" />
+			<view style="text-align: center;line-height: 40px;">各类别比例分布</view>
+		</view>
+
+		<view class="listbox">
+			<view class="boxitem" v-for="(item,index) in typedata" :key="index" @click="handletype(item)">
+				<view class="usetype">
+					<view :class="['iconfont',genre==1?'exclass':'inclass',item.useType.iconclass]"></view>
+					{{item.useType.label}}
+				</view>
+				<view class="">
+					{{item.scale}}%
+				</view>
+				<view class="scale">
+					¥ {{genre==1?item.extotal:item.intotal}}
+					<uni-icons type="forward" size="30" color="#808080"></uni-icons>
+				</view>
+			</view>
+		</view>
 	</view>
 </template>
 
@@ -30,15 +67,22 @@
 		uniIcons,
 		uniNavBar
 	} from '@dcloudio/uni-ui'
+	import HistogramChart from '@/components/stan-ucharts/HistogramChart.vue';
+	import PieChart from '@/components/stan-ucharts/PieChart.vue';
 	export default {
 		components: {
 			uniCard,
 			uniIcons,
-			uniNavBar
+			uniNavBar,
+			HistogramChart,
+			PieChart
 		},
 		data() {
 			return {
-				yearormonth: true, // true 按年查询  false 按月查询
+				genre: 1,
+				resultData: {},
+				typedata: [],
+				yearormonth: false, // true 按年查询  false 按月查询
 				nowdate: {
 					year: "",
 					month: "",
@@ -53,7 +97,23 @@
 					extotal: 0,
 					budgetotal: 0
 				},
-				cardtitle: ""
+				cardtitle: "",
+
+				histogramData: {
+					//总模板
+					categories: [],
+					series: [{
+						name: '', //数据名称
+						data: [],
+						show: true, //图形显示状态，配合点击图例显示状态，也可默认指定是否显示
+						color: '#FF7600', //	图形颜色 不传入则使用系统默认配色方案 即统一柱状图颜色
+						textSize: 12 //图形上方标注文字的字体大小
+
+					}]
+				},
+				pieData: {
+					series: []
+				}
 			}
 		},
 		onLoad(option) {
@@ -77,13 +137,15 @@
 
 		},
 		onShow() {
-			// this.getSummary();
+			this.getSummary();
 			this.getchartData();
+		},
+		created() {
+			// this.Drawing();
 		},
 		methods: {
 			// 返回上一页面
 			toback() {
-				console.log("back")
 				uni.navigateBack({
 					delta: 1,
 					animationType: 'pop-out',
@@ -99,7 +161,7 @@
 					this.cardtitle = `${this.nowdate.year}年${this.nowdate.month}月`;
 				}
 				this.getchartData();
-				// this.getSummary();
+				this.getSummary();
 			},
 			// 点击card上方向图标，查询前/后一月/年的汇总数据
 			handleCard(val) {
@@ -120,7 +182,6 @@
 						}
 					} else if (val == 2) {
 						this.nowdate.month++;
-						console.log(this.nowdate.month)
 						if (this.nowdate.month == 13) {
 							this.nowdate.month = 1;
 							this.nowdate.year++;
@@ -129,12 +190,28 @@
 					this.cardtitle = `${this.nowdate.year}年${this.nowdate.month}月`;
 				}
 				setTimeout(() => {
-					// _this.getSummary();
+					_this.getSummary();
 					_this.getchartData();
 				}, 500)
 			},
+			// 切换支出/收入
+			handinex(val) {
+				this.genre = val;
+				this.getchartData();
+			},
+			// 点击某个类别，查看详情数据
+			handletype(obj) {
+				let label = obj.useType.label;
+				uni.navigateTo({
+					url: './search?label=' + label
+				});
+			},
 			// 获取汇总数据
 			getSummary() {
+				uni.showLoading({
+					title: '数据加载中....',
+					mask: true
+				})
 				let _month = this.nowdate.month < 10 ? '0' + this.nowdate.month : this.nowdate.month;
 				if (this.yearormonth) {
 					this.nowdate.startTime = this.utils.monthYear(this.nowdate.year, 1);
@@ -155,10 +232,10 @@
 					name: 'summary',
 					data: dataobj
 				}).then((res) => {
-					console.log("res:", res)
+					uni.hideLoading();
 					this.summary = res.result;
-					console.log("summary:", this.summary)
 				}).catch((err) => {
+					uni.hideLoading();
 					uni.showModal({
 						content: `查询失败，错误信息为：${err.message}`,
 						showCancel: false
@@ -168,28 +245,93 @@
 			},
 			//获取图表数据
 			getchartData() {
-				let postData={
-					genre:1,
-					range: this.yearormonth?'year':'month',
-					year:this.nowdate.year
+				uni.showLoading({
+					title: '数据加载中...',
+					mask: true
+				})
+				let postData = {
+					genre: this.genre,
+					range: this.yearormonth ? 'year' : 'month',
+					year: this.nowdate.year
 				}
-				if(!this.yearormonth){
-					let _month=this.nowdate.month < 10 ? '0' + this.nowdate.month : this.nowdate.month;
-					postData.month=_month;
+				if (!this.yearormonth) {
+					let _month = this.nowdate.month < 10 ? '0' + this.nowdate.month : this.nowdate.month;
+					postData.month = _month;
 				}
-				console.log("postData:",postData)
 				uniCloud.callFunction({
 					name: 'getchart',
 					data: postData
 				}).then((res) => {
-					console.log("chart:", res)
+					let use = this.yearormonth ? 'useMonth' : 'useDay';
+					res.result.histogramData.data = res.result.histogramData.data.sort(this.utils.compare(use));
+					res.result.pieData.data = res.result.pieData.data.sort(this.utils.compare('scale'));
+					this.resultData = { ...res.result
+					};
+					this.typedata = [...res.result.pieData.data];
+					this.working();
 				}).catch((err) => {
+					uni.hideLoading();
 					uni.showModal({
 						content: `查询失败，错误信息为：${err.message}`,
 						showCancel: false
 					})
-					console.error(err)
 				})
+			},
+			// 数据加工处理
+			working() {
+				let _histogramData = {
+						categories: [],
+						series: []
+					},
+					_pieData = {
+						series: []
+					},
+					Histog = [...this.resultData.histogramData.data],
+					Pie = [...this.resultData.pieData.data],
+					hisName = this.genre == 1 ? '支出' : '收入',
+					hisdata = [];
+
+				for (let i in Histog) {
+					let _month = '';
+					if (this.yearormonth) {
+						_month = Number(Histog[i].useMonth) + '月';
+					} else {
+						_month = Number(Histog[i].useDay) + '日';
+					}
+					_histogramData.categories.push(_month);
+					let _value = this.genre == 1 ? Histog[i].extotal : Histog[i].intotal;
+					hisdata.push(_value)
+				}
+				_histogramData.series = [{
+					name: hisName,
+					data: hisdata,
+					show: true, //图形显示状态，配合点击图例显示状态，也可默认指定是否显示
+					textSize: 12 //图形上方标注文字的字体大小
+				}]
+				this.histogramData = { ..._histogramData
+				};
+
+				for (let i in Pie) {
+					let _obj = {
+						name: Pie[i].useType.label,
+						data: this.genre == 1 ? Pie[i].extotal : Pie[i].intotal,
+					}
+					_pieData.series.push(_obj);
+				}
+				this.pieData = { ..._pieData
+				};
+				this.Drawing();
+			},
+			// 绘图
+			Drawing() {
+				uni.hideLoading();
+				const _this = this;
+				this.$nextTick(() => {
+					//柱状图
+					_this.$refs['histogramData'].showCharts();
+					// 饼状图
+					_this.$refs['pieChart'].showCharts();
+				});
 			}
 		}
 	}
@@ -232,6 +374,68 @@
 
 				.surplus {
 					color: $uni-color-error;
+				}
+			}
+		}
+
+		.inorex {
+			width: 50%;
+			margin: 20upx 25%;
+			height: 70upx;
+
+			display: flex;
+			justify-content: space-around;
+			align-items: center;
+
+			&>view {
+				width: 130upx;
+				height: 100%;
+				line-height: 70upx;
+				text-align: center;
+				background-color: $uni-color-SkyBlue;
+				color: $uni-color-primary;
+				border-radius: 10upx;
+			}
+
+			.selectbox {
+				background-color: $uni-color-primary;
+				color: $uni-text-color-inverse;
+			}
+		}
+
+		.listbox {
+			width: 100%;
+			margin: 30upx 0;
+			.boxitem {
+				padding: 10upx 10upx 10upx 20upx;
+				display: flex;
+				background-color: $uni-text-color-inverse;
+				justify-content: space-between;
+				align-items: center;
+				margin: 10upx 0;
+
+				.usetype {
+					display: flex;
+					align-items: center;
+					justify-content: space-between;
+
+					.iconfont {
+						width: 60upx;
+						height: 60upx;
+						border-radius: 50%;
+						color: $uni-text-color-inverse;
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						font-size: 36upx;
+						margin-right: 10upx;
+					}
+				}
+
+				.scale {
+					display: flex;
+					align-items: center;
+					justify-content: space-around;
 				}
 			}
 		}

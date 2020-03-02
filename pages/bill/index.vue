@@ -144,6 +144,10 @@
 		methods: {
 			// 获取汇总数据
 			getSummary() {
+				uni.showLoading({
+					mask:true,
+					title:"数据加载中..."
+				})
 				let _month = this.nowdate.month < 10 ? '0' + this.nowdate.month : this.nowdate.month;
 				this.nowdate.startTime = this.utils.monthDay(this.nowdate.year, this.nowdate.month, 1);
 				this.nowdate.endTime = this.utils.monthDay(this.nowdate.year, this.nowdate.month, 2);
@@ -158,9 +162,11 @@
 					name: 'summary',
 					data: dataobj
 				}).then((res) => {
+					uni.hideLoading();
 					this.summary = res.result;
 					this.budget = res.result.budgetotal;
 				}).catch((err) => {
+					uni.hideLoading();
 					uni.showModal({
 						content: `查询失败，错误信息为：${err.message}`,
 						showCancel: false
@@ -170,6 +176,10 @@
 			},
 			//获取列表数据
 			getData() {
+				uni.showLoading({
+					mask:true,
+					title:"数据加载中..."
+				})
 				this.nowdate.startTime = this.utils.monthDay(this.nowdate.year, this.nowdate.month, 1);
 				uniCloud.callFunction({
 					name: 'get',
@@ -178,6 +188,7 @@
 						range: 'day'
 					}
 				}).then((res) => {
+					uni.hideLoading();
 					let extotal = 0,
 						intotal = 0;
 					if (res.result.list.length > 0) {
@@ -198,6 +209,7 @@
 						this.lists.push(obj);
 					}
 				}).catch((err) => {
+					uni.hideLoading();
 					uni.showModal({
 						content: `查询失败，错误信息为：${err.message}`,
 						showCancel: false
@@ -213,6 +225,7 @@
 			// 提交预算
 			submitBudget() {
 				uni.showLoading({
+					mask:true,
 					title: '处理中...'
 				})
 				let nowmonth = this.nowdate.year + '-' + this.nowdate.month;

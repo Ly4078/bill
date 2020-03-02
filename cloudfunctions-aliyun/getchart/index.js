@@ -109,7 +109,7 @@ exports.main = async (event, context) => {
 		delete el.list;
 	})
 	// 补充空位时间数据
-	let eachData = await uniCloud.callFunction({
+	let histogramData = await uniCloud.callFunction({
 		name: "supplement",
 		data: {
 			data: list1.result.data,
@@ -118,21 +118,21 @@ exports.main = async (event, context) => {
 			month: month
 		}
 	})
-	
+
 	// 计算各项数值所占比例
-	eachData.result.data.forEach((el) => {
-		el.total = total1;
-		let itemTotal = 0;
-		if (event.genre == 1) {
-			itemTotal = el.extotal;
-		} else if (event.genre == 2) {
-			itemTotal = el.intotal;
-		}
-		el.scale = (itemTotal / el.total).toFixed(2)
-	})
+	// histogramData.result.data.forEach((el) => {
+	// 	el.total = total1;
+	// 	let itemTotal = 0;
+	// 	if (event.genre == 1) {
+	// 		itemTotal = el.extotal;
+	// 	} else if (event.genre == 2) {
+	// 		itemTotal = el.intotal;
+	// 	}
+	// 	el.scale = ((itemTotal / el.total)*100).toFixed(2)
+	// })
 
 	// 数据分类分组
-	let list2 = await uniCloud.callFunction({
+	let pieData = await uniCloud.callFunction({
 		name: "group",
 		data: {
 			arr: listData,
@@ -141,7 +141,7 @@ exports.main = async (event, context) => {
 	})
 	// 计算各项数值
 	let total2 = 0;
-	list2.result.data.forEach((el) => {
+	pieData.result.data.forEach((el) => {
 		el.intotal = 0;
 		el.extotal = 0;
 		el.total = 0;
@@ -160,7 +160,7 @@ exports.main = async (event, context) => {
 		delete el.list
 	})
 	// 计算各项数值所占比例
-	list2.result.data.forEach((el) => {
+	pieData.result.data.forEach((el) => {
 		el.total = total2;
 		let itemTotal = 0;
 		if (event.genre == 1) {
@@ -168,15 +168,13 @@ exports.main = async (event, context) => {
 		} else if (event.genre == 2) {
 			itemTotal = el.intotal;
 		}
-		el.scale = (itemTotal / el.total).toFixed(2)
+		el.scale = ((itemTotal / el.total)*100).toFixed(2)
 	})
 
 
 	//返回数据给客户端
 	return {
-		list: listData,
-		eachData: eachData,
-		list2: list2,
-		total: totalRes
+		histogramData: histogramData.result,
+		pieData: pieData.result
 	}
 };

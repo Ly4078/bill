@@ -93,6 +93,18 @@ export default {
 		_day = _day < 10 ? '0' + _day : _day;
 		return `${e.getFullYear()}-${_month}-${_day} ${e.getHours()}:${e.getMinutes()}`;
 	},
+	// 数组排序
+	compare(property) {
+	  return function (a, b) {
+	    var value1 = a[property];
+	    var value2 = b[property];
+	    return value1 - value2;
+	  }
+	},
+	// 生成随机颜色
+	randomColor(){
+	    return '#' + Math.floor( Math.random() * 0xffffff ).toString(16);
+	},
 	//生成从minNum到maxNum的随机数
 	randomNum(minNum, maxNum) {
 		switch (arguments.length) {

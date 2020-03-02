@@ -116,7 +116,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var uniIcons = function uniIcons() {return Promise.all(/*! import() | node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! ../uni-icons/uni-icons.vue */ 93));};var uniBadge = function uniBadge() {return __webpack_require__.e(/*! import() | node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-badge/uni-badge */ "node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-badge/uni-badge").then(__webpack_require__.bind(null, /*! ../uni-badge/uni-badge.vue */ 150));};
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var uniIcons = function uniIcons() {return Promise.all(/*! import() | node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! ../uni-icons/uni-icons.vue */ 93));};var uniBadge = function uniBadge() {return __webpack_require__.e(/*! import() | node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-badge/uni-badge */ "node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-badge/uni-badge").then(__webpack_require__.bind(null, /*! ../uni-badge/uni-badge.vue */ 161));};
 
 
 
