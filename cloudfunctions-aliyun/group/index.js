@@ -6,8 +6,8 @@ exports.main = async (event, context) => {
 	/*
 	参数说明
 	arr:需要分组的数据，必填，
-	range:分组方式(年/月)，非必填，可选值[year,month]
-	label:分组方式(年/月)，非必填
+	range:分组方式(日/月)，非必填，可选值[useDay,useMonth]
+	label:分组方式，非必填,关键字查询分类
 	range与label必填其一
 	*/
 	let dataArr=[];

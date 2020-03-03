@@ -5,7 +5,7 @@
 		</uni-nav-bar>
 		<view class="annallist">
 			<uni-list v-for="(item,index) in listData.list" :key="index">
-				<uni-list-item class="dateitem" :title="`${item.useYear}年${item.useMonth}`" budget="查年月账单" :show-arrow="false"
+				<uni-list-item class="dateitem" :title="`${item.useYear}年${item.useMonth}月`" budget="查年月账单" :show-arrow="false"
 				 @click="handleMonth(item.useYear,item.useMonth)"></uni-list-item>
 				<uni-list-item v-for="(items,ind) in item.list" :key="items.id" @click="handleItem(items)" @longpress="handleLong(items,index,ind)"
 				 :title="items.useType.label" :note="items.payType.label" :remarks="items.remarks" :amount="items.amount" :datetime="items.useDate"

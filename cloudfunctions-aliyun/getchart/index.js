@@ -75,8 +75,6 @@ exports.main = async (event, context) => {
 		listData = listData.concat(list.data);
 	}
 
-
-
 	// 数据加工
 	let _range = event.range == 'month' ? 'useDay' : 'useMonth';
 	// 数据分类分组
@@ -119,18 +117,6 @@ exports.main = async (event, context) => {
 		}
 	})
 
-	// 计算各项数值所占比例
-	// histogramData.result.data.forEach((el) => {
-	// 	el.total = total1;
-	// 	let itemTotal = 0;
-	// 	if (event.genre == 1) {
-	// 		itemTotal = el.extotal;
-	// 	} else if (event.genre == 2) {
-	// 		itemTotal = el.intotal;
-	// 	}
-	// 	el.scale = ((itemTotal / el.total)*100).toFixed(2)
-	// })
-
 	// 数据分类分组
 	let pieData = await uniCloud.callFunction({
 		name: "group",
@@ -168,7 +154,7 @@ exports.main = async (event, context) => {
 		} else if (event.genre == 2) {
 			itemTotal = el.intotal;
 		}
-		el.scale = ((itemTotal / el.total)*100).toFixed(2)
+		el.scale = ((itemTotal / el.total) * 100).toFixed(2)
 	})
 
 

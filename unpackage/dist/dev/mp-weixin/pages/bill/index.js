@@ -138,10 +138,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uniCloud, uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance");}function _iterableToArray(iter) {if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;}}var _uniNavBar = function _uniNavBar() {return __webpack_require__.e(/*! import() | node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-nav-bar/uni-nav-bar */ "node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-nav-bar/uni-nav-bar").then(__webpack_require__.bind(null, /*! @dcloudio/uni-ui/lib/uni-nav-bar/uni-nav-bar */ 79));};var _uniPagination = function _uniPagination() {return __webpack_require__.e(/*! import() | node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-pagination/uni-pagination */ "node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-pagination/uni-pagination").then(__webpack_require__.bind(null, /*! @dcloudio/uni-ui/lib/uni-pagination/uni-pagination */ 86));};var _uniIcons = function _uniIcons() {return Promise.all(/*! import() | node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @dcloudio/uni-ui/lib/uni-icons/uni-icons */ 93));};var _uniListItem = function _uniListItem() {return __webpack_require__.e(/*! import() | node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-list-item/uni-list-item */ "node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-list-item/uni-list-item").then(__webpack_require__.bind(null, /*! @dcloudio/uni-ui/lib/uni-list-item/uni-list-item */ 101));};var _uniPopup = function _uniPopup() {return __webpack_require__.e(/*! import() | node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-popup/uni-popup */ "node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-popup/uni-popup").then(__webpack_require__.bind(null, /*! @dcloudio/uni-ui/lib/uni-popup/uni-popup */ 108));};var _uniList = function _uniList() {return __webpack_require__.e(/*! import() | node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-list/uni-list */ "node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-list/uni-list").then(__webpack_require__.bind(null, /*! @dcloudio/uni-ui/lib/uni-list/uni-list */ 115));};var _uniCard = function _uniCard() {return __webpack_require__.e(/*! import() | node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-card/uni-card */ "node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-card/uni-card").then(__webpack_require__.bind(null, /*! @dcloudio/uni-ui/lib/uni-card/uni-card */ 122));};
-
-
-
+/* WEBPACK VAR INJECTION */(function(uni, uniCloud) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance");}function _iterableToArray(iter) {if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;}}var _uniNavBar = function _uniNavBar() {return __webpack_require__.e(/*! import() | node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-nav-bar/uni-nav-bar */ "node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-nav-bar/uni-nav-bar").then(__webpack_require__.bind(null, /*! @dcloudio/uni-ui/lib/uni-nav-bar/uni-nav-bar */ 79));};var _uniPagination = function _uniPagination() {return __webpack_require__.e(/*! import() | node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-pagination/uni-pagination */ "node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-pagination/uni-pagination").then(__webpack_require__.bind(null, /*! @dcloudio/uni-ui/lib/uni-pagination/uni-pagination */ 86));};var _uniIcons = function _uniIcons() {return Promise.all(/*! import() | node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @dcloudio/uni-ui/lib/uni-icons/uni-icons */ 93));};var _uniListItem = function _uniListItem() {return __webpack_require__.e(/*! import() | node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-list-item/uni-list-item */ "node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-list-item/uni-list-item").then(__webpack_require__.bind(null, /*! @dcloudio/uni-ui/lib/uni-list-item/uni-list-item */ 101));};var _uniPopup = function _uniPopup() {return __webpack_require__.e(/*! import() | node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-popup/uni-popup */ "node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-popup/uni-popup").then(__webpack_require__.bind(null, /*! @dcloudio/uni-ui/lib/uni-popup/uni-popup */ 108));};var _uniList = function _uniList() {return __webpack_require__.e(/*! import() | node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-list/uni-list */ "node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-list/uni-list").then(__webpack_require__.bind(null, /*! @dcloudio/uni-ui/lib/uni-list/uni-list */ 115));};var _uniCard = function _uniCard() {return __webpack_require__.e(/*! import() | node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-card/uni-card */ "node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-card/uni-card").then(__webpack_require__.bind(null, /*! @dcloudio/uni-ui/lib/uni-card/uni-card */ 122));};
 
 
 
@@ -284,6 +281,10 @@ var _default = {
   methods: {
     // 获取汇总数据
     getSummary: function getSummary() {var _this2 = this;
+      uni.showLoading({
+        mask: true,
+        title: "数据加载中..." });
+
       var _month = this.nowdate.month < 10 ? '0' + this.nowdate.month : this.nowdate.month;
       this.nowdate.startTime = this.utils.monthDay(this.nowdate.year, this.nowdate.month, 1);
       this.nowdate.endTime = this.utils.monthDay(this.nowdate.year, this.nowdate.month, 2);
@@ -298,9 +299,11 @@ var _default = {
         name: 'summary',
         data: dataobj }).
       then(function (res) {
+        uni.hideLoading();
         _this2.summary = res.result;
         _this2.budget = res.result.budgetotal;
       }).catch(function (err) {
+        uni.hideLoading();
         uni.showModal({
           content: "\u67E5\u8BE2\u5931\u8D25\uFF0C\u9519\u8BEF\u4FE1\u606F\u4E3A\uFF1A".concat(err.message),
           showCancel: false });
@@ -310,6 +313,10 @@ var _default = {
     },
     //获取列表数据
     getData: function getData() {var _this3 = this;
+      uni.showLoading({
+        mask: true,
+        title: "数据加载中..." });
+
       this.nowdate.startTime = this.utils.monthDay(this.nowdate.year, this.nowdate.month, 1);
       uniCloud.callFunction({
         name: 'get',
@@ -318,6 +325,7 @@ var _default = {
           range: 'day' } }).
 
       then(function (res) {
+        uni.hideLoading();
         var extotal = 0,
         intotal = 0;
         if (res.result.list.length > 0) {
@@ -338,6 +346,7 @@ var _default = {
           _this3.lists.push(obj);
         }
       }).catch(function (err) {
+        uni.hideLoading();
         uni.showModal({
           content: "\u67E5\u8BE2\u5931\u8D25\uFF0C\u9519\u8BEF\u4FE1\u606F\u4E3A\uFF1A".concat(err.message),
           showCancel: false });
@@ -353,6 +362,7 @@ var _default = {
     // 提交预算
     submitBudget: function submitBudget() {var _this4 = this;
       uni.showLoading({
+        mask: true,
         title: '处理中...' });
 
       var nowmonth = this.nowdate.year + '-' + this.nowdate.month;
@@ -486,7 +496,7 @@ var _default = {
 
       }
     } } };exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/uni-cloud/dist/index.js */ 24)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/uni-cloud/dist/index.js */ 24)["default"]))
 
 /***/ }),
 

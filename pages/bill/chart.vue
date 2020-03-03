@@ -118,23 +118,22 @@
 		},
 		onLoad(option) {
 			const myDate = new Date();
-			let _day = myDate.getDate();
 			if (option.year) {
 				this.nowdate = {
-					year: option.year,
-					month: option.month,
-					day: _day
+					day: String(option.year),
+					month: String(Number(option.month) < 10 ? '0' + Number(option.month) : option.month),
+					day: String(Number(myDate.getDate() + 1) < 10 ? '0' + myDate.getDate() : myDate.getDate())
 				};
-				this.cardtitle = `${option.year}年${option.month}月`;
+
 			} else {
 				this.nowdate = {
-					year: myDate.getFullYear(),
-					month: myDate.getMonth() + 1,
-					day: _day
-				};
-				this.cardtitle = `${this.nowdate.year}年${this.nowdate.month}月`;
-			}
+					year: String(myDate.getFullYear()),
+					month: String(Number(myDate.getMonth() + 1) < 10 ? '0' + (myDate.getMonth() + 1) : myDate.getMonth() + 1),
+					day: String(Number(myDate.getDate() + 1) < 10 ? '0' + myDate.getDate() : myDate.getDate())
+				}
 
+			}
+			this.cardtitle = `${this.nowdate.year}年${this.nowdate.month}月`;
 		},
 		onShow() {
 			this.getSummary();
@@ -168,27 +167,42 @@
 				const _this = this;
 				if (this.yearormonth) { // 按年度查询
 					if (val == 1) {
-						this.nowdate.year--;
+						let year = Number(this.nowdate.year);
+						year--;
+						this.nowdate.year = String(year);
 					} else if (val == 2) {
-						this.nowdate.year++;
+						let year = Number(this.nowdate.year);
+						year++;
+						this.nowdate.year = String(year);
 					}
 					this.cardtitle = `${this.nowdate.year}年`;
 				} else { // 按月份查询 
 					if (val == 1) {
-						this.nowdate.month--;
-						if (this.nowdate.month == 0) {
-							this.nowdate.month = 12;
-							this.nowdate.year--;
+						let month = Number(this.nowdate.month);
+						month--;
+						month = month < 10 ? '0' + month : month;
+						this.nowdate.month = String(month);
+						if (Number(this.nowdate.month) == 0) {
+							this.nowdate.month = '12';
+							let year = Number(this.nowdate.year);
+							year--;
+							this.nowdate.year = String(year);
 						}
 					} else if (val == 2) {
-						this.nowdate.month++;
-						if (this.nowdate.month == 13) {
-							this.nowdate.month = 1;
-							this.nowdate.year++;
+						let month = Number(this.nowdate.month);
+						month++;
+						month = month < 10 ? '0' + month : month;
+						this.nowdate.month = String(month);
+						if (Number(this.nowdate.month) == 13) {
+							this.nowdate.month = '01';
+							let year = Number(this.nowdate.year);
+							year++;
+							this.nowdate.year = String(year);
 						}
 					}
 					this.cardtitle = `${this.nowdate.year}年${this.nowdate.month}月`;
 				}
+				
 				setTimeout(() => {
 					_this.getSummary();
 					_this.getchartData();
@@ -212,22 +226,16 @@
 					title: '数据加载中....',
 					mask: true
 				})
-				let _month = this.nowdate.month < 10 ? '0' + this.nowdate.month : this.nowdate.month;
-				if (this.yearormonth) {
-					this.nowdate.startTime = this.utils.monthYear(this.nowdate.year, 1);
-					this.nowdate.endTime = this.utils.monthYear(this.nowdate.year, 2);
-				} else {
-					this.nowdate.startTime = this.utils.monthDay(this.nowdate.year, this.nowdate.month, 1);
-					this.nowdate.endTime = this.utils.monthDay(this.nowdate.year, this.nowdate.month, 2);
-				}
 
 				const dataobj = {
 					range: this.yearormonth ? 'year' : 'month',
-					yearMonth: this.nowdate.year + '/' + this.nowdate.month,
-					startTime: this.nowdate.startTime,
-					endTime: this.nowdate.endTime
+					yearMonth: this.nowdate.year + '-' + this.nowdate.month,
+					year: this.nowdate.year
 				}
-
+				if (!this.yearormonth) {
+					dataobj.month = this.nowdate.month
+				}
+				
 				uniCloud.callFunction({
 					name: 'summary',
 					data: dataobj
@@ -255,8 +263,7 @@
 					year: this.nowdate.year
 				}
 				if (!this.yearormonth) {
-					let _month = this.nowdate.month < 10 ? '0' + this.nowdate.month : this.nowdate.month;
-					postData.month = _month;
+					postData.month = this.nowdate.month;
 				}
 				uniCloud.callFunction({
 					name: 'getchart',
@@ -406,6 +413,7 @@
 		.listbox {
 			width: 100%;
 			margin: 30upx 0;
+
 			.boxitem {
 				padding: 10upx 10upx 10upx 20upx;
 				display: flex;

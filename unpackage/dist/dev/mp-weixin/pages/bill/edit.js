@@ -283,6 +283,7 @@ __webpack_require__.r(__webpack_exports__);
         console.log(this.idArr);
         uni.showModal({
           title: '提示',
+          mask: true,
           content: '任务完成',
           success: function success(res) {
             if (res.confirm) {
@@ -397,9 +398,9 @@ __webpack_require__.r(__webpack_exports__);
               // error
             }
           }
-          // setTimeout(()=>{
-          // 	_this.toback();
-          // },2500)
+          setTimeout(function () {
+            _this.toback();
+          }, 2500);
         } else {
           uni.showToast({
             title: '保存失败，请重新输入',

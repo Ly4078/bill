@@ -5,7 +5,7 @@ exports.main = async (event, context) => {
   console.log('event : ' + event)
   const collection = db.collection('budgetlist')
   const res = await collection.add(event)
-  return res
+  
   //返回数据给客户端
-  // return event
+  return res
 };

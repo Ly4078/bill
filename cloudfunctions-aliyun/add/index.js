@@ -37,7 +37,7 @@ exports.main = async (event, context) => {
 	}
 
 	// 添加数据创建时间
-	// event.createTime = Date.now();
+	event.createTime = Date.now();
 
 	// 保存数据
 	const collection = db.collection('listdata')

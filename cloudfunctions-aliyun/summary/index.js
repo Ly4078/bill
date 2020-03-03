@@ -3,20 +3,26 @@ const db = uniCloud.database()
 
 exports.main = async (event, context) => {
 	// 取指令
-	const dbCmd = db.command; 
+	const dbCmd = db.command;
 	const $ = db.command.aggregate
-	
+
 	/*
 	参数说明 
 	range:查询范围(年/月)，必填，可选值[year,month]
 	yearMonth:查询某月预算信息，非必填，如不填则不查询，当range=month有效
-	startTime:查询起始时间点，必填
-	endTime:查询结束时间点，必填
+	year:查询年限,必填
+	month:查询月份,非必填
+	day:查询日期,非必填
 	*/
 
 	//event为客户端上传的参数
 	console.log('event : ' + event)
-	
+
+	event.range = "month";
+	event.yearMonth = "2020-03";
+	event.year = "2020";
+	event.month = "03";
+	event.day = "03";
 	// 要返回给客户端的数据
 	const resobj = {
 		inAmount: 0, //收入总额
@@ -26,7 +32,7 @@ exports.main = async (event, context) => {
 		budgetId: '', //预算数据ID
 		budgetotal: 0 //预算金额
 	}
-	
+
 	//  参数校验
 	if (!event.range) {
 		return {
@@ -34,50 +40,71 @@ exports.main = async (event, context) => {
 			msg: 'range必填，可选值[month,year]'
 		}
 	}
-	if (!event.startTime) {
+	if (!event.year) {
 		return {
 			status: -1,
-			msg: 'startTime必填'
+			msg: 'year必填'
 		}
 	}
-	if (!event.endTime) {
+	if (!event.month) {
 		return {
 			status: -1,
-			msg: 'endTime必填'
+			msg: 'month必填'
 		}
 	}
 
-	// 查询startTime至endTime时间段内genre为1(支出)总笔数
-	const exCollection = db.collection('listdata').where({
-		genre: 1,
-		useDategetTime: dbCmd.gte(event.startTime).and(dbCmd.lte(event.endTime))
-	})
+	// 获取查询时间
+	const myDate = new Date();
+	let term = {
+		useYear: String(Number(event.year) < 10 ? '0' + Number(event.year) : event.year)
+	};
+	if (event.month) {
+		term.useMonth = String(Number(event.month) < 10 ? '0' + Number(event.month) : event.month);
+	}
+	if (event.day) {
+		term.useDay = String(Number(event.day) < 10 ? '0' + Number(event.day) : event.day);
+	}
+
+	// 查询时间段内genre为1(支出)总笔数
+	const exCollection = db.collection('listdata').where(dbCmd.and([{
+		genre: 1
+	}, term]));
 	const exlistTotal = await exCollection.count();
 	resobj.extotal = exlistTotal.total;
-	
-	// 查询startTime至endTime时间段内genre为2(收入)总笔数
-	const inCollection = db.collection('listdata').where({
-		genre: 2,
-		useDategetTime: dbCmd.gte(event.startTime).and(dbCmd.lte(event.endTime))
-	})
-	const inlistTotal = await inCollection.count()
+
+	// 查询时间段内genre为2(收入)总笔数
+	const inCollection = db.collection('listdata').where(dbCmd.and([{
+		genre: 2
+	}, term]));
+	const inlistTotal = await inCollection.count();
 	resobj.intotal = inlistTotal.total;
 
 	// //查询符合条件的数据列表
-	const collection = db.collection('listdata').where({
-		useDategetTime: dbCmd.gte(event.startTime).and(dbCmd.lte(event.endTime))
-	})
+	const collection = db.collection('listdata').where(term);
 
-	// 查询计算收支总额
-	const lists = await collection.orderBy("useDategetTime", "desc").get();
-	lists.data.forEach(el => {
-		if (el.genre == 1) {
-			resobj.exAmount += Number(el.amount)
-		} else if (el.genre == 2) {
-			resobj.inAmount += Number(el.amount)
-		}
-	})
+	// 获取符合条件的数据总数
+	const totalRes = await collection.count();
 
+	// 获取原始数据
+	let num = parseInt(totalRes.total / 100) + 1,
+		listData = [];
+
+	for (let i = 0; i < num; i++) {
+		let list = await collection.orderBy("useDategetTime", "desc").skip(i * 100).limit(100).get();
+		listData = listData.concat(list.data);
+	}
+	
+	// 计算时间段内支出/收入总额
+	if(listData.length>0){
+		listData.forEach(el => {
+			if (el.genre == 1) {
+				resobj.exAmount += Number(el.amount)
+			} else if (el.genre == 2) {
+				resobj.inAmount += Number(el.amount)
+			}
+		})
+	}
+	
 	// 当按月份查询且有月份参数时，查询月份预算额及数据ID
 	if (event.range == 'month' && event.yearMonth) {
 		const collection2 = db.collection('budgetlist').where({

@@ -70,12 +70,9 @@
 		<uni-popup ref="navs" type="bottom">
 			<view class="navsbox">
 				<view class="navsitem" v-for="item in navs" :key="item.id" @click="handleNav(item)">
-					<view :class="['iconfont',item.iconsClass]">
-
-					</view>
+					<view :class="['iconfont',item.iconsClass]"></view>
 					<text>{{item.value}}</text>
 				</view>
-
 			</view>
 		</uni-popup>
 	</view>
@@ -107,9 +104,9 @@
 			this.navs = [...this.Navs.navs];
 			const myDate = new Date();
 			this.nowdate = {
-				year: myDate.getFullYear(),
-				month: myDate.getMonth() + 1,
-				day: myDate.getDate()
+				year: String(myDate.getFullYear()),
+				month:String(Number(myDate.getMonth() + 1)<10?'0'+(myDate.getMonth() + 1):myDate.getMonth() + 1) ,
+				day:String(Number(myDate.getDate() + 1)<10?'0'+myDate.getDate():myDate.getDate())
 			}
 		},
 		onShow() {
@@ -145,19 +142,17 @@
 			// 获取汇总数据
 			getSummary() {
 				uni.showLoading({
-					mask:true,
-					title:"数据加载中..."
+					mask: true,
+					title: "数据加载中..."
 				})
-				let _month = this.nowdate.month < 10 ? '0' + this.nowdate.month : this.nowdate.month;
-				this.nowdate.startTime = this.utils.monthDay(this.nowdate.year, this.nowdate.month, 1);
-				this.nowdate.endTime = this.utils.monthDay(this.nowdate.year, this.nowdate.month, 2);
 				const dataobj = {
 					range: "month",
 					yearMonth: this.nowdate.year + '-' + this.nowdate.month,
-					startTime: this.nowdate.startTime,
-					endTime: this.nowdate.endTime
+					year:this.nowdate.year,
+					month:this.nowdate.month,
+					day:this.nowdate.day
 				}
-				
+
 				uniCloud.callFunction({
 					name: 'summary',
 					data: dataobj
@@ -177,10 +172,10 @@
 			//获取列表数据
 			getData() {
 				uni.showLoading({
-					mask:true,
-					title:"数据加载中..."
+					mask: true,
+					title: "数据加载中..."
 				})
-				this.nowdate.startTime = this.utils.monthDay(this.nowdate.year, this.nowdate.month, 1);
+				
 				uniCloud.callFunction({
 					name: 'get',
 					data: {
@@ -210,9 +205,10 @@
 					}
 				}).catch((err) => {
 					uni.hideLoading();
-					uni.showModal({
-						content: `查询失败，错误信息为：${err.message}`,
-						showCancel: false
+					uni.showToast({
+						icon:'none',
+						mask:true,
+						title:'未查询到相关信息'
 					})
 				})
 			},
@@ -225,7 +221,7 @@
 			// 提交预算
 			submitBudget() {
 				uni.showLoading({
-					mask:true,
+					mask: true,
 					title: '处理中...'
 				})
 				let nowmonth = this.nowdate.year + '-' + this.nowdate.month;
@@ -311,7 +307,7 @@
 									uni.hideLoading();
 									uni.showToast({
 										title: res.result.msg,
-										icon:'none',
+										icon: 'none',
 										duration: 2000
 									});
 									_this.getData();
