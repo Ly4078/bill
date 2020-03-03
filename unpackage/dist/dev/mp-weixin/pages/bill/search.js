@@ -207,6 +207,7 @@ var delayTimer;var _default =
   onLoad: function onLoad(option) {
     if (option.label) {
       this.valueInput = option.label;
+      this.isfocus = false;
       this.search();
     } else {
       this.getkeys();
@@ -216,6 +217,8 @@ var delayTimer;var _default =
     return {
       inds: '',
       pageNum: 0,
+      isnull: false,
+      isfocus: true,
       issearch_log: true,
       opearObj: {},
       valueInput: "",
@@ -223,7 +226,7 @@ var delayTimer;var _default =
       search_keys: [],
       listData: {},
       status: 'more',
-      showLoadMore: true,
+      showLoadMore: false,
       loadMoreText: "加载中..." };
 
   },
@@ -270,8 +273,9 @@ var delayTimer;var _default =
       if (delayTimer) {
         clearInterval(delayTimer);
       }
-      if (!_value) {
-        this.issearch_log = true;
+      if (!_value && this.isnull) {
+        this.showLoadMore = false;
+        this.isnull = false;
       }
       delayTimer = setInterval(function () {
         i++;
@@ -305,9 +309,15 @@ var delayTimer;var _default =
 
       then(function (res) {
         uni.hideLoading();
-        _this3.issearch_log = false;
+        console.log(res);
         _this3.showLoadMore = false;
-        if (res.result.list.length > 0) {
+        _this3.issearch_log = false;
+        if (res.result.status == -1) {
+          _this3.isnull = true;
+          return;
+        }
+        if (res.result.total > 0) {
+          _this3.isnull = false;
           var _data = _toConsumableArray(res.result.list);
           if (_this3.pageNum == 0) {
             _this3.listData = res.result;
@@ -317,6 +327,7 @@ var delayTimer;var _default =
         } else {
           if (_this3.pageNum == 0) {
             _this3.listData = {};
+            _this3.isnull = true;
           }
           var msg = _this3.pageNum > 0 ? '没有更多数据了' : res.result.data.msg;
           uni.showToast({
@@ -327,6 +338,7 @@ var delayTimer;var _default =
         }
       }).catch(function (err) {
         uni.hideLoading();
+        _this3.isnull = false;
         uni.showToast({
           icon: 'none',
           duration: 2000,

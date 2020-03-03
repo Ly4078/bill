@@ -37,6 +37,20 @@
 				<textarea placeholder="备注" v-model="dataobj.remarks" />
 				</view>
 		</view>
+		<view class="picturebox">
+				<view class="upimg" v-show="dataobj.picture">
+					<view class="closei" @click="closeimgSrc">
+						<uni-icons type="closeempty" size="24" color="#fff"></uni-icons>
+					</view>
+					<image class="imgsrc" :src="dataobj.picture" mode="aspectFit" @click="seeimgsrc"></image>
+				</view>
+				
+				<view class="plusimg" @click="upload" v-show="!dataobj.picture">
+					<uni-icons type="plus" size="70" color="#999"></uni-icons>
+					<text v-show="dataobj.genre==1">添加发票或支付截图</text>
+					<text v-show="dataobj.genre==2">添加收款凭证或截图</text>
+				</view>
+		</view>
 		<button type="primary" class="savebut" @click="saveData">保存</button>
 		<!-- <button type="primary" class="savebut" @click="firstAgin">开始</button> -->
 		<uni-popup ref="popup" type="bottom">
@@ -51,6 +65,9 @@
 					<text>{{item.label}}</text>
 				</view>
 			</view>
+		</uni-popup>
+		<uni-popup ref="picture" type="center">
+			<image :src="dataobj.picture" mode="aspectFit" />
 		</uni-popup>
 		<simple-datetime-picker ref="myPicker" @submit="handleSubmit" :start-year="2020" :end-year="2035" color="#007aff"></simple-datetime-picker>
 	</view>
@@ -96,7 +113,8 @@
 					useDate:"",
 					payType:{},
 					useType:{},
-					remarks:""
+					remarks:"",
+					picture:""
 				},
 				typeitems:[]
 			}
@@ -126,9 +144,15 @@
 		methods: {
 			//返回上一页面
 			toback() {
-				uni.navigateBack({
-					delta: 1
-				});
+				if(this.dataobj._id){
+					uni.redirectTo({
+					    url: './details?id=' + this.dataobj._id
+					});
+				}else{
+					uni.navigateBack({
+						delta: 1
+					});
+				}
 			},
 			
 			// 创建事件start
@@ -184,6 +208,7 @@
 				// this.dataobj.createTime=useDate.getTime();
 				this.dataobj.amount=this.utils.randomNum(0.01,40.99);
 				this.dataobj.remarks=num>5?Math.random().toString(36).slice(-num):'';
+				this.dataobj.picture='../../static/fapiao.jpg';
 				if(val == 1){
 					this.dataobj.useType=this.types.collect[this.utils.randomNum(0,this.types.collect.length-1)];
 				}else{
@@ -224,6 +249,53 @@
 			showModel(val){
 				this.ismolnum=val;
 				this.$refs.popup.open()
+			},
+			// 上传文件
+			upload() {
+				new Promise((resolve, reject) => {
+					uni.chooseImage({
+						chooseImage: 1,
+						success: res => {
+							const path = res.tempFilePaths[0]
+							const options = {
+								filePath: path
+							}
+							resolve(options)
+						},
+						fail: () => {
+							reject(new Error('Fail_Cancel'))
+						}
+					})
+				}).then((options) => {
+					uni.showLoading({
+						title: '文件上传中...'
+					})
+					return uniCloud.uploadFile(options)
+				}).then(res => {
+					uni.hideLoading()
+					uni.showToast({
+						title:'图片上传成功',
+						mask:true
+					})
+					this.dataobj.picture = res.fileID;
+				}).catch((err) => {
+					uni.hideLoading()
+					console.log(err);
+					if (err.message !== 'Fail_Cancel') {
+						uni.showModal({
+							content: `图片上传失败，请重新上传`,
+							showCancel: false
+						})
+					}
+				})
+			},
+			// 查看文件
+			seeimgsrc(){
+				this.$refs.picture.open();
+			},
+			// 删除当前文件
+			closeimgSrc(){
+				this.dataobj.picture='';
 			},
 			// 保存数据
 			saveData(){
@@ -395,6 +467,36 @@
 			.boxi:last-child{
 				border: none;
 			}
+		}
+		.picturebox{
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			.plusimg{
+				display: flex;
+				flex-direction:column ;
+				align-items: center;
+				justify-content: center;
+				color: $uni-text-color-grey;
+			}
+			.upimg{
+				position: relative;
+				.closei{
+					width: 50upx;
+					height: 50upx;
+					border-radius: 50%;
+					position: relative;
+					right: 0;
+					top: 0;
+					background-color:$uni-text-color-grey ;
+				}
+				.imgsrc{
+					width: 200upx;
+					height: 200upx;
+				}
+			}
+			
+			
 		}
 		.savebut{
 			width: 70%;

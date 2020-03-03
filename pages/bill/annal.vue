@@ -3,15 +3,22 @@
 		<uni-nav-bar fixed="true" status-bar="true" left-icon="back" title="账单记录" color="#333" @clickLeft="toback"
 		 background-color="#f1f1f1">
 		</uni-nav-bar>
-		<view class="annallist">
+
+		<view class="annallist" v-show="!isnull">
 			<uni-list v-for="(item,index) in listData.list" :key="index">
 				<uni-list-item class="dateitem" :title="`${item.useYear}年${item.useMonth}月`" budget="查年月账单" :show-arrow="false"
 				 @click="handleMonth(item.useYear,item.useMonth)"></uni-list-item>
 				<uni-list-item v-for="(items,ind) in item.list" :key="items.id" @click="handleItem(items)" @longpress="handleLong(items,index,ind)"
-				 :title="items.useType.label" :note="items.payType.label" :remarks="items.remarks" :amount="items.amount" :datetime="items.useDate"
-				 :icons="items.useType.iconclass" :genre="items.genre" :show-arrow="false"></uni-list-item>
+				 @onshowproof="onshowproof" :title="items.useType.label" :note="items.payType.label" :remarks="items.remarks"
+				 :amount="items.amount" :datetime="items.useDate" :icons="items.useType.iconclass" :picture="items.picture" :genre="items.genre"
+				 :show-arrow="false"></uni-list-item>
 			</uni-list>
-
+		</view>
+		<view class="nodata" v-if="isnull" @click="getlistdata">
+			<image class="" src="../../static/untils/icons/nodata.png" mode="aspectFit"></image>
+			<view class="notxt">
+				数据为空，点我重试~
+			</view>
 		</view>
 		<uni-popup ref="annalpopup" type="center">
 			<view class="operating">
@@ -22,6 +29,9 @@
 					删除
 				</view>
 			</view>
+		</uni-popup>
+		<uni-popup ref="picture" type="center">
+			<image :src="imgUrl" mode="aspectFit" />
 		</uni-popup>
 	</view>
 </template>
@@ -46,9 +56,11 @@
 				pageNum: 0,
 				executionNum: 0,
 				startTime: '',
+				imgUrl: "",
 				status: 'more',
 				listData: [],
 				islong: true,
+				isnull: false,
 				opearObj: {},
 				inds: {}
 			}
@@ -109,6 +121,7 @@
 				}).then((res) => {
 					uni.hideLoading();
 					if (res.result.total > 0) {
+						this.isnull = false;
 						if (res.result.list.length > 0) {
 							const _data = [...res.result.list];
 							if (this.pageNum == 0) {
@@ -129,17 +142,18 @@
 								duration: 2000,
 								title: msg
 							})
-
 						}
 					} else {
+						this.isnull = true;
 						uni.showToast({
-							title: res.result.msg,
+							title: '未查询到相关数据',
 							icon: 'none',
 							duration: 2000
 						});
 					}
 
 				}).catch((err) => {
+					this.isnull = true;
 					uni.showToast({
 						title: "查询失败，请重试",
 						icon: 'none',
@@ -218,7 +232,12 @@
 				uni.navigateTo({
 					url: './chart?year=' + year + "&month=" + month
 				});
-			}
+			},
+			// 查看凭证图片
+			onshowproof(url) {
+				this.imgUrl = url;
+				this.$refs.picture.open();
+			},
 		}
 	}
 </script>

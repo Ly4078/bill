@@ -32,12 +32,22 @@
 				</navigator>
 			</view>
 		</uni-card>
-		<uni-list v-for="(item,index) in lists" :key="index">
-			<uni-list-item class="dateitem" :title="item.datetime" :budget="item.budget" :show-arrow="false"></uni-list-item>
-			<uni-list-item v-for="(items,indexs) in item.listItem" :key="indexs" @click="handleItem(items)" @longpress="handleLong(items)"
-			 :title="items.useType.label" :note="`${items.payType.label}`" :remarks="items.remarks" :amount="items.amount"
-			 :datetime="items.weekday" :icons="items.useType.iconclass" :genre="items.genre" :show-arrow="false"></uni-list-item>
-		</uni-list>
+		<block v-if="!isnull">
+			<uni-list v-for="(item,index) in lists" :key="index">
+				<uni-list-item class="dateitem" :title="item.datetime" :budget="item.budget" :show-arrow="false"></uni-list-item>
+				<uni-list-item v-for="(items,indexs) in item.listItem" :key="indexs" @click="handleItem(items)" @longpress="handleLong(items)"
+				 @onshowproof="onshowproof" :title="items.useType.label" :note="`${items.payType.label}`" :remarks="items.remarks"
+				 :amount="items.amount" :datetime="items.weekday" :icons="items.useType.iconclass" :picture="items.picture" :genre="items.genre"
+				 :show-arrow="false"></uni-list-item>
+			</uni-list>
+		</block>
+
+		<view class="nodata" v-if="isnull" @click="getData">
+			<image class="" src="../../static/untils/icons/nodata.png" mode="aspectFit"></image>
+			<view class="notxt">
+				数据为空，点我重试~
+			</view>
+		</view>
 		<view class="butbox"></view>
 		<view class="fixdbox">
 			<view class="box">
@@ -75,6 +85,10 @@
 				</view>
 			</view>
 		</uni-popup>
+		<uni-popup ref="picture" type="center">
+			<image :src="imgUrl" mode="aspectFit" />
+		</uni-popup>
+
 	</view>
 </template>
 
@@ -89,7 +103,7 @@
 		uniNavBar
 	} from '@dcloudio/uni-ui'
 	// 也可使用此方式引入组件
-	// import uniBadge from '@dcloudio/uni-ui/lib/uni-badge/uni-badge.vue'
+	import Proof from '../../components/proof'
 	export default {
 		components: {
 			uniCard,
@@ -98,6 +112,7 @@
 			uniListItem,
 			uniIcons,
 			uniPagination,
+			Proof,
 			uniNavBar
 		},
 		onLoad() {
@@ -105,8 +120,8 @@
 			const myDate = new Date();
 			this.nowdate = {
 				year: String(myDate.getFullYear()),
-				month:String(Number(myDate.getMonth() + 1)<10?'0'+(myDate.getMonth() + 1):myDate.getMonth() + 1) ,
-				day:String(Number(myDate.getDate() + 1)<10?'0'+myDate.getDate():myDate.getDate())
+				month: String(Number(myDate.getMonth() + 1) < 10 ? '0' + (myDate.getMonth() + 1) : myDate.getMonth() + 1),
+				day: String(Number(myDate.getDate() + 1) < 10 ? '0' + myDate.getDate() : myDate.getDate())
 			}
 		},
 		onShow() {
@@ -118,8 +133,10 @@
 				navs: [],
 				lists: [],
 				budget: '',
+				imgUrl: "",
 				pageNum: 0,
 				opearObj: {},
+				isnull: false,
 				iseye: false,
 				isbudget: false,
 				isoperat: false,
@@ -148,9 +165,9 @@
 				const dataobj = {
 					range: "month",
 					yearMonth: this.nowdate.year + '-' + this.nowdate.month,
-					year:this.nowdate.year,
-					month:this.nowdate.month,
-					day:this.nowdate.day
+					year: this.nowdate.year,
+					month: this.nowdate.month,
+					day: this.nowdate.day
 				}
 
 				uniCloud.callFunction({
@@ -175,18 +192,23 @@
 					mask: true,
 					title: "数据加载中..."
 				})
-				
+
 				uniCloud.callFunction({
 					name: 'get',
 					data: {
 						pageNum: this.pageNum,
-						range: 'day'
+						range: 'day',
+						year:this.nowdate.year,
+						month:this.nowdate.month,
+						day:this.nowdate.day
 					}
 				}).then((res) => {
 					uni.hideLoading();
 					let extotal = 0,
 						intotal = 0;
-					if (res.result.list.length > 0) {
+					console.log(res)
+					if (res.result.total > 0) {
+						this.isnull = false;
 						res.result.list.forEach(el => {
 							el.weekday = this.utils.getMyDay(el.useDate);
 							if (el.genre == 1) {
@@ -202,13 +224,17 @@
 						}
 						this.lists = [];
 						this.lists.push(obj);
+					} else {
+						this.isnull = true;
 					}
 				}).catch((err) => {
 					uni.hideLoading();
+					this.lists = [];
+					this.isnull = true;
 					uni.showToast({
-						icon:'none',
-						mask:true,
-						title:'未查询到相关信息'
+						icon: 'none',
+						mask: true,
+						title: '未查询到相关信息'
 					})
 				})
 			},
@@ -265,6 +291,7 @@
 			// 点击顶部搜索按钮
 			clickSearch() {
 				this.$refs.navs.close();
+				this.$refs.picture.close();
 				this.$refs.indpopup.close();
 				uni.navigateTo({
 					url: './search'
@@ -283,6 +310,11 @@
 				this.isoperat = true;
 				this.isbudget = false;
 				this.$refs.indpopup.open();
+			},
+			// 查看凭证图片
+			onshowproof(url) {
+				this.imgUrl = url;
+				this.$refs.picture.open();
 			},
 			// 修改1 删除 2
 			moreOper(val) {

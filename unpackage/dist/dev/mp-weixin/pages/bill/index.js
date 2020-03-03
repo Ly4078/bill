@@ -228,6 +228,15 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
+
+
 // 也可使用此方式引入组件
 // import uniBadge from '@dcloudio/uni-ui/lib/uni-badge/uni-badge.vue'
 var _default = {
@@ -244,9 +253,9 @@ var _default = {
     this.navs = _toConsumableArray(this.Navs.navs);
     var myDate = new Date();
     this.nowdate = {
-      year: myDate.getFullYear(),
-      month: myDate.getMonth() + 1,
-      day: myDate.getDate() };
+      year: String(myDate.getFullYear()),
+      month: String(Number(myDate.getMonth() + 1) < 10 ? '0' + (myDate.getMonth() + 1) : myDate.getMonth() + 1),
+      day: String(Number(myDate.getDate() + 1) < 10 ? '0' + myDate.getDate() : myDate.getDate()) };
 
   },
   onShow: function onShow() {
@@ -260,6 +269,7 @@ var _default = {
       budget: '',
       pageNum: 0,
       opearObj: {},
+      isnull: false,
       iseye: false,
       isbudget: false,
       isoperat: false,
@@ -285,14 +295,12 @@ var _default = {
         mask: true,
         title: "数据加载中..." });
 
-      var _month = this.nowdate.month < 10 ? '0' + this.nowdate.month : this.nowdate.month;
-      this.nowdate.startTime = this.utils.monthDay(this.nowdate.year, this.nowdate.month, 1);
-      this.nowdate.endTime = this.utils.monthDay(this.nowdate.year, this.nowdate.month, 2);
       var dataobj = {
         range: "month",
         yearMonth: this.nowdate.year + '-' + this.nowdate.month,
-        startTime: this.nowdate.startTime,
-        endTime: this.nowdate.endTime };
+        year: this.nowdate.year,
+        month: this.nowdate.month,
+        day: this.nowdate.day };
 
 
       uniCloud.callFunction({
@@ -317,7 +325,7 @@ var _default = {
         mask: true,
         title: "数据加载中..." });
 
-      this.nowdate.startTime = this.utils.monthDay(this.nowdate.year, this.nowdate.month, 1);
+
       uniCloud.callFunction({
         name: 'get',
         data: {
@@ -328,7 +336,9 @@ var _default = {
         uni.hideLoading();
         var extotal = 0,
         intotal = 0;
-        if (res.result.list.length > 0) {
+        console.log(res);
+        if (res.result.total > 0) {
+          _this3.isnull = false;
           res.result.list.forEach(function (el) {
             el.weekday = _this3.utils.getMyDay(el.useDate);
             if (el.genre == 1) {
@@ -344,12 +354,17 @@ var _default = {
 
           _this3.lists = [];
           _this3.lists.push(obj);
+        } else {
+          _this3.isnull = true;
         }
       }).catch(function (err) {
         uni.hideLoading();
-        uni.showModal({
-          content: "\u67E5\u8BE2\u5931\u8D25\uFF0C\u9519\u8BEF\u4FE1\u606F\u4E3A\uFF1A".concat(err.message),
-          showCancel: false });
+        _this3.lists = [];
+        _this3.isnull = true;
+        uni.showToast({
+          icon: 'none',
+          mask: true,
+          title: '未查询到相关信息' });
 
       });
     },

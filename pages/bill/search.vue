@@ -1,16 +1,16 @@
 <template>
 	<view class="search">
 		<uni-nav-bar fixed="true" status-bar="true" color="#333" background-color="#f1f1f1">
-			<view><input type="text" focus="true" :value="valueInput" placeholder="搜索消费记录" @input="inputValue" /></view>
+			<view><input class="sinput" type="text" :focus="isfocus" :value="valueInput" placeholder="搜索消费记录" @input="inputValue" /></view>
 			<view slot="left" @click="toback">
 				<uni-icons type="back" size="30"></uni-icons>
 			</view>
 		</uni-nav-bar>
-		<view class="" v-if="keys.length>0 && listData.total<1 && issearch_log">
+		<view class="" v-if="keys.length>0 && issearch_log">
 			<view class="search_log">
 				<view class="logs" v-for="(item,index) in keys" :key="index" @click="handlesey(item,index)">
 					<text>{{item}}</text>
-					<uni-icons type="clear" color="#808080" size="28" @click.stop="handledel(item,index)"></uni-icons>
+					<uni-icons type="clear" color="#808080" size="28" @click.stop="handledel(item,index)" ></uni-icons>
 				</view>
 			</view>
 			<view class="clearAll" @click="clearAll">
@@ -18,20 +18,20 @@
 			</view>
 		</view>
 
-		<uni-list v-if="listData.total>0">
+		<uni-list v-if="!isnull">
 			<!-- 占位 -->
 			<uni-list-item :show-arrow="false"></uni-list-item>
 			<!-- 数据渲染 -->
 			<block v-for="(items,indexs) in listData.list" :key="indexs">
-				<uni-list-item @click="handleItem(items)" @longpress="handleLong(items,indexs)" :title="items.useType.label" :note="`${items.payType.label}`"
-				 :remarks="items.remarks" :amount="items.amount" :datetime="items.useDate" :icons="items.useType.iconclass" :genre="items.genre"
+				<uni-list-item @click="handleItem(items)" @longpress="handleLong(items,indexs)" :title="items.useType.label"  @onshowproof="onshowproof" :note="`${items.payType.label}`"
+				 :remarks="items.remarks" :amount="items.amount" :picture="items.picture" :datetime="items.useDate" :icons="items.useType.iconclass" :genre="items.genre"
 				 :show-arrow="false"></uni-list-item>
 
 			</block>
 			<uni-load-more :status="status" :show-icon="true" v-if="showLoadMore"></uni-load-more>
 		</uni-list>
 
-		<view class="nodata" v-show="listData.total<1 && !issearch_log" @click="search">
+		<view class="nodata" v-show="isnull" @click="search">
 			<image class="" src="../../static/untils/icons/nodata.png" mode="aspectFit"></image>
 			<view class="notxt">
 				数据为空，点我重试~
@@ -46,6 +46,9 @@
 					删除
 				</view>
 			</view>
+		</uni-popup>
+		<uni-popup ref="picture" type="center">
+			<image :src="imgUrl" mode="aspectFit" />
 		</uni-popup>
 	</view>
 </template>
@@ -70,17 +73,21 @@
 			uniIcons
 		},
 		onLoad(option) {
-			if(option.label){
-				this.valueInput=option.label;
+			if (option.label) {
+				this.valueInput = option.label;
+				this.isfocus = false;
 				this.search();
-			}else{
+			} else {
 				this.getkeys();
 			}
 		},
 		data() {
 			return {
-				inds:'',
+				inds: '',
+				imgUrl: "",
 				pageNum: 0,
+				isnull:false,
+				isfocus: true,
 				issearch_log: true,
 				opearObj: {},
 				valueInput: "",
@@ -88,7 +95,7 @@
 				search_keys: [],
 				listData: {},
 				status: 'more',
-				showLoadMore: true,
+				showLoadMore: false,
 				loadMoreText: "加载中..."
 			}
 		},
@@ -135,14 +142,16 @@
 				if (delayTimer) {
 					clearInterval(delayTimer);
 				}
-				if (!_value) {
-					this.issearch_log = true;
+				if (!_value && this.isnull) {
+					this.showLoadMore= false;
+					this.isnull=false;
 				}
 				delayTimer = setInterval(() => {
 					i++;
 					if (i === 30) {
 						if (_value) {
 							this.valueInput = _value;
+							this.pageNum=0;
 							this.keys.push(this.valueInput);
 							let txt = this.keys.join(',')
 							clearInterval(delayTimer);
@@ -159,6 +168,7 @@
 			},
 			// 搜索相关数据
 			search() {
+				this.$refs.picture.close();
 				uni.showLoading({
 					title: '数据加载中...'
 				})
@@ -170,9 +180,15 @@
 					}
 				}).then((res) => {
 					uni.hideLoading()
-					this.issearch_log = false;
+					console.log(res)
 					this.showLoadMore = false;
-					if (res.result.list.length > 0) {
+					this.issearch_log = false;
+					if (res.result.status == -1) {
+						this.isnull=true;
+						return
+					}
+					if (res.result.total > 0) {
+						this.isnull=false;
 						const _data = [...res.result.list];
 						if (this.pageNum == 0) {
 							this.listData = res.result;
@@ -182,6 +198,7 @@
 					} else {
 						if (this.pageNum == 0) {
 							this.listData = {};
+							this.isnull=true;
 						}
 						let msg = this.pageNum > 0 ? '没有更多数据了' : res.result.data.msg;
 						uni.showToast({
@@ -191,7 +208,8 @@
 						})
 					}
 				}).catch((err) => {
-					uni.hideLoading()
+					uni.hideLoading();
+					this.isnull=false;
 					uni.showToast({
 						icon: 'none',
 						duration: 2000,
@@ -199,7 +217,6 @@
 					})
 				})
 			},
-
 			// 获取搜记录
 			getkeys() {
 				try {
@@ -236,6 +253,12 @@
 					// error
 				}
 			},
+			// 查看凭证图片
+			onshowproof(url) {
+				this.imgUrl = url;
+				this.$refs.picture.open();
+				console.log('imgUrl:',this.imgUrl)
+			},
 			//   点击某条数据查看详情
 			handleItem(item) {
 				let _item = JSON.stringify(item)
@@ -244,8 +267,8 @@
 				});
 			},
 			// 长按某条记录
-			handleLong(item,index) {
-				this.inds=index;
+			handleLong(item, index) {
+				this.inds = index;
 				this.opearObj = item;
 				this.$refs.searchPopup.open();
 			},
@@ -275,7 +298,7 @@
 										duration: 2000
 									});
 									// _this.search();
-									_this.listData.list.splice(_this.inds,1);
+									_this.listData.list.splice(_this.inds, 1);
 								}).catch((err) => {
 									uni.hideLoading();
 									uni.showModal({
@@ -300,37 +323,39 @@
 </script>
 
 <style lang="scss" scoped>
-	.search_log {
-		background: $uni-text-color-inverse;
-		padding: 0 20upx;
-
-		.logs {
-			width: 100%;
-			padding: 24upx 0;
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
-			border-bottom: 1upx solid $uni-text-color-disable;
-
-			text {
-				color: $uni-text-color-back;
-			}
+	.search {
+		.sinput {
+			border-bottom: 1upx solid $uni-border-color;
+			padding-left: 10upx;
 		}
 
-	}
+		.search_log {
+			background: $uni-text-color-inverse;
+			padding: 0 20upx;
 
-	.clearAll {
-		width: 100%;
-		height: 100upx;
-		line-height: 100upx;
-		text-align: center;
-		color: $uni-color-primary;
-	}
+			.logs {
+				width: 100%;
+				padding: 24upx 0;
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				border-bottom: 1upx solid $uni-text-color-disable;
 
-	.nodata {
-		width: 100%;
-		margin: 25% 0;
-		// background: red;
-		text-align: center;
+				text {
+					color: $uni-text-color-back;
+				}
+			}
+
+		}
+
+		.clearAll {
+			width: 100%;
+			height: 100upx;
+			line-height: 100upx;
+			text-align: center;
+			color: $uni-color-primary;
+		}
+
+		
 	}
 </style>

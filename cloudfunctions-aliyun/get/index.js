@@ -14,7 +14,7 @@ exports.main = async (event, context) => {
 	day:查询日期,非必填,默认为当前日期,
 	id:数据ID,非必填,查询单个数据详情
 	*/
-	
+
 	// 参数校验
 	if (typeof(event.pageNum) == 'undefined') {
 		return {
@@ -35,10 +35,10 @@ exports.main = async (event, context) => {
 	// 获取查询时间
 	const myDate = new Date();
 	let month = event.month ? event.month : myDate.getMonth() + 1;
-	month = Number(month) < 10 ? '0' + month : month;
+	month = Number(month) < 10 ? '0' + Number(month) : month;
 	let year = event.year ? event.year : myDate.getFullYear();
 	let day = event.day ? event.day : myDate.getDate();
-	day = Number(day) < 10 ? '0' + day : day;
+	day = Number(day) < 10 ? '0' + Number(day) : day;
 	let term = {};
 
 	if (event.id) {
@@ -65,17 +65,22 @@ exports.main = async (event, context) => {
 			useYear: String(year)
 		}
 	}
-
+	resultData.term = term;
 	// 查询数据库
-	const collection = db.collection('listdata').where(dbCmd.or(term, {
-		useType: {
-			label: `/${event.label}/i`
-		}
-	}, {
-		payType: {
-			label: `/${event.label}/i`
-		}
-	}))
+	let collection;
+	if (event.label) {
+		collection = db.collection('listdata').where(dbCmd.or({
+			useType: {
+				label: `/${event.label}/i`
+			}
+		}, {
+			payType: {
+				label: `/${event.label}/i`
+			}
+		}))
+	} else {
+		collection = db.collection('listdata').where(term)
+	}
 
 	// 查询符合条件数据的总数量
 	const totalRes = await collection.count();
@@ -84,7 +89,6 @@ exports.main = async (event, context) => {
 		resultData.total = totalRes.total;
 		// 查询数据列表
 		const list = await collection.orderBy("useDategetTime", "desc").skip(event.pageNum * 100).limit(100).get();
-		console.log('list:', list)
 		if (list.affectedDocs > 0) {
 			resultData.status = 1;
 			resultData.affectedDocs = list.affectedDocs;
@@ -104,11 +108,13 @@ exports.main = async (event, context) => {
 				return resultData
 			}
 		}
+
 		return resultData
 	} else {
 		return {
 			status: -1,
-			msg: '未查询到相关数据'
+			msg: '未查询到相关数据',
+			term:term
 		}
 	}
 };

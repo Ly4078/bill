@@ -14,7 +14,7 @@
 
 <style lang="scss">
 	
-	@import './static/icons.css';
+	@import './static/fonticon.css';
 	/*每个页面公共css */
 	body{
 		background-color: $uni-bg-color-hover;
@@ -42,6 +42,11 @@
 			&>view:nth-child(1) {
 				border-bottom: 2upx solid $uni-text-color-disable;
 			}
+		}
+		.nodata {
+			width: 100%;
+			margin: 20% 0;
+			text-align: center;
 		}
 	}
 </style>

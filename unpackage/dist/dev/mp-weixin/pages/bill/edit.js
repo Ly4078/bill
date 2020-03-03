@@ -208,8 +208,8 @@ __webpack_require__.r(__webpack_exports__);
 
   data: function data() {
     return {
-      statusDay: "2020-03-01 0:0",
-      endDay: '2020-03-01 23:59',
+      statusDay: "2020-03-02 0:0",
+      endDay: '2020-03-04 23:59',
       startTime: '',
       endTime: '',
       second: 86400000,
@@ -265,6 +265,8 @@ __webpack_require__.r(__webpack_exports__);
         delta: 1 });
 
     },
+
+    // 创建事件start
     firstAgin: function firstAgin() {
       this.startTime = new Date();
       this.first();
@@ -314,7 +316,7 @@ __webpack_require__.r(__webpack_exports__);
       var val = this.utils.randomNum(1, 2);
       var num = this.utils.randomNum(1, 13);
       this.dataobj.genre = val;
-      this.dataobj.createTime = useDate.getTime();
+      // this.dataobj.createTime=useDate.getTime();
       this.dataobj.amount = this.utils.randomNum(0.01, 40.99);
       this.dataobj.remarks = num > 5 ? Math.random().toString(36).slice(-num) : '';
       if (val == 1) {
@@ -326,6 +328,9 @@ __webpack_require__.r(__webpack_exports__);
       this.dataobj.useDate = this.utils.Format(useDate);
       this.saveData();
     },
+    // 创建数据 end
+
+
     //切换收入支出
     handleexin: function handleexin(val) {
       this.$refs.popup.close();

@@ -166,6 +166,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
 {
   components: {
     uniList: _uniList,
@@ -182,6 +189,7 @@ __webpack_require__.r(__webpack_exports__);
       status: 'more',
       listData: [],
       islong: true,
+      isnull: false,
       opearObj: {},
       inds: {} };
 
@@ -242,6 +250,7 @@ __webpack_require__.r(__webpack_exports__);
       then(function (res) {
         uni.hideLoading();
         if (res.result.total > 0) {
+          _this2.isnull = false;
           if (res.result.list.length > 0) {
             var _data = _toConsumableArray(res.result.list);
             if (_this2.pageNum == 0) {
@@ -262,17 +271,18 @@ __webpack_require__.r(__webpack_exports__);
               duration: 2000,
               title: msg });
 
-
           }
         } else {
+          _this2.isnull = true;
           uni.showToast({
-            title: res.result.msg,
+            title: '未查询到相关数据',
             icon: 'none',
             duration: 2000 });
 
         }
 
       }).catch(function (err) {
+        _this2.isnull = true;
         uni.showToast({
           title: "查询失败，请重试",
           icon: 'none',

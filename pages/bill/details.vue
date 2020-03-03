@@ -11,7 +11,7 @@
 		</uni-nav-bar>
 		<!-- #endif -->
 
-		<view class="lists">
+		<view class="lists" v-if="listdata.genre">
 			<view class="listitem">
 				<view class="typeimg iconlabel">
 					<view :class="['iconfont',listdata.genre==1?'exclass':'inclass',listdata.useType.iconclass]"></view>
@@ -32,7 +32,9 @@
 			<view class="listitem" v-show="listdata.remarks">
 				{{listdata.remarks}}
 			</view>
-
+			<view class="picture" v-if="listdata.picture">
+				<image class="pictureimg" :src="listdata.picture" mode="aspectFit"></image>
+			</view>
 		</view>
 		<!-- #ifdef APP-NVUE || H5 -->
 
@@ -64,7 +66,6 @@
 			uniNavBar
 		},
 		onShow: function() {
-
 			try {
 				const value = uni.getStorageSync('editData');
 				if (value) {
@@ -84,10 +85,19 @@
 			if (option.item) {
 				this.listdata = JSON.parse(option.item);
 			}
+			if (option.id) {
+				this.dataId = option.id;
+			}
 		},
 		props: {},
+		onShow() {
+			if (this.dataId) {
+				this.getoneData(this.dataId);
+			}
+		},
 		data() {
 			return {
+				dataId: '',
 				listdata: {}
 			}
 		},
@@ -99,6 +109,30 @@
 					animationDuration: 200
 				});
 			},
+			// 获取数据
+			getoneData(id) {
+				uniCloud.callFunction({
+					name: 'get',
+					data: {
+						id: id,
+						pageNum: 0
+					}
+				}).then((res) => {
+					uni.hideLoading();
+					console.log(res)
+					if (res.result.total > 0) {
+						this.listdata = res.result.list[0]
+					}
+				}).catch((err) => {
+					uni.hideLoading();
+					uni.showToast({
+						icon: 'none',
+						mask: true,
+						title: '未查询到相关信息'
+					})
+				})
+			},
+			// 删除数据
 			deldata() {
 				const _this = this;
 				uni.showModal({
@@ -127,7 +161,6 @@
 								})
 								console.error(err)
 							})
-
 						} else if (res.cancel) {
 							console.log('用户点击取消');
 						}
@@ -136,8 +169,9 @@
 			},
 			// 修改数据
 			editdata() {
+				this.listdata.picture = this.listdata.picture ? this.listdata.picture : '';
 				let _item = JSON.stringify(this.listdata)
-				uni.navigateTo({
+				uni.redirectTo({
 					url: './edit?item=' + _item
 				});
 			}
@@ -194,6 +228,14 @@
 
 		.listitem:last-child {
 			background-color: $uni-bg-color-hover;
+		}
+
+		.picture {
+			width: 100%;
+
+			.pictureimg {
+				width: 100%;
+			}
 		}
 
 		.fixdbox {

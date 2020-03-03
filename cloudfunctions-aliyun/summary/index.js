@@ -18,11 +18,6 @@ exports.main = async (event, context) => {
 	//event为客户端上传的参数
 	console.log('event : ' + event)
 
-	event.range = "month";
-	event.yearMonth = "2020-03";
-	event.year = "2020";
-	event.month = "03";
-	event.day = "03";
 	// 要返回给客户端的数据
 	const resobj = {
 		inAmount: 0, //收入总额
@@ -44,12 +39,6 @@ exports.main = async (event, context) => {
 		return {
 			status: -1,
 			msg: 'year必填'
-		}
-	}
-	if (!event.month) {
-		return {
-			status: -1,
-			msg: 'month必填'
 		}
 	}
 

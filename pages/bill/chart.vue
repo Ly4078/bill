@@ -3,15 +3,30 @@
 		<uni-nav-bar fixed="true" status-bar="true" left-icon="back" title="账单详情" color="#333" @clickLeft="toback"
 		 background-color="#f1f1f1">
 			<!-- #ifdef APP-NVUE || H5 -->
-			<view slot="right" @click="changeYearMonth">{{yearormonth?'月':'年'}}</view>
+			<view :class="['iconfont titelIcons',yearormonth?'iconGroup-1':'iconGroup-']" slot="right" @click="changeYearMonth">
+				<text class="itext">{{yearormonth?'月':'年'}}</text>
+			</view>
 			<!-- #endif -->
 		</uni-nav-bar>
 
 		<uni-card mode="basic" class="cardbox">
 			<view class="carditem card_title">
+				<!-- #ifdef APP-PLUS || H5 -->
 				<uni-icons type="back" size="24" color="#333" @click="handleCard(1)"></uni-icons>
 				<text>{{cardtitle}}账单</text>
 				<uni-icons type="forward" size="24" color="#333" @click="handleCard(2)"></uni-icons>
+				<!-- #endif -->
+				
+				<!-- #ifdef MP-WEIXIN -->
+				<view class="titlebox">
+					<uni-icons type="back" size="24" color="#333" @click="handleCard(1)"></uni-icons>
+					<text>{{cardtitle}}账单</text>
+					<uni-icons type="forward" size="24" color="#333" @click="handleCard(2)"></uni-icons>
+				</view>
+				<view :class="['iconfont titelIcons',yearormonth?'iconGroup-1':'iconGroup-']" slot="right" @click="changeYearMonth">
+					<text class="itext">{{yearormonth?'月':'年'}}</text>
+				</view>
+				<!-- #endif -->
 			</view>
 			<view class="carditem extotal">
 				共{{summary.extotal}}笔支出，¥{{summary.exAmount}}
@@ -32,15 +47,22 @@
 		</view>
 
 		<!-- Number柱状图Compent1 -->
-		<view>
+		<view v-show="pieData.series.length>0">
 			<histogram-chart ref="histogramData" :dataAs="histogramData" canvasId="ht0" />
 			<view style="text-align: center;line-height: 40px;">{{yearormonth?'月':'日'}}{{genre==1?'支出':'收入'}}汇总数据</view>
 		</view>
 
 		<!-- 饼状图 -->
-		<view class="pie_chart">
+		<view class="pie_chart" v-show="pieData.series.length>0">
 			<pie-chart ref="pieChart" :dataAs="pieData" canvasId="index_pie_1" />
 			<view style="text-align: center;line-height: 40px;">各类别比例分布</view>
+		</view>
+
+		<view class="nodata" v-if="pieData.series.length<1 && !isnull" @click="getData">
+			<image class="" src="../../static/untils/icons/nodata.png" mode="aspectFit"></image>
+			<view class="notxt">
+				数据为空，点我重试~
+			</view>
 		</view>
 
 		<view class="listbox">
@@ -98,7 +120,7 @@
 					budgetotal: 0
 				},
 				cardtitle: "",
-
+				isnull: true,
 				histogramData: {
 					//总模板
 					categories: [],
@@ -120,7 +142,7 @@
 			const myDate = new Date();
 			if (option.year) {
 				this.nowdate = {
-					day: String(option.year),
+					year: String(option.year),
 					month: String(Number(option.month) < 10 ? '0' + Number(option.month) : option.month),
 					day: String(Number(myDate.getDate() + 1) < 10 ? '0' + myDate.getDate() : myDate.getDate())
 				};
@@ -202,7 +224,7 @@
 					}
 					this.cardtitle = `${this.nowdate.year}年${this.nowdate.month}月`;
 				}
-				
+
 				setTimeout(() => {
 					_this.getSummary();
 					_this.getchartData();
@@ -235,7 +257,7 @@
 				if (!this.yearormonth) {
 					dataobj.month = this.nowdate.month
 				}
-				
+
 				uniCloud.callFunction({
 					name: 'summary',
 					data: dataobj
@@ -269,6 +291,7 @@
 					name: 'getchart',
 					data: postData
 				}).then((res) => {
+					this.isnull = false;
 					let use = this.yearormonth ? 'useMonth' : 'useDay';
 					res.result.histogramData.data = res.result.histogramData.data.sort(this.utils.compare(use));
 					res.result.pieData.data = res.result.pieData.data.sort(this.utils.compare('scale'));
@@ -327,6 +350,9 @@
 				}
 				this.pieData = { ..._pieData
 				};
+				if (this.pieData.series.length > 0) {
+					this.isnull = true;
+				}
 				this.Drawing();
 			},
 			// 绘图
@@ -361,6 +387,26 @@
 
 		/* #endif */
 
+		
+		.uni-navbar__header-btns-right {
+			height: 100%;
+		}
+
+		.titelIcons {
+			width: 60upx;
+			height: 90upx;
+			font-size: 80upx;
+			position: relative;
+
+			.itext {
+				position: relative;
+				top: -105upx;
+				left: 20upx;
+				font-size: 44upx;
+			}
+		}
+
+		
 		.cardbox {
 			.carditem {
 				padding: 10upx 0;
@@ -372,6 +418,21 @@
 				display: flex;
 				align-items: center;
 				justify-content: space-around;
+
+				/* #ifdef MP-WEIXIN */
+				.titlebox {
+					flex: 1;
+					display: flex;
+					align-items: center;
+					justify-content: space-around;
+				}
+
+				.iconfont {
+					width: 10%;
+					margin-top: -18upx;
+				}
+
+				/* #endif */
 			}
 
 			.intotal {

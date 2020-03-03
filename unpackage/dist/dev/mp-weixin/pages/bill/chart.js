@@ -204,6 +204,28 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 {
   components: {
     uniCard: _uniCard,
@@ -233,7 +255,7 @@ __webpack_require__.r(__webpack_exports__);
         budgetotal: 0 },
 
       cardtitle: "",
-
+      isnull: true,
       histogramData: {
         //总模板
         categories: [],
@@ -253,23 +275,22 @@ __webpack_require__.r(__webpack_exports__);
   },
   onLoad: function onLoad(option) {
     var myDate = new Date();
-    var _day = myDate.getDate();
     if (option.year) {
       this.nowdate = {
-        year: option.year,
-        month: option.month,
-        day: _day };
+        year: String(option.year),
+        month: String(Number(option.month) < 10 ? '0' + Number(option.month) : option.month),
+        day: String(Number(myDate.getDate() + 1) < 10 ? '0' + myDate.getDate() : myDate.getDate()) };
 
-      this.cardtitle = "".concat(option.year, "\u5E74").concat(option.month, "\u6708");
+
     } else {
       this.nowdate = {
-        year: myDate.getFullYear(),
-        month: myDate.getMonth() + 1,
-        day: _day };
+        year: String(myDate.getFullYear()),
+        month: String(Number(myDate.getMonth() + 1) < 10 ? '0' + (myDate.getMonth() + 1) : myDate.getMonth() + 1),
+        day: String(Number(myDate.getDate() + 1) < 10 ? '0' + myDate.getDate() : myDate.getDate()) };
 
-      this.cardtitle = "".concat(this.nowdate.year, "\u5E74").concat(this.nowdate.month, "\u6708");
+
     }
-
+    this.cardtitle = "".concat(this.nowdate.year, "\u5E74").concat(this.nowdate.month, "\u6708");
   },
   onShow: function onShow() {
     this.getSummary();
@@ -303,27 +324,42 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
       if (this.yearormonth) {// 按年度查询
         if (val == 1) {
-          this.nowdate.year--;
+          var year = Number(this.nowdate.year);
+          year--;
+          this.nowdate.year = String(year);
         } else if (val == 2) {
-          this.nowdate.year++;
+          var _year = Number(this.nowdate.year);
+          _year++;
+          this.nowdate.year = String(_year);
         }
         this.cardtitle = "".concat(this.nowdate.year, "\u5E74");
       } else {// 按月份查询 
         if (val == 1) {
-          this.nowdate.month--;
-          if (this.nowdate.month == 0) {
-            this.nowdate.month = 12;
-            this.nowdate.year--;
+          var month = Number(this.nowdate.month);
+          month--;
+          month = month < 10 ? '0' + month : month;
+          this.nowdate.month = String(month);
+          if (Number(this.nowdate.month) == 0) {
+            this.nowdate.month = '12';
+            var _year2 = Number(this.nowdate.year);
+            _year2--;
+            this.nowdate.year = String(_year2);
           }
         } else if (val == 2) {
-          this.nowdate.month++;
-          if (this.nowdate.month == 13) {
-            this.nowdate.month = 1;
-            this.nowdate.year++;
+          var _month2 = Number(this.nowdate.month);
+          _month2++;
+          _month2 = _month2 < 10 ? '0' + _month2 : _month2;
+          this.nowdate.month = String(_month2);
+          if (Number(this.nowdate.month) == 13) {
+            this.nowdate.month = '01';
+            var _year3 = Number(this.nowdate.year);
+            _year3++;
+            this.nowdate.year = String(_year3);
           }
         }
         this.cardtitle = "".concat(this.nowdate.year, "\u5E74").concat(this.nowdate.month, "\u6708");
       }
+
       setTimeout(function () {
         _this.getSummary();
         _this.getchartData();
@@ -347,21 +383,15 @@ __webpack_require__.r(__webpack_exports__);
         title: '数据加载中....',
         mask: true });
 
-      var _month = this.nowdate.month < 10 ? '0' + this.nowdate.month : this.nowdate.month;
-      if (this.yearormonth) {
-        this.nowdate.startTime = this.utils.monthYear(this.nowdate.year, 1);
-        this.nowdate.endTime = this.utils.monthYear(this.nowdate.year, 2);
-      } else {
-        this.nowdate.startTime = this.utils.monthDay(this.nowdate.year, this.nowdate.month, 1);
-        this.nowdate.endTime = this.utils.monthDay(this.nowdate.year, this.nowdate.month, 2);
-      }
 
       var dataobj = {
         range: this.yearormonth ? 'year' : 'month',
-        yearMonth: this.nowdate.year + '/' + this.nowdate.month,
-        startTime: this.nowdate.startTime,
-        endTime: this.nowdate.endTime };
+        yearMonth: this.nowdate.year + '-' + this.nowdate.month,
+        year: this.nowdate.year };
 
+      if (!this.yearormonth) {
+        dataobj.month = this.nowdate.month;
+      }
 
       uniCloud.callFunction({
         name: 'summary',
@@ -390,13 +420,13 @@ __webpack_require__.r(__webpack_exports__);
         year: this.nowdate.year };
 
       if (!this.yearormonth) {
-        var _month = this.nowdate.month < 10 ? '0' + this.nowdate.month : this.nowdate.month;
-        postData.month = _month;
+        postData.month = this.nowdate.month;
       }
       uniCloud.callFunction({
         name: 'getchart',
         data: postData }).
       then(function (res) {
+        _this3.isnull = false;
         var use = _this3.yearormonth ? 'useMonth' : 'useDay';
         res.result.histogramData.data = res.result.histogramData.data.sort(_this3.utils.compare(use));
         res.result.pieData.data = res.result.pieData.data.sort(_this3.utils.compare('scale'));
@@ -455,6 +485,9 @@ __webpack_require__.r(__webpack_exports__);
       }
       this.pieData = _objectSpread({}, _pieData);
 
+      if (this.pieData.series.length > 0) {
+        this.isnull = true;
+      }
       this.Drawing();
     },
     // 绘图
