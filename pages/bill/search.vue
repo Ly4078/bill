@@ -10,7 +10,7 @@
 			<view class="search_log">
 				<view class="logs" v-for="(item,index) in keys" :key="index" @click="handlesey(item,index)">
 					<text>{{item}}</text>
-					<uni-icons type="clear" color="#808080" size="28" @click.stop="handledel(item,index)" ></uni-icons>
+					<uni-icons type="clear" color="#808080" size="28" @click.stop="handledel(item,index)"></uni-icons>
 				</view>
 			</view>
 			<view class="clearAll" @click="clearAll">
@@ -23,8 +23,9 @@
 			<uni-list-item :show-arrow="false"></uni-list-item>
 			<!-- 数据渲染 -->
 			<block v-for="(items,indexs) in listData.list" :key="indexs">
-				<uni-list-item @click="handleItem(items)" @longpress="handleLong(items,indexs)" :title="items.useType.label"  @onshowproof="onshowproof" :note="`${items.payType.label}`"
-				 :remarks="items.remarks" :amount="items.amount" :picture="items.picture" :datetime="items.useDate" :icons="items.useType.iconclass" :genre="items.genre"
+				<uni-list-item @click="handleItem(items._id)" @longpress="handleLong(items,indexs)" :title="items.useType.label"
+				 @onshowproof="onshowproof" :note="`${items.payType.label}`" :remarks="items.remarks" :amount="items.amount"
+				 :picture="items.picture" :datetime="items.useDate" :icons="items.useType.iconclass" :genre="items.genre"
 				 :show-arrow="false"></uni-list-item>
 
 			</block>
@@ -86,7 +87,8 @@
 				inds: '',
 				imgUrl: "",
 				pageNum: 0,
-				isnull:false,
+				Token: uni.getStorageSync('userId') || '',
+				isnull: false,
 				isfocus: true,
 				issearch_log: true,
 				opearObj: {},
@@ -143,15 +145,15 @@
 					clearInterval(delayTimer);
 				}
 				if (!_value && this.isnull) {
-					this.showLoadMore= false;
-					this.isnull=false;
+					this.showLoadMore = false;
+					this.isnull = false;
 				}
 				delayTimer = setInterval(() => {
 					i++;
 					if (i === 30) {
 						if (_value) {
 							this.valueInput = _value;
-							this.pageNum=0;
+							this.pageNum = 0;
 							this.keys.push(this.valueInput);
 							let txt = this.keys.join(',')
 							clearInterval(delayTimer);
@@ -168,13 +170,15 @@
 			},
 			// 搜索相关数据
 			search() {
-				this.$refs.picture.close();
+				this.isfocus = false;
+				// this.$refs.picture.close();
 				uni.showLoading({
 					title: '数据加载中...'
 				})
 				uniCloud.callFunction({
 					name: 'get',
 					data: {
+						token: this.Token,
 						pageNum: this.pageNum,
 						label: this.valueInput
 					}
@@ -184,11 +188,11 @@
 					this.showLoadMore = false;
 					this.issearch_log = false;
 					if (res.result.status == -1) {
-						this.isnull=true;
+						this.isnull = true;
 						return
 					}
 					if (res.result.total > 0) {
-						this.isnull=false;
+						this.isnull = false;
 						const _data = [...res.result.list];
 						if (this.pageNum == 0) {
 							this.listData = res.result;
@@ -198,7 +202,7 @@
 					} else {
 						if (this.pageNum == 0) {
 							this.listData = {};
-							this.isnull=true;
+							this.isnull = true;
 						}
 						let msg = this.pageNum > 0 ? '没有更多数据了' : res.result.data.msg;
 						uni.showToast({
@@ -209,7 +213,7 @@
 					}
 				}).catch((err) => {
 					uni.hideLoading();
-					this.isnull=false;
+					this.isnull = false;
 					uni.showToast({
 						icon: 'none',
 						duration: 2000,
@@ -257,13 +261,12 @@
 			onshowproof(url) {
 				this.imgUrl = url;
 				this.$refs.picture.open();
-				console.log('imgUrl:',this.imgUrl)
+				console.log('imgUrl:', this.imgUrl)
 			},
 			//   点击某条数据查看详情
-			handleItem(item) {
-				let _item = JSON.stringify(item)
+			handleItem(Id) {
 				uni.navigateTo({
-					url: './details?item=' + _item
+					url: './details?id=' + Id
 				});
 			},
 			// 长按某条记录
@@ -276,7 +279,7 @@
 			moreOper(val) {
 				const _this = this;
 				if (val == 1) {
-					this.handleItem(this.opearObj)
+					this.handleItem(this.opearObj._id)
 				} else {
 					uni.showModal({
 						title: '提示',
@@ -356,6 +359,6 @@
 			color: $uni-color-primary;
 		}
 
-		
+
 	}
 </style>

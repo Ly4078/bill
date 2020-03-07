@@ -1,1 +1,1 @@
-<view class="about"><uni-nav-bar vue-id="1" fixed="true" status-bar="true" left-icon="back" title="关于" color="#333" background-color="#f1f1f1" data-event-opts="{{[['^clickLeft',[['toback']]]]}}" bind:clickLeft="__e" bind:__l="__l"></uni-nav-bar></view>
+<view class="about"><uni-nav-bar vue-id="57c1a2f0-1" fixed="true" status-bar="true" left-icon="back" title="关于" color="#333" background-color="#f1f1f1" data-event-opts="{{[['^clickLeft',[['toback']]]]}}" bind:clickLeft="__e" bind:__l="__l"></uni-nav-bar></view>

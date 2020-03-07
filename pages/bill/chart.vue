@@ -2,7 +2,7 @@
 	<view class="chart">
 		<uni-nav-bar fixed="true" status-bar="true" left-icon="back" title="账单详情" color="#333" @clickLeft="toback"
 		 background-color="#f1f1f1">
-			<!-- #ifdef APP-NVUE || H5 -->
+			<!-- #ifdef  APP-PLUS|| H5 -->
 			<view :class="['iconfont titelIcons',yearormonth?'iconGroup-1':'iconGroup-']" slot="right" @click="changeYearMonth">
 				<text class="itext">{{yearormonth?'月':'年'}}</text>
 			</view>
@@ -16,7 +16,7 @@
 				<text>{{cardtitle}}账单</text>
 				<uni-icons type="forward" size="24" color="#333" @click="handleCard(2)"></uni-icons>
 				<!-- #endif -->
-				
+
 				<!-- #ifdef MP-WEIXIN -->
 				<view class="titlebox">
 					<uni-icons type="back" size="24" color="#333" @click="handleCard(1)"></uni-icons>
@@ -47,18 +47,18 @@
 		</view>
 
 		<!-- Number柱状图Compent1 -->
-		<view v-show="pieData.series.length>0">
+		<view>
 			<histogram-chart ref="histogramData" :dataAs="histogramData" canvasId="ht0" />
-			<view style="text-align: center;line-height: 40px;">{{yearormonth?'月':'日'}}{{genre==1?'支出':'收入'}}汇总数据</view>
+			<view style="text-align: center;line-height: 40px;">{{yearormonth?'年':'月'}}{{genre==1?'支出':'收入'}}汇总数据</view>
 		</view>
 
 		<!-- 饼状图 -->
-		<view class="pie_chart" v-show="pieData.series.length>0">
+		<view class="pie_chart">
 			<pie-chart ref="pieChart" :dataAs="pieData" canvasId="index_pie_1" />
 			<view style="text-align: center;line-height: 40px;">各类别比例分布</view>
 		</view>
 
-		<view class="nodata" v-if="pieData.series.length<1 && !isnull" @click="getData">
+		<view class="nodata"  v-show="isnull" @click="getData">
 			<image class="" src="../../static/untils/icons/nodata.png" mode="aspectFit"></image>
 			<view class="notxt">
 				数据为空，点我重试~
@@ -105,6 +105,7 @@
 				resultData: {},
 				typedata: [],
 				yearormonth: false, // true 按年查询  false 按月查询
+				Token:uni.getStorageSync('userId') || '',
 				nowdate: {
 					year: "",
 					month: "",
@@ -112,6 +113,7 @@
 					startTime: "",
 					endTime: "",
 				},
+
 				summary: {
 					inAmount: 0,
 					intotal: 0,
@@ -120,7 +122,7 @@
 					budgetotal: 0
 				},
 				cardtitle: "",
-				isnull: true,
+				isnull: false,
 				histogramData: {
 					//总模板
 					categories: [],
@@ -252,7 +254,8 @@
 				const dataobj = {
 					range: this.yearormonth ? 'year' : 'month',
 					yearMonth: this.nowdate.year + '-' + this.nowdate.month,
-					year: this.nowdate.year
+					year: this.nowdate.year,
+					token:this.Token
 				}
 				if (!this.yearormonth) {
 					dataobj.month = this.nowdate.month
@@ -282,7 +285,8 @@
 				let postData = {
 					genre: this.genre,
 					range: this.yearormonth ? 'year' : 'month',
-					year: this.nowdate.year
+					year: this.nowdate.year,
+					token:this.Token
 				}
 				if (!this.yearormonth) {
 					postData.month = this.nowdate.month;
@@ -291,13 +295,14 @@
 					name: 'getchart',
 					data: postData
 				}).then((res) => {
-					this.isnull = false;
+
 					let use = this.yearormonth ? 'useMonth' : 'useDay';
 					res.result.histogramData.data = res.result.histogramData.data.sort(this.utils.compare(use));
 					res.result.pieData.data = res.result.pieData.data.sort(this.utils.compare('scale'));
 					this.resultData = { ...res.result
 					};
 					this.typedata = [...res.result.pieData.data];
+					uni.hideLoading();
 					this.working();
 				}).catch((err) => {
 					uni.hideLoading();
@@ -350,29 +355,37 @@
 				}
 				this.pieData = { ..._pieData
 				};
-				if (this.pieData.series.length > 0) {
+				
+				if (this.pieData.series.length == 0) {
 					this.isnull = true;
+				}else{
+					this.isnull = false;
 				}
 				this.Drawing();
 			},
 			// 绘图
 			Drawing() {
-				uni.hideLoading();
-				const _this = this;
 				this.$nextTick(() => {
 					//柱状图
-					_this.$refs['histogramData'].showCharts();
+					this.$refs['histogramData'].showCharts();
 					// 饼状图
-					_this.$refs['pieChart'].showCharts();
+					this.$refs['pieChart'].showCharts();
 				});
 			}
 		}
 	}
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 	.chart {
-
+		.nodata{
+			position:absolute;
+			top: 300upx;
+			background-color: $uni-bg-color-hover;
+			width: 100%;
+			height: 90%;
+			z-index: 2;
+		}
 		/* #ifdef MP-WEIXIN */
 		.mpleft {
 			margin-left: 60%;
@@ -387,7 +400,7 @@
 
 		/* #endif */
 
-		
+
 		.uni-navbar__header-btns-right {
 			height: 100%;
 		}
@@ -406,7 +419,7 @@
 			}
 		}
 
-		
+
 		.cardbox {
 			.carditem {
 				padding: 10upx 0;

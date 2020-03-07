@@ -95,15 +95,15 @@ export default {
 	},
 	// 数组排序
 	compare(property) {
-	  return function (a, b) {
-	    var value1 = a[property];
-	    var value2 = b[property];
-	    return value1 - value2;
-	  }
+		return function(a, b) {
+			var value1 = a[property];
+			var value2 = b[property];
+			return value1 - value2;
+		}
 	},
 	// 生成随机颜色
-	randomColor(){
-	    return '#' + Math.floor( Math.random() * 0xffffff ).toString(16);
+	randomColor() {
+		return '#' + Math.floor(Math.random() * 0xffffff).toString(16);
 	},
 	//生成从minNum到maxNum的随机数
 	randomNum(minNum, maxNum) {
@@ -161,7 +161,7 @@ export default {
 	SplitArr(data, value) {
 		let dataArr = [];
 		data.map(mapItem => {
-			console.log('mapItem:',mapItem)
+			console.log('mapItem:', mapItem)
 			if (dataArr.length == 0) {
 				dataArr.push({
 					useMonth: mapItem.useMonth,
@@ -170,11 +170,11 @@ export default {
 				})
 			} else {
 				let res = dataArr.some(item => { //判断相同日期，有就添加到当前项
-				console.log("item:",item)
+					console.log("item:", item)
 					if (item[value] == mapItem[value]) {
-						item.list=item.list.concat(mapItem.list)
+						item.list = item.list.concat(mapItem.list)
 						return true
-					}else{
+					} else {
 						console.log('aa')
 					}
 				})
@@ -182,11 +182,19 @@ export default {
 					dataArr.push({
 						useMonth: mapItem.useMonth,
 						useYear: mapItem.useYear,
-						list:mapItem.list
+						list: mapItem.list
 					})
 				}
 			}
 		})
 		return dataArr
+	},
+	// 手机号验证
+	checkPhone(phone) {
+		if ((/^1[3456789]\d{9}$/.test(phone))) {
+			return true;
+		}else{
+			return false;
+		}
 	}
 }

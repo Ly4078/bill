@@ -4,6 +4,9 @@ exports.main = async (event, context) => {
 	console.log('event : ' + event)
 	
 	/*
+	函数说明 
+	公用函数，根据指定条件，对一维数组进行分类为多维数组
+	
 	参数说明
 	arr:需要分组的数据，必填，
 	range:分组方式(日/月)，非必填，可选值[useDay,useMonth]

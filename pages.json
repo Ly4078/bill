@@ -4,6 +4,15 @@
 			"path": "pages/bill/index",
 			"style": {}
 		}, {
+			"path": "pages/bill/login",
+			"style": {}
+		}, {
+			"path": "pages/bill/typelist",
+			"style": {}
+		},{
+			"path": "pages/bill/addtype",
+			"style": {}
+		}, {
 			"path": "pages/bill/details",
 			"style": {}
 		}, {

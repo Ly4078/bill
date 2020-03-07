@@ -116,6 +116,10 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.uni-list-item__content-title .titletxt.data-v-52da9bfc {
+    font-weight: blod;
+    margin-right: 10rpx;
+}
 .uni-list-item__content-note.data-v-52da9bfc {
   margin-top: 6rpx;
   color: #999;
@@ -124,6 +128,11 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+.uni-list-item__content-note .pictureimg.data-v-52da9bfc {
+    top: 20rpx;
+    height: 50rpx;
+    margin-left: 10rpx;
 }
 .uni-list-item__extra.data-v-52da9bfc {
   display: -webkit-box;

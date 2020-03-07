@@ -62,7 +62,7 @@
 			<view class="tables2" v-if="ismolnum==1">
 				<view class="titem" v-for="(item,index) in typeitems" :key="index" @click="handleType(item)">
 					<view :class="['iconfont',dataobj.genre==1?'exclass':'inclass',item.iconclass]"></view>
-					<text>{{item.label}}</text>
+					<text class="tlabel">{{item.label}}</text>
 				</view>
 			</view>
 		</uni-popup>
@@ -98,6 +98,7 @@
 				fives:18000000,
 				twenty:82800000,
 				executionNum:0,
+				Token:uni.getStorageSync('userId') || '',
 				isAgain:false,
 				ismodel:false,
 				ismolnum:1,
@@ -120,26 +121,18 @@
 			}
 		},
 		onLoad: function(option) {
-			let _paytype={ ...this.GlobalJson.paytype };
-			let _types = { ...this.GlobalJson.expenditure };
-			for(let j in _paytype){
-				this.paytype.push(_paytype[j])
-			}
-			for (let i in _types) {
-				if (_types[i].type == 1) {
-					this.types.collect.push(_types[i]);
-				} else if (_types[i].type == 2) {
-					this.types.branch.push(_types[i]);
-				}
-			}
+			this.paytype=[ ...this.GlobalJson.paytype];
 			
-			this.typeitems= this.types.collect;
 			if(option.item){
 				let _dataobj = JSON.parse(option.item);
+				console.log('_dataobj:',_dataobj)
 				this.dataobj=_dataobj
 			}else{
 				this.dataobj.useDate=this.utils.Format(new Date());
 			}
+		},
+		onShow() {
+			this.gettypelist();
 		},
 		methods: {
 			//返回上一页面
@@ -224,8 +217,9 @@
 			//切换收入支出
 			handleexin(val){
 				this.$refs.popup.close();
+				this.dataobj.genre=val;
+				this.gettypelist();
 				if(this.dataobj._id){
-					this.dataobj.genre=val;
 					this.dataobj.useType={};
 				}else{
 					let _Obj={
@@ -239,11 +233,47 @@
 					_Obj.useDate=this.utils.Format(new Date());
 					this.dataobj=_Obj;
 				}
-				if(val==1){
-					this.typeitems= this.types.collect;
-				}else{
-					this.typeitems=this.types.branch;
-				}
+			},
+			// 获取类别数据
+			gettypelist() {
+				uni.showLoading({
+					title: '数据加载中...',
+					mask: true
+				})
+				uniCloud.callFunction({
+					name: 'settype',
+					data: {
+						pay: 4,
+						token: this.Token,
+						genre: this.dataobj.genre
+					}
+				}).then((res) => {
+					uni.hideLoading();
+					let more=[{
+						iconclass: "iconjia",
+						label:'编辑',
+						isadd:true
+					}];
+					if (res.result.status == 0) {
+						this.isnull = false;
+						let _data = [...res.result.list.data];
+						
+						 this.typeitems =[..._data,...more];
+						 console.log('typeitems:',this.typeitems)
+					} else {
+						this.typeitems = [...more];
+						uni.showToast({
+							title: res.result.msg,
+							icon: 'none'
+						})
+					}
+				}).catch((err) => {
+					uni.hideLoading();
+					uni.showModal({
+						content: `操作失败，请重新操作`,
+						showCancel: false
+					})
+				})
 			},
 			// 弹出模态框 
 			showModel(val){
@@ -299,9 +329,31 @@
 			},
 			// 保存数据
 			saveData(){
+		
+				  if(!this.dataobj.amount){
+					  uni.showToast({
+					  	title:'请输入金额',
+						icon:'none'
+					  })
+					  return
+				  }
+				  if(!this.dataobj.payType.label){
+					  uni.showToast({
+						title:'请选择方式',
+						icon:'none'
+					  })
+					  return
+				  }
+				  if(!this.dataobj.useType.label){
+				  	uni.showToast({
+				  	    title:'请选择方式',
+						icon:'none'
+				    })
+				    return
+				  }
 				  uni.showLoading({
 				    title: '数据保存中...',
-					mask:true
+				  	mask:true
 				  })
 				  let _data={...this.dataobj},eventName='',_this=this;
 				  _data.useDategetTime=new Date(_data.useDate).getTime();
@@ -311,6 +363,7 @@
 				  	_data.useMonth=dateArr2[1];
 				  	_data.useDay=dateArr2[2];
 					_data.useHour=dateArr[1];
+					_data.token=this.Token;
 				  if(_data._id){
 					  eventName="update";
 				  }else{
@@ -369,8 +422,14 @@
 			},
 			// 选择某个类别
 			handleType(item){
-				this.dataobj.useType=item;
 				this.$refs.popup.close();
+				if(item.isadd){
+					uni.navigateTo({
+						url: './typelist?genre='+this.dataobj.genre
+					});
+				}else{
+					this.dataobj.useType=item;
+				}
 			},
 			// 打开picker
 			openDatetimePicker() {
@@ -393,25 +452,7 @@
 
 <style lang="scss" scoped>
 	.edit {
-		.swipaction {
-			width: 70%;
-			height: 95%;
-			/* #ifdef APP-PLUS || H5 */
-			margin-left: 15%;
-			/* #endif */
-			display: flex;
-			justify-content: space-around;
-			view{
-				min-width: 28%;
-				text-align: center;
-				padding: 0 8%;
-				color: $uni-text-color;
-			},
-			.borbut{
-				color:$uni-color-primary;
-				border-bottom: $uni-border-radius-base solid $uni-color-primary;
-			}
-		}
+		
 		.box{
 			width: 96%;
 			min-height: 300upx;
@@ -537,7 +578,7 @@
 				flex-direction:column;
 				justify-content: space-around;
 				align-items: center;
-				font-size: 40upx;
+				
 				margin: 20upx 10upx;
 				.iconfont{
 					width: 60upx;
@@ -549,6 +590,9 @@
 					align-items: center;
 					justify-content: center;
 					border-radius: 50%;
+				}
+				.tlabel{
+					font-size: 20upx;
 				}
 			}
 		}

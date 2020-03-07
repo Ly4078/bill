@@ -82,6 +82,12 @@
 .details .listitem.data-v-4e345653:last-child {
   background-color: #f1f1f1;
 }
+.details .picture.data-v-4e345653 {
+  width: 100%;
+}
+.details .picture .pictureimg.data-v-4e345653 {
+    width: 100%;
+}
 .details .fixdbox.data-v-4e345653 {
   width: 100%;
   padding: 25rpx 0;

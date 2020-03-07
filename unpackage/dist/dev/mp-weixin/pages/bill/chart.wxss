@@ -24,35 +24,43 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.chart .mpleft {
+.chart .nodata.data-v-fa394fa2 {
+  position: absolute;
+  top: 300rpx;
+  background-color: #f1f1f1;
+  width: 100%;
+  height: 90%;
+  z-index: 2;
+}
+.chart .mpleft.data-v-fa394fa2 {
   margin-left: 60%;
   padding: 5rpx;
   padding: 0 50uxp;
 }
-.chart .mpleft .ymtxt {
+.chart .mpleft .ymtxt.data-v-fa394fa2 {
     margin: 0 40rpx;
     background: red;
 }
-.chart .uni-navbar__header-btns-right {
+.chart .uni-navbar__header-btns-right.data-v-fa394fa2 {
   height: 100%;
 }
-.chart .titelIcons {
+.chart .titelIcons.data-v-fa394fa2 {
   width: 60rpx;
   height: 90rpx;
   font-size: 80rpx;
   position: relative;
 }
-.chart .titelIcons .itext {
+.chart .titelIcons .itext.data-v-fa394fa2 {
     position: relative;
     top: -105rpx;
     left: 20rpx;
     font-size: 44rpx;
 }
-.chart .cardbox .carditem {
+.chart .cardbox .carditem.data-v-fa394fa2 {
   padding: 10rpx 0;
   font-size: 34rpx;
 }
-.chart .cardbox .card_title {
+.chart .cardbox .card_title.data-v-fa394fa2 {
   font-weight: bold;
   display: -webkit-box;
   display: -webkit-flex;
@@ -63,7 +71,7 @@
   -webkit-justify-content: space-around;
           justify-content: space-around;
 }
-.chart .cardbox .card_title .titlebox {
+.chart .cardbox .card_title .titlebox.data-v-fa394fa2 {
     -webkit-box-flex: 1;
     -webkit-flex: 1;
             flex: 1;
@@ -76,11 +84,11 @@
     -webkit-justify-content: space-around;
             justify-content: space-around;
 }
-.chart .cardbox .card_title .iconfont {
+.chart .cardbox .card_title .iconfont.data-v-fa394fa2 {
     width: 10%;
     margin-top: -18rpx;
 }
-.chart .cardbox .intotal {
+.chart .cardbox .intotal.data-v-fa394fa2 {
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -91,10 +99,10 @@
   -webkit-justify-content: space-between;
           justify-content: space-between;
 }
-.chart .cardbox .intotal .surplus {
+.chart .cardbox .intotal .surplus.data-v-fa394fa2 {
     color: #dd524d;
 }
-.chart .inorex {
+.chart .inorex.data-v-fa394fa2 {
   width: 50%;
   margin: 20rpx 25%;
   height: 70rpx;
@@ -107,7 +115,7 @@
   -webkit-align-items: center;
           align-items: center;
 }
-.chart .inorex > view {
+.chart .inorex > view.data-v-fa394fa2 {
     width: 130rpx;
     height: 100%;
     line-height: 70rpx;
@@ -116,15 +124,15 @@
     color: #007aff;
     border-radius: 10rpx;
 }
-.chart .inorex .selectbox {
+.chart .inorex .selectbox.data-v-fa394fa2 {
     background-color: #007aff;
     color: #fff;
 }
-.chart .listbox {
+.chart .listbox.data-v-fa394fa2 {
   width: 100%;
   margin: 30rpx 0;
 }
-.chart .listbox .boxitem {
+.chart .listbox .boxitem.data-v-fa394fa2 {
     padding: 10rpx 10rpx 10rpx 20rpx;
     display: -webkit-box;
     display: -webkit-flex;
@@ -138,7 +146,7 @@
             align-items: center;
     margin: 10rpx 0;
 }
-.chart .listbox .boxitem .usetype {
+.chart .listbox .boxitem .usetype.data-v-fa394fa2 {
       display: -webkit-box;
       display: -webkit-flex;
       display: flex;
@@ -149,7 +157,7 @@
       -webkit-justify-content: space-between;
               justify-content: space-between;
 }
-.chart .listbox .boxitem .usetype .iconfont {
+.chart .listbox .boxitem .usetype .iconfont.data-v-fa394fa2 {
         width: 60rpx;
         height: 60rpx;
         border-radius: 50%;
@@ -166,7 +174,7 @@
         font-size: 36rpx;
         margin-right: 10rpx;
 }
-.chart .listbox .boxitem .scale {
+.chart .listbox .boxitem .scale.data-v-fa394fa2 {
       display: -webkit-box;
       display: -webkit-flex;
       display: flex;

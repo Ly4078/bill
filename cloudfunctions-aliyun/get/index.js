@@ -6,6 +6,7 @@ exports.main = async (event, context) => {
 
 	/*
 	参数说明
+	token:身份验证，必填
 	pageNum:页码参数，必填，默认每页返回100条数据,Number, pageNum>-1
 	range:查询类型，非必填,可选值[day,month,year]
 	label:关键字查询,非必填,可匹配payType.label或useType.label中的关键字查询
@@ -16,6 +17,12 @@ exports.main = async (event, context) => {
 	*/
 
 	// 参数校验
+	if (!event.token) {
+		return {
+			status: -1,
+			msg: 'token必填'
+		}
+	}
 	if (typeof(event.pageNum) == 'undefined') {
 		return {
 			status: -1,
@@ -28,7 +35,7 @@ exports.main = async (event, context) => {
 			msg: 'pageNum应是小于0的整数'
 		}
 	}
-
+	
 	// 要返回给客户端的数据
 	let resultData = {};
 
@@ -49,20 +56,23 @@ exports.main = async (event, context) => {
 		term = {
 			useYear: String(year),
 			useMonth: String(month),
-			useDay: String(day)
+			useDay: String(day),
+			token: event.token
 		}
 	}
 	// 按月查询
 	if (event.range == 'month') {
 		term = {
 			useYear: String(year),
-			useMonth: String(month)
+			useMonth: String(month),
+			token: event.token
 		}
 	}
 	// 按年查询
 	if (event.range == 'year') {
 		term = {
-			useYear: String(year)
+			useYear: String(year),
+			token: event.token
 		}
 	}
 	resultData.term = term;
@@ -70,10 +80,12 @@ exports.main = async (event, context) => {
 	let collection;
 	if (event.label) {
 		collection = db.collection('listdata').where(dbCmd.or({
+			token: event.token,
 			useType: {
 				label: `/${event.label}/i`
 			}
 		}, {
+			token: event.token,
 			payType: {
 				label: `/${event.label}/i`
 			}
@@ -88,7 +100,7 @@ exports.main = async (event, context) => {
 	if (totalRes.total > 0) {
 		resultData.total = totalRes.total;
 		// 查询数据列表
-		const list = await collection.orderBy("useDategetTime", "desc").skip(event.pageNum * 100).limit(100).get();
+		const list = await collection.field({ 'token': false }).orderBy("useDategetTime", "desc").skip(event.pageNum * 100).limit(100).get();
 		if (list.affectedDocs > 0) {
 			resultData.status = 1;
 			resultData.affectedDocs = list.affectedDocs;
@@ -113,8 +125,7 @@ exports.main = async (event, context) => {
 	} else {
 		return {
 			status: -1,
-			msg: '未查询到相关数据',
-			term:term
+			msg: '未查询到相关数据'
 		}
 	}
 };

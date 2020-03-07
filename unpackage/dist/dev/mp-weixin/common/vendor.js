@@ -8,7 +8,7 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.createApp = createApp;exports.createComponent = createComponent;exports.createPage = createPage;exports.default = void 0;var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _slicedToArray(arr, i) {return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest();}function _nonIterableRest() {throw new TypeError("Invalid attempt to destructure non-iterable instance");}function _iterableToArrayLimit(arr, i) {var _arr = [];var _n = true;var _d = false;var _e = undefined;try {for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {_arr.push(_s.value);if (i && _arr.length === i) break;}} catch (err) {_d = true;_e = err;} finally {try {if (!_n && _i["return"] != null) _i["return"]();} finally {if (_d) throw _e;}}return _arr;}function _arrayWithHoles(arr) {if (Array.isArray(arr)) return arr;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance");}function _iterableToArray(iter) {if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;}}
+Object.defineProperty(exports, "__esModule", { value: true });exports.createApp = createApp;exports.createComponent = createComponent;exports.createPage = createPage;exports.default = void 0;var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _slicedToArray(arr, i) {return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest();}function _nonIterableRest() {throw new TypeError("Invalid attempt to destructure non-iterable instance");}function _iterableToArrayLimit(arr, i) {if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) {return;}var _arr = [];var _n = true;var _d = false;var _e = undefined;try {for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {_arr.push(_s.value);if (i && _arr.length === i) break;}} catch (err) {_d = true;_e = err;} finally {try {if (!_n && _i["return"] != null) _i["return"]();} finally {if (_d) throw _e;}}return _arr;}function _arrayWithHoles(arr) {if (Array.isArray(arr)) return arr;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance");}function _iterableToArray(iter) {if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;}}
 
 var _toString = Object.prototype.toString;
 var hasOwnProperty = Object.prototype.hasOwnProperty;
@@ -754,7 +754,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -1327,9 +1327,10 @@ function parseBaseComponent(vueComponentOptions)
 {var _ref5 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},isPage = _ref5.isPage,initRelation = _ref5.initRelation;var _initVueComponent =
   initVueComponent(_vue.default, vueComponentOptions),_initVueComponent2 = _slicedToArray(_initVueComponent, 2),VueComponent = _initVueComponent2[0],vueOptions = _initVueComponent2[1];
 
-  var options = {
+  var options = _objectSpread({
     multipleSlots: true,
-    addGlobalClass: true };
+    addGlobalClass: true },
+  vueOptions.options || {});
 
 
   {
@@ -1551,7 +1552,1103 @@ uni$1;exports.default = _default;
 
 /***/ }),
 
-/***/ 14:
+/***/ 12:
+/*!********************************************!*\
+  !*** ./node_modules/vuex/dist/vuex.esm.js ***!
+  \********************************************/
+/*! exports provided: Store, install, mapState, mapMutations, mapGetters, mapActions, createNamespacedHelpers, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Store", function() { return Store; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "install", function() { return install; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mapState", function() { return mapState; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mapMutations", function() { return mapMutations; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mapGetters", function() { return mapGetters; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mapActions", function() { return mapActions; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createNamespacedHelpers", function() { return createNamespacedHelpers; });
+/**
+ * vuex v3.0.1
+ * (c) 2017 Evan You
+ * @license MIT
+ */
+var applyMixin = function (Vue) {
+  var version = Number(Vue.version.split('.')[0]);
+
+  if (version >= 2) {
+    Vue.mixin({ beforeCreate: vuexInit });
+  } else {
+    // override init and inject vuex init procedure
+    // for 1.x backwards compatibility.
+    var _init = Vue.prototype._init;
+    Vue.prototype._init = function (options) {
+      if ( options === void 0 ) options = {};
+
+      options.init = options.init
+        ? [vuexInit].concat(options.init)
+        : vuexInit;
+      _init.call(this, options);
+    };
+  }
+
+  /**
+   * Vuex init hook, injected into each instances init hooks list.
+   */
+
+  function vuexInit () {
+    var options = this.$options;
+    // store injection
+    if (options.store) {
+      this.$store = typeof options.store === 'function'
+        ? options.store()
+        : options.store;
+    } else if (options.parent && options.parent.$store) {
+      this.$store = options.parent.$store;
+    }
+  }
+};
+
+var devtoolHook =
+  typeof window !== 'undefined' &&
+  window.__VUE_DEVTOOLS_GLOBAL_HOOK__;
+
+function devtoolPlugin (store) {
+  if (!devtoolHook) { return }
+
+  store._devtoolHook = devtoolHook;
+
+  devtoolHook.emit('vuex:init', store);
+
+  devtoolHook.on('vuex:travel-to-state', function (targetState) {
+    store.replaceState(targetState);
+  });
+
+  store.subscribe(function (mutation, state) {
+    devtoolHook.emit('vuex:mutation', mutation, state);
+  });
+}
+
+/**
+ * Get the first item that pass the test
+ * by second argument function
+ *
+ * @param {Array} list
+ * @param {Function} f
+ * @return {*}
+ */
+/**
+ * Deep copy the given object considering circular structure.
+ * This function caches all nested objects and its copies.
+ * If it detects circular structure, use cached copy to avoid infinite loop.
+ *
+ * @param {*} obj
+ * @param {Array<Object>} cache
+ * @return {*}
+ */
+
+
+/**
+ * forEach for object
+ */
+function forEachValue (obj, fn) {
+  Object.keys(obj).forEach(function (key) { return fn(obj[key], key); });
+}
+
+function isObject (obj) {
+  return obj !== null && typeof obj === 'object'
+}
+
+function isPromise (val) {
+  return val && typeof val.then === 'function'
+}
+
+function assert (condition, msg) {
+  if (!condition) { throw new Error(("[vuex] " + msg)) }
+}
+
+var Module = function Module (rawModule, runtime) {
+  this.runtime = runtime;
+  this._children = Object.create(null);
+  this._rawModule = rawModule;
+  var rawState = rawModule.state;
+  this.state = (typeof rawState === 'function' ? rawState() : rawState) || {};
+};
+
+var prototypeAccessors$1 = { namespaced: { configurable: true } };
+
+prototypeAccessors$1.namespaced.get = function () {
+  return !!this._rawModule.namespaced
+};
+
+Module.prototype.addChild = function addChild (key, module) {
+  this._children[key] = module;
+};
+
+Module.prototype.removeChild = function removeChild (key) {
+  delete this._children[key];
+};
+
+Module.prototype.getChild = function getChild (key) {
+  return this._children[key]
+};
+
+Module.prototype.update = function update (rawModule) {
+  this._rawModule.namespaced = rawModule.namespaced;
+  if (rawModule.actions) {
+    this._rawModule.actions = rawModule.actions;
+  }
+  if (rawModule.mutations) {
+    this._rawModule.mutations = rawModule.mutations;
+  }
+  if (rawModule.getters) {
+    this._rawModule.getters = rawModule.getters;
+  }
+};
+
+Module.prototype.forEachChild = function forEachChild (fn) {
+  forEachValue(this._children, fn);
+};
+
+Module.prototype.forEachGetter = function forEachGetter (fn) {
+  if (this._rawModule.getters) {
+    forEachValue(this._rawModule.getters, fn);
+  }
+};
+
+Module.prototype.forEachAction = function forEachAction (fn) {
+  if (this._rawModule.actions) {
+    forEachValue(this._rawModule.actions, fn);
+  }
+};
+
+Module.prototype.forEachMutation = function forEachMutation (fn) {
+  if (this._rawModule.mutations) {
+    forEachValue(this._rawModule.mutations, fn);
+  }
+};
+
+Object.defineProperties( Module.prototype, prototypeAccessors$1 );
+
+var ModuleCollection = function ModuleCollection (rawRootModule) {
+  // register root module (Vuex.Store options)
+  this.register([], rawRootModule, false);
+};
+
+ModuleCollection.prototype.get = function get (path) {
+  return path.reduce(function (module, key) {
+    return module.getChild(key)
+  }, this.root)
+};
+
+ModuleCollection.prototype.getNamespace = function getNamespace (path) {
+  var module = this.root;
+  return path.reduce(function (namespace, key) {
+    module = module.getChild(key);
+    return namespace + (module.namespaced ? key + '/' : '')
+  }, '')
+};
+
+ModuleCollection.prototype.update = function update$1 (rawRootModule) {
+  update([], this.root, rawRootModule);
+};
+
+ModuleCollection.prototype.register = function register (path, rawModule, runtime) {
+    var this$1 = this;
+    if ( runtime === void 0 ) runtime = true;
+
+  if (true) {
+    assertRawModule(path, rawModule);
+  }
+
+  var newModule = new Module(rawModule, runtime);
+  if (path.length === 0) {
+    this.root = newModule;
+  } else {
+    var parent = this.get(path.slice(0, -1));
+    parent.addChild(path[path.length - 1], newModule);
+  }
+
+  // register nested modules
+  if (rawModule.modules) {
+    forEachValue(rawModule.modules, function (rawChildModule, key) {
+      this$1.register(path.concat(key), rawChildModule, runtime);
+    });
+  }
+};
+
+ModuleCollection.prototype.unregister = function unregister (path) {
+  var parent = this.get(path.slice(0, -1));
+  var key = path[path.length - 1];
+  if (!parent.getChild(key).runtime) { return }
+
+  parent.removeChild(key);
+};
+
+function update (path, targetModule, newModule) {
+  if (true) {
+    assertRawModule(path, newModule);
+  }
+
+  // update target module
+  targetModule.update(newModule);
+
+  // update nested modules
+  if (newModule.modules) {
+    for (var key in newModule.modules) {
+      if (!targetModule.getChild(key)) {
+        if (true) {
+          console.warn(
+            "[vuex] trying to add a new module '" + key + "' on hot reloading, " +
+            'manual reload is needed'
+          );
+        }
+        return
+      }
+      update(
+        path.concat(key),
+        targetModule.getChild(key),
+        newModule.modules[key]
+      );
+    }
+  }
+}
+
+var functionAssert = {
+  assert: function (value) { return typeof value === 'function'; },
+  expected: 'function'
+};
+
+var objectAssert = {
+  assert: function (value) { return typeof value === 'function' ||
+    (typeof value === 'object' && typeof value.handler === 'function'); },
+  expected: 'function or object with "handler" function'
+};
+
+var assertTypes = {
+  getters: functionAssert,
+  mutations: functionAssert,
+  actions: objectAssert
+};
+
+function assertRawModule (path, rawModule) {
+  Object.keys(assertTypes).forEach(function (key) {
+    if (!rawModule[key]) { return }
+
+    var assertOptions = assertTypes[key];
+
+    forEachValue(rawModule[key], function (value, type) {
+      assert(
+        assertOptions.assert(value),
+        makeAssertionMessage(path, key, type, value, assertOptions.expected)
+      );
+    });
+  });
+}
+
+function makeAssertionMessage (path, key, type, value, expected) {
+  var buf = key + " should be " + expected + " but \"" + key + "." + type + "\"";
+  if (path.length > 0) {
+    buf += " in module \"" + (path.join('.')) + "\"";
+  }
+  buf += " is " + (JSON.stringify(value)) + ".";
+  return buf
+}
+
+var Vue; // bind on install
+
+var Store = function Store (options) {
+  var this$1 = this;
+  if ( options === void 0 ) options = {};
+
+  // Auto install if it is not done yet and `window` has `Vue`.
+  // To allow users to avoid auto-installation in some cases,
+  // this code should be placed here. See #731
+  if (!Vue && typeof window !== 'undefined' && window.Vue) {
+    install(window.Vue);
+  }
+
+  if (true) {
+    assert(Vue, "must call Vue.use(Vuex) before creating a store instance.");
+    assert(typeof Promise !== 'undefined', "vuex requires a Promise polyfill in this browser.");
+    assert(this instanceof Store, "Store must be called with the new operator.");
+  }
+
+  var plugins = options.plugins; if ( plugins === void 0 ) plugins = [];
+  var strict = options.strict; if ( strict === void 0 ) strict = false;
+
+  var state = options.state; if ( state === void 0 ) state = {};
+  if (typeof state === 'function') {
+    state = state() || {};
+  }
+
+  // store internal state
+  this._committing = false;
+  this._actions = Object.create(null);
+  this._actionSubscribers = [];
+  this._mutations = Object.create(null);
+  this._wrappedGetters = Object.create(null);
+  this._modules = new ModuleCollection(options);
+  this._modulesNamespaceMap = Object.create(null);
+  this._subscribers = [];
+  this._watcherVM = new Vue();
+
+  // bind commit and dispatch to self
+  var store = this;
+  var ref = this;
+  var dispatch = ref.dispatch;
+  var commit = ref.commit;
+  this.dispatch = function boundDispatch (type, payload) {
+    return dispatch.call(store, type, payload)
+  };
+  this.commit = function boundCommit (type, payload, options) {
+    return commit.call(store, type, payload, options)
+  };
+
+  // strict mode
+  this.strict = strict;
+
+  // init root module.
+  // this also recursively registers all sub-modules
+  // and collects all module getters inside this._wrappedGetters
+  installModule(this, state, [], this._modules.root);
+
+  // initialize the store vm, which is responsible for the reactivity
+  // (also registers _wrappedGetters as computed properties)
+  resetStoreVM(this, state);
+
+  // apply plugins
+  plugins.forEach(function (plugin) { return plugin(this$1); });
+
+  if (Vue.config.devtools) {
+    devtoolPlugin(this);
+  }
+};
+
+var prototypeAccessors = { state: { configurable: true } };
+
+prototypeAccessors.state.get = function () {
+  return this._vm._data.$$state
+};
+
+prototypeAccessors.state.set = function (v) {
+  if (true) {
+    assert(false, "Use store.replaceState() to explicit replace store state.");
+  }
+};
+
+Store.prototype.commit = function commit (_type, _payload, _options) {
+    var this$1 = this;
+
+  // check object-style commit
+  var ref = unifyObjectStyle(_type, _payload, _options);
+    var type = ref.type;
+    var payload = ref.payload;
+    var options = ref.options;
+
+  var mutation = { type: type, payload: payload };
+  var entry = this._mutations[type];
+  if (!entry) {
+    if (true) {
+      console.error(("[vuex] unknown mutation type: " + type));
+    }
+    return
+  }
+  this._withCommit(function () {
+    entry.forEach(function commitIterator (handler) {
+      handler(payload);
+    });
+  });
+  this._subscribers.forEach(function (sub) { return sub(mutation, this$1.state); });
+
+  if (
+     true &&
+    options && options.silent
+  ) {
+    console.warn(
+      "[vuex] mutation type: " + type + ". Silent option has been removed. " +
+      'Use the filter functionality in the vue-devtools'
+    );
+  }
+};
+
+Store.prototype.dispatch = function dispatch (_type, _payload) {
+    var this$1 = this;
+
+  // check object-style dispatch
+  var ref = unifyObjectStyle(_type, _payload);
+    var type = ref.type;
+    var payload = ref.payload;
+
+  var action = { type: type, payload: payload };
+  var entry = this._actions[type];
+  if (!entry) {
+    if (true) {
+      console.error(("[vuex] unknown action type: " + type));
+    }
+    return
+  }
+
+  this._actionSubscribers.forEach(function (sub) { return sub(action, this$1.state); });
+
+  return entry.length > 1
+    ? Promise.all(entry.map(function (handler) { return handler(payload); }))
+    : entry[0](payload)
+};
+
+Store.prototype.subscribe = function subscribe (fn) {
+  return genericSubscribe(fn, this._subscribers)
+};
+
+Store.prototype.subscribeAction = function subscribeAction (fn) {
+  return genericSubscribe(fn, this._actionSubscribers)
+};
+
+Store.prototype.watch = function watch (getter, cb, options) {
+    var this$1 = this;
+
+  if (true) {
+    assert(typeof getter === 'function', "store.watch only accepts a function.");
+  }
+  return this._watcherVM.$watch(function () { return getter(this$1.state, this$1.getters); }, cb, options)
+};
+
+Store.prototype.replaceState = function replaceState (state) {
+    var this$1 = this;
+
+  this._withCommit(function () {
+    this$1._vm._data.$$state = state;
+  });
+};
+
+Store.prototype.registerModule = function registerModule (path, rawModule, options) {
+    if ( options === void 0 ) options = {};
+
+  if (typeof path === 'string') { path = [path]; }
+
+  if (true) {
+    assert(Array.isArray(path), "module path must be a string or an Array.");
+    assert(path.length > 0, 'cannot register the root module by using registerModule.');
+  }
+
+  this._modules.register(path, rawModule);
+  installModule(this, this.state, path, this._modules.get(path), options.preserveState);
+  // reset store to update getters...
+  resetStoreVM(this, this.state);
+};
+
+Store.prototype.unregisterModule = function unregisterModule (path) {
+    var this$1 = this;
+
+  if (typeof path === 'string') { path = [path]; }
+
+  if (true) {
+    assert(Array.isArray(path), "module path must be a string or an Array.");
+  }
+
+  this._modules.unregister(path);
+  this._withCommit(function () {
+    var parentState = getNestedState(this$1.state, path.slice(0, -1));
+    Vue.delete(parentState, path[path.length - 1]);
+  });
+  resetStore(this);
+};
+
+Store.prototype.hotUpdate = function hotUpdate (newOptions) {
+  this._modules.update(newOptions);
+  resetStore(this, true);
+};
+
+Store.prototype._withCommit = function _withCommit (fn) {
+  var committing = this._committing;
+  this._committing = true;
+  fn();
+  this._committing = committing;
+};
+
+Object.defineProperties( Store.prototype, prototypeAccessors );
+
+function genericSubscribe (fn, subs) {
+  if (subs.indexOf(fn) < 0) {
+    subs.push(fn);
+  }
+  return function () {
+    var i = subs.indexOf(fn);
+    if (i > -1) {
+      subs.splice(i, 1);
+    }
+  }
+}
+
+function resetStore (store, hot) {
+  store._actions = Object.create(null);
+  store._mutations = Object.create(null);
+  store._wrappedGetters = Object.create(null);
+  store._modulesNamespaceMap = Object.create(null);
+  var state = store.state;
+  // init all modules
+  installModule(store, state, [], store._modules.root, true);
+  // reset vm
+  resetStoreVM(store, state, hot);
+}
+
+function resetStoreVM (store, state, hot) {
+  var oldVm = store._vm;
+
+  // bind store public getters
+  store.getters = {};
+  var wrappedGetters = store._wrappedGetters;
+  var computed = {};
+  forEachValue(wrappedGetters, function (fn, key) {
+    // use computed to leverage its lazy-caching mechanism
+    computed[key] = function () { return fn(store); };
+    Object.defineProperty(store.getters, key, {
+      get: function () { return store._vm[key]; },
+      enumerable: true // for local getters
+    });
+  });
+
+  // use a Vue instance to store the state tree
+  // suppress warnings just in case the user has added
+  // some funky global mixins
+  var silent = Vue.config.silent;
+  Vue.config.silent = true;
+  store._vm = new Vue({
+    data: {
+      $$state: state
+    },
+    computed: computed
+  });
+  Vue.config.silent = silent;
+
+  // enable strict mode for new vm
+  if (store.strict) {
+    enableStrictMode(store);
+  }
+
+  if (oldVm) {
+    if (hot) {
+      // dispatch changes in all subscribed watchers
+      // to force getter re-evaluation for hot reloading.
+      store._withCommit(function () {
+        oldVm._data.$$state = null;
+      });
+    }
+    Vue.nextTick(function () { return oldVm.$destroy(); });
+  }
+}
+
+function installModule (store, rootState, path, module, hot) {
+  var isRoot = !path.length;
+  var namespace = store._modules.getNamespace(path);
+
+  // register in namespace map
+  if (module.namespaced) {
+    store._modulesNamespaceMap[namespace] = module;
+  }
+
+  // set state
+  if (!isRoot && !hot) {
+    var parentState = getNestedState(rootState, path.slice(0, -1));
+    var moduleName = path[path.length - 1];
+    store._withCommit(function () {
+      Vue.set(parentState, moduleName, module.state);
+    });
+  }
+
+  var local = module.context = makeLocalContext(store, namespace, path);
+
+  module.forEachMutation(function (mutation, key) {
+    var namespacedType = namespace + key;
+    registerMutation(store, namespacedType, mutation, local);
+  });
+
+  module.forEachAction(function (action, key) {
+    var type = action.root ? key : namespace + key;
+    var handler = action.handler || action;
+    registerAction(store, type, handler, local);
+  });
+
+  module.forEachGetter(function (getter, key) {
+    var namespacedType = namespace + key;
+    registerGetter(store, namespacedType, getter, local);
+  });
+
+  module.forEachChild(function (child, key) {
+    installModule(store, rootState, path.concat(key), child, hot);
+  });
+}
+
+/**
+ * make localized dispatch, commit, getters and state
+ * if there is no namespace, just use root ones
+ */
+function makeLocalContext (store, namespace, path) {
+  var noNamespace = namespace === '';
+
+  var local = {
+    dispatch: noNamespace ? store.dispatch : function (_type, _payload, _options) {
+      var args = unifyObjectStyle(_type, _payload, _options);
+      var payload = args.payload;
+      var options = args.options;
+      var type = args.type;
+
+      if (!options || !options.root) {
+        type = namespace + type;
+        if ( true && !store._actions[type]) {
+          console.error(("[vuex] unknown local action type: " + (args.type) + ", global type: " + type));
+          return
+        }
+      }
+
+      return store.dispatch(type, payload)
+    },
+
+    commit: noNamespace ? store.commit : function (_type, _payload, _options) {
+      var args = unifyObjectStyle(_type, _payload, _options);
+      var payload = args.payload;
+      var options = args.options;
+      var type = args.type;
+
+      if (!options || !options.root) {
+        type = namespace + type;
+        if ( true && !store._mutations[type]) {
+          console.error(("[vuex] unknown local mutation type: " + (args.type) + ", global type: " + type));
+          return
+        }
+      }
+
+      store.commit(type, payload, options);
+    }
+  };
+
+  // getters and state object must be gotten lazily
+  // because they will be changed by vm update
+  Object.defineProperties(local, {
+    getters: {
+      get: noNamespace
+        ? function () { return store.getters; }
+        : function () { return makeLocalGetters(store, namespace); }
+    },
+    state: {
+      get: function () { return getNestedState(store.state, path); }
+    }
+  });
+
+  return local
+}
+
+function makeLocalGetters (store, namespace) {
+  var gettersProxy = {};
+
+  var splitPos = namespace.length;
+  Object.keys(store.getters).forEach(function (type) {
+    // skip if the target getter is not match this namespace
+    if (type.slice(0, splitPos) !== namespace) { return }
+
+    // extract local getter type
+    var localType = type.slice(splitPos);
+
+    // Add a port to the getters proxy.
+    // Define as getter property because
+    // we do not want to evaluate the getters in this time.
+    Object.defineProperty(gettersProxy, localType, {
+      get: function () { return store.getters[type]; },
+      enumerable: true
+    });
+  });
+
+  return gettersProxy
+}
+
+function registerMutation (store, type, handler, local) {
+  var entry = store._mutations[type] || (store._mutations[type] = []);
+  entry.push(function wrappedMutationHandler (payload) {
+    handler.call(store, local.state, payload);
+  });
+}
+
+function registerAction (store, type, handler, local) {
+  var entry = store._actions[type] || (store._actions[type] = []);
+  entry.push(function wrappedActionHandler (payload, cb) {
+    var res = handler.call(store, {
+      dispatch: local.dispatch,
+      commit: local.commit,
+      getters: local.getters,
+      state: local.state,
+      rootGetters: store.getters,
+      rootState: store.state
+    }, payload, cb);
+    if (!isPromise(res)) {
+      res = Promise.resolve(res);
+    }
+    if (store._devtoolHook) {
+      return res.catch(function (err) {
+        store._devtoolHook.emit('vuex:error', err);
+        throw err
+      })
+    } else {
+      return res
+    }
+  });
+}
+
+function registerGetter (store, type, rawGetter, local) {
+  if (store._wrappedGetters[type]) {
+    if (true) {
+      console.error(("[vuex] duplicate getter key: " + type));
+    }
+    return
+  }
+  store._wrappedGetters[type] = function wrappedGetter (store) {
+    return rawGetter(
+      local.state, // local state
+      local.getters, // local getters
+      store.state, // root state
+      store.getters // root getters
+    )
+  };
+}
+
+function enableStrictMode (store) {
+  store._vm.$watch(function () { return this._data.$$state }, function () {
+    if (true) {
+      assert(store._committing, "Do not mutate vuex store state outside mutation handlers.");
+    }
+  }, { deep: true, sync: true });
+}
+
+function getNestedState (state, path) {
+  return path.length
+    ? path.reduce(function (state, key) { return state[key]; }, state)
+    : state
+}
+
+function unifyObjectStyle (type, payload, options) {
+  if (isObject(type) && type.type) {
+    options = payload;
+    payload = type;
+    type = type.type;
+  }
+
+  if (true) {
+    assert(typeof type === 'string', ("Expects string as the type, but found " + (typeof type) + "."));
+  }
+
+  return { type: type, payload: payload, options: options }
+}
+
+function install (_Vue) {
+  if (Vue && _Vue === Vue) {
+    if (true) {
+      console.error(
+        '[vuex] already installed. Vue.use(Vuex) should be called only once.'
+      );
+    }
+    return
+  }
+  Vue = _Vue;
+  applyMixin(Vue);
+}
+
+var mapState = normalizeNamespace(function (namespace, states) {
+  var res = {};
+  normalizeMap(states).forEach(function (ref) {
+    var key = ref.key;
+    var val = ref.val;
+
+    res[key] = function mappedState () {
+      var state = this.$store.state;
+      var getters = this.$store.getters;
+      if (namespace) {
+        var module = getModuleByNamespace(this.$store, 'mapState', namespace);
+        if (!module) {
+          return
+        }
+        state = module.context.state;
+        getters = module.context.getters;
+      }
+      return typeof val === 'function'
+        ? val.call(this, state, getters)
+        : state[val]
+    };
+    // mark vuex getter for devtools
+    res[key].vuex = true;
+  });
+  return res
+});
+
+var mapMutations = normalizeNamespace(function (namespace, mutations) {
+  var res = {};
+  normalizeMap(mutations).forEach(function (ref) {
+    var key = ref.key;
+    var val = ref.val;
+
+    res[key] = function mappedMutation () {
+      var args = [], len = arguments.length;
+      while ( len-- ) args[ len ] = arguments[ len ];
+
+      var commit = this.$store.commit;
+      if (namespace) {
+        var module = getModuleByNamespace(this.$store, 'mapMutations', namespace);
+        if (!module) {
+          return
+        }
+        commit = module.context.commit;
+      }
+      return typeof val === 'function'
+        ? val.apply(this, [commit].concat(args))
+        : commit.apply(this.$store, [val].concat(args))
+    };
+  });
+  return res
+});
+
+var mapGetters = normalizeNamespace(function (namespace, getters) {
+  var res = {};
+  normalizeMap(getters).forEach(function (ref) {
+    var key = ref.key;
+    var val = ref.val;
+
+    val = namespace + val;
+    res[key] = function mappedGetter () {
+      if (namespace && !getModuleByNamespace(this.$store, 'mapGetters', namespace)) {
+        return
+      }
+      if ( true && !(val in this.$store.getters)) {
+        console.error(("[vuex] unknown getter: " + val));
+        return
+      }
+      return this.$store.getters[val]
+    };
+    // mark vuex getter for devtools
+    res[key].vuex = true;
+  });
+  return res
+});
+
+var mapActions = normalizeNamespace(function (namespace, actions) {
+  var res = {};
+  normalizeMap(actions).forEach(function (ref) {
+    var key = ref.key;
+    var val = ref.val;
+
+    res[key] = function mappedAction () {
+      var args = [], len = arguments.length;
+      while ( len-- ) args[ len ] = arguments[ len ];
+
+      var dispatch = this.$store.dispatch;
+      if (namespace) {
+        var module = getModuleByNamespace(this.$store, 'mapActions', namespace);
+        if (!module) {
+          return
+        }
+        dispatch = module.context.dispatch;
+      }
+      return typeof val === 'function'
+        ? val.apply(this, [dispatch].concat(args))
+        : dispatch.apply(this.$store, [val].concat(args))
+    };
+  });
+  return res
+});
+
+var createNamespacedHelpers = function (namespace) { return ({
+  mapState: mapState.bind(null, namespace),
+  mapGetters: mapGetters.bind(null, namespace),
+  mapMutations: mapMutations.bind(null, namespace),
+  mapActions: mapActions.bind(null, namespace)
+}); };
+
+function normalizeMap (map) {
+  return Array.isArray(map)
+    ? map.map(function (key) { return ({ key: key, val: key }); })
+    : Object.keys(map).map(function (key) { return ({ key: key, val: map[key] }); })
+}
+
+function normalizeNamespace (fn) {
+  return function (namespace, map) {
+    if (typeof namespace !== 'string') {
+      map = namespace;
+      namespace = '';
+    } else if (namespace.charAt(namespace.length - 1) !== '/') {
+      namespace += '/';
+    }
+    return fn(namespace, map)
+  }
+}
+
+function getModuleByNamespace (store, helper, namespace) {
+  var module = store._modulesNamespaceMap[namespace];
+  if ( true && !module) {
+    console.error(("[vuex] module namespace not found in " + helper + "(): " + namespace));
+  }
+  return module
+}
+
+var index_esm = {
+  Store: Store,
+  install: install,
+  version: '3.0.1',
+  mapState: mapState,
+  mapMutations: mapMutations,
+  mapGetters: mapGetters,
+  mapActions: mapActions,
+  createNamespacedHelpers: createNamespacedHelpers
+};
+
+
+/* harmony default export */ __webpack_exports__["default"] = (index_esm);
+
+
+/***/ }),
+
+/***/ 124:
+/*!********************************************************************************************************!*\
+  !*** D:/cloud/cloud_test/node_modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-icons/icons.js ***!
+  \********************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+	"pulldown": "\ue588",
+	"refreshempty": "\ue461",
+	"back": "\ue471",
+	"forward": "\ue470",
+	"more": "\ue507",
+	"more-filled": "\ue537",
+	"scan": "\ue612",
+	"qq": "\ue264",
+	"weibo": "\ue260",
+	"weixin": "\ue261",
+	"pengyouquan": "\ue262",
+	"loop": "\ue565",
+	"refresh": "\ue407",
+	"refresh-filled": "\ue437",
+	"arrowthindown": "\ue585",
+	"arrowthinleft": "\ue586",
+	"arrowthinright": "\ue587",
+	"arrowthinup": "\ue584",
+	"undo-filled": "\ue7d6",
+	"undo": "\ue406",
+	"redo": "\ue405",
+	"redo-filled": "\ue7d9",
+	"bars": "\ue563",
+	"chatboxes": "\ue203",
+	"camera": "\ue301",
+	"chatboxes-filled": "\ue233",
+	"camera-filled": "\ue7ef",
+	"cart-filled": "\ue7f4",
+	"cart": "\ue7f5",
+	"checkbox-filled": "\ue442",
+	"checkbox": "\ue7fa",
+	"arrowleft": "\ue582",
+	"arrowdown": "\ue581",
+	"arrowright": "\ue583",
+	"smallcircle-filled": "\ue801",
+	"arrowup": "\ue580",
+	"circle": "\ue411",
+	"eye-filled": "\ue568",
+	"eye-slash-filled": "\ue822",
+	"eye-slash": "\ue823",
+	"eye": "\ue824",
+	"flag-filled": "\ue825",
+	"flag": "\ue508",
+	"gear-filled": "\ue532",
+	"reload": "\ue462",
+	"gear": "\ue502",
+	"hand-thumbsdown-filled": "\ue83b",
+	"hand-thumbsdown": "\ue83c",
+	"hand-thumbsup-filled": "\ue83d",
+	"heart-filled": "\ue83e",
+	"hand-thumbsup": "\ue83f",
+	"heart": "\ue840",
+	"home": "\ue500",
+	"info": "\ue504",
+	"home-filled": "\ue530",
+	"info-filled": "\ue534",
+	"circle-filled": "\ue441",
+	"chat-filled": "\ue847",
+	"chat": "\ue263",
+	"mail-open-filled": "\ue84d",
+	"email-filled": "\ue231",
+	"mail-open": "\ue84e",
+	"email": "\ue201",
+	"checkmarkempty": "\ue472",
+	"list": "\ue562",
+	"locked-filled": "\ue856",
+	"locked": "\ue506",
+	"map-filled": "\ue85c",
+	"map-pin": "\ue85e",
+	"map-pin-ellipse": "\ue864",
+	"map": "\ue364",
+	"minus-filled": "\ue440",
+	"mic-filled": "\ue332",
+	"minus": "\ue410",
+	"micoff": "\ue360",
+	"mic": "\ue302",
+	"clear": "\ue434",
+	"smallcircle": "\ue868",
+	"close": "\ue404",
+	"closeempty": "\ue460",
+	"paperclip": "\ue567",
+	"paperplane": "\ue503",
+	"paperplane-filled": "\ue86e",
+	"person-filled": "\ue131",
+	"contact-filled": "\ue130",
+	"person": "\ue101",
+	"contact": "\ue100",
+	"images-filled": "\ue87a",
+	"phone": "\ue200",
+	"images": "\ue87b",
+	"image": "\ue363",
+	"image-filled": "\ue877",
+	"location-filled": "\ue333",
+	"location": "\ue303",
+	"plus-filled": "\ue439",
+	"plus": "\ue409",
+	"plusempty": "\ue468",
+	"help-filled": "\ue535",
+	"help": "\ue505",
+	"navigate-filled": "\ue884",
+	"navigate": "\ue501",
+	"mic-slash-filled": "\ue892",
+	"search": "\ue466",
+	"settings": "\ue560",
+	"sound": "\ue590",
+	"sound-filled": "\ue8a1",
+	"spinner-cycle": "\ue465",
+	"download-filled": "\ue8a4",
+	"personadd-filled": "\ue132",
+	"videocam-filled": "\ue8af",
+	"personadd": "\ue102",
+	"upload": "\ue402",
+	"upload-filled": "\ue8b1",
+	"starhalf": "\ue463",
+	"star-filled": "\ue438",
+	"star": "\ue408",
+	"trash": "\ue401",
+	"phone-filled": "\ue230",
+	"compose": "\ue400",
+	"videocam": "\ue300",
+	"trash-filled": "\ue8dc",
+	"download": "\ue403",
+	"chatbubble-filled": "\ue232",
+	"chatbubble": "\ue202",
+	"cloud-download": "\ue8e4",
+	"cloud-upload-filled": "\ue8e5",
+	"cloud-upload": "\ue8e6",
+	"cloud-download-filled": "\ue8e9",
+	"headphones":"\ue8bf",
+	"shop":"\ue609"
+});
+
+
+/***/ }),
+
+/***/ 15:
 /*!**********************************************************************************************************!*\
   !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/runtime/componentNormalizer.js ***!
   \**********************************************************************************************************/
@@ -1672,7 +2769,29 @@ function normalizeComponent (
 
 /***/ }),
 
-/***/ 148:
+/***/ 16:
+/*!*********************************************!*\
+  !*** D:/cloud/cloud_test/static/types.json ***!
+  \*********************************************/
+/*! exports provided: typdIcons, paytype, default */
+/***/ (function(module) {
+
+module.exports = {"typdIcons":[{"iconclass":"iconqiche"},{"iconclass":"iconhuoche"},{"iconclass":"iconfeiji"},{"iconclass":"icontingche"},{"iconclass":"iconbaozhuanhuan"},{"iconclass":"iconyinhang"},{"iconclass":"icon19"},{"iconclass":"iconlvyouchanpin"},{"iconclass":"icontuikuan"},{"iconclass":"iconjiangjinguize"},{"iconclass":"iconpets"},{"iconclass":"iconxuexi"},{"iconclass":"iconzhuanzhang"},{"iconclass":"iconzhufang"},{"iconclass":"icongongjiao"},{"iconclass":"iconyiliao"},{"iconclass":"iconaa"},{"iconclass":"iconlixifuji"},{"iconclass":"iconrenminbi"},{"iconclass":"icontang"},{"iconclass":"iconyule"},{"iconclass":"iconyunongtongqukuanfuwu"},{"iconclass":"iconjiekuan"},{"iconclass":"iconyifu"},{"iconclass":"iconhongbao"},{"iconclass":"iconjiaoyu"},{"iconclass":"iconshenghuo-"},{"iconclass":"iconshuaqiaqiapianyinhangqia"},{"iconclass":"icontouzixiangmu"},{"iconclass":"iconqita"},{"iconclass":"iconhuiyuanjiangjin"},{"iconclass":"iconshangdian"},{"iconclass":"iconzijinzhuanzhang"},{"iconclass":"iconcanyincanju"}],"paytype":[{"value":5,"label":"现金"},{"value":1,"label":"微信"},{"value":2,"label":"支付宝"},{"value":3,"label":"银行卡"},{"value":4,"label":"信用卡"},{"value":6,"label":"其它"}]};
+
+/***/ }),
+
+/***/ 17:
+/*!********************************************!*\
+  !*** D:/cloud/cloud_test/static/navs.json ***!
+  \********************************************/
+/*! exports provided: navs, default */
+/***/ (function(module) {
+
+module.exports = {"navs":[{"id":1,"iconsClass":"iconguanyu","value":"关于"},{"id":2,"iconsClass":"iconshezhi1","value":"设置"},{"id":3,"iconsClass":"iconweibiaoti15","value":"账单记录"},{"id":4,"iconsClass":"iconweibiaoti--","value":"账单详情"}]};
+
+/***/ }),
+
+/***/ 174:
 /*!*********************************************************************!*\
   !*** D:/cloud/cloud_test/plugins/stan-ucharts/u-charts/u-charts.js ***!
   \*********************************************************************/
@@ -7317,29 +8436,7 @@ if ( true && typeof module.exports === "object") {
 
 /***/ }),
 
-/***/ 15:
-/*!*********************************************!*\
-  !*** D:/cloud/cloud_test/static/types.json ***!
-  \*********************************************/
-/*! exports provided: expenditure, paytype, default */
-/***/ (function(module) {
-
-module.exports = {"expenditure":[{"type":1,"value":"a14","label":"生活","iconclass":"iconshenghuo-"},{"type":1,"value":"a2","label":"转账","iconclass":"iconzijinzhuanzhang"},{"type":1,"value":"a3","label":"餐饮","iconclass":"iconcanyincanju"},{"type":1,"value":"a4","label":"交通","iconclass":"iconqiche"},{"type":1,"value":"a5","label":"娱乐","iconclass":"iconyule"},{"type":1,"value":"a6","label":"购物","iconclass":"icongouwu"},{"type":1,"value":"a7","label":"通讯","iconclass":"iconshouji"},{"type":1,"value":"a9","label":"红包","iconclass":"iconhongbao"},{"type":1,"value":"a10","label":"取款","iconclass":"iconshuaqiaqiapianyinhangqia"},{"type":1,"value":"a11","label":"租房","iconclass":"iconfangzi"},{"type":1,"value":"a12","label":"医疗","iconclass":"iconjia"},{"type":1,"value":"a13","label":"教育","iconclass":"iconjiaoyu"},{"type":1,"value":"a14","label":"其它","iconclass":"iconqita"},{"type":2,"value":"b1","label":"薪资","iconclass":"iconshuaqiaqiapianyinhangqia"},{"type":2,"value":"b2","label":"奖金","iconclass":"iconhuiyuanjiangjin"},{"type":2,"value":"b3","label":"借入","iconclass":"iconjiekuan"},{"type":2,"value":"b4","label":"收债","iconclass":"icondkw_jiekuan"},{"type":2,"value":"b5","label":"投资","iconclass":"icontouzixiangmu"},{"type":2,"value":"b6","label":"其它","iconclass":"iconqita"}],"paytype":[{"value":5,"label":"现金"},{"value":1,"label":"微信"},{"value":2,"label":"支付宝"},{"value":3,"label":"银行卡"},{"value":4,"label":"信用卡"},{"value":6,"label":"其它"}]};
-
-/***/ }),
-
-/***/ 16:
-/*!********************************************!*\
-  !*** D:/cloud/cloud_test/static/navs.json ***!
-  \********************************************/
-/*! exports provided: navs, default */
-/***/ (function(module) {
-
-module.exports = {"navs":[{"id":1,"iconsClass":"iconguanyu","value":"关于"},{"id":2,"iconsClass":"iconshezhi1","value":"设置"},{"id":3,"iconsClass":"iconweibiaoti15","value":"账单记录"},{"id":4,"iconsClass":"iconweibiaoti--","value":"账单详情"}]};
-
-/***/ }),
-
-/***/ 17:
+/***/ 18:
 /*!**************************************************!*\
   !*** D:/cloud/cloud_test/static/untils/until.js ***!
   \**************************************************/
@@ -7537,7 +8634,54 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
       }
     });
     return dataArr;
+  },
+  // 手机号验证
+  checkPhone: function checkPhone(phone) {
+    if (/^1[3456789]\d{9}$/.test(phone)) {
+      return true;
+    } else {
+      return false;
+    }
   } };exports.default = _default;
+
+/***/ }),
+
+/***/ 19:
+/*!******************************************!*\
+  !*** D:/cloud/cloud_test/store/index.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
+var _vuex = _interopRequireDefault(__webpack_require__(/*! vuex */ 12));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+_vue.default.use(_vuex.default);
+var store = new _vuex.default.Store({
+  state: {
+    hasLogin: false,
+    userId: '' },
+
+  mutations: {
+    login: function login(state, user) {
+      state.hasLogin = true;
+      state.userId = user || '';
+      uni.setStorage({
+        key: "userId",
+        data: user });
+
+    },
+    loginOut: function loginOut(state, user) {
+      state.hasLogin = false;
+      state.userId = '';
+      uni.removeStorage({
+        key: 'userId' });
+
+    } } });var _default =
+
+
+store;exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 
@@ -7552,7 +8696,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 __webpack_require__.r(__webpack_exports__);
 /* WEBPACK VAR INJECTION */(function(global) {/*!
  * Vue.js v2.6.11
- * (c) 2014-2019 Evan You
+ * (c) 2014-2020 Evan You
  * Released under the MIT License.
  */
 /*  */
@@ -13073,7 +14217,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -13094,14 +14238,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -13175,9 +14319,9 @@ var patch = function(oldVnode, vnode) {
     Object.keys(data).forEach(function (key) { //仅同步 data 中有的数据
       mpData[key] = mpInstance.data[key];
     });
-    var diffData = diff(data, mpData);
+    var diffData = this.$shouldDiffData === false ? data : diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -13350,12 +14494,11 @@ function getTarget(obj, path) {
 function internalMixin(Vue) {
 
   Vue.config.errorHandler = function(err) {
+    console.error(err);
     /* eslint-disable no-undef */
     var app = getApp();
     if (app && app.onError) {
       app.onError(err);
-    } else {
-      console.error(err);
     }
   };
 
@@ -13572,7 +14715,7 @@ internalMixin(Vue);
 
 /***/ }),
 
-/***/ 24:
+/***/ 26:
 /*!************************************************************************************!*\
   !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/uni-cloud/dist/index.js ***!
   \************************************************************************************/
@@ -13581,13 +14724,13 @@ internalMixin(Vue);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* WEBPACK VAR INJECTION */(function(global, uni, process) {var e="undefined"!=typeof globalThis?globalThis:"undefined"!=typeof window?window:"undefined"!=typeof global?global:"undefined"!=typeof self?self:{};function t(e){return e&&e.__esModule&&Object.prototype.hasOwnProperty.call(e,"default")?e.default:e}function n(e,t){return e(t={exports:{}},t.exports),t.exports}var r=n((function(e,t){var n;e.exports=(n=n||function(e,t){var n=Object.create||function(){function e(){}return function(t){var n;return e.prototype=t,n=new e,e.prototype=null,n}}(),r={},o=r.lib={},s=o.Base={extend:function(e){var t=n(this);return e&&t.mixIn(e),t.hasOwnProperty("init")&&this.init!==t.init||(t.init=function(){t.$super.init.apply(this,arguments)}),t.init.prototype=t,t.$super=this,t},create:function(){var e=this.extend();return e.init.apply(e,arguments),e},init:function(){},mixIn:function(e){for(var t in e)e.hasOwnProperty(t)&&(this[t]=e[t]);e.hasOwnProperty("toString")&&(this.toString=e.toString)},clone:function(){return this.init.prototype.extend(this)}},i=o.WordArray=s.extend({init:function(e,t){e=this.words=e||[],this.sigBytes=null!=t?t:4*e.length},toString:function(e){return(e||c).stringify(this)},concat:function(e){var t=this.words,n=e.words,r=this.sigBytes,o=e.sigBytes;if(this.clamp(),r%4)for(var s=0;s<o;s++){var i=n[s>>>2]>>>24-s%4*8&255;t[r+s>>>2]|=i<<24-(r+s)%4*8}else for(s=0;s<o;s+=4)t[r+s>>>2]=n[s>>>2];return this.sigBytes+=o,this},clamp:function(){var t=this.words,n=this.sigBytes;t[n>>>2]&=4294967295<<32-n%4*8,t.length=e.ceil(n/4)},clone:function(){var e=s.clone.call(this);return e.words=this.words.slice(0),e},random:function(t){for(var n,r=[],o=function(t){t=t;var n=987654321,r=4294967295;return function(){var o=((n=36969*(65535&n)+(n>>16)&r)<<16)+(t=18e3*(65535&t)+(t>>16)&r)&r;return o/=4294967296,(o+=.5)*(e.random()>.5?1:-1)}},s=0;s<t;s+=4){var a=o(4294967296*(n||e.random()));n=987654071*a(),r.push(4294967296*a()|0)}return new i.init(r,t)}}),a=r.enc={},c=a.Hex={stringify:function(e){for(var t=e.words,n=e.sigBytes,r=[],o=0;o<n;o++){var s=t[o>>>2]>>>24-o%4*8&255;r.push((s>>>4).toString(16)),r.push((15&s).toString(16))}return r.join("")},parse:function(e){for(var t=e.length,n=[],r=0;r<t;r+=2)n[r>>>3]|=parseInt(e.substr(r,2),16)<<24-r%8*4;return new i.init(n,t/2)}},u=a.Latin1={stringify:function(e){for(var t=e.words,n=e.sigBytes,r=[],o=0;o<n;o++){var s=t[o>>>2]>>>24-o%4*8&255;r.push(String.fromCharCode(s))}return r.join("")},parse:function(e){for(var t=e.length,n=[],r=0;r<t;r++)n[r>>>2]|=(255&e.charCodeAt(r))<<24-r%4*8;return new i.init(n,t)}},l=a.Utf8={stringify:function(e){try{return decodeURIComponent(escape(u.stringify(e)))}catch(e){throw new Error("Malformed UTF-8 data")}},parse:function(e){return u.parse(unescape(encodeURIComponent(e)))}},f=o.BufferedBlockAlgorithm=s.extend({reset:function(){this._data=new i.init,this._nDataBytes=0},_append:function(e){"string"==typeof e&&(e=l.parse(e)),this._data.concat(e),this._nDataBytes+=e.sigBytes},_process:function(t){var n=this._data,r=n.words,o=n.sigBytes,s=this.blockSize,a=o/(4*s),c=(a=t?e.ceil(a):e.max((0|a)-this._minBufferSize,0))*s,u=e.min(4*c,o);if(c){for(var l=0;l<c;l+=s)this._doProcessBlock(r,l);var f=r.splice(0,c);n.sigBytes-=u}return new i.init(f,u)},clone:function(){var e=s.clone.call(this);return e._data=this._data.clone(),e},_minBufferSize:0}),p=(o.Hasher=f.extend({cfg:s.extend(),init:function(e){this.cfg=this.cfg.extend(e),this.reset()},reset:function(){f.reset.call(this),this._doReset()},update:function(e){return this._append(e),this._process(),this},finalize:function(e){return e&&this._append(e),this._doFinalize()},blockSize:16,_createHelper:function(e){return function(t,n){return new e.init(n).finalize(t)}},_createHmacHelper:function(e){return function(t,n){return new p.HMAC.init(e,n).finalize(t)}}}),r.algo={});return r}(Math),n)})),o=(n((function(e,t){var n;e.exports=(n=r,function(e){var t=n,r=t.lib,o=r.WordArray,s=r.Hasher,i=t.algo,a=[];!function(){for(var t=0;t<64;t++)a[t]=4294967296*e.abs(e.sin(t+1))|0}();var c=i.MD5=s.extend({_doReset:function(){this._hash=new o.init([1732584193,4023233417,2562383102,271733878])},_doProcessBlock:function(e,t){for(var n=0;n<16;n++){var r=t+n,o=e[r];e[r]=16711935&(o<<8|o>>>24)|4278255360&(o<<24|o>>>8)}var s=this._hash.words,i=e[t+0],c=e[t+1],h=e[t+2],d=e[t+3],y=e[t+4],v=e[t+5],g=e[t+6],_=e[t+7],m=e[t+8],b=e[t+9],w=e[t+10],E=e[t+11],T=e[t+12],S=e[t+13],O=e[t+14],k=e[t+15],A=s[0],P=s[1],I=s[2],N=s[3];A=u(A,P,I,N,i,7,a[0]),N=u(N,A,P,I,c,12,a[1]),I=u(I,N,A,P,h,17,a[2]),P=u(P,I,N,A,d,22,a[3]),A=u(A,P,I,N,y,7,a[4]),N=u(N,A,P,I,v,12,a[5]),I=u(I,N,A,P,g,17,a[6]),P=u(P,I,N,A,_,22,a[7]),A=u(A,P,I,N,m,7,a[8]),N=u(N,A,P,I,b,12,a[9]),I=u(I,N,A,P,w,17,a[10]),P=u(P,I,N,A,E,22,a[11]),A=u(A,P,I,N,T,7,a[12]),N=u(N,A,P,I,S,12,a[13]),I=u(I,N,A,P,O,17,a[14]),A=l(A,P=u(P,I,N,A,k,22,a[15]),I,N,c,5,a[16]),N=l(N,A,P,I,g,9,a[17]),I=l(I,N,A,P,E,14,a[18]),P=l(P,I,N,A,i,20,a[19]),A=l(A,P,I,N,v,5,a[20]),N=l(N,A,P,I,w,9,a[21]),I=l(I,N,A,P,k,14,a[22]),P=l(P,I,N,A,y,20,a[23]),A=l(A,P,I,N,b,5,a[24]),N=l(N,A,P,I,O,9,a[25]),I=l(I,N,A,P,d,14,a[26]),P=l(P,I,N,A,m,20,a[27]),A=l(A,P,I,N,S,5,a[28]),N=l(N,A,P,I,h,9,a[29]),I=l(I,N,A,P,_,14,a[30]),A=f(A,P=l(P,I,N,A,T,20,a[31]),I,N,v,4,a[32]),N=f(N,A,P,I,m,11,a[33]),I=f(I,N,A,P,E,16,a[34]),P=f(P,I,N,A,O,23,a[35]),A=f(A,P,I,N,c,4,a[36]),N=f(N,A,P,I,y,11,a[37]),I=f(I,N,A,P,_,16,a[38]),P=f(P,I,N,A,w,23,a[39]),A=f(A,P,I,N,S,4,a[40]),N=f(N,A,P,I,i,11,a[41]),I=f(I,N,A,P,d,16,a[42]),P=f(P,I,N,A,g,23,a[43]),A=f(A,P,I,N,b,4,a[44]),N=f(N,A,P,I,T,11,a[45]),I=f(I,N,A,P,k,16,a[46]),A=p(A,P=f(P,I,N,A,h,23,a[47]),I,N,i,6,a[48]),N=p(N,A,P,I,_,10,a[49]),I=p(I,N,A,P,O,15,a[50]),P=p(P,I,N,A,v,21,a[51]),A=p(A,P,I,N,T,6,a[52]),N=p(N,A,P,I,d,10,a[53]),I=p(I,N,A,P,w,15,a[54]),P=p(P,I,N,A,c,21,a[55]),A=p(A,P,I,N,m,6,a[56]),N=p(N,A,P,I,k,10,a[57]),I=p(I,N,A,P,g,15,a[58]),P=p(P,I,N,A,S,21,a[59]),A=p(A,P,I,N,y,6,a[60]),N=p(N,A,P,I,E,10,a[61]),I=p(I,N,A,P,h,15,a[62]),P=p(P,I,N,A,b,21,a[63]),s[0]=s[0]+A|0,s[1]=s[1]+P|0,s[2]=s[2]+I|0,s[3]=s[3]+N|0},_doFinalize:function(){var t=this._data,n=t.words,r=8*this._nDataBytes,o=8*t.sigBytes;n[o>>>5]|=128<<24-o%32;var s=e.floor(r/4294967296),i=r;n[15+(o+64>>>9<<4)]=16711935&(s<<8|s>>>24)|4278255360&(s<<24|s>>>8),n[14+(o+64>>>9<<4)]=16711935&(i<<8|i>>>24)|4278255360&(i<<24|i>>>8),t.sigBytes=4*(n.length+1),this._process();for(var a=this._hash,c=a.words,u=0;u<4;u++){var l=c[u];c[u]=16711935&(l<<8|l>>>24)|4278255360&(l<<24|l>>>8)}return a},clone:function(){var e=s.clone.call(this);return e._hash=this._hash.clone(),e}});function u(e,t,n,r,o,s,i){var a=e+(t&n|~t&r)+o+i;return(a<<s|a>>>32-s)+t}function l(e,t,n,r,o,s,i){var a=e+(t&r|n&~r)+o+i;return(a<<s|a>>>32-s)+t}function f(e,t,n,r,o,s,i){var a=e+(t^n^r)+o+i;return(a<<s|a>>>32-s)+t}function p(e,t,n,r,o,s,i){var a=e+(n^(t|~r))+o+i;return(a<<s|a>>>32-s)+t}t.MD5=s._createHelper(c),t.HmacMD5=s._createHmacHelper(c)}(Math),n.MD5)})),n((function(e,t){var n,o,s;e.exports=(o=(n=r).lib.Base,s=n.enc.Utf8,void(n.algo.HMAC=o.extend({init:function(e,t){e=this._hasher=new e.init,"string"==typeof t&&(t=s.parse(t));var n=e.blockSize,r=4*n;t.sigBytes>r&&(t=e.finalize(t)),t.clamp();for(var o=this._oKey=t.clone(),i=this._iKey=t.clone(),a=o.words,c=i.words,u=0;u<n;u++)a[u]^=1549556828,c[u]^=909522486;o.sigBytes=i.sigBytes=r,this.reset()},reset:function(){var e=this._hasher;e.reset(),e.update(this._iKey)},update:function(e){return this._hasher.update(e),this},finalize:function(e){var t=this._hasher,n=t.finalize(e);return t.reset(),t.finalize(this._oKey.clone().concat(n))}})))})),n((function(e,t){e.exports=r.HmacMD5})));class s extends Error{constructor(e){super(e.message),this.errMsg=e.message||"",Object.defineProperties(this,{code:{get:()=>e.code},requestId:{get:()=>e.requestId},message:{get(){return`errCode: ${e.code||""} | errMsg: `+this.errMsg},set(e){this.errMsg=e}}})}}var i={sign:function(e,t){let n="";return Object.keys(e).sort().forEach((function(t){e[t]&&(n=n+"&"+t+"="+e[t])})),n=n.slice(1),o(n,t).toString()},wrappedRequest:function(e){return new Promise((t,n)=>{uni.request(Object.assign(e,{complete(e){e||(e={}),"request:fail"!==e.errMsg&&"request:faill"!==e.errMsg||"h5"!=="mp-weixin"||"development"!=="development"||console.warn("发布H5，需要在uniCloud后台操作，绑定安全域名，否则会因为跨域问题而无法访问。教程参考：https://uniapp.dcloud.io/uniCloud/quickstart?id=H5%E4%B8%AD%E4%BD%BF%E7%94%A8unicloud");const r=e.header&&e.header["request-id"];if(!e.statusCode||e.statusCode>=400)return n(new s({code:"SYS_ERR",message:e.errMsg||"request:fail",requestId:r}));const o=e.data;if(o.error)return n(new s({code:o.error.code,message:o.error.message,requestId:r}));o.result=o.data,o.requestId=r,delete o.data,t(o)}}))})}};const a={jpg:"image/jpeg",jpeg:"image/jpeg",png:"image/png",gif:"image/gif",webp:"image/webp",svg:"image/svg+xml",mp3:"audio/mp3",mp4:"video/mp4",ogg:"audio/ogg",webm:"video/webm"};function c(e){return a[e.toLowerCase()]}class u{constructor(e){["spaceId","clientSecret"].forEach(t=>{if(!Object.prototype.hasOwnProperty.call(e,t))throw new Error(`缺少参数${t}`)}),this.config=Object.assign({},{endpoint:"https://api.bspapp.com"},e),this.config.provider="aliyun",this.config.requestUrl=this.config.endpoint+"/client",this.config.envType=this.config.envType||"public",this.config.accessTokenKey="access_token_"+this.config.spaceId}get hasAccessToken(){return!!this.accessToken}setAccessToken(e){uni.setStorageSync(this.config.accessTokenKey,e),this.accessToken=e}requestAuth(e){return i.wrappedRequest(e)}request(e,t){return this.hasAccessToken?t?i.wrappedRequest(e):i.wrappedRequest(e).catch(t=>new Promise((e,n)=>{!t||"GATEWAY_INVALID_TOKEN"!==t.code&&"InvalidParameter.InvalidToken"!==t.code?n(t):e()}).then(()=>this.getAccessToken()).then(()=>{const t=this.rebuildRequest(e);return this.request(t,!0)})):this.getAccessToken().then(()=>{const t=this.rebuildRequest(e);return this.request(t,!0)})}rebuildRequest(e){const t=Object.assign({},e);return t.data.token=this.accessToken,t.header["x-basement-token"]=this.accessToken,t.header["x-serverless-sign"]=i.sign(t.data,this.config.clientSecret),t}setupRequest(e,t){const n=Object.assign({},e,{spaceId:this.config.spaceId,timestamp:Date.now()}),r={"Content-Type":"application/json"};return"auth"!==t&&(n.token=this.accessToken,r["x-basement-token"]=this.accessToken),r["x-serverless-sign"]=i.sign(n,this.config.clientSecret),{url:this.config.requestUrl,method:"POST",data:n,dataType:"json",header:r}}getAccessToken(){return this.requestAuth(this.setupRequest({method:"serverless.auth.user.anonymousAuthorize",params:"{}"},"auth")).then(e=>new Promise((t,n)=>{e.result&&e.result.accessToken?(this.setAccessToken(e.result.accessToken),t(this.accessToken)):n(new s({code:"AUTH_FAILED",message:"获取accessToken失败"}))}))}authorize(){this.getAccessToken()}callFunction(e){const t={method:"serverless.function.runtime.invoke",params:JSON.stringify({functionTarget:e.name,functionArgs:e.data||{}})};return this.config.useDebugFunction?this.request(this.setupRequest(t)).then(t=>{if(t&&t.requestId){const n=JSON.stringify({spaceId:this.config.spaceId,functionName:e.name,requestId:t.requestId});console.log(`[aliyun-request]${n}[/aliyun-request]`)}return Promise.resolve(t)}).catch(t=>{if(t&&t.requestId){const n=JSON.stringify({spaceId:this.config.spaceId,functionName:e.name,requestId:t.requestId});console.log(`[aliyun-request]${n}[/aliyun-request]`)}return Promise.reject(t)}):this.request(this.setupRequest(t))}getOSSUploadOptionsFromPath(e){const t={method:"serverless.file.resource.generateProximalSign",params:JSON.stringify(e)};return this.request(this.setupRequest(t))}uploadFileToOSS({url:e,formData:t,fileName:n,name:r,filePath:o,fileType:i,contentType:a}){return new Promise((a,c)=>{uni.uploadFile({url:e,formData:t,fileName:n,name:r,filePath:o,fileType:i,header:{"X-OSS-server-side-encrpytion":"AES256"},success(e){e&&e.statusCode<400?a(e):c(new s({code:"UPLOAD_FAILED",message:"文件上传失败"}))},fail(e){c(e)}})})}reportOSSUpload(e){const t={method:"serverless.file.resource.report",params:JSON.stringify(e)};return this.request(this.setupRequest(t))}uploadFile({filePath:e,config:t}){const n=t&&t.envType||this.config.envType;let r,o,i,u,l,f=e.split("/").pop();return(r= false?undefined:c(o=e.split(".").pop())?Promise.resolve():Promise.reject(new s({code:"UNSUPPORTED_FILE_TYPE",message:"不支持的文件类型"}))).then(()=>this.getOSSUploadOptionsFromPath({env:n,filename:f})).then(t=>{const n=t.result;i=c(o),u=n.id,l="https://"+n.host+"/"+n.ossPath;const r={url:"https://"+n.host,formData:{"Cache-Control":"max-age=2592000","Content-Disposition":"attachment",OSSAccessKeyId:n.accessKeyId,Signature:n.signature,host:n.host,id:u,key:n.ossPath,policy:n.policy,success_action_status:200},fileName:"file",name:"file",filePath:e,fileType:"image",contentType:i};return this.uploadFileToOSS(r)}).then(()=>this.reportOSSUpload({id:u,contentType:i})).then(t=>new Promise((n,r)=>{t.success?n({success:!0,filePath:e,fileID:l}):r(new s({code:"UPLOAD_FAILED",message:"文件上传失败"}))}))}deleteFile({fileList:e}){const t={method:"serverless.file.resource.delete",params:JSON.stringify({id:e[0]})};return this.request(this.setupRequest(t))}}const l=__webpack_require__(/*! uni-stat-config */ 8).default||__webpack_require__(/*! uni-stat-config */ 8),f="__DC_STAT_UUID",p="__DC_UUID_VALUE",h="https://ide.dcloud.net.cn/serverless/function/invoke";function d(){let e="";if("n"===y()){try{e=plus.runtime.getDCloudId()}catch(t){e=""}return e}try{e=uni.getStorageSync(f)}catch(t){e=p}if(!e){e=Date.now()+""+Math.floor(1e7*Math.random());try{uni.setStorageSync(f,e)}catch(e){uni.setStorageSync(f,p)}}return e}function y(){return{"app-plus":"n",h5:"h5","mp-weixin":"wx","mp-alipay":"ali","mp-baidu":"bd","mp-toutiao":"tt","mp-qq":"qq"}["mp-weixin"]}function v(e){return function(t){if(!((t=t||{}).success||t.fail||t.complete))return e.call(this,t);e.call(this,t).then(e=>{t.success&&t.success(e),t.complete&&t.complete(e)}).catch(e=>{t.fail&&t.fail(e),t.complete&&t.complete(e)})}}const g={init(e){const t=new u(e);return["callFunction","uploadFile","deleteFile"].forEach(e=>{t[e]=v(t[e]).bind(t)}),setTimeout(()=>{t.authorize()}),t}};var _;!function(e){e.local="local",e.none="none",e.session="session"}(_||(_={}));var m=function(){},b=function(){};function w(e,t,n){void 0===n&&(n={});var r=/\?/.test(t),o="";for(var s in n)""===o?!r&&(t+="?"):o+="&",o+=s+"="+encodeURIComponent(n[s]);return/^http(s)?\:\/\//.test(t+=o)?t:""+e+t}var E,T=Object.freeze({__proto__:null,get StorageType(){return _},AbstractSDKRequest:m,AbstractStorage:b,formatUrl:w}),S=(E=function(e,t){return(E=Object.setPrototypeOf||{__proto__:[]}instanceof Array&&function(e,t){e.__proto__=t}||function(e,t){for(var n in t)t.hasOwnProperty(n)&&(e[n]=t[n])})(e,t)},function(e,t){function n(){this.constructor=e}E(e,t),e.prototype=null===t?Object.create(t):(n.prototype=t.prototype,new n)}),O=function(){return(O=Object.assign||function(e){for(var t,n=1,r=arguments.length;n<r;n++)for(var o in t=arguments[n])Object.prototype.hasOwnProperty.call(t,o)&&(e[o]=t[o]);return e}).apply(this,arguments)};var k=function(e){function t(){return null!==e&&e.apply(this,arguments)||this}return S(t,e),t.prototype.post=function(e){var t=e.url,n=e.data,r=e.headers;return new Promise((function(e,o){uni.request({url:w("https:",t),data:n,method:"POST",header:r,success:function(t){e(t)},fail:function(e){o(e)}})}))},t.prototype.upload=function(e){return new Promise((function(t){var n=e.url,r=e.file,o=e.data,s=e.headers;uni.uploadFile({url:w("https:",n),name:"file",formData:Object.assign({},o,{file:r}),filePath:r,header:s,success:function(e){var n={statusCode:e.statusCode,data:e.data||{}};200===e.statusCode&&o.success_action_status&&(n.statusCode=parseInt(o.success_action_status,10)),t(n)},fail:function(e){t(e)}})}))},t.prototype.download=function(e){var t=e.url,n=e.headers;return new Promise((function(e,r){uni.downloadFile({url:w("https:",t),header:n,success:function(t){200===t.statusCode&&t.tempFilePath?e({statusCode:200,tempFilePath:t.tempFilePath}):e(t)},fail:function(e){r(e)}})}))},t}(m),A={setItem:function(e,t){uni.setStorageSync(e,t)},getItem:function(e){return uni.getStorageSync(e)},removeItem:function(e){uni.removeStorageSync(e)},clear:function(){uni.clearStorageSync()}},P=function(e,t){void 0===t&&(t={});var n=uni.connectSocket(O({url:e},t));return{set onopen(e){n.onOpen(e)},set onmessage(e){n.onMessage(e)},set onclose(e){n.onClose(e)},set onerror(e){n.onError(e)},send:function(e){return n.send({data:e})},close:function(e,t){return n.close({code:e,reason:t})},get readyState(){return n.readyState},CONNECTING:0,OPEN:1,CLOSING:2,CLOSED:3}};var I={genAdapter:function(){return{root:{},reqClass:k,wsClass:P,localStorage:A,primaryStorage:_.local}},isMatch:function(){return"undefined"!=typeof uni&&!!uni.request},runtime:"uni_app"},N=n((function(e,t){Object.defineProperty(t,"__esModule",{value:!0}),t.getQuery=function(e,t){if("undefined"==typeof window)return!1;var n=t||window.location.search,r=new RegExp("(^|&)"+e+"=([^&]*)(&|$)"),o=n.substr(n.indexOf("?")+1).match(r);return null!=o?o[2]:""},t.getHash=function(e){var t=window.location.hash.match(new RegExp("[#?&/]"+e+"=([^&#]*)"));return t?t[1]:""},t.removeParam=function(e,t){var n=t.split("?")[0],r=[],o=-1!==t.indexOf("?")?t.split("?")[1]:"";if(""!==o){for(var s=(r=o.split("&")).length-1;s>=0;s-=1)r[s].split("=")[0]===e&&r.splice(s,1);n=n+"?"+r.join("&")}return n},t.createPromiseCallback=function(){var e;if(!Promise){(e=function(){}).promise={};var t=function(){throw new Error('Your Node runtime does support ES6 Promises. Set "global.Promise" to your preferred implementation of promises.')};return Object.defineProperty(e.promise,"then",{get:t}),Object.defineProperty(e.promise,"catch",{get:t}),e}var n=new Promise((function(t,n){e=function(e,r){return e?n(e):t(r)}}));return e.promise=n,e},t.getWeixinCode=function(){return t.getQuery("code")||t.getHash("code")},t.getMiniAppCode=function(){return new Promise((function(e,t){wx.login({success:function(t){e(t.code)},fail:function(e){t(e)}})}))},t.isArray=function(e){return"[object Array]"===Object.prototype.toString.call(e)},t.isString=function(e){return"string"==typeof e},t.isUndefined=function(e){return void 0===e},t.isInstanceOf=function(e,t){return e instanceof t},t.isFormData=function(e){return"[object FormData]"===Object.prototype.toString.call(e)},t.genSeqId=function(){return Math.random().toString(16).slice(2)},t.getArgNames=function(e){var t=e.toString();return t.slice(t.indexOf("(")+1,t.indexOf(")")).match(/([^\s,]+)/g)},t.formatUrl=function(e,t,n){void 0===n&&(n={});var r=/\?/.test(t),o="";for(var s in n)""===o?!r&&(t+="?"):o+="&",o+=s+"="+encodeURIComponent(n[s]);return/^http(s)?\:\/\//.test(t+=o)?t:""+e+t}}));t(N);N.getQuery,N.getHash,N.removeParam,N.createPromiseCallback,N.getWeixinCode,N.getMiniAppCode,N.isArray,N.isString,N.isUndefined,N.isInstanceOf,N.isFormData,N.genSeqId,N.getArgNames,N.formatUrl;var R,C="dist/index.js",q="./dist/index.d.ts",x={build:"npm run tsc && webpack",tsc:"tsc -p tsconfig.json","tsc:w":"tsc -p tsconfig.json -w",test:"jest --verbose false -i",e2e:'NODE_ENV=e2e webpack && jest --config="./jest.e2e.config.js"  --verbose false -i "e2e"',start:"webpack-dev-server --hot --open",eslint:'eslint "./**/*.js" "./**/*.ts"',"eslint-fix":'eslint --fix "./**/*.js" "./**/*.ts"',test_web:"npm run tsc && webpack-dev-server --devtool eval-source-map --progress --colors --hot --inline --content-base ./dist --host jimmytest-088bef.tcb.qcloud.la --port 80 --disableHostCheck true --mode development --config webpack.test.js"},j={type:"git",url:"https://github.com/TencentCloudBase/tcb-js-sdk"},U=["tcb","js-sdk"],L={"@cloudbase/adapter-interface":"^0.2.0","@cloudbase/adapter-wx_mp":"^0.2.1","@cloudbase/database":"^0.9.8"},D={"@babel/core":"^7.6.2","@babel/plugin-proposal-class-properties":"^7.5.5","@babel/plugin-proposal-object-rest-spread":"^7.6.2","@babel/plugin-transform-runtime":"^7.6.2","@babel/preset-env":"^7.6.2","@babel/preset-typescript":"^7.6.0","@babel/runtime":"^7.6.2","@types/jest":"^23.1.4","@types/node":"^10.14.4","@types/superagent":"^4.1.4",axios:"^0.19.0","babel-eslint":"^10.0.1","babel-loader":"^8.0.6","babel-polyfill":"^6.26.0",eslint:"^5.16.0","eslint-config-alloy":"^1.4.2","eslint-config-prettier":"^4.1.0","eslint-plugin-prettier":"^3.0.1","eslint-plugin-typescript":"^1.0.0-rc.3",express:"^4.17.1",husky:"^3.1.0",jest:"^24.7.1","jest-puppeteer":"^4.3.0","lint-staged":"^9.5.0","power-assert":"^1.6.1",puppeteer:"^1.20.0","serve-static":"^1.14.1","ts-jest":"^23.10.4","ts-loader":"^6.2.1",typescript:"^3.4.3","typescript-eslint-parser":"^22.0.0",webpack:"^4.41.3","webpack-bundle-analyzer":"^3.4.1","webpack-cli":"^3.3.0","webpack-dev-server":"^3.3.1","webpack-merge":"^4.2.2","webpack-visualizer-plugin":"^0.1.11"},M={hooks:{"pre-commit":"lint-staged"}},F={name:"tcb-js-sdk",version:"1.3.5",description:"js sdk for tcb",main:C,types:q,scripts:x,repository:j,keywords:U,author:"jimmyjzhang",license:"ISC",dependencies:L,devDependencies:D,husky:M,"lint-staged":{"*.{js,ts}":["eslint --fix","git add"]}},K=(R=Object.freeze({__proto__:null,name:"tcb-js-sdk",version:"1.3.5",description:"js sdk for tcb",main:C,types:q,scripts:x,repository:j,keywords:U,author:"jimmyjzhang",license:"ISC",dependencies:L,devDependencies:D,husky:M,default:F}))&&R.default||R,G=n((function(t,n){var r=e&&e.__importStar||function(e){if(e&&e.__esModule)return e;var t={};if(null!=e)for(var n in e)Object.hasOwnProperty.call(e,n)&&(t[n]=e[n]);return t.default=e,t};Object.defineProperty(n,"__esModule",{value:!0});var o=r(K);n.SDK_VERISON=o.version,n.ACCESS_TOKEN="access_token",n.ACCESS_TOKEN_Expire="access_token_expire",n.REFRESH_TOKEN="refresh_token",n.ANONYMOUS_UUID="anonymous_uuid",n.LOGIN_TYPE_KEY="login_type",n.protocol="undefined"!=typeof location&&"http:"===location.protocol?"http:":"https:",n.BASE_URL= false?undefined:"//tcb-api.tencentcloudapi.com/web"}));t(G);G.SDK_VERISON,G.ACCESS_TOKEN,G.ACCESS_TOKEN_Expire,G.REFRESH_TOKEN,G.ANONYMOUS_UUID,G.LOGIN_TYPE_KEY,G.protocol,G.BASE_URL;var H=n((function(t,n){var r=e&&e.__extends||function(){var e=function(t,n){return(e=Object.setPrototypeOf||{__proto__:[]}instanceof Array&&function(e,t){e.__proto__=t}||function(e,t){for(var n in t)t.hasOwnProperty(n)&&(e[n]=t[n])})(t,n)};return function(t,n){function r(){this.constructor=t}e(t,n),t.prototype=null===n?Object.create(n):(r.prototype=n.prototype,new r)}}(),o=e&&e.__assign||function(){return(o=Object.assign||function(e){for(var t,n=1,r=arguments.length;n<r;n++)for(var o in t=arguments[n])Object.prototype.hasOwnProperty.call(t,o)&&(e[o]=t[o]);return e}).apply(this,arguments)},s=e&&e.__awaiter||function(e,t,n,r){return new(n||(n=Promise))((function(o,s){function i(e){try{c(r.next(e))}catch(e){s(e)}}function a(e){try{c(r.throw(e))}catch(e){s(e)}}function c(e){var t;e.done?o(e.value):(t=e.value,t instanceof n?t:new n((function(e){e(t)}))).then(i,a)}c((r=r.apply(e,t||[])).next())}))},i=e&&e.__generator||function(e,t){var n,r,o,s,i={label:0,sent:function(){if(1&o[0])throw o[1];return o[1]},trys:[],ops:[]};return s={next:a(0),throw:a(1),return:a(2)},"function"==typeof Symbol&&(s[Symbol.iterator]=function(){return this}),s;function a(s){return function(a){return function(s){if(n)throw new TypeError("Generator is already executing.");for(;i;)try{if(n=1,r&&(o=2&s[0]?r.return:s[0]?r.throw||((o=r.return)&&o.call(r),0):r.next)&&!(o=o.call(r,s[1])).done)return o;switch(r=0,o&&(s=[2&s[0],o.value]),s[0]){case 0:case 1:o=s;break;case 4:return i.label++,{value:s[1],done:!1};case 5:i.label++,r=s[1],s=[0];continue;case 7:s=i.ops.pop(),i.trys.pop();continue;default:if(!(o=(o=i.trys).length>0&&o[o.length-1])&&(6===s[0]||2===s[0])){i=0;continue}if(3===s[0]&&(!o||s[1]>o[0]&&s[1]<o[3])){i.label=s[1];break}if(6===s[0]&&i.label<o[1]){i.label=o[1],o=s;break}if(o&&i.label<o[2]){i.label=o[2],i.ops.push(s);break}o[2]&&i.ops.pop(),i.trys.pop();continue}s=t.call(e,i)}catch(e){s=[6,e],r=0}finally{n=o=0}if(5&s[0])throw s[1];return{value:s[0]?s[1]:void 0,done:!0}}([s,a])}}};Object.defineProperty(n,"__esModule",{value:!0});var a=function(e){function t(){return null!==e&&e.apply(this,arguments)||this}return r(t,e),t.prototype.get=function(e){return this._request(o(o({},e),{method:"get"}))},t.prototype.post=function(e){return this._request(o(o({},e),{method:"post"}))},t.prototype.upload=function(e){var t=e.data,n=e.file,r=e.name,s=new FormData;for(var i in t)s.append(i,t[i]);return s.append("key",r),s.append("file",n),this._request(o(o({},e),{data:s,method:"post"}))},t.prototype.download=function(e){return s(this,void 0,void 0,(function(){var t,n;return i(this,(function(r){return t=decodeURIComponent(new URL(e.url).pathname.split("/").pop()||""),(n=document.createElement("a")).href=e.url,n.setAttribute("download",t),n.setAttribute("target","_blank"),document.body.appendChild(n),n.click(),[2,new Promise((function(t){t({statusCode:200,tempFilePath:e.url})}))]}))}))},t.prototype._request=function(e){var t=String(e.method).toLowerCase()||"get";return new Promise((function(n){var r=e.url,o=e.headers,s=void 0===o?{}:o,i=e.data,a=e.responseType,c=N.formatUrl(G.protocol,r,"get"===t?i:{}),u=new XMLHttpRequest;for(var l in u.open(t,c),a&&(u.responseType=a),s)u.setRequestHeader(l,s[l]);u.onreadystatechange=function(){if(4===u.readyState){var e={statusCode:u.status};try{e.data=JSON.parse(u.responseText)}catch(e){}n(e)}},u.send("post"===t&&N.isFormData(i)?i:JSON.stringify(i||{}))}))},t}(T.AbstractSDKRequest);n.WebRequest=a,n.genAdapter=function(){return{root:window,reqClass:a,wsClass:WebSocket,localStorage:localStorage,sessionStorage:sessionStorage}}}));t(H);H.WebRequest,H.genAdapter;var Y=n((function(t,n){var r=e&&e.__importStar||function(e){if(e&&e.__esModule)return e;var t={};if(null!=e)for(var n in e)Object.hasOwnProperty.call(e,n)&&(t[n]=e[n]);return t.default=e,t};Object.defineProperty(n,"__esModule",{value:!0});var o,s=r(H);!function(e){e.WEB="web",e.WX_MP="wx_mp"}(o=n.RUNTIME||(n.RUNTIME={})),n.useAdapters=function(e){for(var t=0,n=N.isArray(e)?e:[e];t<n.length;t++){var r=n[t],o=r.isMatch,s=r.genAdapter,i=r.runtime;if(o())return{adapter:s(),runtime:i}}},n.useDefaultAdapter=function(){return{adapter:s.genAdapter(),runtime:o.WEB}},n.Adapter={adapter:null,runtime:void 0}}));t(Y);Y.RUNTIME,Y.useAdapters,Y.useDefaultAdapter,Y.Adapter;var V=n((function(t,n){var r=e&&e.__extends||function(){var e=function(t,n){return(e=Object.setPrototypeOf||{__proto__:[]}instanceof Array&&function(e,t){e.__proto__=t}||function(e,t){for(var n in t)t.hasOwnProperty(n)&&(e[n]=t[n])})(t,n)};return function(t,n){function r(){this.constructor=t}e(t,n),t.prototype=null===n?Object.create(n):(r.prototype=n.prototype,new r)}}();Object.defineProperty(n,"__esModule",{value:!0});var o=function(){function e(e){switch(Y.Adapter.adapter.primaryStorage||e){case"local":this.storageClass=Y.Adapter.adapter.localStorage||new s;break;case"none":this.storageClass=new s;break;default:this.storageClass=Y.Adapter.adapter.sessionStorage||new s}}return e.prototype.setStore=function(e,t,n){try{if(!this.storageClass)return}catch(e){return}var r,o={};o.version=n||"localCachev1",o.content=t,r=JSON.stringify(o);try{this.storageClass.setItem(e,r)}catch(e){return}},e.prototype.getStore=function(e,t){try{if(process&&Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"})&&Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).tcb_token)return Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).tcb_token;if(!this.storageClass)return}catch(e){return""}t=t||"localCachev1";var n=this.storageClass.getItem(e);return n&&n.indexOf(t)>=0?JSON.parse(n).content:""},e.prototype.removeStore=function(e){this.storageClass.removeItem(e)},e}();n.Cache=o;var s=function(e){function t(){var t=e.call(this)||this;return Y.Adapter.adapter.root.tcbObject||(Y.Adapter.adapter.root.tcbObject={}),t}return r(t,e),t.prototype.setItem=function(e,t){Y.Adapter.adapter.root.tcbObject[e]=t},t.prototype.getItem=function(e){return Y.Adapter.adapter.root.tcbObject[e]},t.prototype.removeItem=function(e){delete Y.Adapter.adapter.root.tcbObject[e]},t.prototype.clear=function(){delete Y.Adapter.adapter.root.tcbObject},t}(T.AbstractStorage)}));t(V);V.Cache;var B=n((function(t,n){var r=e&&e.__extends||function(){var e=function(t,n){return(e=Object.setPrototypeOf||{__proto__:[]}instanceof Array&&function(e,t){e.__proto__=t}||function(e,t){for(var n in t)t.hasOwnProperty(n)&&(e[n]=t[n])})(t,n)};return function(t,n){function r(){this.constructor=t}e(t,n),t.prototype=null===n?Object.create(n):(r.prototype=n.prototype,new r)}}(),o=e&&e.__spreadArrays||function(){for(var e=0,t=0,n=arguments.length;t<n;t++)e+=arguments[t].length;var r=Array(e),o=0;for(t=0;t<n;t++)for(var s=arguments[t],i=0,a=s.length;i<a;i++,o++)r[o]=s[i];return r};Object.defineProperty(n,"__esModule",{value:!0});var s=function(e,t){this.data=t||null,this.name=e};n.IEvent=s;var i=function(e){function t(t,n){var r=e.call(this,"error",{error:t,data:n})||this;return r.error=t,r}return r(t,e),t}(s);n.IErrorEvent=i;var a=function(){function e(){this._listeners={}}return e.prototype.on=function(e,t){return function(e,t,n){n[e]=n[e]||[],n[e].push(t)}(e,t,this._listeners),this},e.prototype.off=function(e,t){return function(e,t,n){if(n&&n[e]){var r=n[e].indexOf(t);-1!==r&&n[e].splice(r,1)}}(e,t,this._listeners),this},e.prototype.fire=function(e,t){if(N.isInstanceOf(e,i))return console.error(e.error),this;var n=N.isString(e)?new s(e,t||{}):e,r=n.name;if(this._listens(r)){n.target=this;for(var a=0,c=this._listeners[r]?o(this._listeners[r]):[];a<c.length;a++){c[a].call(this,n)}}return this},e.prototype._listens=function(e){return this._listeners[e]&&this._listeners[e].length>0},e}();n.IEventEmitter=a;var c=new a;n.addEventListener=function(e,t){c.on(e,t)},n.activateEvent=function(e,t){void 0===t&&(t={}),c.fire(e,t)},n.removeEventListener=function(e,t){c.off(e,t)},n.EVENTS={LOGIN_STATE_CHANGED:"loginStateChanged",LOGIN_STATE_EXPIRE:"loginStateExpire",LOGIN_TYPE_CHANGE:"loginTypeChanged",ANONYMOUS_CONVERTED:"anonymousConverted",REFRESH_ACCESS_TOKEN:"refreshAccessToken"}}));t(B);B.IEvent,B.IErrorEvent,B.IEventEmitter,B.addEventListener,B.activateEvent,B.removeEventListener,B.EVENTS;var W=n((function(t,n){var r=e&&e.__assign||function(){return(r=Object.assign||function(e){for(var t,n=1,r=arguments.length;n<r;n++)for(var o in t=arguments[n])Object.prototype.hasOwnProperty.call(t,o)&&(e[o]=t[o]);return e}).apply(this,arguments)},o=e&&e.__awaiter||function(e,t,n,r){return new(n||(n=Promise))((function(o,s){function i(e){try{c(r.next(e))}catch(e){s(e)}}function a(e){try{c(r.throw(e))}catch(e){s(e)}}function c(e){var t;e.done?o(e.value):(t=e.value,t instanceof n?t:new n((function(e){e(t)}))).then(i,a)}c((r=r.apply(e,t||[])).next())}))},s=e&&e.__generator||function(e,t){var n,r,o,s,i={label:0,sent:function(){if(1&o[0])throw o[1];return o[1]},trys:[],ops:[]};return s={next:a(0),throw:a(1),return:a(2)},"function"==typeof Symbol&&(s[Symbol.iterator]=function(){return this}),s;function a(s){return function(a){return function(s){if(n)throw new TypeError("Generator is already executing.");for(;i;)try{if(n=1,r&&(o=2&s[0]?r.return:s[0]?r.throw||((o=r.return)&&o.call(r),0):r.next)&&!(o=o.call(r,s[1])).done)return o;switch(r=0,o&&(s=[2&s[0],o.value]),s[0]){case 0:case 1:o=s;break;case 4:return i.label++,{value:s[1],done:!1};case 5:i.label++,r=s[1],s=[0];continue;case 7:s=i.ops.pop(),i.trys.pop();continue;default:if(!(o=(o=i.trys).length>0&&o[o.length-1])&&(6===s[0]||2===s[0])){i=0;continue}if(3===s[0]&&(!o||s[1]>o[0]&&s[1]<o[3])){i.label=s[1];break}if(6===s[0]&&i.label<o[1]){i.label=o[1],o=s;break}if(o&&i.label<o[2]){i.label=o[2],i.ops.push(s);break}o[2]&&i.ops.pop(),i.trys.pop();continue}s=t.call(e,i)}catch(e){s=[6,e],r=0}finally{n=o=0}if(5&s[0])throw s[1];return{value:s[0]?s[1]:void 0,done:!0}}([s,a])}}};Object.defineProperty(n,"__esModule",{value:!0});var i=["auth.getJwt","auth.logout","auth.signInWithTicket","auth.signInAnonymously"],a={"X-SDK-Version":G.SDK_VERISON};function c(e,t,n){var o=e[t];e[t]=function(t){var s={},i={};n.forEach((function(n){var r=n.call(e,t),o=r.data,a=r.headers;Object.assign(s,o),Object.assign(i,a)}));var a=t.data;return a&&function(){if(N.isFormData(a))for(var e in s)a.append(e,s[e]);else t.data=r(r({},a),s)}(),t.headers=r(r({},t.headers||{}),i),o.call(e,t)}}function u(){var e=N.genSeqId();return{data:{seqId:e},headers:r(r({},a),{"x-seqid":e})}}var l=function(){function e(e){void 0===e&&(e={}),this.config=e,this.cache=new V.Cache(e.persistence),this.accessTokenKey=G.ACCESS_TOKEN+"_"+e.env,this.accessTokenExpireKey=G.ACCESS_TOKEN_Expire+"_"+e.env,this.refreshTokenKey=G.REFRESH_TOKEN+"_"+e.env,this.anonymousUuidKey=G.ANONYMOUS_UUID+"_"+e.env,this.loginTypeKey=G.LOGIN_TYPE_KEY+"_"+e.env,this._reqClass=new Y.Adapter.adapter.reqClass,c(this._reqClass,"post",[u]),c(this._reqClass,"upload",[u]),c(this._reqClass,"download",[u])}return e.prototype.post=function(e){return o(this,void 0,void 0,(function(){return s(this,(function(t){switch(t.label){case 0:return[4,this._reqClass.post(e)];case 1:return[2,t.sent()]}}))}))},e.prototype.upload=function(e){return o(this,void 0,void 0,(function(){return s(this,(function(t){switch(t.label){case 0:return[4,this._reqClass.upload(e)];case 1:return[2,t.sent()]}}))}))},e.prototype.download=function(e){return o(this,void 0,void 0,(function(){return s(this,(function(t){switch(t.label){case 0:return[4,this._reqClass.download(e)];case 1:return[2,t.sent()]}}))}))},e.prototype.refreshAccessToken=function(){return o(this,void 0,void 0,(function(){var e,t,n;return s(this,(function(r){switch(r.label){case 0:this._refreshAccessTokenPromise||(this._refreshAccessTokenPromise=this._refreshAccessToken()),r.label=1;case 1:return r.trys.push([1,3,,4]),[4,this._refreshAccessTokenPromise];case 2:return e=r.sent(),[3,4];case 3:return n=r.sent(),t=n,[3,4];case 4:if(this._refreshAccessTokenPromise=null,this._shouldRefreshAccessTokenHook=null,t)throw t;return[2,e]}}))}))},e.prototype._refreshAccessToken=function(){return o(this,void 0,void 0,(function(){var e,t,n,r;return s(this,(function(o){switch(o.label){case 0:if(this.cache.removeStore(this.accessTokenKey),this.cache.removeStore(this.accessTokenExpireKey),!(e=this.cache.getStore(this.refreshTokenKey)))throw new Error("[tcb-js-sdk] 未登录CloudBase");return t={refresh_token:e},this.cache.getStore(this.loginTypeKey)===z.LOGINTYPE.ANONYMOUS&&(t.anonymous_uuid=this.cache.getStore(this.anonymousUuidKey)),[4,this.request("auth.getJwt",t)];case 1:if((n=o.sent()).data.code)throw"SIGN_PARAM_INVALID"!==(r=n.data.code)&&"REFRESH_TOKEN_EXPIRED"!==r&&"INVALID_REFRESH_TOKEN"!==r||(B.activateEvent(B.EVENTS.LOGIN_STATE_EXPIRE),this.cache.removeStore(this.refreshTokenKey)),new Error("[tcb-js-sdk] 刷新access token失败："+n.data.code);return n.data.access_token?(B.activateEvent(B.EVENTS.REFRESH_ACCESS_TOKEN),this.cache.setStore(this.accessTokenKey,n.data.access_token),this.cache.setStore(this.accessTokenExpireKey,n.data.access_token_expire+Date.now()),B.activateEvent(B.EVENTS.LOGIN_TYPE_CHANGE,n.data.login_type),[2,{accessToken:n.data.access_token,accessTokenExpire:n.data.access_token_expire}]):(n.data.refresh_token&&(this.cache.removeStore(this.refreshTokenKey),this.cache.setStore(this.refreshTokenKey,n.data.refresh_token),this._refreshAccessToken()),[2])}}))}))},e.prototype.getAccessToken=function(){return o(this,void 0,void 0,(function(){var e,t,n,r;return s(this,(function(o){switch(o.label){case 0:return e=this.cache.getStore(this.accessTokenKey),t=this.cache.getStore(this.accessTokenExpireKey),n=!0,(r=this._shouldRefreshAccessTokenHook)?[4,this._shouldRefreshAccessTokenHook(e,t)]:[3,2];case 1:r=!o.sent(),o.label=2;case 2:return r&&(n=!1),(!e||!t||t<Date.now())&&n?[2,this.refreshAccessToken()]:[2,{accessToken:e,accessTokenExpire:t}]}}))}))},e.prototype.request=function(e,t,n){return o(this,void 0,void 0,(function(){var o,a,c,u,l,f,p,h,d,y,v,g;return s(this,(function(s){switch(s.label){case 0:return o="application/x-www-form-urlencoded",a=r({action:e,env:this.config.env,dataVersion:"2019-08-16"},t),-1!==i.indexOf(e)?[3,2]:(c=a,[4,this.getAccessToken()]);case 1:c.access_token=s.sent().accessToken,s.label=2;case 2:if("storage.uploadFile"===e){for(l in u=new FormData)u.hasOwnProperty(l)&&void 0!==u[l]&&u.append(l,a[l]);o="multipart/form-data"}else o="application/json;charset=UTF-8",u=a;return f={headers:{"content-type":o}},n&&n.onUploadProgress&&(f.onUploadProgress=n.onUploadProgress),p=t.parse,h=t.query,d=t.search,y={env:this.config.env},p&&(y.parse=!0),h&&(y=r(r({},h),y)),v=N.formatUrl(G.protocol,G.BASE_URL,y),d&&(v+=d),[4,this.post(r({url:v,data:u},f))];case 3:if(g=s.sent(),200!==Number(g.status)&&200!==Number(g.statusCode)||!g.data)throw new Error("network request error");return[2,g]}}))}))},e.prototype.send=function(e,t){return void 0===t&&(t={}),o(this,void 0,void 0,(function(){var n,r,o;return s(this,(function(s){switch(s.label){case 0:return n=setTimeout((function(){console.warn("Database operation is longer than 3s. Please check query performance and your network environment.")}),3e3),[4,this.request(e,t,{onUploadProgress:t.onUploadProgress})];case 1:return r=s.sent(),clearTimeout(n),"ACCESS_TOKEN_EXPIRED"!==r.data.code||-1!==i.indexOf(e)?[3,4]:[4,this.refreshAccessToken()];case 2:return s.sent(),[4,this.request(e,t,{onUploadProgress:t.onUploadProgress})];case 3:if((o=s.sent()).data.code)throw new Error("["+o.data.code+"] "+o.data.message);return[2,o.data];case 4:if(r.data.code)throw new Error("["+r.data.code+"] "+r.data.message);return[2,r.data]}}))}))},e}();n.Request=l}));t(W);W.Request;var z=n((function(t,n){var r,o=e&&e.__awaiter||function(e,t,n,r){return new(n||(n=Promise))((function(o,s){function i(e){try{c(r.next(e))}catch(e){s(e)}}function a(e){try{c(r.throw(e))}catch(e){s(e)}}function c(e){var t;e.done?o(e.value):(t=e.value,t instanceof n?t:new n((function(e){e(t)}))).then(i,a)}c((r=r.apply(e,t||[])).next())}))},s=e&&e.__generator||function(e,t){var n,r,o,s,i={label:0,sent:function(){if(1&o[0])throw o[1];return o[1]},trys:[],ops:[]};return s={next:a(0),throw:a(1),return:a(2)},"function"==typeof Symbol&&(s[Symbol.iterator]=function(){return this}),s;function a(s){return function(a){return function(s){if(n)throw new TypeError("Generator is already executing.");for(;i;)try{if(n=1,r&&(o=2&s[0]?r.return:s[0]?r.throw||((o=r.return)&&o.call(r),0):r.next)&&!(o=o.call(r,s[1])).done)return o;switch(r=0,o&&(s=[2&s[0],o.value]),s[0]){case 0:case 1:o=s;break;case 4:return i.label++,{value:s[1],done:!1};case 5:i.label++,r=s[1],s=[0];continue;case 7:s=i.ops.pop(),i.trys.pop();continue;default:if(!(o=(o=i.trys).length>0&&o[o.length-1])&&(6===s[0]||2===s[0])){i=0;continue}if(3===s[0]&&(!o||s[1]>o[0]&&s[1]<o[3])){i.label=s[1];break}if(6===s[0]&&i.label<o[1]){i.label=o[1],o=s;break}if(o&&i.label<o[2]){i.label=o[2],i.ops.push(s);break}o[2]&&i.ops.pop(),i.trys.pop();continue}s=t.call(e,i)}catch(e){s=[6,e],r=0}finally{n=o=0}if(5&s[0])throw s[1];return{value:s[0]?s[1]:void 0,done:!0}}([s,a])}}};Object.defineProperty(n,"__esModule",{value:!0}),function(e){e.ANONYMOUS="ANONYMOUS",e.WECHAT="WECHAT",e.CUSTOM="CUSTOM",e.NULL="NULL"}(r=n.LOGINTYPE||(n.LOGINTYPE={}));var i=function(){function e(e){this._loginType=r.NULL,this.config=e,this.onLoginTypeChanged=this.onLoginTypeChanged.bind(this),B.addEventListener(B.EVENTS.LOGIN_TYPE_CHANGE,this.onLoginTypeChanged)}return e.prototype.init=function(){this.httpRequest=new W.Request(this.config),this.cache=new V.Cache(this.config.persistence),this.accessTokenKey=G.ACCESS_TOKEN+"_"+this.config.env,this.accessTokenExpireKey=G.ACCESS_TOKEN_Expire+"_"+this.config.env,this.refreshTokenKey=G.REFRESH_TOKEN+"_"+this.config.env,this.loginTypeKey=G.LOGIN_TYPE_KEY+"_"+this.config.env},e.prototype.onLoginTypeChanged=function(e){this._loginType=e.data,this.cache.setStore(this.loginTypeKey,this._loginType)},Object.defineProperty(e.prototype,"loginType",{get:function(){return this._loginType},enumerable:!0,configurable:!0}),e.prototype.setRefreshToken=function(e){this.cache.removeStore(this.accessTokenKey),this.cache.removeStore(this.accessTokenExpireKey),this.cache.setStore(this.refreshTokenKey,e)},e.prototype.getRefreshTokenByWXCode=function(e,t,n){return o(this,void 0,void 0,(function(){var r;return s(this,(function(o){return"auth.getJwt",r=Y.Adapter.runtime===Y.RUNTIME.WX_MP?"1":"0",[2,this.httpRequest.send("auth.getJwt",{appid:e,loginType:t,code:n,hybridMiniapp:r}).then((function(e){if(e.code)throw new Error("[tcb-js-sdk] 微信登录失败: "+e.code);if(e.refresh_token)return{refreshToken:e.refresh_token,accessToken:e.access_token,accessTokenExpire:e.access_token_expire};throw new Error("[tcb-js-sdk] getJwt未返回refreshToken")}))]}))}))},e}();n.default=i}));t(z);z.LOGINTYPE;var J=n((function(t,n){var r=e&&e.__extends||function(){var e=function(t,n){return(e=Object.setPrototypeOf||{__proto__:[]}instanceof Array&&function(e,t){e.__proto__=t}||function(e,t){for(var n in t)t.hasOwnProperty(n)&&(e[n]=t[n])})(t,n)};return function(t,n){function r(){this.constructor=t}e(t,n),t.prototype=null===n?Object.create(n):(r.prototype=n.prototype,new r)}}(),o=e&&e.__awaiter||function(e,t,n,r){return new(n||(n=Promise))((function(o,s){function i(e){try{c(r.next(e))}catch(e){s(e)}}function a(e){try{c(r.throw(e))}catch(e){s(e)}}function c(e){var t;e.done?o(e.value):(t=e.value,t instanceof n?t:new n((function(e){e(t)}))).then(i,a)}c((r=r.apply(e,t||[])).next())}))},s=e&&e.__generator||function(e,t){var n,r,o,s,i={label:0,sent:function(){if(1&o[0])throw o[1];return o[1]},trys:[],ops:[]};return s={next:a(0),throw:a(1),return:a(2)},"function"==typeof Symbol&&(s[Symbol.iterator]=function(){return this}),s;function a(s){return function(a){return function(s){if(n)throw new TypeError("Generator is already executing.");for(;i;)try{if(n=1,r&&(o=2&s[0]?r.return:s[0]?r.throw||((o=r.return)&&o.call(r),0):r.next)&&!(o=o.call(r,s[1])).done)return o;switch(r=0,o&&(s=[2&s[0],o.value]),s[0]){case 0:case 1:o=s;break;case 4:return i.label++,{value:s[1],done:!1};case 5:i.label++,r=s[1],s=[0];continue;case 7:s=i.ops.pop(),i.trys.pop();continue;default:if(!(o=(o=i.trys).length>0&&o[o.length-1])&&(6===s[0]||2===s[0])){i=0;continue}if(3===s[0]&&(!o||s[1]>o[0]&&s[1]<o[3])){i.label=s[1];break}if(6===s[0]&&i.label<o[1]){i.label=o[1],o=s;break}if(o&&i.label<o[2]){i.label=o[2],i.ops.push(s);break}o[2]&&i.ops.pop(),i.trys.pop();continue}s=t.call(e,i)}catch(e){s=[6,e],r=0}finally{n=o=0}if(5&s[0])throw s[1];return{value:s[0]?s[1]:void 0,done:!0}}([s,a])}}},i=e&&e.__importStar||function(e){if(e&&e.__esModule)return e;var t={};if(null!=e)for(var n in e)Object.hasOwnProperty.call(e,n)&&(t[n]=e[n]);return t.default=e,t};Object.defineProperty(n,"__esModule",{value:!0});var a,c,u=i(N),l=i(z);!function(e){e.snsapi_base="snsapi_base",e.snsapi_userinfo="snsapi_userinfo",e.snsapi_login="snsapi_login"}(a||(a={})),function(e){e.redirect="redirect",e.prompt="prompt"}(c||(c={}));var f={},p=function(e){function t(t,n,r,o,s){var i=e.call(this,t)||this;return i.config=t,i.appid=n,i.scope=Y.Adapter.runtime===Y.RUNTIME.WX_MP?"snsapi_base":r,i.state=s||"weixin",i.loginMode=o||"redirect",i}return r(t,e),t.prototype.signIn=function(){return o(this,void 0,void 0,(function(){var e,t,n;return s(this,(function(r){switch(r.label){case 0:f[this.config.env]||(f[this.config.env]=this._signIn()),r.label=1;case 1:return r.trys.push([1,3,,4]),[4,f[this.config.env]];case 2:return e=r.sent(),[3,4];case 3:return n=r.sent(),t=n,[3,4];case 4:if(f[this.config.env]=null,t)throw t;return[2,e]}}))}))},t.prototype._signIn=function(){return o(this,void 0,void 0,(function(){var e,t,n,r,o,i;return s(this,(function(s){switch(s.label){case 0:if(e=this.cache.getStore(this.accessTokenKey),t=this.cache.getStore(this.accessTokenExpireKey),e){if(t&&t>Date.now())return[2,{credential:{accessToken:e,refreshToken:this.cache.getStore(this.refreshTokenKey)}}];this.cache.removeStore(this.accessTokenKey),this.cache.removeStore(this.accessTokenExpireKey)}if(!1===Object.values(a).includes(a[this.scope]))throw new Error("错误的scope类型");return Y.Adapter.runtime!==Y.RUNTIME.WX_MP?[3,2]:[4,u.getMiniAppCode()];case 1:return n=s.sent(),[3,4];case 2:return[4,u.getWeixinCode()];case 3:if(!(n=s.sent()))return[2,this.redirect()];s.label=4;case 4:return r=function(e){switch(e){case a.snsapi_login:return"WECHAT-OPEN";default:return"WECHAT-PUBLIC"}}(this.scope),[4,this.getRefreshTokenByWXCode(this.appid,r,n)];case 5:return o=s.sent(),i=o.refreshToken,this.cache.setStore(this.refreshTokenKey,i),o.accessToken&&this.cache.setStore(this.accessTokenKey,o.accessToken),o.accessTokenExpire&&this.cache.setStore(this.accessTokenExpireKey,o.accessTokenExpire+Date.now()),B.activateEvent(B.EVENTS.LOGIN_STATE_CHANGED),B.activateEvent(B.EVENTS.LOGIN_TYPE_CHANGE,l.LOGINTYPE.WECHAT),[2,{credential:{refreshToken:i}}]}}))}))},t.prototype.redirect=function(){var e=u.removeParam("code",location.href);e=u.removeParam("state",e),e=encodeURIComponent(e);var t="//open.weixin.qq.com/connect/oauth2/authorize";"snsapi_login"===this.scope&&(t="//open.weixin.qq.com/connect/qrconnect"),"redirect"===c[this.loginMode]&&(location.href=t+"?appid="+this.appid+"&redirect_uri="+e+"&response_type=code&scope="+this.scope+"&state="+this.state+"#wechat_redirect")},t}(l.default);n.default=p}));t(J);var X=n((function(t,n){var r=e&&e.__extends||function(){var e=function(t,n){return(e=Object.setPrototypeOf||{__proto__:[]}instanceof Array&&function(e,t){e.__proto__=t}||function(e,t){for(var n in t)t.hasOwnProperty(n)&&(e[n]=t[n])})(t,n)};return function(t,n){function r(){this.constructor=t}e(t,n),t.prototype=null===n?Object.create(n):(r.prototype=n.prototype,new r)}}(),o=e&&e.__assign||function(){return(o=Object.assign||function(e){for(var t,n=1,r=arguments.length;n<r;n++)for(var o in t=arguments[n])Object.prototype.hasOwnProperty.call(t,o)&&(e[o]=t[o]);return e}).apply(this,arguments)},s=e&&e.__awaiter||function(e,t,n,r){return new(n||(n=Promise))((function(o,s){function i(e){try{c(r.next(e))}catch(e){s(e)}}function a(e){try{c(r.throw(e))}catch(e){s(e)}}function c(e){var t;e.done?o(e.value):(t=e.value,t instanceof n?t:new n((function(e){e(t)}))).then(i,a)}c((r=r.apply(e,t||[])).next())}))},i=e&&e.__generator||function(e,t){var n,r,o,s,i={label:0,sent:function(){if(1&o[0])throw o[1];return o[1]},trys:[],ops:[]};return s={next:a(0),throw:a(1),return:a(2)},"function"==typeof Symbol&&(s[Symbol.iterator]=function(){return this}),s;function a(s){return function(a){return function(s){if(n)throw new TypeError("Generator is already executing.");for(;i;)try{if(n=1,r&&(o=2&s[0]?r.return:s[0]?r.throw||((o=r.return)&&o.call(r),0):r.next)&&!(o=o.call(r,s[1])).done)return o;switch(r=0,o&&(s=[2&s[0],o.value]),s[0]){case 0:case 1:o=s;break;case 4:return i.label++,{value:s[1],done:!1};case 5:i.label++,r=s[1],s=[0];continue;case 7:s=i.ops.pop(),i.trys.pop();continue;default:if(!(o=(o=i.trys).length>0&&o[o.length-1])&&(6===s[0]||2===s[0])){i=0;continue}if(3===s[0]&&(!o||s[1]>o[0]&&s[1]<o[3])){i.label=s[1];break}if(6===s[0]&&i.label<o[1]){i.label=o[1],o=s;break}if(o&&i.label<o[2]){i.label=o[2],i.ops.push(s);break}o[2]&&i.ops.pop(),i.trys.pop();continue}s=t.call(e,i)}catch(e){s=[6,e],r=0}finally{n=o=0}if(5&s[0])throw s[1];return{value:s[0]?s[1]:void 0,done:!0}}([s,a])}}},a=e&&e.__importStar||function(e){if(e&&e.__esModule)return e;var t={};if(null!=e)for(var n in e)Object.hasOwnProperty.call(e,n)&&(t[n]=e[n]);return t.default=e,t};Object.defineProperty(n,"__esModule",{value:!0});var c=a(z),u=function(e){function t(t){var n=e.call(this,o(o({},t),{persistence:"local"}))||this;return n._anonymousUuidKey=G.ANONYMOUS_UUID+"_"+n.config.env,n._loginTypeKey=G.LOGIN_TYPE_KEY+"_"+n.config.env,n}return r(t,e),t.prototype.init=function(){e.prototype.init.call(this)},t.prototype.signIn=function(){return s(this,void 0,void 0,(function(){var e,t,n;return i(this,(function(r){switch(r.label){case 0:return e=this.cache.getStore(this._anonymousUuidKey)||void 0,t=this.cache.getStore(this.refreshTokenKey)||void 0,[4,this.httpRequest.send("auth.signInAnonymously",{anonymous_uuid:e,refresh_token:t})];case 1:return(n=r.sent()).uuid&&n.refresh_token?(this._setAnonymousUUID(n.uuid),this.setRefreshToken(n.refresh_token),[4,this.httpRequest.refreshAccessToken()]):[3,3];case 2:return r.sent(),B.activateEvent(B.EVENTS.LOGIN_STATE_CHANGED),B.activateEvent(B.EVENTS.LOGIN_TYPE_CHANGE,c.LOGINTYPE.ANONYMOUS),[2,{credential:{refreshToken:n.refresh_token}}];case 3:throw new Error("[tcb-js-sdk] 匿名登录失败")}}))}))},t.prototype.linkAndRetrieveDataWithTicket=function(e){return s(this,void 0,void 0,(function(){var t,n,r;return i(this,(function(o){switch(o.label){case 0:return t=this.cache.getStore(this._anonymousUuidKey),n=this.cache.getStore(this.refreshTokenKey),[4,this.httpRequest.send("auth.linkAndRetrieveDataWithTicket",{anonymous_uuid:t,refresh_token:n,ticket:e})];case 1:return(r=o.sent()).refresh_token?(this._clearAnonymousUUID(),this.setRefreshToken(r.refresh_token),[4,this.httpRequest.refreshAccessToken()]):[3,3];case 2:return o.sent(),B.activateEvent(B.EVENTS.ANONYMOUS_CONVERTED,{refresh_token:r.refresh_token}),B.activateEvent(B.EVENTS.LOGIN_TYPE_CHANGE,c.LOGINTYPE.CUSTOM),[2,{credential:{refreshToken:r.refresh_token}}];case 3:throw new Error("[tcb-js-sdk] 匿名转化失败")}}))}))},t.prototype.getAllStore=function(){var e={};return e[this.refreshTokenKey]=this.cache.getStore(this.refreshTokenKey)||"",e[this._loginTypeKey]=this.cache.getStore(this._loginTypeKey)||"",e[this.accessTokenKey]=this.cache.getStore(this.accessTokenKey)||"",e[this.accessTokenExpireKey]=this.cache.getStore(this.accessTokenExpireKey)||"",e},t.prototype._setAnonymousUUID=function(e){this.cache.removeStore(this._anonymousUuidKey),this.cache.setStore(this._anonymousUuidKey,e),this.cache.setStore(this._loginTypeKey,c.LOGINTYPE.ANONYMOUS)},t.prototype._clearAnonymousUUID=function(){this.cache.removeStore(this._anonymousUuidKey)},t}(c.default);n.AnonymousAuthProvider=u}));t(X);X.AnonymousAuthProvider;var $=n((function(t,n){var r=e&&e.__extends||function(){var e=function(t,n){return(e=Object.setPrototypeOf||{__proto__:[]}instanceof Array&&function(e,t){e.__proto__=t}||function(e,t){for(var n in t)t.hasOwnProperty(n)&&(e[n]=t[n])})(t,n)};return function(t,n){function r(){this.constructor=t}e(t,n),t.prototype=null===n?Object.create(n):(r.prototype=n.prototype,new r)}}(),o=e&&e.__assign||function(){return(o=Object.assign||function(e){for(var t,n=1,r=arguments.length;n<r;n++)for(var o in t=arguments[n])Object.prototype.hasOwnProperty.call(t,o)&&(e[o]=t[o]);return e}).apply(this,arguments)},s=e&&e.__awaiter||function(e,t,n,r){return new(n||(n=Promise))((function(o,s){function i(e){try{c(r.next(e))}catch(e){s(e)}}function a(e){try{c(r.throw(e))}catch(e){s(e)}}function c(e){var t;e.done?o(e.value):(t=e.value,t instanceof n?t:new n((function(e){e(t)}))).then(i,a)}c((r=r.apply(e,t||[])).next())}))},i=e&&e.__generator||function(e,t){var n,r,o,s,i={label:0,sent:function(){if(1&o[0])throw o[1];return o[1]},trys:[],ops:[]};return s={next:a(0),throw:a(1),return:a(2)},"function"==typeof Symbol&&(s[Symbol.iterator]=function(){return this}),s;function a(s){return function(a){return function(s){if(n)throw new TypeError("Generator is already executing.");for(;i;)try{if(n=1,r&&(o=2&s[0]?r.return:s[0]?r.throw||((o=r.return)&&o.call(r),0):r.next)&&!(o=o.call(r,s[1])).done)return o;switch(r=0,o&&(s=[2&s[0],o.value]),s[0]){case 0:case 1:o=s;break;case 4:return i.label++,{value:s[1],done:!1};case 5:i.label++,r=s[1],s=[0];continue;case 7:s=i.ops.pop(),i.trys.pop();continue;default:if(!(o=(o=i.trys).length>0&&o[o.length-1])&&(6===s[0]||2===s[0])){i=0;continue}if(3===s[0]&&(!o||s[1]>o[0]&&s[1]<o[3])){i.label=s[1];break}if(6===s[0]&&i.label<o[1]){i.label=o[1],o=s;break}if(o&&i.label<o[2]){i.label=o[2],i.ops.push(s);break}o[2]&&i.ops.pop(),i.trys.pop();continue}s=t.call(e,i)}catch(e){s=[6,e],r=0}finally{n=o=0}if(5&s[0])throw s[1];return{value:s[0]?s[1]:void 0,done:!0}}([s,a])}}},a=e&&e.__importDefault||function(e){return e&&e.__esModule?e:{default:e}},c=e&&e.__importStar||function(e){if(e&&e.__esModule)return e;var t={};if(null!=e)for(var n in e)Object.hasOwnProperty.call(e,n)&&(t[n]=e[n]);return t.default=e,t};Object.defineProperty(n,"__esModule",{value:!0});var u=a(J),l=c(z),f=function(e){function t(t){var n=e.call(this,t)||this;return n.config=t,n}return r(t,e),t.prototype.init=function(){e.prototype.init.call(this),this.customAuthProvider=new l.default(this.config),this.customAuthProvider.init()},t.prototype.weixinAuthProvider=function(e){var t=e.appid,n=e.scope,r=e.loginMode,o=e.state,s=new u.default(this.config,t,n,r,o);return s.init(),s},t.prototype.signInAnonymously=function(){return s(this,void 0,void 0,(function(){var e=this;return i(this,(function(t){switch(t.label){case 0:return this._anonymousAuthProvider||(this._anonymousAuthProvider=new X.AnonymousAuthProvider(this.config),this._anonymousAuthProvider.init()),B.addEventListener(B.EVENTS.LOGIN_TYPE_CHANGE,(function(t){if(t&&t.data===l.LOGINTYPE.ANONYMOUS){var n=e._anonymousAuthProvider.getAllStore();for(var r in n)n[r]&&e.httpRequest.cache.setStore(r,n[r])}})),[4,this._anonymousAuthProvider.signIn()];case 1:return[2,t.sent()]}}))}))},t.prototype.linkAndRetrieveDataWithTicket=function(e){return s(this,void 0,void 0,(function(){var t=this;return i(this,(function(n){switch(n.label){case 0:return this._anonymousAuthProvider||(this._anonymousAuthProvider=new X.AnonymousAuthProvider(this.config),this._anonymousAuthProvider.init()),B.addEventListener(B.EVENTS.ANONYMOUS_CONVERTED,(function(e){var n=e.data.refresh_token;n&&t.httpRequest.cache.setStore(t.refreshTokenKey,n)})),[4,this._anonymousAuthProvider.linkAndRetrieveDataWithTicket(e)];case 1:return[2,n.sent()]}}))}))},t.prototype.signOut=function(){return s(this,void 0,void 0,(function(){var e,t,n,r,o,s,a;return i(this,(function(i){switch(i.label){case 0:if(this.loginType===l.LOGINTYPE.ANONYMOUS)throw new Error("[tcb-js-sdk] 匿名用户不支持登出操作");return e=this.httpRequest,t=e.cache,n=e.refreshTokenKey,r=e.accessTokenKey,o=e.accessTokenExpireKey,"auth.logout",(s=t.getStore(n))?[4,this.httpRequest.send("auth.logout",{refresh_token:s})]:[2];case 1:return a=i.sent(),t.removeStore(n),t.removeStore(r),t.removeStore(o),B.activateEvent(B.EVENTS.LOGIN_STATE_CHANGED),B.activateEvent(B.EVENTS.LOGIN_TYPE_CHANGE,l.LOGINTYPE.NULL),[2,a]}}))}))},t.prototype.getAccessToken=function(){return s(this,void 0,void 0,(function(){var e;return i(this,(function(t){switch(t.label){case 0:return e={},[4,this.httpRequest.getAccessToken()];case 1:return[2,(e.accessToken=t.sent().accessToken,e.env=this.config.env,e)]}}))}))},t.prototype.onLoginStateExpire=function(e){B.addEventListener("loginStateExpire",e)},t.prototype.getLoginState=function(){return s(this,void 0,void 0,(function(){var e,t,n,r,o;return i(this,(function(s){switch(s.label){case 0:if(e=this.httpRequest,t=e.cache,n=e.refreshTokenKey,r=e.accessTokenKey,!(o=t.getStore(n)))return[3,5];s.label=1;case 1:return s.trys.push([1,3,,4]),[4,this.httpRequest.refreshAccessToken()];case 2:return s.sent(),[3,4];case 3:return s.sent(),[2,null];case 4:return[2,{isAnonymous:this.loginType===l.LOGINTYPE.ANONYMOUS,credential:{refreshToken:o,accessToken:t.getStore(r)}}];case 5:return[2,null]}}))}))},t.prototype.signInWithTicket=function(e){return s(this,void 0,void 0,(function(){var t,n,r,o;return i(this,(function(s){switch(s.label){case 0:if("string"!=typeof e)throw new Error("ticket must be a string");return t=this.httpRequest,n=t.cache,r=t.refreshTokenKey,[4,this.httpRequest.send("auth.signInWithTicket",{ticket:e,refresh_token:n.getStore(r)||""})];case 1:return(o=s.sent()).refresh_token?(this.customAuthProvider.setRefreshToken(o.refresh_token),[4,this.httpRequest.refreshAccessToken()]):[3,3];case 2:return s.sent(),B.activateEvent(B.EVENTS.LOGIN_STATE_CHANGED),B.activateEvent(B.EVENTS.LOGIN_TYPE_CHANGE,l.LOGINTYPE.CUSTOM),[2,{credential:{refreshToken:o.refresh_token}}];case 3:throw new Error("[tcb-js-sdk] 自定义登录失败")}}))}))},t.prototype.shouldRefreshAccessToken=function(e){this.httpRequest._shouldRefreshAccessTokenHook=e.bind(this)},t.prototype.getUserInfo=function(){return this.httpRequest.send("auth.getUserInfo",{}).then((function(e){return e.code?e:o(o({},e.data),{requestId:e.seqId})}))},t}(l.default);n.default=f}));t($);var Q=n((function(t,n){var r=e&&e.__awaiter||function(e,t,n,r){return new(n||(n=Promise))((function(o,s){function i(e){try{c(r.next(e))}catch(e){s(e)}}function a(e){try{c(r.throw(e))}catch(e){s(e)}}function c(e){var t;e.done?o(e.value):(t=e.value,t instanceof n?t:new n((function(e){e(t)}))).then(i,a)}c((r=r.apply(e,t||[])).next())}))},o=e&&e.__generator||function(e,t){var n,r,o,s,i={label:0,sent:function(){if(1&o[0])throw o[1];return o[1]},trys:[],ops:[]};return s={next:a(0),throw:a(1),return:a(2)},"function"==typeof Symbol&&(s[Symbol.iterator]=function(){return this}),s;function a(s){return function(a){return function(s){if(n)throw new TypeError("Generator is already executing.");for(;i;)try{if(n=1,r&&(o=2&s[0]?r.return:s[0]?r.throw||((o=r.return)&&o.call(r),0):r.next)&&!(o=o.call(r,s[1])).done)return o;switch(r=0,o&&(s=[2&s[0],o.value]),s[0]){case 0:case 1:o=s;break;case 4:return i.label++,{value:s[1],done:!1};case 5:i.label++,r=s[1],s=[0];continue;case 7:s=i.ops.pop(),i.trys.pop();continue;default:if(!(o=(o=i.trys).length>0&&o[o.length-1])&&(6===s[0]||2===s[0])){i=0;continue}if(3===s[0]&&(!o||s[1]>o[0]&&s[1]<o[3])){i.label=s[1];break}if(6===s[0]&&i.label<o[1]){i.label=o[1],o=s;break}if(o&&i.label<o[2]){i.label=o[2],i.ops.push(s);break}o[2]&&i.ops.pop(),i.trys.pop();continue}s=t.call(e,i)}catch(e){s=[6,e],r=0}finally{n=o=0}if(5&s[0])throw s[1];return{value:s[0]?s[1]:void 0,done:!0}}([s,a])}}};Object.defineProperty(n,"__esModule",{value:!0}),n.uploadFile=function(e,t){t=t||N.createPromiseCallback();var n=new W.Request(this.config),r=e.cloudPath,o=e.filePath,s=e.onUploadProgress;return n.send("storage.getUploadMetadata",{path:r}).then((function(e){var i=e.data,a=i.url,c=i.authorization,u=i.token,l=i.fileId,f=i.cosFileId,p=e.requestId,h={key:r,signature:c,"x-cos-meta-fileid":f,success_action_status:"201","x-cos-security-token":u};n.upload({url:a,data:h,file:o,name:r,onUploadProgress:s}).then((function(e){201===e.statusCode?t(null,{fileID:l,requestId:p}):t(new Error("STORAGE_REQUEST_FAIL: "+e.data))})).catch((function(e){t(e)}))})).catch((function(e){t(e)})),t.promise},n.deleteFile=function(e,t){var n=e.fileList;if(t=t||N.createPromiseCallback(),!n||!Array.isArray(n))return{code:"INVALID_PARAM",message:"fileList必须是非空的数组"};for(var r=0,o=n;r<o.length;r++){var s=o[r];if(!s||"string"!=typeof s)return{code:"INVALID_PARAM",message:"fileList的元素必须是非空的字符串"}}var i={fileid_list:n};return new W.Request(this.config).send("storage.batchDeleteFile",i).then((function(e){e.code?t(null,e):t(null,{fileList:e.data.delete_list,requestId:e.requestId})})).catch((function(e){t(e)})),t.promise},n.getTempFileURL=function(e,t){var n=e.fileList;t=t||N.createPromiseCallback(),n&&Array.isArray(n)||t(null,{code:"INVALID_PARAM",message:"fileList必须是非空的数组"});for(var r=[],o=0,s=n;o<s.length;o++){var i=s[o];"object"==typeof i?(i.hasOwnProperty("fileID")&&i.hasOwnProperty("maxAge")||t(null,{code:"INVALID_PARAM",message:"fileList的元素必须是包含fileID和maxAge的对象"}),r.push({fileid:i.fileID,max_age:i.maxAge})):"string"==typeof i?r.push({fileid:i}):t(null,{code:"INVALID_PARAM",message:"fileList的元素必须是字符串"})}var a={file_list:r};return new W.Request(this.config).send("storage.batchGetDownloadUrl",a).then((function(e){e.code?t(null,e):t(null,{fileList:e.data.download_list,requestId:e.requestId})})).catch((function(e){t(e)})),t.promise},n.downloadFile=function(e,t){var s=e.fileID;return r(this,void 0,void 0,(function(){var e,r,i,a,c;return o(this,(function(o){switch(o.label){case 0:return[4,n.getTempFileURL.call(this,{fileList:[{fileID:s,maxAge:600}]})];case 1:return e=o.sent(),"SUCCESS"!==(r=e.fileList[0]).code?[2,t?t(r):new Promise((function(e){e(r)}))]:(i=r.download_url,i=encodeURI(i),a=new W.Request(this.config),t?[4,a.download({url:i})]:[3,3]);case 2:return c=o.sent(),t(c),[3,4];case 3:return[2,a.download({url:i})];case 4:return[2]}}))}))}}));t(Q);Q.uploadFile,Q.deleteFile,Q.getTempFileURL,Q.downloadFile;var Z=n((function(e,t){Object.defineProperty(t,"__esModule",{value:!0}),t.callFunction=function(e,t){var n,r=e.name,o=e.data,s=e.query,i=e.parse,a=e.search,c=t||N.createPromiseCallback();try{n=o?JSON.stringify(o):""}catch(e){return Promise.reject(e)}if(!r)return Promise.reject(new Error("函数名不能为空"));var u={query:s,parse:i,search:a,function_name:r,request_data:n};return new W.Request(this.config).send("functions.invokeFunction",u).then((function(e){if(e.code)c(null,e);else{var t=e.data.response_data;if(i)c(null,{result:t,requestId:e.requestId});else try{t=JSON.parse(e.data.response_data),c(null,{result:t,requestId:e.requestId})}catch(e){c(new Error("response data must be json"))}}return c.promise})).catch((function(e){c(e)})),c.promise}}));t(Z);Z.callFunction;var ee=t(n((function(t){var n=e&&e.__assign||function(){return(n=Object.assign||function(e){for(var t,n=1,r=arguments.length;n<r;n++)for(var o in t=arguments[n])Object.prototype.hasOwnProperty.call(t,o)&&(e[o]=t[o]);return e}).apply(this,arguments)},r=e&&e.__importDefault||function(e){return e&&e.__esModule?e:{default:e}},o=e&&e.__importStar||function(e){if(e&&e.__esModule)return e;var t={};if(null!=e)for(var n in e)Object.hasOwnProperty.call(e,n)&&(t[n]=e[n]);return t.default=e,t},s=r(I),i=r($),a=o(Q),c=o(Z),u={timeout:15e3},l=new(function(){function e(e){var t=this;this.config=e||this.config,this.authObj=void 0,B.addEventListener(B.EVENTS.LOGIN_TYPE_CHANGE,(function(e){e.data===z.LOGINTYPE.ANONYMOUS&&(t.config.persistence="local")}))}return e.prototype.init=function(t){return this.config=n(n({},u),t),Y.Adapter.adapter||this._useDefaultAdapter(),new e(this.config)},e.prototype.auth=function(e){var t=(void 0===e?{}:e).persistence;return this.authObj?this.authObj:(this.config=n(n({},this.config),{persistence:t||Y.Adapter.adapter.primaryStorage||"session"}),this.authObj=new i.default(this.config),this.authObj.init(),this.authObj)},e.prototype.on=function(e,t){return B.addEventListener.apply(this,[e,t])},e.prototype.off=function(e,t){return B.removeEventListener.apply(this,[e,t])},e.prototype.callFunction=function(e,t){return c.callFunction.apply(this,[e,t])},e.prototype.deleteFile=function(e,t){return a.deleteFile.apply(this,[e,t])},e.prototype.getTempFileURL=function(e,t){return a.getTempFileURL.apply(this,[e,t])},e.prototype.downloadFile=function(e,t){return a.downloadFile.apply(this,[e,t])},e.prototype.uploadFile=function(e,t){return a.uploadFile.apply(this,[e,t])},e.prototype.useAdapters=function(e){var t=Y.useAdapters(e)||{},n=t.adapter,r=t.runtime;n&&(Y.Adapter.adapter=n),r&&(Y.Adapter.runtime=r)},e.prototype._useDefaultAdapter=function(){var e=Y.useDefaultAdapter(),t=e.adapter,n=e.runtime;Y.Adapter.adapter=t,Y.Adapter.runtime=n},e}());l.useAdapters(s.default);try{window.tcb=l}catch(e){}t.exports=l})));ee.useAdapters(I);const te=ee,ne=te.init;let re,oe;function se(e){re||(re=function(){const e=uni.getSystemInfoSync();return{PLATFORM:"mp-weixin",OS:e.platform,APPID:l.appid}}(),oe=function(){const e=uni.getSystemInfoSync();return{ak:l.appid,p:"android"===e.platform?"a":"i",ut:y(),uuid:d()}}());const t=JSON.parse(JSON.stringify(e.data||{})),n=e.name,r=this.config.spaceId,o=Object.assign({},oe,{fn:n,sid:r});return Object.assign(t,{clientInfo:re,uniCloudClientInfo:encodeURIComponent(JSON.stringify(o))}),e.data=t,e}function ie(e){const t=se.call(this,e),n={tencent:"tcb",aliyun:"aliyun"}[this.config.provider],r=oe.ak,o=this.config.spaceId,s=JSON.stringify(t.data),i=t.name,a=JSON.stringify({body:{provider:n,appid:r,spaceId:o,functionName:i,run_params:s},header:{token:"f320c770-5d01-11ea-8d04-6598f4bbaf4e"}});return new Promise((e,t)=>{uni.request({url:h,method:"POST",data:{param:a},complete(r){r||(r={});const o=r.data&&r.data.body;if(!o)return void t(new Error(`[FUNCTIONS_EXECUTE_FAIL] Request Fail: [${i}]`));if("tcb"===n&&function(e){if(!e)return;const t=/^START RequestId:\s(.*?)\n/g.exec(e)[1],n=new RegExp(`\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3}Z\\t${t.replace(/-/g,"\\-")}\\t`,"g"),r=[/^START RequestId:\s/g,/^Event RequestId:\s/g,/^END RequestId:\s/g,/^Report RequestId:\s/g];e.split("\n").forEach(e=>{let t=!1;for(let n=0;n<r.length;n++)if(r[n].test(e)){t=!0;break}t||console.log(e.replace(n,""))})}(o.log),0!==o.invokeResult&&"0"!==o.invokeResult)return void t(new Error(o.errorMsg));const s=o.requestId;let a={};try{a=JSON.parse(o.result)}catch(e){a=o.result}e({requestId:s,result:a})}})})}te.init=function(e){e.env=e.spaceId;const t=ne.call(this,e);t.config.provider="tencent",t.config.spaceId=e.spaceId;const n=t.auth;t.auth=function(e){const t=n.call(this,e);return["linkAndRetrieveDataWithTicket","signInAnonymously","signOut","getAccessToken","getLoginState","signInWithTicket","getUserInfo"].forEach(e=>{t[e]=v(t[e]).bind(t)}),t};if(["callFunction","uploadFile","deleteFile","getTempFileURL","downloadFile"].forEach(e=>{t[e]=v(t[e]).bind(t)}),!1!==e.autoSignIn){const e=t.auth();e.getLoginState().then(t=>{t||e.signInAnonymously()})}return t};const ae={init(e){let t={};const n=!(!1===e.debugFunction||"development"!=="development"|| true&&"h5"!=="mp-weixin"||!"f320c770-5d01-11ea-8d04-6598f4bbaf4e");switch(e.provider){case"tencent":t=te.init(Object.assign(e,{useDebugFunction:n}));break;case"aliyun":t=g.init(Object.assign(e,{useDebugFunction:n}));break;default:throw new Error("未提供正确的provider参数")}if(n&&"tencent"===e.provider)t.callFunction=function(e){return v(ie).call(this,e)};else{const e=t.callFunction;t.callFunction=function(t){const n=se.call(this,t);return e.call(this,n)}}const r=t.callFunction;return t.callFunction=function(e){return true&&console.log(`[spaceId:${this.config.spaceId}]`),r.call(this,e)},t.init=this.init,t}};let ce=ae;try{ce=ae.init({"provider":"aliyun","spaceName":"uni3b8053b","spaceId":"619c6799-42b7-4564-8451-176c824fba46","clientSecret":"fNttWcHDgAjaFYtDsMBZgg==","endpoint":"https://api.bspapp.com"})}catch(e){["auth","callFunction","uploadFile","deleteFile","getTempFileURL","downloadFile"].forEach(e=>{ce[e]=function(){return console.error("请先执行uniCloud.init指明所用的服务空间"),Promise.reject(new s({code:"SYS_ERR",message:"请先执行uniCloud.init指明所用的服务空间"}))}})}var ue=ce;/* harmony default export */ __webpack_exports__["default"] = (ue);
+/* WEBPACK VAR INJECTION */(function(global, uni, process) {var e="undefined"!=typeof globalThis?globalThis:"undefined"!=typeof window?window:"undefined"!=typeof global?global:"undefined"!=typeof self?self:{};function t(e){return e&&e.__esModule&&Object.prototype.hasOwnProperty.call(e,"default")?e.default:e}function n(e,t){return e(t={exports:{}},t.exports),t.exports}var r=n((function(e,t){var n;e.exports=(n=n||function(e,t){var n=Object.create||function(){function e(){}return function(t){var n;return e.prototype=t,n=new e,e.prototype=null,n}}(),r={},o=r.lib={},s=o.Base={extend:function(e){var t=n(this);return e&&t.mixIn(e),t.hasOwnProperty("init")&&this.init!==t.init||(t.init=function(){t.$super.init.apply(this,arguments)}),t.init.prototype=t,t.$super=this,t},create:function(){var e=this.extend();return e.init.apply(e,arguments),e},init:function(){},mixIn:function(e){for(var t in e)e.hasOwnProperty(t)&&(this[t]=e[t]);e.hasOwnProperty("toString")&&(this.toString=e.toString)},clone:function(){return this.init.prototype.extend(this)}},i=o.WordArray=s.extend({init:function(e,t){e=this.words=e||[],this.sigBytes=null!=t?t:4*e.length},toString:function(e){return(e||c).stringify(this)},concat:function(e){var t=this.words,n=e.words,r=this.sigBytes,o=e.sigBytes;if(this.clamp(),r%4)for(var s=0;s<o;s++){var i=n[s>>>2]>>>24-s%4*8&255;t[r+s>>>2]|=i<<24-(r+s)%4*8}else for(s=0;s<o;s+=4)t[r+s>>>2]=n[s>>>2];return this.sigBytes+=o,this},clamp:function(){var t=this.words,n=this.sigBytes;t[n>>>2]&=4294967295<<32-n%4*8,t.length=e.ceil(n/4)},clone:function(){var e=s.clone.call(this);return e.words=this.words.slice(0),e},random:function(t){for(var n,r=[],o=function(t){t=t;var n=987654321,r=4294967295;return function(){var o=((n=36969*(65535&n)+(n>>16)&r)<<16)+(t=18e3*(65535&t)+(t>>16)&r)&r;return o/=4294967296,(o+=.5)*(e.random()>.5?1:-1)}},s=0;s<t;s+=4){var a=o(4294967296*(n||e.random()));n=987654071*a(),r.push(4294967296*a()|0)}return new i.init(r,t)}}),a=r.enc={},c=a.Hex={stringify:function(e){for(var t=e.words,n=e.sigBytes,r=[],o=0;o<n;o++){var s=t[o>>>2]>>>24-o%4*8&255;r.push((s>>>4).toString(16)),r.push((15&s).toString(16))}return r.join("")},parse:function(e){for(var t=e.length,n=[],r=0;r<t;r+=2)n[r>>>3]|=parseInt(e.substr(r,2),16)<<24-r%8*4;return new i.init(n,t/2)}},u=a.Latin1={stringify:function(e){for(var t=e.words,n=e.sigBytes,r=[],o=0;o<n;o++){var s=t[o>>>2]>>>24-o%4*8&255;r.push(String.fromCharCode(s))}return r.join("")},parse:function(e){for(var t=e.length,n=[],r=0;r<t;r++)n[r>>>2]|=(255&e.charCodeAt(r))<<24-r%4*8;return new i.init(n,t)}},l=a.Utf8={stringify:function(e){try{return decodeURIComponent(escape(u.stringify(e)))}catch(e){throw new Error("Malformed UTF-8 data")}},parse:function(e){return u.parse(unescape(encodeURIComponent(e)))}},f=o.BufferedBlockAlgorithm=s.extend({reset:function(){this._data=new i.init,this._nDataBytes=0},_append:function(e){"string"==typeof e&&(e=l.parse(e)),this._data.concat(e),this._nDataBytes+=e.sigBytes},_process:function(t){var n=this._data,r=n.words,o=n.sigBytes,s=this.blockSize,a=o/(4*s),c=(a=t?e.ceil(a):e.max((0|a)-this._minBufferSize,0))*s,u=e.min(4*c,o);if(c){for(var l=0;l<c;l+=s)this._doProcessBlock(r,l);var f=r.splice(0,c);n.sigBytes-=u}return new i.init(f,u)},clone:function(){var e=s.clone.call(this);return e._data=this._data.clone(),e},_minBufferSize:0}),p=(o.Hasher=f.extend({cfg:s.extend(),init:function(e){this.cfg=this.cfg.extend(e),this.reset()},reset:function(){f.reset.call(this),this._doReset()},update:function(e){return this._append(e),this._process(),this},finalize:function(e){return e&&this._append(e),this._doFinalize()},blockSize:16,_createHelper:function(e){return function(t,n){return new e.init(n).finalize(t)}},_createHmacHelper:function(e){return function(t,n){return new p.HMAC.init(e,n).finalize(t)}}}),r.algo={});return r}(Math),n)})),o=(n((function(e,t){var n;e.exports=(n=r,function(e){var t=n,r=t.lib,o=r.WordArray,s=r.Hasher,i=t.algo,a=[];!function(){for(var t=0;t<64;t++)a[t]=4294967296*e.abs(e.sin(t+1))|0}();var c=i.MD5=s.extend({_doReset:function(){this._hash=new o.init([1732584193,4023233417,2562383102,271733878])},_doProcessBlock:function(e,t){for(var n=0;n<16;n++){var r=t+n,o=e[r];e[r]=16711935&(o<<8|o>>>24)|4278255360&(o<<24|o>>>8)}var s=this._hash.words,i=e[t+0],c=e[t+1],h=e[t+2],d=e[t+3],y=e[t+4],v=e[t+5],g=e[t+6],_=e[t+7],m=e[t+8],b=e[t+9],w=e[t+10],E=e[t+11],T=e[t+12],S=e[t+13],O=e[t+14],k=e[t+15],A=s[0],P=s[1],I=s[2],N=s[3];A=u(A,P,I,N,i,7,a[0]),N=u(N,A,P,I,c,12,a[1]),I=u(I,N,A,P,h,17,a[2]),P=u(P,I,N,A,d,22,a[3]),A=u(A,P,I,N,y,7,a[4]),N=u(N,A,P,I,v,12,a[5]),I=u(I,N,A,P,g,17,a[6]),P=u(P,I,N,A,_,22,a[7]),A=u(A,P,I,N,m,7,a[8]),N=u(N,A,P,I,b,12,a[9]),I=u(I,N,A,P,w,17,a[10]),P=u(P,I,N,A,E,22,a[11]),A=u(A,P,I,N,T,7,a[12]),N=u(N,A,P,I,S,12,a[13]),I=u(I,N,A,P,O,17,a[14]),A=l(A,P=u(P,I,N,A,k,22,a[15]),I,N,c,5,a[16]),N=l(N,A,P,I,g,9,a[17]),I=l(I,N,A,P,E,14,a[18]),P=l(P,I,N,A,i,20,a[19]),A=l(A,P,I,N,v,5,a[20]),N=l(N,A,P,I,w,9,a[21]),I=l(I,N,A,P,k,14,a[22]),P=l(P,I,N,A,y,20,a[23]),A=l(A,P,I,N,b,5,a[24]),N=l(N,A,P,I,O,9,a[25]),I=l(I,N,A,P,d,14,a[26]),P=l(P,I,N,A,m,20,a[27]),A=l(A,P,I,N,S,5,a[28]),N=l(N,A,P,I,h,9,a[29]),I=l(I,N,A,P,_,14,a[30]),A=f(A,P=l(P,I,N,A,T,20,a[31]),I,N,v,4,a[32]),N=f(N,A,P,I,m,11,a[33]),I=f(I,N,A,P,E,16,a[34]),P=f(P,I,N,A,O,23,a[35]),A=f(A,P,I,N,c,4,a[36]),N=f(N,A,P,I,y,11,a[37]),I=f(I,N,A,P,_,16,a[38]),P=f(P,I,N,A,w,23,a[39]),A=f(A,P,I,N,S,4,a[40]),N=f(N,A,P,I,i,11,a[41]),I=f(I,N,A,P,d,16,a[42]),P=f(P,I,N,A,g,23,a[43]),A=f(A,P,I,N,b,4,a[44]),N=f(N,A,P,I,T,11,a[45]),I=f(I,N,A,P,k,16,a[46]),A=p(A,P=f(P,I,N,A,h,23,a[47]),I,N,i,6,a[48]),N=p(N,A,P,I,_,10,a[49]),I=p(I,N,A,P,O,15,a[50]),P=p(P,I,N,A,v,21,a[51]),A=p(A,P,I,N,T,6,a[52]),N=p(N,A,P,I,d,10,a[53]),I=p(I,N,A,P,w,15,a[54]),P=p(P,I,N,A,c,21,a[55]),A=p(A,P,I,N,m,6,a[56]),N=p(N,A,P,I,k,10,a[57]),I=p(I,N,A,P,g,15,a[58]),P=p(P,I,N,A,S,21,a[59]),A=p(A,P,I,N,y,6,a[60]),N=p(N,A,P,I,E,10,a[61]),I=p(I,N,A,P,h,15,a[62]),P=p(P,I,N,A,b,21,a[63]),s[0]=s[0]+A|0,s[1]=s[1]+P|0,s[2]=s[2]+I|0,s[3]=s[3]+N|0},_doFinalize:function(){var t=this._data,n=t.words,r=8*this._nDataBytes,o=8*t.sigBytes;n[o>>>5]|=128<<24-o%32;var s=e.floor(r/4294967296),i=r;n[15+(o+64>>>9<<4)]=16711935&(s<<8|s>>>24)|4278255360&(s<<24|s>>>8),n[14+(o+64>>>9<<4)]=16711935&(i<<8|i>>>24)|4278255360&(i<<24|i>>>8),t.sigBytes=4*(n.length+1),this._process();for(var a=this._hash,c=a.words,u=0;u<4;u++){var l=c[u];c[u]=16711935&(l<<8|l>>>24)|4278255360&(l<<24|l>>>8)}return a},clone:function(){var e=s.clone.call(this);return e._hash=this._hash.clone(),e}});function u(e,t,n,r,o,s,i){var a=e+(t&n|~t&r)+o+i;return(a<<s|a>>>32-s)+t}function l(e,t,n,r,o,s,i){var a=e+(t&r|n&~r)+o+i;return(a<<s|a>>>32-s)+t}function f(e,t,n,r,o,s,i){var a=e+(t^n^r)+o+i;return(a<<s|a>>>32-s)+t}function p(e,t,n,r,o,s,i){var a=e+(n^(t|~r))+o+i;return(a<<s|a>>>32-s)+t}t.MD5=s._createHelper(c),t.HmacMD5=s._createHmacHelper(c)}(Math),n.MD5)})),n((function(e,t){var n,o,s;e.exports=(o=(n=r).lib.Base,s=n.enc.Utf8,void(n.algo.HMAC=o.extend({init:function(e,t){e=this._hasher=new e.init,"string"==typeof t&&(t=s.parse(t));var n=e.blockSize,r=4*n;t.sigBytes>r&&(t=e.finalize(t)),t.clamp();for(var o=this._oKey=t.clone(),i=this._iKey=t.clone(),a=o.words,c=i.words,u=0;u<n;u++)a[u]^=1549556828,c[u]^=909522486;o.sigBytes=i.sigBytes=r,this.reset()},reset:function(){var e=this._hasher;e.reset(),e.update(this._iKey)},update:function(e){return this._hasher.update(e),this},finalize:function(e){var t=this._hasher,n=t.finalize(e);return t.reset(),t.finalize(this._oKey.clone().concat(n))}})))})),n((function(e,t){e.exports=r.HmacMD5})));class s extends Error{constructor(e){super(e.message),this.errMsg=e.message||"",Object.defineProperties(this,{code:{get:()=>e.code},requestId:{get:()=>e.requestId},message:{get(){return this.errMsg},set(e){this.errMsg=e}}})}}var i={sign:function(e,t){let n="";return Object.keys(e).sort().forEach((function(t){e[t]&&(n=n+"&"+t+"="+e[t])})),n=n.slice(1),o(n,t).toString()},wrappedRequest:function(e){return new Promise((t,n)=>{uni.request(Object.assign(e,{complete(e){e||(e={}),"request:fail"!==e.errMsg&&"request:faill"!==e.errMsg||"h5"!=="mp-weixin"||"development"!=="development"||console.warn("发布H5，需要在uniCloud后台操作，绑定安全域名，否则会因为跨域问题而无法访问。教程参考：https://uniapp.dcloud.io/uniCloud/quickstart?id=H5%E4%B8%AD%E4%BD%BF%E7%94%A8unicloud");const r=e.header&&e.header["request-id"];if(!e.statusCode||e.statusCode>=400)return n(new s({code:"SYS_ERR",message:e.errMsg||"request:fail",requestId:r}));const o=e.data;if(o.error)return n(new s({code:o.error.code,message:o.error.message,requestId:r}));o.result=o.data,o.requestId=r,delete o.data,t(o)}}))})}};const a={jpg:"image/jpeg",jpeg:"image/jpeg",png:"image/png",gif:"image/gif",webp:"image/webp",svg:"image/svg+xml",mp3:"audio/mp3",mp4:"video/mp4",ogg:"audio/ogg",webm:"video/webm"};function c(e){return a[e.toLowerCase()]}class u{constructor(e){["spaceId","clientSecret"].forEach(t=>{if(!Object.prototype.hasOwnProperty.call(e,t))throw new Error(`缺少参数${t}`)}),this.config=Object.assign({},{endpoint:"https://api.bspapp.com"},e),this.config.provider="aliyun",this.config.requestUrl=this.config.endpoint+"/client",this.config.envType=this.config.envType||"public",this.config.accessTokenKey="access_token_"+this.config.spaceId}get hasAccessToken(){return!!this.accessToken}setAccessToken(e){uni.setStorageSync(this.config.accessTokenKey,e),this.accessToken=e}requestAuth(e){return i.wrappedRequest(e)}request(e,t){return this.hasAccessToken?t?i.wrappedRequest(e):i.wrappedRequest(e).catch(t=>new Promise((e,n)=>{!t||"GATEWAY_INVALID_TOKEN"!==t.code&&"InvalidParameter.InvalidToken"!==t.code?n(t):e()}).then(()=>this.getAccessToken()).then(()=>{const t=this.rebuildRequest(e);return this.request(t,!0)})):this.getAccessToken().then(()=>{const t=this.rebuildRequest(e);return this.request(t,!0)})}rebuildRequest(e){const t=Object.assign({},e);return t.data.token=this.accessToken,t.header["x-basement-token"]=this.accessToken,t.header["x-serverless-sign"]=i.sign(t.data,this.config.clientSecret),t}setupRequest(e,t){const n=Object.assign({},e,{spaceId:this.config.spaceId,timestamp:Date.now()}),r={"Content-Type":"application/json"};return"auth"!==t&&(n.token=this.accessToken,r["x-basement-token"]=this.accessToken),r["x-serverless-sign"]=i.sign(n,this.config.clientSecret),{url:this.config.requestUrl,method:"POST",data:n,dataType:"json",header:r}}getAccessToken(){return this.requestAuth(this.setupRequest({method:"serverless.auth.user.anonymousAuthorize",params:"{}"},"auth")).then(e=>new Promise((t,n)=>{e.result&&e.result.accessToken?(this.setAccessToken(e.result.accessToken),t(this.accessToken)):n(new s({code:"AUTH_FAILED",message:"获取accessToken失败"}))}))}authorize(){this.getAccessToken()}callFunction(e){const t={method:"serverless.function.runtime.invoke",params:JSON.stringify({functionTarget:e.name,functionArgs:e.data||{}})};return this.config.useDebugFunction?this.request(this.setupRequest(t)).then(t=>{if(t&&t.requestId){const n=JSON.stringify({spaceId:this.config.spaceId,functionName:e.name,requestId:t.requestId});console.log(`[aliyun-request]${n}[/aliyun-request]`)}return Promise.resolve(t)}).catch(t=>{if(t&&t.requestId){const n=JSON.stringify({spaceId:this.config.spaceId,functionName:e.name,requestId:t.requestId});console.log(`[aliyun-request]${n}[/aliyun-request]`)}return Promise.reject(t)}):this.request(this.setupRequest(t))}getOSSUploadOptionsFromPath(e){const t={method:"serverless.file.resource.generateProximalSign",params:JSON.stringify(e)};return this.request(this.setupRequest(t))}uploadFileToOSS({url:e,formData:t,fileName:n,name:r,filePath:o,fileType:i,contentType:a,onUploadProgress:c}){return new Promise((a,u)=>{const l=uni.uploadFile({url:e,formData:t,fileName:n,name:r,filePath:o,fileType:i,header:{"X-OSS-server-side-encrpytion":"AES256"},success(e){e&&e.statusCode<400?a(e):u(new s({code:"UPLOAD_FAILED",message:"文件上传失败"}))},fail(e){u(e)}});"function"==typeof c&&l.onProgressUpdate(e=>{c({loaded:e.totalBytesSent,total:e.totalBytesExpectedToSend})})})}reportOSSUpload(e){const t={method:"serverless.file.resource.report",params:JSON.stringify(e)};return this.request(this.setupRequest(t))}uploadFile({filePath:e,onUploadProgress:t,config:n}){const r=n&&n.envType||this.config.envType;let o,i,u,l,f,p=e.split("/").pop();return(o= false?undefined:c(i=e.split(".").pop())?Promise.resolve():Promise.reject(new s({code:"UNSUPPORTED_FILE_TYPE",message:"不支持的文件类型"}))).then(()=>this.getOSSUploadOptionsFromPath({env:r,filename:p})).then(n=>{const r=n.result;u=c(i),l=r.id,f="https://"+r.cdnDomain+"/"+r.ossPath;const o={url:"https://"+r.host,formData:{"Cache-Control":"max-age=2592000","Content-Disposition":"attachment",OSSAccessKeyId:r.accessKeyId,Signature:r.signature,host:r.host,id:l,key:r.ossPath,policy:r.policy,success_action_status:200},fileName:"file",name:"file",filePath:e,fileType:"image",contentType:u};return this.uploadFileToOSS(Object.assign({},o,{onUploadProgress:t}))}).then(()=>this.reportOSSUpload({id:l,contentType:u})).then(t=>new Promise((n,r)=>{t.success?n({success:!0,filePath:e,fileID:f}):r(new s({code:"UPLOAD_FAILED",message:"文件上传失败"}))}))}deleteFile({fileList:e}){const t={method:"serverless.file.resource.delete",params:JSON.stringify({id:e[0]})};return this.request(this.setupRequest(t))}}const l=__webpack_require__(/*! uni-stat-config */ 8).default||__webpack_require__(/*! uni-stat-config */ 8),f="__DC_STAT_UUID",p="__DC_UUID_VALUE",h="https://ide.dcloud.net.cn/serverless/function/invoke";function d(){let e="";if("n"===y()){try{e=plus.runtime.getDCloudId()}catch(t){e=""}return e}try{e=uni.getStorageSync(f)}catch(t){e=p}if(!e){e=Date.now()+""+Math.floor(1e7*Math.random());try{uni.setStorageSync(f,e)}catch(e){uni.setStorageSync(f,p)}}return e}function y(){return{"app-plus":"n",h5:"h5","mp-weixin":"wx","mp-alipay":"ali","mp-baidu":"bd","mp-toutiao":"tt","mp-qq":"qq"}["mp-weixin"]}function v(e){return function(t){if(!((t=t||{}).success||t.fail||t.complete))return e.call(this,t);e.call(this,t).then(e=>{t.success&&t.success(e),t.complete&&t.complete(e)}).catch(e=>{t.fail&&t.fail(e),t.complete&&t.complete(e)})}}const g={init(e){const t=new u(e);return["uploadFile","deleteFile"].forEach(e=>{t[e]=v(t[e]).bind(t)}),setTimeout(()=>{t.authorize()}),t}};var _;!function(e){e.local="local",e.none="none",e.session="session"}(_||(_={}));var m=function(){},b=function(){};function w(e,t,n){void 0===n&&(n={});var r=/\?/.test(t),o="";for(var s in n)""===o?!r&&(t+="?"):o+="&",o+=s+"="+encodeURIComponent(n[s]);return/^http(s)?\:\/\//.test(t+=o)?t:""+e+t}var E,T=Object.freeze({__proto__:null,get StorageType(){return _},AbstractSDKRequest:m,AbstractStorage:b,formatUrl:w}),S=(E=function(e,t){return(E=Object.setPrototypeOf||{__proto__:[]}instanceof Array&&function(e,t){e.__proto__=t}||function(e,t){for(var n in t)t.hasOwnProperty(n)&&(e[n]=t[n])})(e,t)},function(e,t){function n(){this.constructor=e}E(e,t),e.prototype=null===t?Object.create(t):(n.prototype=t.prototype,new n)}),O=function(){return(O=Object.assign||function(e){for(var t,n=1,r=arguments.length;n<r;n++)for(var o in t=arguments[n])Object.prototype.hasOwnProperty.call(t,o)&&(e[o]=t[o]);return e}).apply(this,arguments)};var k=function(e){function t(){return null!==e&&e.apply(this,arguments)||this}return S(t,e),t.prototype.post=function(e){var t=e.url,n=e.data,r=e.headers;return new Promise((function(e,o){uni.request({url:w("https:",t),data:n,method:"POST",header:r,success:function(t){e(t)},fail:function(e){o(e)}})}))},t.prototype.upload=function(e){return new Promise((function(t){var n=e.url,r=e.file,o=e.data,s=e.headers;uni.uploadFile({url:w("https:",n),name:"file",formData:Object.assign({},o,{file:r}),filePath:r,header:s,success:function(e){var n={statusCode:e.statusCode,data:e.data||{}};200===e.statusCode&&o.success_action_status&&(n.statusCode=parseInt(o.success_action_status,10)),t(n)},fail:function(e){t(e)}})}))},t.prototype.download=function(e){var t=e.url,n=e.headers;return new Promise((function(e,r){uni.downloadFile({url:w("https:",t),header:n,success:function(t){200===t.statusCode&&t.tempFilePath?e({statusCode:200,tempFilePath:t.tempFilePath}):e(t)},fail:function(e){r(e)}})}))},t}(m),A={setItem:function(e,t){uni.setStorageSync(e,t)},getItem:function(e){return uni.getStorageSync(e)},removeItem:function(e){uni.removeStorageSync(e)},clear:function(){uni.clearStorageSync()}},P=function(e,t){void 0===t&&(t={});var n=uni.connectSocket(O({url:e},t));return{set onopen(e){n.onOpen(e)},set onmessage(e){n.onMessage(e)},set onclose(e){n.onClose(e)},set onerror(e){n.onError(e)},send:function(e){return n.send({data:e})},close:function(e,t){return n.close({code:e,reason:t})},get readyState(){return n.readyState},CONNECTING:0,OPEN:1,CLOSING:2,CLOSED:3}};var I={genAdapter:function(){return{root:{},reqClass:k,wsClass:P,localStorage:A,primaryStorage:_.local}},isMatch:function(){return"undefined"!=typeof uni&&!!uni.request},runtime:"uni_app"},N=n((function(e,t){Object.defineProperty(t,"__esModule",{value:!0}),t.getQuery=function(e,t){if("undefined"==typeof window)return!1;var n=t||window.location.search,r=new RegExp("(^|&)"+e+"=([^&]*)(&|$)"),o=n.substr(n.indexOf("?")+1).match(r);return null!=o?o[2]:""},t.getHash=function(e){var t=window.location.hash.match(new RegExp("[#?&/]"+e+"=([^&#]*)"));return t?t[1]:""},t.removeParam=function(e,t){var n=t.split("?")[0],r=[],o=-1!==t.indexOf("?")?t.split("?")[1]:"";if(""!==o){for(var s=(r=o.split("&")).length-1;s>=0;s-=1)r[s].split("=")[0]===e&&r.splice(s,1);n=n+"?"+r.join("&")}return n},t.createPromiseCallback=function(){var e;if(!Promise){(e=function(){}).promise={};var t=function(){throw new Error('Your Node runtime does support ES6 Promises. Set "global.Promise" to your preferred implementation of promises.')};return Object.defineProperty(e.promise,"then",{get:t}),Object.defineProperty(e.promise,"catch",{get:t}),e}var n=new Promise((function(t,n){e=function(e,r){return e?n(e):t(r)}}));return e.promise=n,e},t.getWeixinCode=function(){return t.getQuery("code")||t.getHash("code")},t.getMiniAppCode=function(){return new Promise((function(e,t){wx.login({success:function(t){e(t.code)},fail:function(e){t(e)}})}))},t.isArray=function(e){return"[object Array]"===Object.prototype.toString.call(e)},t.isString=function(e){return"string"==typeof e},t.isUndefined=function(e){return void 0===e},t.isInstanceOf=function(e,t){return e instanceof t},t.isFormData=function(e){return"[object FormData]"===Object.prototype.toString.call(e)},t.genSeqId=function(){return Math.random().toString(16).slice(2)},t.getArgNames=function(e){var t=e.toString();return t.slice(t.indexOf("(")+1,t.indexOf(")")).match(/([^\s,]+)/g)},t.formatUrl=function(e,t,n){void 0===n&&(n={});var r=/\?/.test(t),o="";for(var s in n)""===o?!r&&(t+="?"):o+="&",o+=s+"="+encodeURIComponent(n[s]);return/^http(s)?\:\/\//.test(t+=o)?t:""+e+t}}));t(N);N.getQuery,N.getHash,N.removeParam,N.createPromiseCallback,N.getWeixinCode,N.getMiniAppCode,N.isArray,N.isString,N.isUndefined,N.isInstanceOf,N.isFormData,N.genSeqId,N.getArgNames,N.formatUrl;var C,R="dist/index.js",x="./dist/index.d.ts",q={build:"npm run tsc && webpack",tsc:"tsc -p tsconfig.json","tsc:w":"tsc -p tsconfig.json -w",test:"jest --verbose false -i",e2e:'NODE_ENV=e2e webpack && jest --config="./jest.e2e.config.js"  --verbose false -i "e2e"',start:"webpack-dev-server --hot --open",eslint:'eslint "./**/*.js" "./**/*.ts"',"eslint-fix":'eslint --fix "./**/*.js" "./**/*.ts"',test_web:"npm run tsc && webpack-dev-server --devtool eval-source-map --progress --colors --hot --inline --content-base ./dist --host jimmytest-088bef.tcb.qcloud.la --port 80 --disableHostCheck true --mode development --config webpack.test.js"},j={type:"git",url:"https://github.com/TencentCloudBase/tcb-js-sdk"},U=["tcb","js-sdk"],L={"@cloudbase/adapter-interface":"^0.2.0","@cloudbase/adapter-wx_mp":"^0.2.1","@cloudbase/database":"^0.9.8"},D={"@babel/core":"^7.6.2","@babel/plugin-proposal-class-properties":"^7.5.5","@babel/plugin-proposal-object-rest-spread":"^7.6.2","@babel/plugin-transform-runtime":"^7.6.2","@babel/preset-env":"^7.6.2","@babel/preset-typescript":"^7.6.0","@babel/runtime":"^7.6.2","@types/jest":"^23.1.4","@types/node":"^10.14.4","@types/superagent":"^4.1.4",axios:"^0.19.0","babel-eslint":"^10.0.1","babel-loader":"^8.0.6","babel-polyfill":"^6.26.0",eslint:"^5.16.0","eslint-config-alloy":"^1.4.2","eslint-config-prettier":"^4.1.0","eslint-plugin-prettier":"^3.0.1","eslint-plugin-typescript":"^1.0.0-rc.3",express:"^4.17.1",husky:"^3.1.0",jest:"^24.7.1","jest-puppeteer":"^4.3.0","lint-staged":"^9.5.0","power-assert":"^1.6.1",puppeteer:"^1.20.0","serve-static":"^1.14.1","ts-jest":"^23.10.4","ts-loader":"^6.2.1",typescript:"^3.4.3","typescript-eslint-parser":"^22.0.0",webpack:"^4.41.3","webpack-bundle-analyzer":"^3.4.1","webpack-cli":"^3.3.0","webpack-dev-server":"^3.3.1","webpack-merge":"^4.2.2","webpack-visualizer-plugin":"^0.1.11"},K={hooks:{"pre-commit":"lint-staged"}},M={name:"tcb-js-sdk",version:"1.3.5",description:"js sdk for tcb",main:R,types:x,scripts:q,repository:j,keywords:U,author:"jimmyjzhang",license:"ISC",dependencies:L,devDependencies:D,husky:K,"lint-staged":{"*.{js,ts}":["eslint --fix","git add"]}},F=(C=Object.freeze({__proto__:null,name:"tcb-js-sdk",version:"1.3.5",description:"js sdk for tcb",main:R,types:x,scripts:q,repository:j,keywords:U,author:"jimmyjzhang",license:"ISC",dependencies:L,devDependencies:D,husky:K,default:M}))&&C.default||C,G=n((function(t,n){var r=e&&e.__importStar||function(e){if(e&&e.__esModule)return e;var t={};if(null!=e)for(var n in e)Object.hasOwnProperty.call(e,n)&&(t[n]=e[n]);return t.default=e,t};Object.defineProperty(n,"__esModule",{value:!0});var o=r(F);n.SDK_VERISON=o.version,n.ACCESS_TOKEN="access_token",n.ACCESS_TOKEN_Expire="access_token_expire",n.REFRESH_TOKEN="refresh_token",n.ANONYMOUS_UUID="anonymous_uuid",n.LOGIN_TYPE_KEY="login_type",n.protocol="undefined"!=typeof location&&"http:"===location.protocol?"http:":"https:",n.BASE_URL= false?undefined:"//tcb-api.tencentcloudapi.com/web"}));t(G);G.SDK_VERISON,G.ACCESS_TOKEN,G.ACCESS_TOKEN_Expire,G.REFRESH_TOKEN,G.ANONYMOUS_UUID,G.LOGIN_TYPE_KEY,G.protocol,G.BASE_URL;var H=n((function(t,n){var r=e&&e.__extends||function(){var e=function(t,n){return(e=Object.setPrototypeOf||{__proto__:[]}instanceof Array&&function(e,t){e.__proto__=t}||function(e,t){for(var n in t)t.hasOwnProperty(n)&&(e[n]=t[n])})(t,n)};return function(t,n){function r(){this.constructor=t}e(t,n),t.prototype=null===n?Object.create(n):(r.prototype=n.prototype,new r)}}(),o=e&&e.__assign||function(){return(o=Object.assign||function(e){for(var t,n=1,r=arguments.length;n<r;n++)for(var o in t=arguments[n])Object.prototype.hasOwnProperty.call(t,o)&&(e[o]=t[o]);return e}).apply(this,arguments)},s=e&&e.__awaiter||function(e,t,n,r){return new(n||(n=Promise))((function(o,s){function i(e){try{c(r.next(e))}catch(e){s(e)}}function a(e){try{c(r.throw(e))}catch(e){s(e)}}function c(e){var t;e.done?o(e.value):(t=e.value,t instanceof n?t:new n((function(e){e(t)}))).then(i,a)}c((r=r.apply(e,t||[])).next())}))},i=e&&e.__generator||function(e,t){var n,r,o,s,i={label:0,sent:function(){if(1&o[0])throw o[1];return o[1]},trys:[],ops:[]};return s={next:a(0),throw:a(1),return:a(2)},"function"==typeof Symbol&&(s[Symbol.iterator]=function(){return this}),s;function a(s){return function(a){return function(s){if(n)throw new TypeError("Generator is already executing.");for(;i;)try{if(n=1,r&&(o=2&s[0]?r.return:s[0]?r.throw||((o=r.return)&&o.call(r),0):r.next)&&!(o=o.call(r,s[1])).done)return o;switch(r=0,o&&(s=[2&s[0],o.value]),s[0]){case 0:case 1:o=s;break;case 4:return i.label++,{value:s[1],done:!1};case 5:i.label++,r=s[1],s=[0];continue;case 7:s=i.ops.pop(),i.trys.pop();continue;default:if(!(o=(o=i.trys).length>0&&o[o.length-1])&&(6===s[0]||2===s[0])){i=0;continue}if(3===s[0]&&(!o||s[1]>o[0]&&s[1]<o[3])){i.label=s[1];break}if(6===s[0]&&i.label<o[1]){i.label=o[1],o=s;break}if(o&&i.label<o[2]){i.label=o[2],i.ops.push(s);break}o[2]&&i.ops.pop(),i.trys.pop();continue}s=t.call(e,i)}catch(e){s=[6,e],r=0}finally{n=o=0}if(5&s[0])throw s[1];return{value:s[0]?s[1]:void 0,done:!0}}([s,a])}}};Object.defineProperty(n,"__esModule",{value:!0});var a=function(e){function t(){return null!==e&&e.apply(this,arguments)||this}return r(t,e),t.prototype.get=function(e){return this._request(o(o({},e),{method:"get"}))},t.prototype.post=function(e){return this._request(o(o({},e),{method:"post"}))},t.prototype.upload=function(e){var t=e.data,n=e.file,r=e.name,s=new FormData;for(var i in t)s.append(i,t[i]);return s.append("key",r),s.append("file",n),this._request(o(o({},e),{data:s,method:"post"}))},t.prototype.download=function(e){return s(this,void 0,void 0,(function(){var t,n;return i(this,(function(r){return t=decodeURIComponent(new URL(e.url).pathname.split("/").pop()||""),(n=document.createElement("a")).href=e.url,n.setAttribute("download",t),n.setAttribute("target","_blank"),document.body.appendChild(n),n.click(),[2,new Promise((function(t){t({statusCode:200,tempFilePath:e.url})}))]}))}))},t.prototype._request=function(e){var t=String(e.method).toLowerCase()||"get";return new Promise((function(n){var r=e.url,o=e.headers,s=void 0===o?{}:o,i=e.data,a=e.responseType,c=N.formatUrl(G.protocol,r,"get"===t?i:{}),u=new XMLHttpRequest;for(var l in u.open(t,c),a&&(u.responseType=a),s)u.setRequestHeader(l,s[l]);u.onreadystatechange=function(){if(4===u.readyState){var e={statusCode:u.status};try{e.data=JSON.parse(u.responseText)}catch(e){}n(e)}},u.send("post"===t&&N.isFormData(i)?i:JSON.stringify(i||{}))}))},t}(T.AbstractSDKRequest);n.WebRequest=a,n.genAdapter=function(){return{root:window,reqClass:a,wsClass:WebSocket,localStorage:localStorage,sessionStorage:sessionStorage}}}));t(H);H.WebRequest,H.genAdapter;var Y=n((function(t,n){var r=e&&e.__importStar||function(e){if(e&&e.__esModule)return e;var t={};if(null!=e)for(var n in e)Object.hasOwnProperty.call(e,n)&&(t[n]=e[n]);return t.default=e,t};Object.defineProperty(n,"__esModule",{value:!0});var o,s=r(H);!function(e){e.WEB="web",e.WX_MP="wx_mp"}(o=n.RUNTIME||(n.RUNTIME={})),n.useAdapters=function(e){for(var t=0,n=N.isArray(e)?e:[e];t<n.length;t++){var r=n[t],o=r.isMatch,s=r.genAdapter,i=r.runtime;if(o())return{adapter:s(),runtime:i}}},n.useDefaultAdapter=function(){return{adapter:s.genAdapter(),runtime:o.WEB}},n.Adapter={adapter:null,runtime:void 0}}));t(Y);Y.RUNTIME,Y.useAdapters,Y.useDefaultAdapter,Y.Adapter;var V=n((function(t,n){var r=e&&e.__extends||function(){var e=function(t,n){return(e=Object.setPrototypeOf||{__proto__:[]}instanceof Array&&function(e,t){e.__proto__=t}||function(e,t){for(var n in t)t.hasOwnProperty(n)&&(e[n]=t[n])})(t,n)};return function(t,n){function r(){this.constructor=t}e(t,n),t.prototype=null===n?Object.create(n):(r.prototype=n.prototype,new r)}}();Object.defineProperty(n,"__esModule",{value:!0});var o=function(){function e(e){switch(Y.Adapter.adapter.primaryStorage||e){case"local":this.storageClass=Y.Adapter.adapter.localStorage||new s;break;case"none":this.storageClass=new s;break;default:this.storageClass=Y.Adapter.adapter.sessionStorage||new s}}return e.prototype.setStore=function(e,t,n){try{if(!this.storageClass)return}catch(e){return}var r,o={};o.version=n||"localCachev1",o.content=t,r=JSON.stringify(o);try{this.storageClass.setItem(e,r)}catch(e){return}},e.prototype.getStore=function(e,t){try{if(process&&Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"})&&Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).tcb_token)return Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).tcb_token;if(!this.storageClass)return}catch(e){return""}t=t||"localCachev1";var n=this.storageClass.getItem(e);return n&&n.indexOf(t)>=0?JSON.parse(n).content:""},e.prototype.removeStore=function(e){this.storageClass.removeItem(e)},e}();n.Cache=o;var s=function(e){function t(){var t=e.call(this)||this;return Y.Adapter.adapter.root.tcbObject||(Y.Adapter.adapter.root.tcbObject={}),t}return r(t,e),t.prototype.setItem=function(e,t){Y.Adapter.adapter.root.tcbObject[e]=t},t.prototype.getItem=function(e){return Y.Adapter.adapter.root.tcbObject[e]},t.prototype.removeItem=function(e){delete Y.Adapter.adapter.root.tcbObject[e]},t.prototype.clear=function(){delete Y.Adapter.adapter.root.tcbObject},t}(T.AbstractStorage)}));t(V);V.Cache;var B=n((function(t,n){var r=e&&e.__extends||function(){var e=function(t,n){return(e=Object.setPrototypeOf||{__proto__:[]}instanceof Array&&function(e,t){e.__proto__=t}||function(e,t){for(var n in t)t.hasOwnProperty(n)&&(e[n]=t[n])})(t,n)};return function(t,n){function r(){this.constructor=t}e(t,n),t.prototype=null===n?Object.create(n):(r.prototype=n.prototype,new r)}}(),o=e&&e.__spreadArrays||function(){for(var e=0,t=0,n=arguments.length;t<n;t++)e+=arguments[t].length;var r=Array(e),o=0;for(t=0;t<n;t++)for(var s=arguments[t],i=0,a=s.length;i<a;i++,o++)r[o]=s[i];return r};Object.defineProperty(n,"__esModule",{value:!0});var s=function(e,t){this.data=t||null,this.name=e};n.IEvent=s;var i=function(e){function t(t,n){var r=e.call(this,"error",{error:t,data:n})||this;return r.error=t,r}return r(t,e),t}(s);n.IErrorEvent=i;var a=function(){function e(){this._listeners={}}return e.prototype.on=function(e,t){return function(e,t,n){n[e]=n[e]||[],n[e].push(t)}(e,t,this._listeners),this},e.prototype.off=function(e,t){return function(e,t,n){if(n&&n[e]){var r=n[e].indexOf(t);-1!==r&&n[e].splice(r,1)}}(e,t,this._listeners),this},e.prototype.fire=function(e,t){if(N.isInstanceOf(e,i))return console.error(e.error),this;var n=N.isString(e)?new s(e,t||{}):e,r=n.name;if(this._listens(r)){n.target=this;for(var a=0,c=this._listeners[r]?o(this._listeners[r]):[];a<c.length;a++){c[a].call(this,n)}}return this},e.prototype._listens=function(e){return this._listeners[e]&&this._listeners[e].length>0},e}();n.IEventEmitter=a;var c=new a;n.addEventListener=function(e,t){c.on(e,t)},n.activateEvent=function(e,t){void 0===t&&(t={}),c.fire(e,t)},n.removeEventListener=function(e,t){c.off(e,t)},n.EVENTS={LOGIN_STATE_CHANGED:"loginStateChanged",LOGIN_STATE_EXPIRE:"loginStateExpire",LOGIN_TYPE_CHANGE:"loginTypeChanged",ANONYMOUS_CONVERTED:"anonymousConverted",REFRESH_ACCESS_TOKEN:"refreshAccessToken"}}));t(B);B.IEvent,B.IErrorEvent,B.IEventEmitter,B.addEventListener,B.activateEvent,B.removeEventListener,B.EVENTS;var W=n((function(t,n){var r=e&&e.__assign||function(){return(r=Object.assign||function(e){for(var t,n=1,r=arguments.length;n<r;n++)for(var o in t=arguments[n])Object.prototype.hasOwnProperty.call(t,o)&&(e[o]=t[o]);return e}).apply(this,arguments)},o=e&&e.__awaiter||function(e,t,n,r){return new(n||(n=Promise))((function(o,s){function i(e){try{c(r.next(e))}catch(e){s(e)}}function a(e){try{c(r.throw(e))}catch(e){s(e)}}function c(e){var t;e.done?o(e.value):(t=e.value,t instanceof n?t:new n((function(e){e(t)}))).then(i,a)}c((r=r.apply(e,t||[])).next())}))},s=e&&e.__generator||function(e,t){var n,r,o,s,i={label:0,sent:function(){if(1&o[0])throw o[1];return o[1]},trys:[],ops:[]};return s={next:a(0),throw:a(1),return:a(2)},"function"==typeof Symbol&&(s[Symbol.iterator]=function(){return this}),s;function a(s){return function(a){return function(s){if(n)throw new TypeError("Generator is already executing.");for(;i;)try{if(n=1,r&&(o=2&s[0]?r.return:s[0]?r.throw||((o=r.return)&&o.call(r),0):r.next)&&!(o=o.call(r,s[1])).done)return o;switch(r=0,o&&(s=[2&s[0],o.value]),s[0]){case 0:case 1:o=s;break;case 4:return i.label++,{value:s[1],done:!1};case 5:i.label++,r=s[1],s=[0];continue;case 7:s=i.ops.pop(),i.trys.pop();continue;default:if(!(o=(o=i.trys).length>0&&o[o.length-1])&&(6===s[0]||2===s[0])){i=0;continue}if(3===s[0]&&(!o||s[1]>o[0]&&s[1]<o[3])){i.label=s[1];break}if(6===s[0]&&i.label<o[1]){i.label=o[1],o=s;break}if(o&&i.label<o[2]){i.label=o[2],i.ops.push(s);break}o[2]&&i.ops.pop(),i.trys.pop();continue}s=t.call(e,i)}catch(e){s=[6,e],r=0}finally{n=o=0}if(5&s[0])throw s[1];return{value:s[0]?s[1]:void 0,done:!0}}([s,a])}}};Object.defineProperty(n,"__esModule",{value:!0});var i=["auth.getJwt","auth.logout","auth.signInWithTicket","auth.signInAnonymously"],a={"X-SDK-Version":G.SDK_VERISON};function c(e,t,n){var o=e[t];e[t]=function(t){var s={},i={};n.forEach((function(n){var r=n.call(e,t),o=r.data,a=r.headers;Object.assign(s,o),Object.assign(i,a)}));var a=t.data;return a&&function(){if(N.isFormData(a))for(var e in s)a.append(e,s[e]);else t.data=r(r({},a),s)}(),t.headers=r(r({},t.headers||{}),i),o.call(e,t)}}function u(){var e=N.genSeqId();return{data:{seqId:e},headers:r(r({},a),{"x-seqid":e})}}var l=function(){function e(e){void 0===e&&(e={}),this.config=e,this.cache=new V.Cache(e.persistence),this.accessTokenKey=G.ACCESS_TOKEN+"_"+e.env,this.accessTokenExpireKey=G.ACCESS_TOKEN_Expire+"_"+e.env,this.refreshTokenKey=G.REFRESH_TOKEN+"_"+e.env,this.anonymousUuidKey=G.ANONYMOUS_UUID+"_"+e.env,this.loginTypeKey=G.LOGIN_TYPE_KEY+"_"+e.env,this._reqClass=new Y.Adapter.adapter.reqClass,c(this._reqClass,"post",[u]),c(this._reqClass,"upload",[u]),c(this._reqClass,"download",[u])}return e.prototype.post=function(e){return o(this,void 0,void 0,(function(){return s(this,(function(t){switch(t.label){case 0:return[4,this._reqClass.post(e)];case 1:return[2,t.sent()]}}))}))},e.prototype.upload=function(e){return o(this,void 0,void 0,(function(){return s(this,(function(t){switch(t.label){case 0:return[4,this._reqClass.upload(e)];case 1:return[2,t.sent()]}}))}))},e.prototype.download=function(e){return o(this,void 0,void 0,(function(){return s(this,(function(t){switch(t.label){case 0:return[4,this._reqClass.download(e)];case 1:return[2,t.sent()]}}))}))},e.prototype.refreshAccessToken=function(){return o(this,void 0,void 0,(function(){var e,t,n;return s(this,(function(r){switch(r.label){case 0:this._refreshAccessTokenPromise||(this._refreshAccessTokenPromise=this._refreshAccessToken()),r.label=1;case 1:return r.trys.push([1,3,,4]),[4,this._refreshAccessTokenPromise];case 2:return e=r.sent(),[3,4];case 3:return n=r.sent(),t=n,[3,4];case 4:if(this._refreshAccessTokenPromise=null,this._shouldRefreshAccessTokenHook=null,t)throw t;return[2,e]}}))}))},e.prototype._refreshAccessToken=function(){return o(this,void 0,void 0,(function(){var e,t,n,r;return s(this,(function(o){switch(o.label){case 0:if(this.cache.removeStore(this.accessTokenKey),this.cache.removeStore(this.accessTokenExpireKey),!(e=this.cache.getStore(this.refreshTokenKey)))throw new Error("[tcb-js-sdk] 未登录CloudBase");return t={refresh_token:e},this.cache.getStore(this.loginTypeKey)===z.LOGINTYPE.ANONYMOUS&&(t.anonymous_uuid=this.cache.getStore(this.anonymousUuidKey)),[4,this.request("auth.getJwt",t)];case 1:if((n=o.sent()).data.code)throw"SIGN_PARAM_INVALID"!==(r=n.data.code)&&"REFRESH_TOKEN_EXPIRED"!==r&&"INVALID_REFRESH_TOKEN"!==r||(B.activateEvent(B.EVENTS.LOGIN_STATE_EXPIRE),this.cache.removeStore(this.refreshTokenKey)),new Error("[tcb-js-sdk] 刷新access token失败："+n.data.code);return n.data.access_token?(B.activateEvent(B.EVENTS.REFRESH_ACCESS_TOKEN),this.cache.setStore(this.accessTokenKey,n.data.access_token),this.cache.setStore(this.accessTokenExpireKey,n.data.access_token_expire+Date.now()),B.activateEvent(B.EVENTS.LOGIN_TYPE_CHANGE,n.data.login_type),[2,{accessToken:n.data.access_token,accessTokenExpire:n.data.access_token_expire}]):(n.data.refresh_token&&(this.cache.removeStore(this.refreshTokenKey),this.cache.setStore(this.refreshTokenKey,n.data.refresh_token),this._refreshAccessToken()),[2])}}))}))},e.prototype.getAccessToken=function(){return o(this,void 0,void 0,(function(){var e,t,n,r;return s(this,(function(o){switch(o.label){case 0:return e=this.cache.getStore(this.accessTokenKey),t=this.cache.getStore(this.accessTokenExpireKey),n=!0,(r=this._shouldRefreshAccessTokenHook)?[4,this._shouldRefreshAccessTokenHook(e,t)]:[3,2];case 1:r=!o.sent(),o.label=2;case 2:return r&&(n=!1),(!e||!t||t<Date.now())&&n?[2,this.refreshAccessToken()]:[2,{accessToken:e,accessTokenExpire:t}]}}))}))},e.prototype.request=function(e,t,n){return o(this,void 0,void 0,(function(){var o,a,c,u,l,f,p,h,d,y,v,g;return s(this,(function(s){switch(s.label){case 0:return o="application/x-www-form-urlencoded",a=r({action:e,env:this.config.env,dataVersion:"2019-08-16"},t),-1!==i.indexOf(e)?[3,2]:(c=a,[4,this.getAccessToken()]);case 1:c.access_token=s.sent().accessToken,s.label=2;case 2:if("storage.uploadFile"===e){for(l in u=new FormData)u.hasOwnProperty(l)&&void 0!==u[l]&&u.append(l,a[l]);o="multipart/form-data"}else o="application/json;charset=UTF-8",u=a;return f={headers:{"content-type":o}},n&&n.onUploadProgress&&(f.onUploadProgress=n.onUploadProgress),p=t.parse,h=t.query,d=t.search,y={env:this.config.env},p&&(y.parse=!0),h&&(y=r(r({},h),y)),v=N.formatUrl(G.protocol,G.BASE_URL,y),d&&(v+=d),[4,this.post(r({url:v,data:u},f))];case 3:if(g=s.sent(),200!==Number(g.status)&&200!==Number(g.statusCode)||!g.data)throw new Error("network request error");return[2,g]}}))}))},e.prototype.send=function(e,t){return void 0===t&&(t={}),o(this,void 0,void 0,(function(){var n,r,o;return s(this,(function(s){switch(s.label){case 0:return n=setTimeout((function(){console.warn("Database operation is longer than 3s. Please check query performance and your network environment.")}),3e3),[4,this.request(e,t,{onUploadProgress:t.onUploadProgress})];case 1:return r=s.sent(),clearTimeout(n),"ACCESS_TOKEN_EXPIRED"!==r.data.code||-1!==i.indexOf(e)?[3,4]:[4,this.refreshAccessToken()];case 2:return s.sent(),[4,this.request(e,t,{onUploadProgress:t.onUploadProgress})];case 3:if((o=s.sent()).data.code)throw new Error("["+o.data.code+"] "+o.data.message);return[2,o.data];case 4:if(r.data.code)throw new Error("["+r.data.code+"] "+r.data.message);return[2,r.data]}}))}))},e}();n.Request=l}));t(W);W.Request;var z=n((function(t,n){var r,o=e&&e.__awaiter||function(e,t,n,r){return new(n||(n=Promise))((function(o,s){function i(e){try{c(r.next(e))}catch(e){s(e)}}function a(e){try{c(r.throw(e))}catch(e){s(e)}}function c(e){var t;e.done?o(e.value):(t=e.value,t instanceof n?t:new n((function(e){e(t)}))).then(i,a)}c((r=r.apply(e,t||[])).next())}))},s=e&&e.__generator||function(e,t){var n,r,o,s,i={label:0,sent:function(){if(1&o[0])throw o[1];return o[1]},trys:[],ops:[]};return s={next:a(0),throw:a(1),return:a(2)},"function"==typeof Symbol&&(s[Symbol.iterator]=function(){return this}),s;function a(s){return function(a){return function(s){if(n)throw new TypeError("Generator is already executing.");for(;i;)try{if(n=1,r&&(o=2&s[0]?r.return:s[0]?r.throw||((o=r.return)&&o.call(r),0):r.next)&&!(o=o.call(r,s[1])).done)return o;switch(r=0,o&&(s=[2&s[0],o.value]),s[0]){case 0:case 1:o=s;break;case 4:return i.label++,{value:s[1],done:!1};case 5:i.label++,r=s[1],s=[0];continue;case 7:s=i.ops.pop(),i.trys.pop();continue;default:if(!(o=(o=i.trys).length>0&&o[o.length-1])&&(6===s[0]||2===s[0])){i=0;continue}if(3===s[0]&&(!o||s[1]>o[0]&&s[1]<o[3])){i.label=s[1];break}if(6===s[0]&&i.label<o[1]){i.label=o[1],o=s;break}if(o&&i.label<o[2]){i.label=o[2],i.ops.push(s);break}o[2]&&i.ops.pop(),i.trys.pop();continue}s=t.call(e,i)}catch(e){s=[6,e],r=0}finally{n=o=0}if(5&s[0])throw s[1];return{value:s[0]?s[1]:void 0,done:!0}}([s,a])}}};Object.defineProperty(n,"__esModule",{value:!0}),function(e){e.ANONYMOUS="ANONYMOUS",e.WECHAT="WECHAT",e.CUSTOM="CUSTOM",e.NULL="NULL"}(r=n.LOGINTYPE||(n.LOGINTYPE={}));var i=function(){function e(e){this._loginType=r.NULL,this.config=e,this.onLoginTypeChanged=this.onLoginTypeChanged.bind(this),B.addEventListener(B.EVENTS.LOGIN_TYPE_CHANGE,this.onLoginTypeChanged)}return e.prototype.init=function(){this.httpRequest=new W.Request(this.config),this.cache=new V.Cache(this.config.persistence),this.accessTokenKey=G.ACCESS_TOKEN+"_"+this.config.env,this.accessTokenExpireKey=G.ACCESS_TOKEN_Expire+"_"+this.config.env,this.refreshTokenKey=G.REFRESH_TOKEN+"_"+this.config.env,this.loginTypeKey=G.LOGIN_TYPE_KEY+"_"+this.config.env},e.prototype.onLoginTypeChanged=function(e){this._loginType=e.data,this.cache.setStore(this.loginTypeKey,this._loginType)},Object.defineProperty(e.prototype,"loginType",{get:function(){return this._loginType},enumerable:!0,configurable:!0}),e.prototype.setRefreshToken=function(e){this.cache.removeStore(this.accessTokenKey),this.cache.removeStore(this.accessTokenExpireKey),this.cache.setStore(this.refreshTokenKey,e)},e.prototype.getRefreshTokenByWXCode=function(e,t,n){return o(this,void 0,void 0,(function(){var r;return s(this,(function(o){return"auth.getJwt",r=Y.Adapter.runtime===Y.RUNTIME.WX_MP?"1":"0",[2,this.httpRequest.send("auth.getJwt",{appid:e,loginType:t,code:n,hybridMiniapp:r}).then((function(e){if(e.code)throw new Error("[tcb-js-sdk] 微信登录失败: "+e.code);if(e.refresh_token)return{refreshToken:e.refresh_token,accessToken:e.access_token,accessTokenExpire:e.access_token_expire};throw new Error("[tcb-js-sdk] getJwt未返回refreshToken")}))]}))}))},e}();n.default=i}));t(z);z.LOGINTYPE;var J=n((function(t,n){var r=e&&e.__extends||function(){var e=function(t,n){return(e=Object.setPrototypeOf||{__proto__:[]}instanceof Array&&function(e,t){e.__proto__=t}||function(e,t){for(var n in t)t.hasOwnProperty(n)&&(e[n]=t[n])})(t,n)};return function(t,n){function r(){this.constructor=t}e(t,n),t.prototype=null===n?Object.create(n):(r.prototype=n.prototype,new r)}}(),o=e&&e.__awaiter||function(e,t,n,r){return new(n||(n=Promise))((function(o,s){function i(e){try{c(r.next(e))}catch(e){s(e)}}function a(e){try{c(r.throw(e))}catch(e){s(e)}}function c(e){var t;e.done?o(e.value):(t=e.value,t instanceof n?t:new n((function(e){e(t)}))).then(i,a)}c((r=r.apply(e,t||[])).next())}))},s=e&&e.__generator||function(e,t){var n,r,o,s,i={label:0,sent:function(){if(1&o[0])throw o[1];return o[1]},trys:[],ops:[]};return s={next:a(0),throw:a(1),return:a(2)},"function"==typeof Symbol&&(s[Symbol.iterator]=function(){return this}),s;function a(s){return function(a){return function(s){if(n)throw new TypeError("Generator is already executing.");for(;i;)try{if(n=1,r&&(o=2&s[0]?r.return:s[0]?r.throw||((o=r.return)&&o.call(r),0):r.next)&&!(o=o.call(r,s[1])).done)return o;switch(r=0,o&&(s=[2&s[0],o.value]),s[0]){case 0:case 1:o=s;break;case 4:return i.label++,{value:s[1],done:!1};case 5:i.label++,r=s[1],s=[0];continue;case 7:s=i.ops.pop(),i.trys.pop();continue;default:if(!(o=(o=i.trys).length>0&&o[o.length-1])&&(6===s[0]||2===s[0])){i=0;continue}if(3===s[0]&&(!o||s[1]>o[0]&&s[1]<o[3])){i.label=s[1];break}if(6===s[0]&&i.label<o[1]){i.label=o[1],o=s;break}if(o&&i.label<o[2]){i.label=o[2],i.ops.push(s);break}o[2]&&i.ops.pop(),i.trys.pop();continue}s=t.call(e,i)}catch(e){s=[6,e],r=0}finally{n=o=0}if(5&s[0])throw s[1];return{value:s[0]?s[1]:void 0,done:!0}}([s,a])}}},i=e&&e.__importStar||function(e){if(e&&e.__esModule)return e;var t={};if(null!=e)for(var n in e)Object.hasOwnProperty.call(e,n)&&(t[n]=e[n]);return t.default=e,t};Object.defineProperty(n,"__esModule",{value:!0});var a,c,u=i(N),l=i(z);!function(e){e.snsapi_base="snsapi_base",e.snsapi_userinfo="snsapi_userinfo",e.snsapi_login="snsapi_login"}(a||(a={})),function(e){e.redirect="redirect",e.prompt="prompt"}(c||(c={}));var f={},p=function(e){function t(t,n,r,o,s){var i=e.call(this,t)||this;return i.config=t,i.appid=n,i.scope=Y.Adapter.runtime===Y.RUNTIME.WX_MP?"snsapi_base":r,i.state=s||"weixin",i.loginMode=o||"redirect",i}return r(t,e),t.prototype.signIn=function(){return o(this,void 0,void 0,(function(){var e,t,n;return s(this,(function(r){switch(r.label){case 0:f[this.config.env]||(f[this.config.env]=this._signIn()),r.label=1;case 1:return r.trys.push([1,3,,4]),[4,f[this.config.env]];case 2:return e=r.sent(),[3,4];case 3:return n=r.sent(),t=n,[3,4];case 4:if(f[this.config.env]=null,t)throw t;return[2,e]}}))}))},t.prototype._signIn=function(){return o(this,void 0,void 0,(function(){var e,t,n,r,o,i;return s(this,(function(s){switch(s.label){case 0:if(e=this.cache.getStore(this.accessTokenKey),t=this.cache.getStore(this.accessTokenExpireKey),e){if(t&&t>Date.now())return[2,{credential:{accessToken:e,refreshToken:this.cache.getStore(this.refreshTokenKey)}}];this.cache.removeStore(this.accessTokenKey),this.cache.removeStore(this.accessTokenExpireKey)}if(!1===Object.values(a).includes(a[this.scope]))throw new Error("错误的scope类型");return Y.Adapter.runtime!==Y.RUNTIME.WX_MP?[3,2]:[4,u.getMiniAppCode()];case 1:return n=s.sent(),[3,4];case 2:return[4,u.getWeixinCode()];case 3:if(!(n=s.sent()))return[2,this.redirect()];s.label=4;case 4:return r=function(e){switch(e){case a.snsapi_login:return"WECHAT-OPEN";default:return"WECHAT-PUBLIC"}}(this.scope),[4,this.getRefreshTokenByWXCode(this.appid,r,n)];case 5:return o=s.sent(),i=o.refreshToken,this.cache.setStore(this.refreshTokenKey,i),o.accessToken&&this.cache.setStore(this.accessTokenKey,o.accessToken),o.accessTokenExpire&&this.cache.setStore(this.accessTokenExpireKey,o.accessTokenExpire+Date.now()),B.activateEvent(B.EVENTS.LOGIN_STATE_CHANGED),B.activateEvent(B.EVENTS.LOGIN_TYPE_CHANGE,l.LOGINTYPE.WECHAT),[2,{credential:{refreshToken:i}}]}}))}))},t.prototype.redirect=function(){var e=u.removeParam("code",location.href);e=u.removeParam("state",e),e=encodeURIComponent(e);var t="//open.weixin.qq.com/connect/oauth2/authorize";"snsapi_login"===this.scope&&(t="//open.weixin.qq.com/connect/qrconnect"),"redirect"===c[this.loginMode]&&(location.href=t+"?appid="+this.appid+"&redirect_uri="+e+"&response_type=code&scope="+this.scope+"&state="+this.state+"#wechat_redirect")},t}(l.default);n.default=p}));t(J);var X=n((function(t,n){var r=e&&e.__extends||function(){var e=function(t,n){return(e=Object.setPrototypeOf||{__proto__:[]}instanceof Array&&function(e,t){e.__proto__=t}||function(e,t){for(var n in t)t.hasOwnProperty(n)&&(e[n]=t[n])})(t,n)};return function(t,n){function r(){this.constructor=t}e(t,n),t.prototype=null===n?Object.create(n):(r.prototype=n.prototype,new r)}}(),o=e&&e.__assign||function(){return(o=Object.assign||function(e){for(var t,n=1,r=arguments.length;n<r;n++)for(var o in t=arguments[n])Object.prototype.hasOwnProperty.call(t,o)&&(e[o]=t[o]);return e}).apply(this,arguments)},s=e&&e.__awaiter||function(e,t,n,r){return new(n||(n=Promise))((function(o,s){function i(e){try{c(r.next(e))}catch(e){s(e)}}function a(e){try{c(r.throw(e))}catch(e){s(e)}}function c(e){var t;e.done?o(e.value):(t=e.value,t instanceof n?t:new n((function(e){e(t)}))).then(i,a)}c((r=r.apply(e,t||[])).next())}))},i=e&&e.__generator||function(e,t){var n,r,o,s,i={label:0,sent:function(){if(1&o[0])throw o[1];return o[1]},trys:[],ops:[]};return s={next:a(0),throw:a(1),return:a(2)},"function"==typeof Symbol&&(s[Symbol.iterator]=function(){return this}),s;function a(s){return function(a){return function(s){if(n)throw new TypeError("Generator is already executing.");for(;i;)try{if(n=1,r&&(o=2&s[0]?r.return:s[0]?r.throw||((o=r.return)&&o.call(r),0):r.next)&&!(o=o.call(r,s[1])).done)return o;switch(r=0,o&&(s=[2&s[0],o.value]),s[0]){case 0:case 1:o=s;break;case 4:return i.label++,{value:s[1],done:!1};case 5:i.label++,r=s[1],s=[0];continue;case 7:s=i.ops.pop(),i.trys.pop();continue;default:if(!(o=(o=i.trys).length>0&&o[o.length-1])&&(6===s[0]||2===s[0])){i=0;continue}if(3===s[0]&&(!o||s[1]>o[0]&&s[1]<o[3])){i.label=s[1];break}if(6===s[0]&&i.label<o[1]){i.label=o[1],o=s;break}if(o&&i.label<o[2]){i.label=o[2],i.ops.push(s);break}o[2]&&i.ops.pop(),i.trys.pop();continue}s=t.call(e,i)}catch(e){s=[6,e],r=0}finally{n=o=0}if(5&s[0])throw s[1];return{value:s[0]?s[1]:void 0,done:!0}}([s,a])}}},a=e&&e.__importStar||function(e){if(e&&e.__esModule)return e;var t={};if(null!=e)for(var n in e)Object.hasOwnProperty.call(e,n)&&(t[n]=e[n]);return t.default=e,t};Object.defineProperty(n,"__esModule",{value:!0});var c=a(z),u=function(e){function t(t){var n=e.call(this,o(o({},t),{persistence:"local"}))||this;return n._anonymousUuidKey=G.ANONYMOUS_UUID+"_"+n.config.env,n._loginTypeKey=G.LOGIN_TYPE_KEY+"_"+n.config.env,n}return r(t,e),t.prototype.init=function(){e.prototype.init.call(this)},t.prototype.signIn=function(){return s(this,void 0,void 0,(function(){var e,t,n;return i(this,(function(r){switch(r.label){case 0:return e=this.cache.getStore(this._anonymousUuidKey)||void 0,t=this.cache.getStore(this.refreshTokenKey)||void 0,[4,this.httpRequest.send("auth.signInAnonymously",{anonymous_uuid:e,refresh_token:t})];case 1:return(n=r.sent()).uuid&&n.refresh_token?(this._setAnonymousUUID(n.uuid),this.setRefreshToken(n.refresh_token),[4,this.httpRequest.refreshAccessToken()]):[3,3];case 2:return r.sent(),B.activateEvent(B.EVENTS.LOGIN_STATE_CHANGED),B.activateEvent(B.EVENTS.LOGIN_TYPE_CHANGE,c.LOGINTYPE.ANONYMOUS),[2,{credential:{refreshToken:n.refresh_token}}];case 3:throw new Error("[tcb-js-sdk] 匿名登录失败")}}))}))},t.prototype.linkAndRetrieveDataWithTicket=function(e){return s(this,void 0,void 0,(function(){var t,n,r;return i(this,(function(o){switch(o.label){case 0:return t=this.cache.getStore(this._anonymousUuidKey),n=this.cache.getStore(this.refreshTokenKey),[4,this.httpRequest.send("auth.linkAndRetrieveDataWithTicket",{anonymous_uuid:t,refresh_token:n,ticket:e})];case 1:return(r=o.sent()).refresh_token?(this._clearAnonymousUUID(),this.setRefreshToken(r.refresh_token),[4,this.httpRequest.refreshAccessToken()]):[3,3];case 2:return o.sent(),B.activateEvent(B.EVENTS.ANONYMOUS_CONVERTED,{refresh_token:r.refresh_token}),B.activateEvent(B.EVENTS.LOGIN_TYPE_CHANGE,c.LOGINTYPE.CUSTOM),[2,{credential:{refreshToken:r.refresh_token}}];case 3:throw new Error("[tcb-js-sdk] 匿名转化失败")}}))}))},t.prototype.getAllStore=function(){var e={};return e[this.refreshTokenKey]=this.cache.getStore(this.refreshTokenKey)||"",e[this._loginTypeKey]=this.cache.getStore(this._loginTypeKey)||"",e[this.accessTokenKey]=this.cache.getStore(this.accessTokenKey)||"",e[this.accessTokenExpireKey]=this.cache.getStore(this.accessTokenExpireKey)||"",e},t.prototype._setAnonymousUUID=function(e){this.cache.removeStore(this._anonymousUuidKey),this.cache.setStore(this._anonymousUuidKey,e),this.cache.setStore(this._loginTypeKey,c.LOGINTYPE.ANONYMOUS)},t.prototype._clearAnonymousUUID=function(){this.cache.removeStore(this._anonymousUuidKey)},t}(c.default);n.AnonymousAuthProvider=u}));t(X);X.AnonymousAuthProvider;var $=n((function(t,n){var r=e&&e.__extends||function(){var e=function(t,n){return(e=Object.setPrototypeOf||{__proto__:[]}instanceof Array&&function(e,t){e.__proto__=t}||function(e,t){for(var n in t)t.hasOwnProperty(n)&&(e[n]=t[n])})(t,n)};return function(t,n){function r(){this.constructor=t}e(t,n),t.prototype=null===n?Object.create(n):(r.prototype=n.prototype,new r)}}(),o=e&&e.__assign||function(){return(o=Object.assign||function(e){for(var t,n=1,r=arguments.length;n<r;n++)for(var o in t=arguments[n])Object.prototype.hasOwnProperty.call(t,o)&&(e[o]=t[o]);return e}).apply(this,arguments)},s=e&&e.__awaiter||function(e,t,n,r){return new(n||(n=Promise))((function(o,s){function i(e){try{c(r.next(e))}catch(e){s(e)}}function a(e){try{c(r.throw(e))}catch(e){s(e)}}function c(e){var t;e.done?o(e.value):(t=e.value,t instanceof n?t:new n((function(e){e(t)}))).then(i,a)}c((r=r.apply(e,t||[])).next())}))},i=e&&e.__generator||function(e,t){var n,r,o,s,i={label:0,sent:function(){if(1&o[0])throw o[1];return o[1]},trys:[],ops:[]};return s={next:a(0),throw:a(1),return:a(2)},"function"==typeof Symbol&&(s[Symbol.iterator]=function(){return this}),s;function a(s){return function(a){return function(s){if(n)throw new TypeError("Generator is already executing.");for(;i;)try{if(n=1,r&&(o=2&s[0]?r.return:s[0]?r.throw||((o=r.return)&&o.call(r),0):r.next)&&!(o=o.call(r,s[1])).done)return o;switch(r=0,o&&(s=[2&s[0],o.value]),s[0]){case 0:case 1:o=s;break;case 4:return i.label++,{value:s[1],done:!1};case 5:i.label++,r=s[1],s=[0];continue;case 7:s=i.ops.pop(),i.trys.pop();continue;default:if(!(o=(o=i.trys).length>0&&o[o.length-1])&&(6===s[0]||2===s[0])){i=0;continue}if(3===s[0]&&(!o||s[1]>o[0]&&s[1]<o[3])){i.label=s[1];break}if(6===s[0]&&i.label<o[1]){i.label=o[1],o=s;break}if(o&&i.label<o[2]){i.label=o[2],i.ops.push(s);break}o[2]&&i.ops.pop(),i.trys.pop();continue}s=t.call(e,i)}catch(e){s=[6,e],r=0}finally{n=o=0}if(5&s[0])throw s[1];return{value:s[0]?s[1]:void 0,done:!0}}([s,a])}}},a=e&&e.__importDefault||function(e){return e&&e.__esModule?e:{default:e}},c=e&&e.__importStar||function(e){if(e&&e.__esModule)return e;var t={};if(null!=e)for(var n in e)Object.hasOwnProperty.call(e,n)&&(t[n]=e[n]);return t.default=e,t};Object.defineProperty(n,"__esModule",{value:!0});var u=a(J),l=c(z),f=function(e){function t(t){var n=e.call(this,t)||this;return n.config=t,n}return r(t,e),t.prototype.init=function(){e.prototype.init.call(this),this.customAuthProvider=new l.default(this.config),this.customAuthProvider.init()},t.prototype.weixinAuthProvider=function(e){var t=e.appid,n=e.scope,r=e.loginMode,o=e.state,s=new u.default(this.config,t,n,r,o);return s.init(),s},t.prototype.signInAnonymously=function(){return s(this,void 0,void 0,(function(){var e=this;return i(this,(function(t){switch(t.label){case 0:return this._anonymousAuthProvider||(this._anonymousAuthProvider=new X.AnonymousAuthProvider(this.config),this._anonymousAuthProvider.init()),B.addEventListener(B.EVENTS.LOGIN_TYPE_CHANGE,(function(t){if(t&&t.data===l.LOGINTYPE.ANONYMOUS){var n=e._anonymousAuthProvider.getAllStore();for(var r in n)n[r]&&e.httpRequest.cache.setStore(r,n[r])}})),[4,this._anonymousAuthProvider.signIn()];case 1:return[2,t.sent()]}}))}))},t.prototype.linkAndRetrieveDataWithTicket=function(e){return s(this,void 0,void 0,(function(){var t=this;return i(this,(function(n){switch(n.label){case 0:return this._anonymousAuthProvider||(this._anonymousAuthProvider=new X.AnonymousAuthProvider(this.config),this._anonymousAuthProvider.init()),B.addEventListener(B.EVENTS.ANONYMOUS_CONVERTED,(function(e){var n=e.data.refresh_token;n&&t.httpRequest.cache.setStore(t.refreshTokenKey,n)})),[4,this._anonymousAuthProvider.linkAndRetrieveDataWithTicket(e)];case 1:return[2,n.sent()]}}))}))},t.prototype.signOut=function(){return s(this,void 0,void 0,(function(){var e,t,n,r,o,s,a;return i(this,(function(i){switch(i.label){case 0:if(this.loginType===l.LOGINTYPE.ANONYMOUS)throw new Error("[tcb-js-sdk] 匿名用户不支持登出操作");return e=this.httpRequest,t=e.cache,n=e.refreshTokenKey,r=e.accessTokenKey,o=e.accessTokenExpireKey,"auth.logout",(s=t.getStore(n))?[4,this.httpRequest.send("auth.logout",{refresh_token:s})]:[2];case 1:return a=i.sent(),t.removeStore(n),t.removeStore(r),t.removeStore(o),B.activateEvent(B.EVENTS.LOGIN_STATE_CHANGED),B.activateEvent(B.EVENTS.LOGIN_TYPE_CHANGE,l.LOGINTYPE.NULL),[2,a]}}))}))},t.prototype.getAccessToken=function(){return s(this,void 0,void 0,(function(){var e;return i(this,(function(t){switch(t.label){case 0:return e={},[4,this.httpRequest.getAccessToken()];case 1:return[2,(e.accessToken=t.sent().accessToken,e.env=this.config.env,e)]}}))}))},t.prototype.onLoginStateExpire=function(e){B.addEventListener("loginStateExpire",e)},t.prototype.getLoginState=function(){return s(this,void 0,void 0,(function(){var e,t,n,r,o;return i(this,(function(s){switch(s.label){case 0:if(e=this.httpRequest,t=e.cache,n=e.refreshTokenKey,r=e.accessTokenKey,!(o=t.getStore(n)))return[3,5];s.label=1;case 1:return s.trys.push([1,3,,4]),[4,this.httpRequest.refreshAccessToken()];case 2:return s.sent(),[3,4];case 3:return s.sent(),[2,null];case 4:return[2,{isAnonymous:this.loginType===l.LOGINTYPE.ANONYMOUS,credential:{refreshToken:o,accessToken:t.getStore(r)}}];case 5:return[2,null]}}))}))},t.prototype.signInWithTicket=function(e){return s(this,void 0,void 0,(function(){var t,n,r,o;return i(this,(function(s){switch(s.label){case 0:if("string"!=typeof e)throw new Error("ticket must be a string");return t=this.httpRequest,n=t.cache,r=t.refreshTokenKey,[4,this.httpRequest.send("auth.signInWithTicket",{ticket:e,refresh_token:n.getStore(r)||""})];case 1:return(o=s.sent()).refresh_token?(this.customAuthProvider.setRefreshToken(o.refresh_token),[4,this.httpRequest.refreshAccessToken()]):[3,3];case 2:return s.sent(),B.activateEvent(B.EVENTS.LOGIN_STATE_CHANGED),B.activateEvent(B.EVENTS.LOGIN_TYPE_CHANGE,l.LOGINTYPE.CUSTOM),[2,{credential:{refreshToken:o.refresh_token}}];case 3:throw new Error("[tcb-js-sdk] 自定义登录失败")}}))}))},t.prototype.shouldRefreshAccessToken=function(e){this.httpRequest._shouldRefreshAccessTokenHook=e.bind(this)},t.prototype.getUserInfo=function(){return this.httpRequest.send("auth.getUserInfo",{}).then((function(e){return e.code?e:o(o({},e.data),{requestId:e.seqId})}))},t}(l.default);n.default=f}));t($);var Q=n((function(t,n){var r=e&&e.__awaiter||function(e,t,n,r){return new(n||(n=Promise))((function(o,s){function i(e){try{c(r.next(e))}catch(e){s(e)}}function a(e){try{c(r.throw(e))}catch(e){s(e)}}function c(e){var t;e.done?o(e.value):(t=e.value,t instanceof n?t:new n((function(e){e(t)}))).then(i,a)}c((r=r.apply(e,t||[])).next())}))},o=e&&e.__generator||function(e,t){var n,r,o,s,i={label:0,sent:function(){if(1&o[0])throw o[1];return o[1]},trys:[],ops:[]};return s={next:a(0),throw:a(1),return:a(2)},"function"==typeof Symbol&&(s[Symbol.iterator]=function(){return this}),s;function a(s){return function(a){return function(s){if(n)throw new TypeError("Generator is already executing.");for(;i;)try{if(n=1,r&&(o=2&s[0]?r.return:s[0]?r.throw||((o=r.return)&&o.call(r),0):r.next)&&!(o=o.call(r,s[1])).done)return o;switch(r=0,o&&(s=[2&s[0],o.value]),s[0]){case 0:case 1:o=s;break;case 4:return i.label++,{value:s[1],done:!1};case 5:i.label++,r=s[1],s=[0];continue;case 7:s=i.ops.pop(),i.trys.pop();continue;default:if(!(o=(o=i.trys).length>0&&o[o.length-1])&&(6===s[0]||2===s[0])){i=0;continue}if(3===s[0]&&(!o||s[1]>o[0]&&s[1]<o[3])){i.label=s[1];break}if(6===s[0]&&i.label<o[1]){i.label=o[1],o=s;break}if(o&&i.label<o[2]){i.label=o[2],i.ops.push(s);break}o[2]&&i.ops.pop(),i.trys.pop();continue}s=t.call(e,i)}catch(e){s=[6,e],r=0}finally{n=o=0}if(5&s[0])throw s[1];return{value:s[0]?s[1]:void 0,done:!0}}([s,a])}}};Object.defineProperty(n,"__esModule",{value:!0}),n.uploadFile=function(e,t){t=t||N.createPromiseCallback();var n=new W.Request(this.config),r=e.cloudPath,o=e.filePath,s=e.onUploadProgress;return n.send("storage.getUploadMetadata",{path:r}).then((function(e){var i=e.data,a=i.url,c=i.authorization,u=i.token,l=i.fileId,f=i.cosFileId,p=e.requestId,h={key:r,signature:c,"x-cos-meta-fileid":f,success_action_status:"201","x-cos-security-token":u};n.upload({url:a,data:h,file:o,name:r,onUploadProgress:s}).then((function(e){201===e.statusCode?t(null,{fileID:l,requestId:p}):t(new Error("STORAGE_REQUEST_FAIL: "+e.data))})).catch((function(e){t(e)}))})).catch((function(e){t(e)})),t.promise},n.deleteFile=function(e,t){var n=e.fileList;if(t=t||N.createPromiseCallback(),!n||!Array.isArray(n))return{code:"INVALID_PARAM",message:"fileList必须是非空的数组"};for(var r=0,o=n;r<o.length;r++){var s=o[r];if(!s||"string"!=typeof s)return{code:"INVALID_PARAM",message:"fileList的元素必须是非空的字符串"}}var i={fileid_list:n};return new W.Request(this.config).send("storage.batchDeleteFile",i).then((function(e){e.code?t(null,e):t(null,{fileList:e.data.delete_list,requestId:e.requestId})})).catch((function(e){t(e)})),t.promise},n.getTempFileURL=function(e,t){var n=e.fileList;t=t||N.createPromiseCallback(),n&&Array.isArray(n)||t(null,{code:"INVALID_PARAM",message:"fileList必须是非空的数组"});for(var r=[],o=0,s=n;o<s.length;o++){var i=s[o];"object"==typeof i?(i.hasOwnProperty("fileID")&&i.hasOwnProperty("maxAge")||t(null,{code:"INVALID_PARAM",message:"fileList的元素必须是包含fileID和maxAge的对象"}),r.push({fileid:i.fileID,max_age:i.maxAge})):"string"==typeof i?r.push({fileid:i}):t(null,{code:"INVALID_PARAM",message:"fileList的元素必须是字符串"})}var a={file_list:r};return new W.Request(this.config).send("storage.batchGetDownloadUrl",a).then((function(e){e.code?t(null,e):t(null,{fileList:e.data.download_list,requestId:e.requestId})})).catch((function(e){t(e)})),t.promise},n.downloadFile=function(e,t){var s=e.fileID;return r(this,void 0,void 0,(function(){var e,r,i,a,c;return o(this,(function(o){switch(o.label){case 0:return[4,n.getTempFileURL.call(this,{fileList:[{fileID:s,maxAge:600}]})];case 1:return e=o.sent(),"SUCCESS"!==(r=e.fileList[0]).code?[2,t?t(r):new Promise((function(e){e(r)}))]:(i=r.download_url,i=encodeURI(i),a=new W.Request(this.config),t?[4,a.download({url:i})]:[3,3]);case 2:return c=o.sent(),t(c),[3,4];case 3:return[2,a.download({url:i})];case 4:return[2]}}))}))}}));t(Q);Q.uploadFile,Q.deleteFile,Q.getTempFileURL,Q.downloadFile;var Z=n((function(e,t){Object.defineProperty(t,"__esModule",{value:!0}),t.callFunction=function(e,t){var n,r=e.name,o=e.data,s=e.query,i=e.parse,a=e.search,c=t||N.createPromiseCallback();try{n=o?JSON.stringify(o):""}catch(e){return Promise.reject(e)}if(!r)return Promise.reject(new Error("函数名不能为空"));var u={query:s,parse:i,search:a,function_name:r,request_data:n};return new W.Request(this.config).send("functions.invokeFunction",u).then((function(e){if(e.code)c(null,e);else{var t=e.data.response_data;if(i)c(null,{result:t,requestId:e.requestId});else try{t=JSON.parse(e.data.response_data),c(null,{result:t,requestId:e.requestId})}catch(e){c(new Error("response data must be json"))}}return c.promise})).catch((function(e){c(e)})),c.promise}}));t(Z);Z.callFunction;var ee=t(n((function(t){var n=e&&e.__assign||function(){return(n=Object.assign||function(e){for(var t,n=1,r=arguments.length;n<r;n++)for(var o in t=arguments[n])Object.prototype.hasOwnProperty.call(t,o)&&(e[o]=t[o]);return e}).apply(this,arguments)},r=e&&e.__importDefault||function(e){return e&&e.__esModule?e:{default:e}},o=e&&e.__importStar||function(e){if(e&&e.__esModule)return e;var t={};if(null!=e)for(var n in e)Object.hasOwnProperty.call(e,n)&&(t[n]=e[n]);return t.default=e,t},s=r(I),i=r($),a=o(Q),c=o(Z),u={timeout:15e3},l=new(function(){function e(e){var t=this;this.config=e||this.config,this.authObj=void 0,B.addEventListener(B.EVENTS.LOGIN_TYPE_CHANGE,(function(e){e.data===z.LOGINTYPE.ANONYMOUS&&(t.config.persistence="local")}))}return e.prototype.init=function(t){return this.config=n(n({},u),t),Y.Adapter.adapter||this._useDefaultAdapter(),new e(this.config)},e.prototype.auth=function(e){var t=(void 0===e?{}:e).persistence;return this.authObj?this.authObj:(this.config=n(n({},this.config),{persistence:t||Y.Adapter.adapter.primaryStorage||"session"}),this.authObj=new i.default(this.config),this.authObj.init(),this.authObj)},e.prototype.on=function(e,t){return B.addEventListener.apply(this,[e,t])},e.prototype.off=function(e,t){return B.removeEventListener.apply(this,[e,t])},e.prototype.callFunction=function(e,t){return c.callFunction.apply(this,[e,t])},e.prototype.deleteFile=function(e,t){return a.deleteFile.apply(this,[e,t])},e.prototype.getTempFileURL=function(e,t){return a.getTempFileURL.apply(this,[e,t])},e.prototype.downloadFile=function(e,t){return a.downloadFile.apply(this,[e,t])},e.prototype.uploadFile=function(e,t){return a.uploadFile.apply(this,[e,t])},e.prototype.useAdapters=function(e){var t=Y.useAdapters(e)||{},n=t.adapter,r=t.runtime;n&&(Y.Adapter.adapter=n),r&&(Y.Adapter.runtime=r)},e.prototype._useDefaultAdapter=function(){var e=Y.useDefaultAdapter(),t=e.adapter,n=e.runtime;Y.Adapter.adapter=t,Y.Adapter.runtime=n},e}());l.useAdapters(s.default);try{window.tcb=l}catch(e){}t.exports=l})));ee.useAdapters(I);const te=ee,ne=te.init;let re,oe;function se(e){re||(re=function(){const e=uni.getSystemInfoSync();return{PLATFORM:"mp-weixin",OS:e.platform,APPID:l.appid}}(),oe=function(){const e=uni.getSystemInfoSync();return{ak:l.appid,p:"android"===e.platform?"a":"i",ut:y(),uuid:d()}}());const t=JSON.parse(JSON.stringify(e.data||{})),n=e.name,r=this.config.spaceId,o={tencent:"t",aliyun:"a"}[this.config.provider],s=Object.assign({},oe,{fn:n,sid:r,pvd:o});return Object.assign(t,{clientInfo:re,uniCloudClientInfo:encodeURIComponent(JSON.stringify(s))}),e.data=t,e}function ie(e){const t=se.call(this,e),n={tencent:"tcb",aliyun:"aliyun"}[this.config.provider],r=oe.ak,o=this.config.spaceId,i=JSON.stringify(t.data),a=t.name,c=JSON.stringify({body:{provider:n,appid:r,spaceId:o,functionName:a,run_params:i},header:{token:"aa855340-5f9c-11ea-aade-13af6457b8b5"}});return new Promise((e,t)=>{uni.request({url:h,method:"POST",data:{param:c},complete(r){r||(r={});const o=r.data&&r.data.body;if(!o)return void t(new s({message:`[FUNCTIONS_EXECUTE_FAIL] Request Fail: [${a}]`}));if("tcb"===n&&console.log(o.log),0!==o.invokeResult&&"0"!==o.invokeResult)return void t(new s({message:o.errorMsg}));const i=o.requestId;let c={};try{c=JSON.parse(o.result)}catch(e){c=o.result}e({requestId:i,result:c})}})})}te.init=function(e){e.env=e.spaceId;const t=ne.call(this,e);t.config.provider="tencent",t.config.spaceId=e.spaceId;const n=t.auth;t.auth=function(e){const t=n.call(this,e);return["linkAndRetrieveDataWithTicket","signInAnonymously","signOut","getAccessToken","getLoginState","signInWithTicket","getUserInfo"].forEach(e=>{t[e]=v(t[e]).bind(t)}),t};if(["uploadFile","deleteFile","getTempFileURL","downloadFile"].forEach(e=>{t[e]=v(t[e]).bind(t)}),!1!==e.autoSignIn){const e=t.auth();e.getLoginState().then(t=>{t||e.signInAnonymously()})}return t};const ae={init(e){let t={};const n=!(!1===e.debugFunction||"development"!=="development"||!"aa855340-5f9c-11ea-aade-13af6457b8b5");switch(e.provider){case"tencent":t=te.init(Object.assign(e,{useDebugFunction:n}));break;case"aliyun":t=g.init(Object.assign(e,{useDebugFunction:n}));break;default:throw new Error("未提供正确的provider参数")}return function(e){let t=e.callFunction;e.config.useDebugFunction&&"tencent"===e.config.provider&&(t=ie),e.callFunction=function(e){ true&&console.log(`[spaceId:${this.config.spaceId}]`);const n=se.call(this,e);return new Promise((r,o)=>{t.call(this,n).then(e=>{r(e)}).catch(t=>{t&&t.message&&(t.message=`[${e.name}]: ${t.message}`),o(t)})})};const n=e.callFunction;e.callFunction=function(e){return v(n).call(this,e)}}(t),t.init=this.init,t}};let ce=ae;try{let e={};1===[{"provider":"aliyun","spaceName":"uni3b8053b","spaceId":"619c6799-42b7-4564-8451-176c824fba46","clientSecret":"fNttWcHDgAjaFYtDsMBZgg==","endpoint":"https://api.bspapp.com"}].length&&(e=[{"provider":"aliyun","spaceName":"uni3b8053b","spaceId":"619c6799-42b7-4564-8451-176c824fba46","clientSecret":"fNttWcHDgAjaFYtDsMBZgg==","endpoint":"https://api.bspapp.com"}][0]),ce=ae.init(e)}catch(e){["auth","callFunction","uploadFile","deleteFile","getTempFileURL","downloadFile"].forEach(e=>{ce[e]=function(){const e=[{"provider":"aliyun","spaceName":"uni3b8053b","spaceId":"619c6799-42b7-4564-8451-176c824fba46","clientSecret":"fNttWcHDgAjaFYtDsMBZgg==","endpoint":"https://api.bspapp.com"}].length>0?"应用有多个服务空间，请通过uniCloud.init方法指定要使用的服务空间":"应用未关联服务空间，请在cloudfunctions目录右键关联服务空间";return console.error(e),Promise.reject(new s({code:"SYS_ERR",message:e}))}})}var ue=ce;/* harmony default export */ __webpack_exports__["default"] = (ue);
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../webpack/buildin/global.js */ 3), __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"], __webpack_require__(/*! ./../../../../../node-libs-browser/mock/process.js */ 25)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../webpack/buildin/global.js */ 3), __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"], __webpack_require__(/*! ./../../../../../node-libs-browser/mock/process.js */ 27)))
 
 /***/ }),
 
-/***/ 25:
+/***/ 27:
 /*!********************************************************!*\
   !*** ./node_modules/node-libs-browser/mock/process.js ***!
   \********************************************************/
@@ -13595,7 +14738,11 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 exports.nextTick = function nextTick(fn) {
-	setTimeout(fn, 0);
+    var args = Array.prototype.slice.call(arguments);
+    args.shift();
+    setTimeout(function () {
+        fn.apply(null, args);
+    }, 0);
 };
 
 exports.platform = exports.arch = 
@@ -13614,7 +14761,7 @@ exports.binding = function (name) {
     var path;
     exports.cwd = function () { return cwd };
     exports.chdir = function (dir) {
-        if (!path) path = __webpack_require__(/*! path */ 26);
+        if (!path) path = __webpack_require__(/*! path */ 28);
         cwd = path.resolve(dir, cwd);
     };
 })();
@@ -13628,14 +14775,17 @@ exports.features = {};
 
 /***/ }),
 
-/***/ 26:
+/***/ 28:
 /*!***********************************************!*\
   !*** ./node_modules/path-browserify/index.js ***!
   \***********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(process) {// Copyright Joyent, Inc. and other Node contributors.
+/* WEBPACK VAR INJECTION */(function(process) {// .dirname, .basename, and .extname methods are extracted from Node.js v8.11.1,
+// backported and transplited with Babel, with backwards-compat fixes
+
+// Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
 // copy of this software and associated documentation files (the
@@ -13685,14 +14835,6 @@ function normalizeArray(parts, allowAboveRoot) {
 
   return parts;
 }
-
-// Split a filename into [root, dir, basename, ext], unix version
-// 'root' is just a slash, or nothing.
-var splitPathRe =
-    /^(\/?|)([\s\S]*?)((?:\.{1,2}|[^\/]+?|)(\.[^.\/]*|))(?:[\/]*)$/;
-var splitPath = function(filename) {
-  return splitPathRe.exec(filename).slice(1);
-};
 
 // path.resolve([from ...], to)
 // posix version
@@ -13809,37 +14951,120 @@ exports.relative = function(from, to) {
 exports.sep = '/';
 exports.delimiter = ':';
 
-exports.dirname = function(path) {
-  var result = splitPath(path),
-      root = result[0],
-      dir = result[1];
-
-  if (!root && !dir) {
-    // No dirname whatsoever
-    return '.';
+exports.dirname = function (path) {
+  if (typeof path !== 'string') path = path + '';
+  if (path.length === 0) return '.';
+  var code = path.charCodeAt(0);
+  var hasRoot = code === 47 /*/*/;
+  var end = -1;
+  var matchedSlash = true;
+  for (var i = path.length - 1; i >= 1; --i) {
+    code = path.charCodeAt(i);
+    if (code === 47 /*/*/) {
+        if (!matchedSlash) {
+          end = i;
+          break;
+        }
+      } else {
+      // We saw the first non-path separator
+      matchedSlash = false;
+    }
   }
 
-  if (dir) {
-    // It has a dirname, strip trailing slash
-    dir = dir.substr(0, dir.length - 1);
+  if (end === -1) return hasRoot ? '/' : '.';
+  if (hasRoot && end === 1) {
+    // return '//';
+    // Backwards-compat fix:
+    return '/';
   }
-
-  return root + dir;
+  return path.slice(0, end);
 };
 
+function basename(path) {
+  if (typeof path !== 'string') path = path + '';
 
-exports.basename = function(path, ext) {
-  var f = splitPath(path)[2];
-  // TODO: make this comparison case-insensitive on windows?
+  var start = 0;
+  var end = -1;
+  var matchedSlash = true;
+  var i;
+
+  for (i = path.length - 1; i >= 0; --i) {
+    if (path.charCodeAt(i) === 47 /*/*/) {
+        // If we reached a path separator that was not part of a set of path
+        // separators at the end of the string, stop now
+        if (!matchedSlash) {
+          start = i + 1;
+          break;
+        }
+      } else if (end === -1) {
+      // We saw the first non-path separator, mark this as the end of our
+      // path component
+      matchedSlash = false;
+      end = i + 1;
+    }
+  }
+
+  if (end === -1) return '';
+  return path.slice(start, end);
+}
+
+// Uses a mixed approach for backwards-compatibility, as ext behavior changed
+// in new Node.js versions, so only basename() above is backported here
+exports.basename = function (path, ext) {
+  var f = basename(path);
   if (ext && f.substr(-1 * ext.length) === ext) {
     f = f.substr(0, f.length - ext.length);
   }
   return f;
 };
 
+exports.extname = function (path) {
+  if (typeof path !== 'string') path = path + '';
+  var startDot = -1;
+  var startPart = 0;
+  var end = -1;
+  var matchedSlash = true;
+  // Track the state of characters (if any) we see before our first dot and
+  // after any path separator we find
+  var preDotState = 0;
+  for (var i = path.length - 1; i >= 0; --i) {
+    var code = path.charCodeAt(i);
+    if (code === 47 /*/*/) {
+        // If we reached a path separator that was not part of a set of path
+        // separators at the end of the string, stop now
+        if (!matchedSlash) {
+          startPart = i + 1;
+          break;
+        }
+        continue;
+      }
+    if (end === -1) {
+      // We saw the first non-path separator, mark this as the end of our
+      // extension
+      matchedSlash = false;
+      end = i + 1;
+    }
+    if (code === 46 /*.*/) {
+        // If this is our first dot, mark it as the start of our extension
+        if (startDot === -1)
+          startDot = i;
+        else if (preDotState !== 1)
+          preDotState = 1;
+    } else if (startDot !== -1) {
+      // We saw a non-dot and non-path separator before our dot, so we should
+      // have a good chance at having a non-empty extension
+      preDotState = -1;
+    }
+  }
 
-exports.extname = function(path) {
-  return splitPath(path)[3];
+  if (startDot === -1 || end === -1 ||
+      // We saw a non-dot character immediately before the dot
+      preDotState === 0 ||
+      // The (right-most) trimmed path component is exactly '..'
+      preDotState === 1 && startDot === end - 1 && startDot === startPart + 1) {
+    return '';
+  }
+  return path.slice(startDot, end);
 };
 
 function filter (xs, f) {
@@ -13860,7 +15085,7 @@ var substr = 'ab'.substr(-1) === 'b'
     }
 ;
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../node-libs-browser/mock/process.js */ 25)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../node-libs-browser/mock/process.js */ 27)))
 
 /***/ }),
 
@@ -14801,7 +16026,7 @@ main();
 /*! exports provided: _from, _id, _inBundle, _integrity, _location, _phantomChildren, _requested, _requiredBy, _resolved, _shasum, _spec, _where, author, bugs, bundleDependencies, deprecated, description, devDependencies, files, gitHead, homepage, license, main, name, repository, scripts, version, default */
 /***/ (function(module) {
 
-module.exports = {"_from":"@dcloudio/uni-stat@alpha","_id":"@dcloudio/uni-stat@2.0.0-alpha-25720200116005","_inBundle":false,"_integrity":"sha512-RZFw3WAaS/CZTzzv9JPaWvmoNitojD/06vPdHSzlqZi8GbuE222lFuyochEjrGkG8rPPrWHAnwfoPBuQVtkfdg==","_location":"/@dcloudio/uni-stat","_phantomChildren":{},"_requested":{"type":"tag","registry":true,"raw":"@dcloudio/uni-stat@alpha","name":"@dcloudio/uni-stat","escapedName":"@dcloudio%2funi-stat","scope":"@dcloudio","rawSpec":"alpha","saveSpec":null,"fetchSpec":"alpha"},"_requiredBy":["#USER","/","/@dcloudio/vue-cli-plugin-uni"],"_resolved":"https://registry.npmjs.org/@dcloudio/uni-stat/-/uni-stat-2.0.0-alpha-25720200116005.tgz","_shasum":"08bb17aba91c84a981f33d74153aa3dd07b578ad","_spec":"@dcloudio/uni-stat@alpha","_where":"/Users/guoshengqiang/Documents/dcloud-plugins/alpha/uniapp-cli","author":"","bugs":{"url":"https://github.com/dcloudio/uni-app/issues"},"bundleDependencies":false,"deprecated":false,"description":"","devDependencies":{"@babel/core":"^7.5.5","@babel/preset-env":"^7.5.5","eslint":"^6.1.0","rollup":"^1.19.3","rollup-plugin-babel":"^4.3.3","rollup-plugin-clear":"^2.0.7","rollup-plugin-commonjs":"^10.0.2","rollup-plugin-copy":"^3.1.0","rollup-plugin-eslint":"^7.0.0","rollup-plugin-json":"^4.0.0","rollup-plugin-node-resolve":"^5.2.0","rollup-plugin-replace":"^2.2.0","rollup-plugin-uglify":"^6.0.2"},"files":["dist","package.json","LICENSE"],"gitHead":"a129bde60de35f7ef497f43d5a45b4556231995c","homepage":"https://github.com/dcloudio/uni-app#readme","license":"Apache-2.0","main":"dist/index.js","name":"@dcloudio/uni-stat","repository":{"type":"git","url":"git+https://github.com/dcloudio/uni-app.git","directory":"packages/uni-stat"},"scripts":{"build":"NODE_ENV=production rollup -c rollup.config.js","dev":"NODE_ENV=development rollup -w -c rollup.config.js"},"version":"2.0.0-alpha-25720200116005"};
+module.exports = {"_from":"@dcloudio/uni-stat@2.0.0-alpha-26320200304005","_id":"@dcloudio/uni-stat@2.0.0-alpha-26320200304005","_inBundle":false,"_integrity":"sha512-MRGMdXcs4VyliJXFrfBJMSpE7KKphnWQOsmhEHfYlxysU5xb7fD9VcWqzZSP05O2XjwiinDmMah1P0WQAbOv1g==","_location":"/@dcloudio/uni-stat","_phantomChildren":{},"_requested":{"type":"version","registry":true,"raw":"@dcloudio/uni-stat@2.0.0-alpha-26320200304005","name":"@dcloudio/uni-stat","escapedName":"@dcloudio%2funi-stat","scope":"@dcloudio","rawSpec":"2.0.0-alpha-26320200304005","saveSpec":null,"fetchSpec":"2.0.0-alpha-26320200304005"},"_requiredBy":["#USER","/","/@dcloudio/vue-cli-plugin-uni"],"_resolved":"https://registry.npmjs.org/@dcloudio/uni-stat/-/uni-stat-2.0.0-alpha-26320200304005.tgz","_shasum":"4d5bbd18fc8312453c6a30d1ca2ac4afec39b69e","_spec":"@dcloudio/uni-stat@2.0.0-alpha-26320200304005","_where":"/Users/guoshengqiang/Documents/dcloud-plugins-new/alpha/uniapp-cli","author":"","bugs":{"url":"https://github.com/dcloudio/uni-app/issues"},"bundleDependencies":false,"deprecated":false,"description":"","devDependencies":{"@babel/core":"^7.5.5","@babel/preset-env":"^7.5.5","eslint":"^6.1.0","rollup":"^1.19.3","rollup-plugin-babel":"^4.3.3","rollup-plugin-clear":"^2.0.7","rollup-plugin-commonjs":"^10.0.2","rollup-plugin-copy":"^3.1.0","rollup-plugin-eslint":"^7.0.0","rollup-plugin-json":"^4.0.0","rollup-plugin-node-resolve":"^5.2.0","rollup-plugin-replace":"^2.2.0","rollup-plugin-uglify":"^6.0.2"},"files":["dist","package.json","LICENSE"],"gitHead":"2c63c817259209b961dde5b8e5702bb599b2c603","homepage":"https://github.com/dcloudio/uni-app#readme","license":"Apache-2.0","main":"dist/index.js","name":"@dcloudio/uni-stat","repository":{"type":"git","url":"git+https://github.com/dcloudio/uni-app.git","directory":"packages/uni-stat"},"scripts":{"build":"NODE_ENV=production rollup -c rollup.config.js","dev":"NODE_ENV=development rollup -w -c rollup.config.js"},"version":"2.0.0-alpha-26320200304005"};
 
 /***/ }),
 
@@ -14813,7 +16038,7 @@ module.exports = {"_from":"@dcloudio/uni-stat@alpha","_id":"@dcloudio/uni-stat@2
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/bill/index": {}, "pages/bill/details": {}, "pages/bill/search": {}, "pages/bill/edit": {}, "pages/bill/about": {}, "pages/bill/site": {}, "pages/bill/annal": {}, "pages/bill/chart": {} }, "globalStyle": { "navigationStyle": "custom", "navigationBarTextStyle": "black" } };exports.default = _default;
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/bill/index": {}, "pages/bill/login": {}, "pages/bill/typelist": {}, "pages/bill/addtype": {}, "pages/bill/details": {}, "pages/bill/search": {}, "pages/bill/edit": {}, "pages/bill/about": {}, "pages/bill/site": {}, "pages/bill/annal": {}, "pages/bill/chart": {} }, "globalStyle": { "navigationStyle": "custom", "navigationBarTextStyle": "black" } };exports.default = _default;
 
 /***/ }),
 
@@ -14826,148 +16051,6 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "appid": "__UNI__3B8053B" };exports.default = _default;
-
-/***/ }),
-
-/***/ 98:
-/*!********************************************************************************************************!*\
-  !*** D:/cloud/cloud_test/node_modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-icons/icons.js ***!
-  \********************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
-  "pulldown": "\uE588",
-  "refreshempty": "\uE461",
-  "back": "\uE471",
-  "forward": "\uE470",
-  "more": "\uE507",
-  "more-filled": "\uE537",
-  "scan": "\uE612",
-  "qq": "\uE264",
-  "weibo": "\uE260",
-  "weixin": "\uE261",
-  "pengyouquan": "\uE262",
-  "loop": "\uE565",
-  "refresh": "\uE407",
-  "refresh-filled": "\uE437",
-  "arrowthindown": "\uE585",
-  "arrowthinleft": "\uE586",
-  "arrowthinright": "\uE587",
-  "arrowthinup": "\uE584",
-  "undo-filled": "\uE7D6",
-  "undo": "\uE406",
-  "redo": "\uE405",
-  "redo-filled": "\uE7D9",
-  "bars": "\uE563",
-  "chatboxes": "\uE203",
-  "camera": "\uE301",
-  "chatboxes-filled": "\uE233",
-  "camera-filled": "\uE7EF",
-  "cart-filled": "\uE7F4",
-  "cart": "\uE7F5",
-  "checkbox-filled": "\uE442",
-  "checkbox": "\uE7FA",
-  "arrowleft": "\uE582",
-  "arrowdown": "\uE581",
-  "arrowright": "\uE583",
-  "smallcircle-filled": "\uE801",
-  "arrowup": "\uE580",
-  "circle": "\uE411",
-  "eye-filled": "\uE568",
-  "eye-slash-filled": "\uE822",
-  "eye-slash": "\uE823",
-  "eye": "\uE824",
-  "flag-filled": "\uE825",
-  "flag": "\uE508",
-  "gear-filled": "\uE532",
-  "reload": "\uE462",
-  "gear": "\uE502",
-  "hand-thumbsdown-filled": "\uE83B",
-  "hand-thumbsdown": "\uE83C",
-  "hand-thumbsup-filled": "\uE83D",
-  "heart-filled": "\uE83E",
-  "hand-thumbsup": "\uE83F",
-  "heart": "\uE840",
-  "home": "\uE500",
-  "info": "\uE504",
-  "home-filled": "\uE530",
-  "info-filled": "\uE534",
-  "circle-filled": "\uE441",
-  "chat-filled": "\uE847",
-  "chat": "\uE263",
-  "mail-open-filled": "\uE84D",
-  "email-filled": "\uE231",
-  "mail-open": "\uE84E",
-  "email": "\uE201",
-  "checkmarkempty": "\uE472",
-  "list": "\uE562",
-  "locked-filled": "\uE856",
-  "locked": "\uE506",
-  "map-filled": "\uE85C",
-  "map-pin": "\uE85E",
-  "map-pin-ellipse": "\uE864",
-  "map": "\uE364",
-  "minus-filled": "\uE440",
-  "mic-filled": "\uE332",
-  "minus": "\uE410",
-  "micoff": "\uE360",
-  "mic": "\uE302",
-  "clear": "\uE434",
-  "smallcircle": "\uE868",
-  "close": "\uE404",
-  "closeempty": "\uE460",
-  "paperclip": "\uE567",
-  "paperplane": "\uE503",
-  "paperplane-filled": "\uE86E",
-  "person-filled": "\uE131",
-  "contact-filled": "\uE130",
-  "person": "\uE101",
-  "contact": "\uE100",
-  "images-filled": "\uE87A",
-  "phone": "\uE200",
-  "images": "\uE87B",
-  "image": "\uE363",
-  "image-filled": "\uE877",
-  "location-filled": "\uE333",
-  "location": "\uE303",
-  "plus-filled": "\uE439",
-  "plus": "\uE409",
-  "plusempty": "\uE468",
-  "help-filled": "\uE535",
-  "help": "\uE505",
-  "navigate-filled": "\uE884",
-  "navigate": "\uE501",
-  "mic-slash-filled": "\uE892",
-  "search": "\uE466",
-  "settings": "\uE560",
-  "sound": "\uE590",
-  "sound-filled": "\uE8A1",
-  "spinner-cycle": "\uE465",
-  "download-filled": "\uE8A4",
-  "personadd-filled": "\uE132",
-  "videocam-filled": "\uE8AF",
-  "personadd": "\uE102",
-  "upload": "\uE402",
-  "upload-filled": "\uE8B1",
-  "starhalf": "\uE463",
-  "star-filled": "\uE438",
-  "star": "\uE408",
-  "trash": "\uE401",
-  "phone-filled": "\uE230",
-  "compose": "\uE400",
-  "videocam": "\uE300",
-  "trash-filled": "\uE8DC",
-  "download": "\uE403",
-  "chatbubble-filled": "\uE232",
-  "chatbubble": "\uE202",
-  "cloud-download": "\uE8E4",
-  "cloud-upload-filled": "\uE8E5",
-  "cloud-upload": "\uE8E6",
-  "cloud-download-filled": "\uE8E9",
-  "headphones": "\uE8BF",
-  "shop": "\uE609" };exports.default = _default;
 
 /***/ })
 

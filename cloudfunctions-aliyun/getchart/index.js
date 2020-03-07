@@ -10,6 +10,7 @@ exports.main = async (event, context) => {
 
 	/*
 	参数说明
+	token:身份验证，必填
 	range:查询范围(年/月)，必填，可选值[year,month]
 	genre:查询收/支,必填，可选值[1支,2收]
 	year:查询年限, 非必填,默认为当前年份
@@ -17,6 +18,12 @@ exports.main = async (event, context) => {
 	*/
 
 	// 校验参数
+	if (!event.token) {
+		return {
+			status: -1,
+			msg: 'token必填'
+		}
+	}
 	if (!event.range) {
 		return {
 			status: -1,
@@ -56,6 +63,7 @@ exports.main = async (event, context) => {
 	let term = {
 		genre: event.genre,
 		useYear: String(year),
+		token: event.token
 	}
 	if (event.range == 'month') {
 		term.useMonth = String(month)

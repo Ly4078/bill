@@ -8,6 +8,7 @@ exports.main = async (event, context) => {
 
 	/*
 	参数说明 
+	token:身份验证，必填
 	range:查询范围(年/月)，必填，可选值[year,month]
 	yearMonth:查询某月预算信息，非必填，如不填则不查询，当range=month有效
 	year:查询年限,必填
@@ -29,6 +30,12 @@ exports.main = async (event, context) => {
 	}
 
 	//  参数校验
+	if (!event.token) {
+		return {
+			status: -1,
+			msg: 'token必填'
+		}
+	}
 	if (!event.range) {
 		return {
 			status: -1,
@@ -45,7 +52,8 @@ exports.main = async (event, context) => {
 	// 获取查询时间
 	const myDate = new Date();
 	let term = {
-		useYear: String(Number(event.year) < 10 ? '0' + Number(event.year) : event.year)
+		useYear: String(Number(event.year) < 10 ? '0' + Number(event.year) : event.year),
+		token: event.token
 	};
 	if (event.month) {
 		term.useMonth = String(Number(event.month) < 10 ? '0' + Number(event.month) : event.month);
@@ -82,9 +90,9 @@ exports.main = async (event, context) => {
 		let list = await collection.orderBy("useDategetTime", "desc").skip(i * 100).limit(100).get();
 		listData = listData.concat(list.data);
 	}
-	
+
 	// 计算时间段内支出/收入总额
-	if(listData.length>0){
+	if (listData.length > 0) {
 		listData.forEach(el => {
 			if (el.genre == 1) {
 				resobj.exAmount += Number(el.amount)
@@ -93,10 +101,11 @@ exports.main = async (event, context) => {
 			}
 		})
 	}
-	
+
 	// 当按月份查询且有月份参数时，查询月份预算额及数据ID
 	if (event.range == 'month' && event.yearMonth) {
 		const collection2 = db.collection('budgetlist').where({
+			token:event.token,
 			yearMonth: event.yearMonth
 		})
 		const budgetobj = await collection2.get();

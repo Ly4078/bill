@@ -8,7 +8,7 @@
 			<uni-list v-for="(item,index) in listData.list" :key="index">
 				<uni-list-item class="dateitem" :title="`${item.useYear}年${item.useMonth}月`" budget="查年月账单" :show-arrow="false"
 				 @click="handleMonth(item.useYear,item.useMonth)"></uni-list-item>
-				<uni-list-item v-for="(items,ind) in item.list" :key="items.id" @click="handleItem(items)" @longpress="handleLong(items,index,ind)"
+				<uni-list-item v-for="(items,ind) in item.list" :key="items.id" @click="handleItem(items._id)" @longpress="handleLong(items,index,ind)"
 				 @onshowproof="onshowproof" :title="items.useType.label" :note="items.payType.label" :remarks="items.remarks"
 				 :amount="items.amount" :datetime="items.useDate" :icons="items.useType.iconclass" :picture="items.picture" :genre="items.genre"
 				 :show-arrow="false"></uni-list-item>
@@ -55,6 +55,7 @@
 				num: 0,
 				pageNum: 0,
 				executionNum: 0,
+				Token:uni.getStorageSync('userId') || '',
 				startTime: '',
 				imgUrl: "",
 				status: 'more',
@@ -112,12 +113,15 @@
 				uni.showLoading({
 					title: '数据加载中...'
 				})
-				uniCloud.callFunction({
-					name: 'get',
-					data: {
+				const _data={
+						token:this.Token,
 						pageNum: this.pageNum,
 						range: 'year'
-					}
+					};
+					
+				uniCloud.callFunction({
+					name: 'get',
+					data: _data
 				}).then((res) => {
 					uni.hideLoading();
 					if (res.result.total > 0) {
@@ -162,11 +166,10 @@
 				})
 			},
 			//  点击某条记录
-			handleItem(item) {
+			handleItem(Id) {
 				this.islong = true;
-				let _item = JSON.stringify(item)
 				uni.navigateTo({
-					url: './details?item=' + _item
+					url: './details?id=' + Id
 				});
 			},
 			// 长按某条记录，选择下一步操作
@@ -188,7 +191,7 @@
 				this.islong = true;
 				const _this = this;
 				if (val == 1) {
-					this.handleItem(this.opearObj)
+					this.handleItem(this.opearObj._id)
 				} else {
 					uni.showModal({
 						title: '提示',
@@ -201,6 +204,7 @@
 								uniCloud.callFunction({
 									name: 'remove',
 									data: {
+										token:_this.Token,
 										dataId: _this.opearObj._id
 									}
 								}).then((res) => {

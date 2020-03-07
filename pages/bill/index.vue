@@ -6,7 +6,7 @@
 		</uni-nav-bar>
 		<!-- #endif -->
 
-		<!-- #ifdef APP-NVUE || H5 -->
+		<!-- #ifdef  APP-PLUS|| H5 -->
 		<uni-nav-bar fixed="true" status-bar="true" right-icon="search" title="我的帐单儿" color="#333" @clickRight="clickSearch"
 		 background-color="#f1f1f1">
 		</uni-nav-bar>
@@ -35,7 +35,7 @@
 		<block v-if="!isnull">
 			<uni-list v-for="(item,index) in lists" :key="index">
 				<uni-list-item class="dateitem" :title="item.datetime" :budget="item.budget" :show-arrow="false"></uni-list-item>
-				<uni-list-item v-for="(items,indexs) in item.listItem" :key="indexs" @click="handleItem(items)" @longpress="handleLong(items)"
+				<uni-list-item v-for="(items,indexs) in item.listItem" :key="indexs" @click="handleItem(items._id)" @longpress="handleLong(items)"
 				 @onshowproof="onshowproof" :title="items.useType.label" :note="`${items.payType.label}`" :remarks="items.remarks"
 				 :amount="items.amount" :datetime="items.weekday" :icons="items.useType.iconclass" :picture="items.picture" :genre="items.genre"
 				 :show-arrow="false"></uni-list-item>
@@ -88,7 +88,6 @@
 		<uni-popup ref="picture" type="center">
 			<image :src="imgUrl" mode="aspectFit" />
 		</uni-popup>
-
 	</view>
 </template>
 
@@ -101,9 +100,14 @@
 		uniPopup,
 		uniListItem,
 		uniNavBar
-	} from '@dcloudio/uni-ui'
+	} from '@dcloudio/uni-ui';
 	// 也可使用此方式引入组件
-	import Proof from '../../components/proof'
+	//#ifdef MP-WEIXIN
+	import {
+		mapState,
+		mapMutations
+	} from 'vuex';
+	//#endif
 	export default {
 		components: {
 			uniCard,
@@ -112,10 +116,27 @@
 			uniListItem,
 			uniIcons,
 			uniPagination,
-			Proof,
 			uniNavBar
 		},
+		//#ifdef MP-WEIXIN
+		computed: {
+			...mapState(['hasLogin'])
+		},
+		//#endif
 		onLoad() {
+			const userId = uni.getStorageSync('userId') || '';
+			if (!userId) {
+				//#ifdef APP-PLUS || H5
+				uni.reLaunch({
+					url: './login'
+				})
+				//#endif
+				//#ifdef MP-WEIXIN
+				this.getOpenId();
+				//#endif
+			}else{
+				this.Token=userId;
+			}
 			this.navs = [...this.Navs.navs];
 			const myDate = new Date();
 			this.nowdate = {
@@ -125,12 +146,16 @@
 			}
 		},
 		onShow() {
-			this.getSummary();
-			this.getData();
+			const userId = uni.getStorageSync('userId') || '';
+			if (userId) {
+				this.getSummary();
+				this.getData();
+			}
 		},
 		data() {
 			return {
 				navs: [],
+				Token:'',
 				lists: [],
 				budget: '',
 				imgUrl: "",
@@ -156,6 +181,47 @@
 			}
 		},
 		methods: {
+			//#ifdef MP-WEIXIN
+			...mapMutations(['login']),
+			// 获取微信openid
+			getOpenId(){
+				uni.login({
+					provider: 'weixin',
+					success: loginRes => {
+						uniCloud.callFunction({
+							name: 'getUnionid',
+							data: {
+								js_code: loginRes.code
+							}
+						}).then((res) => {
+							this.wxLogin(res.result.data.openid)
+						})
+					}
+				});
+			},
+			// 微信登录
+			wxLogin(openid){
+				const _this=this;
+				uniCloud.callFunction({
+					name: 'login',
+					data: {
+						openid:openid
+					}
+				}).then((res) => {
+					if (res.result.status == 0) {
+						this.login(res.result.token);
+						setTimeout(()=>{
+							_this.getSummary();
+							_this.getData();
+						},200)
+					} else {
+						uni.reLaunch({
+							url: './login'
+						})
+					}
+				})
+			},
+			//#endif
 			// 获取汇总数据
 			getSummary() {
 				uni.showLoading({
@@ -164,12 +230,11 @@
 				})
 				const dataobj = {
 					range: "month",
+					token:this.Token,
 					yearMonth: this.nowdate.year + '-' + this.nowdate.month,
 					year: this.nowdate.year,
-					month: this.nowdate.month,
-					day: this.nowdate.day
+					month: this.nowdate.month
 				}
-
 				uniCloud.callFunction({
 					name: 'summary',
 					data: dataobj
@@ -192,21 +257,21 @@
 					mask: true,
 					title: "数据加载中..."
 				})
-
-				uniCloud.callFunction({
-					name: 'get',
-					data: {
+				const _data={
+						token:this.Token,
 						pageNum: this.pageNum,
 						range: 'day',
-						year:this.nowdate.year,
-						month:this.nowdate.month,
-						day:this.nowdate.day
+						year: this.nowdate.year,
+						month: this.nowdate.month,
+						day: this.nowdate.day
 					}
+				uniCloud.callFunction({
+					name: 'get',
+					data: _data
 				}).then((res) => {
 					uni.hideLoading();
 					let extotal = 0,
 						intotal = 0;
-					console.log(res)
 					if (res.result.total > 0) {
 						this.isnull = false;
 						res.result.list.forEach(el => {
@@ -255,7 +320,8 @@
 					postData = {
 						yearMonth: nowmonth,
 						createTime: new Date(nowmonth).getTime(),
-						budgetTotal: this.budget
+						budgetTotal: this.budget,
+						token:this.Token,
 					};
 
 				if (this.summary.budgetId) {
@@ -298,10 +364,9 @@
 				});
 			},
 			//  点击某条记录
-			handleItem(item) {
-				let _item = JSON.stringify(item)
+			handleItem(Id) {
 				uni.navigateTo({
-					url: './details?item=' + _item
+					url:'./details?id=' + Id
 				});
 			},
 			// 长按某条记录，选择下一步操作
@@ -320,7 +385,7 @@
 			moreOper(val) {
 				const _this = this;
 				if (val == 1) {
-					this.handleItem(this.opearObj)
+					this.handleItem(this.opearObj._id)
 				} else {
 					uni.showModal({
 						title: '提示',
@@ -333,6 +398,7 @@
 								uniCloud.callFunction({
 									name: 'remove',
 									data: {
+										token:_this.Token,
 										dataId: _this.opearObj._id
 									}
 								}).then((res) => {
@@ -367,7 +433,6 @@
 			},
 			// 点击某个菜单跳转到相应页面
 			handleNav(item) {
-				console.log(item)
 				this.$refs.navs.close();
 				if (item.id == 1) {
 					uni.navigateTo({

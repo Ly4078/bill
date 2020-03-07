@@ -1,7 +1,18 @@
 <script>
+	import{mapMutations} from 'vuex';
 	export default {
+		methods:{
+			...mapMutations(['login'])
+		},
 		onLaunch: function() {
 			// console.log('App Launch')
+			let userId=uni.getStorageSync('userId') || '';
+			if(userId){
+				uni.setStorage({
+					key: "userId",
+					data: userId
+				})
+			}
 		},
 		onShow: function() {
 			// console.log('App Show')
@@ -19,10 +30,10 @@
 	body{
 		background-color: $uni-bg-color-hover;
 		.exclass{
-			background-color: $uni-color-success;
+			background-color: $uni-color-exclass;
 		}
 		.inclass{
-			background-color: $uni-color-primary;
+			background-color: $uni-color-inclass;
 		}
 		
 		.operating {
@@ -47,6 +58,34 @@
 			width: 100%;
 			margin: 20% 0;
 			text-align: center;
+		}
+		.swipaction {
+			width: 70%;
+			height: 95%;
+			/* #ifdef APP-PLUS || H5 */
+			margin-left: 15%;
+			/* #endif */
+			display: flex;
+			justify-content: space-around;
+			view{
+				min-width: 28%;
+				text-align: center;
+				padding: 0 8%;
+				color: $uni-text-color;
+			},
+			.borbut{
+				color:$uni-color-primary;
+				border-bottom: $uni-border-radius-base solid $uni-color-primary;
+			}
+		}
+		.addtypebut {
+			position: absolute;
+			width: 50%;
+			left: 25%;
+			bottom: 30upx;
+			border-radius: 60upx;
+			background-color: $uni-color-primary;
+			color: $uni-text-color-inverse;
 		}
 	}
 </style>

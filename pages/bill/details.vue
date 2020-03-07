@@ -5,7 +5,7 @@
 		 background-color="#f1f1f1">
 		</uni-nav-bar>
 		<!-- #endif -->
-		<!-- #ifdef APP-NVUE || H5 -->
+		<!-- #ifdef  APP-PLUS|| H5 -->
 		<uni-nav-bar fixed="true" status-bar="true" left-icon="closeempty" right-icon="trash" title="详情" color="#333"
 		 @clickLeft="toback" @clickRight="deldata" background-color="#f1f1f1">
 		</uni-nav-bar>
@@ -69,7 +69,6 @@
 			try {
 				const value = uni.getStorageSync('editData');
 				if (value) {
-
 					this.listdata = value;
 					try {
 						uni.removeStorageSync('editData');
@@ -82,9 +81,6 @@
 			}
 		},
 		onLoad: function(option) {
-			if (option.item) {
-				this.listdata = JSON.parse(option.item);
-			}
 			if (option.id) {
 				this.dataId = option.id;
 			}
@@ -98,7 +94,8 @@
 		data() {
 			return {
 				dataId: '',
-				listdata: {}
+				listdata: {},
+				Token:uni.getStorageSync('userId') || '',
 			}
 		},
 		methods: {
@@ -114,12 +111,12 @@
 				uniCloud.callFunction({
 					name: 'get',
 					data: {
+						token:this.Token,
 						id: id,
 						pageNum: 0
 					}
 				}).then((res) => {
 					uni.hideLoading();
-					console.log(res)
 					if (res.result.total > 0) {
 						this.listdata = res.result.list[0]
 					}
@@ -143,7 +140,8 @@
 							uniCloud.callFunction({
 								name: 'remove',
 								data: {
-									dataId: _this.listdata._id
+									dataId: _this.listdata._id,
+									token:_this.Token
 								}
 							}).then((res) => {
 								uni.showToast({
@@ -170,6 +168,9 @@
 			// 修改数据
 			editdata() {
 				this.listdata.picture = this.listdata.picture ? this.listdata.picture : '';
+				console.log("this.listdata:",this.listdata)
+				delete this.listdata.uniCloudClientInfo;
+				delete this.listdata.useType.uniCloudClientInfo;
 				let _item = JSON.stringify(this.listdata)
 				uni.redirectTo({
 					url: './edit?item=' + _item

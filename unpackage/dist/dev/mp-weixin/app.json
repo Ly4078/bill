@@ -1,6 +1,9 @@
 {
   "pages": [
     "pages/bill/index",
+    "pages/bill/login",
+    "pages/bill/typelist",
+    "pages/bill/addtype",
     "pages/bill/details",
     "pages/bill/search",
     "pages/bill/edit",
@@ -15,5 +18,5 @@
     "navigationBarTextStyle": "black"
   },
   "usingComponents": {},
-  "sitemapLocation": "sitemap86.json"
+  "sitemapLocation": "sitemap44.json"
 }

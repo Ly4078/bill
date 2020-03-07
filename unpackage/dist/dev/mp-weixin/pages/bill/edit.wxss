@@ -24,26 +24,6 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.edit .swipaction.data-v-609b23c9 {
-  width: 70%;
-  height: 95%;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-justify-content: space-around;
-          justify-content: space-around;
-}
-.edit .swipaction view.data-v-609b23c9 {
-    min-width: 28%;
-    text-align: center;
-    padding: 0 8%;
-    color: #333;
-}
-.edit .swipaction.data-v-609b23c9,
-  .edit .swipaction .borbut.data-v-609b23c9 {
-    color: #007aff;
-    border-bottom: 6rpx solid #007aff;
-}
 .edit .box.data-v-609b23c9 {
   width: 96%;
   min-height: 300rpx;
@@ -122,6 +102,49 @@
 .edit .box .boxi.data-v-609b23c9:last-child {
     border: none;
 }
+.edit .picturebox.data-v-609b23c9 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+}
+.edit .picturebox .plusimg.data-v-609b23c9 {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+            align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+            justify-content: center;
+    color: #999;
+}
+.edit .picturebox .upimg.data-v-609b23c9 {
+    position: relative;
+}
+.edit .picturebox .upimg .closei.data-v-609b23c9 {
+      width: 50rpx;
+      height: 50rpx;
+      border-radius: 50%;
+      position: relative;
+      right: 0;
+      top: 0;
+      background-color: #999;
+}
+.edit .picturebox .upimg .imgsrc.data-v-609b23c9 {
+      width: 200rpx;
+      height: 200rpx;
+}
 .edit .savebut.data-v-609b23c9 {
   width: 70%;
   margin-left: 15%;
@@ -175,7 +198,6 @@
     -webkit-box-align: center;
     -webkit-align-items: center;
             align-items: center;
-    font-size: 40rpx;
     margin: 20rpx 10rpx;
 }
 .edit .tables2 .titem .iconfont.data-v-609b23c9 {
@@ -194,5 +216,8 @@
       -webkit-justify-content: center;
               justify-content: center;
       border-radius: 50%;
+}
+.edit .tables2 .titem .tlabel.data-v-609b23c9 {
+      font-size: 20rpx;
 }
 
