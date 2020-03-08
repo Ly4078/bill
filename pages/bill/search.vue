@@ -1,7 +1,8 @@
 <template>
 	<view class="search">
 		<uni-nav-bar fixed="true" status-bar="true" color="#333" background-color="#f1f1f1">
-			<view><input class="sinput" type="text" :focus="isfocus" :value="valueInput" placeholder="搜索消费记录" @input="inputValue" /></view>
+			<view><input class="sinput" type="text" :focus="isfocus" :value="valueInput" placeholder="搜索消费记录" @input="inputValue"
+				 @confirm="inputValue" /></view>
 			<view slot="left" @click="toback">
 				<uni-icons type="back" size="30"></uni-icons>
 			</view>
@@ -90,6 +91,7 @@
 				Token: uni.getStorageSync('userId') || '',
 				isnull: false,
 				isfocus: true,
+				issearch: true,
 				issearch_log: true,
 				opearObj: {},
 				valueInput: "",
@@ -163,6 +165,7 @@
 								// error
 							}
 							this.pageNum = 0;
+
 							this.search();
 						}
 					}
@@ -170,6 +173,10 @@
 			},
 			// 搜索相关数据
 			search() {
+				if (!this.issearch) {
+					return
+				}
+				this.issearch = false;
 				this.isfocus = false;
 				// this.$refs.picture.close();
 				uni.showLoading({
@@ -185,6 +192,7 @@
 				}).then((res) => {
 					uni.hideLoading()
 					console.log(res)
+					this.issearch = true;
 					this.showLoadMore = false;
 					this.issearch_log = false;
 					if (res.result.status == -1) {
@@ -213,6 +221,7 @@
 					}
 				}).catch((err) => {
 					uni.hideLoading();
+					this.issearch = true;
 					this.isnull = false;
 					uni.showToast({
 						icon: 'none',

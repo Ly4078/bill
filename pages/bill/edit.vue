@@ -2,10 +2,10 @@
 	<view class="edit">
 		<uni-nav-bar fixed="true" status-bar="true" color="#333" background-color="#f1f1f1">
 			<view class="swipaction">
-				<view :class="dataobj.genre==1?'borbut':''" @click="handleexin(1)">
+				<view :class="dataobj.genre==1?'exbor':''" @click="handleexin(1)">
 					支出
 				</view>
-				<view :class="dataobj.genre==2?'borbut':''" @click="handleexin(2)">
+				<view :class="dataobj.genre==2?'inbor':''" @click="handleexin(2)">
 					收入
 				</view>
 			</view>
@@ -38,19 +38,20 @@
 				</view>
 		</view>
 		<view class="picturebox">
-				<view class="upimg" v-show="dataobj.picture">
+				<view class="upimg" v-if="dataobj.picture">
 					<view class="closei" @click="closeimgSrc">
 						<uni-icons type="closeempty" size="24" color="#fff"></uni-icons>
 					</view>
 					<image class="imgsrc" :src="dataobj.picture" mode="aspectFit" @click="seeimgsrc"></image>
 				</view>
 				
-				<view class="plusimg" @click="upload" v-show="!dataobj.picture">
+				<view class="plusimg" @click="upload" v-if="!dataobj.picture">
 					<uni-icons type="plus" size="70" color="#999"></uni-icons>
 					<text v-show="dataobj.genre==1">添加发票或支付截图</text>
 					<text v-show="dataobj.genre==2">添加收款凭证或截图</text>
 				</view>
 		</view>
+		
 		<button type="primary" class="savebut" @click="saveData">保存</button>
 		<!-- <button type="primary" class="savebut" @click="firstAgin">开始</button> -->
 		<uni-popup ref="popup" type="bottom">

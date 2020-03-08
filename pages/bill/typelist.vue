@@ -2,31 +2,35 @@
 	<view class="edittype">
 		<uni-nav-bar fixed="true" status-bar="true" color="#333" background-color="#f1f1f1">
 			<view class="swipaction">
-				<view :class="genre==1?'borbut':''" @click="handleexin(1)">
+				<view :class="genre==1?'exbor':''" @click="handleexin(1)">
 					支出
 				</view>
-				<view :class="genre==2?'borbut':''" @click="handleexin(2)">
+				<view :class="genre==2?'inbor':''" @click="handleexin(2)">
 					收入
 				</view>
+				
 			</view>
 			<view slot="left" @click="toback">
 				<uni-icons type="back" size="30"></uni-icons>
 			</view>
 		</uni-nav-bar>
-
-		<view class="listitem" v-for="(item,index) in list" :key="index">
-			<view class="itemleft">
-				<view :class="['iconfont',genre==1?'exclass':'inclass',item.iconclass]"></view>
-				<view class="">{{item.label}}</view>
+		<view class="listbox">
+			<view class="listitem" v-for="(item,index) in list" :key="index">
+				<view class="itemleft">
+					<view :class="['iconfont',genre==1?'exclass':'inclass',item.iconclass]"></view>
+					<view class="">{{item.label}}</view>
+				</view>
+				<uni-icons type="more-filled" @click="more(item)"></uni-icons>
 			</view>
-			<uni-icons type="more-filled" @click="more(item)"></uni-icons>
 		</view>
+			
 		<view class="nodata" v-if="isnull" @click="gettypelist">
 			<image class="" src="../../static/untils/icons/nodata.png" mode="aspectFit"></image>
 			<view class="notxt">
 				数据为空，点我重试~
 			</view>
 		</view>
+		<view class="butbox"></view>
 		<button type="default" class="addtypebut" @click="addtype">添加分类</button>
 		<uni-popup ref="typepopup" type="center">
 			<view class="operating">
@@ -192,6 +196,10 @@
 
 <style lang="scss" scoped>
 	.edittype {
+		position: relative;
+		.listbox{
+			height: 80%;
+		}
 		.listitem {
 			width: 90%;
 			margin: 2.5%;

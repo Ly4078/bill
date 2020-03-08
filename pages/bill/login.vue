@@ -45,6 +45,7 @@
 
 		data() {
 			return {
+				tokenId:"",
 				title: '登 录',
 				iseye: false,
 				isver: false,
@@ -52,8 +53,10 @@
 				wxdata: {}
 			}
 		},
-		onLoad() {
+		onLoad(option) {
+			console.log('option:',option)
 			//#ifdef MP-WEIXIN
+			this.tokenId=option.id;
 			uni.login({
 				provider: 'weixin',
 				success: loginRes => {
@@ -64,6 +67,7 @@
 						}
 					}).then((res) => {
 						this.wxdata = res.result.data;
+						console.log('wxdata:',this.wxdata)
 					})
 				}
 			});

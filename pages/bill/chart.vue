@@ -58,7 +58,7 @@
 			<view style="text-align: center;line-height: 40px;">各类别比例分布</view>
 		</view>
 
-		<view class="nodata"  v-show="isnull" @click="getData">
+		<view class="nodata"  v-show="isnull" @click="getchartData">
 			<image class="" src="../../static/untils/icons/nodata.png" mode="aspectFit"></image>
 			<view class="notxt">
 				数据为空，点我重试~

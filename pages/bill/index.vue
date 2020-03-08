@@ -134,8 +134,8 @@
 				//#ifdef MP-WEIXIN
 				this.getOpenId();
 				//#endif
-			}else{
-				this.Token=userId;
+			} else {
+				this.Token = userId;
 			}
 			this.navs = [...this.Navs.navs];
 			const myDate = new Date();
@@ -148,6 +148,7 @@
 		onShow() {
 			const userId = uni.getStorageSync('userId') || '';
 			if (userId) {
+				console.log('userId:', userId)
 				this.getSummary();
 				this.getData();
 			}
@@ -155,7 +156,7 @@
 		data() {
 			return {
 				navs: [],
-				Token:'',
+				Token: '',
 				lists: [],
 				budget: '',
 				imgUrl: "",
@@ -184,7 +185,7 @@
 			//#ifdef MP-WEIXIN
 			...mapMutations(['login']),
 			// 获取微信openid
-			getOpenId(){
+			getOpenId() {
 				uni.login({
 					provider: 'weixin',
 					success: loginRes => {
@@ -200,23 +201,24 @@
 				});
 			},
 			// 微信登录
-			wxLogin(openid){
-				const _this=this;
+			wxLogin(openid) {
+				const _this = this;
 				uniCloud.callFunction({
 					name: 'login',
 					data: {
-						openid:openid
+						openid: openid
 					}
 				}).then((res) => {
+					console.log('res:', res)
 					if (res.result.status == 0) {
 						this.login(res.result.token);
-						setTimeout(()=>{
-							_this.getSummary();
-							_this.getData();
-						},200)
-					} else {
+						this.Token = res.result.token;
+						this.getSummary();
+						this.getData();
+					}
+					if (res.result.status == 1) {
 						uni.reLaunch({
-							url: './login'
+							url: './login?id='+res.result.token
 						})
 					}
 				})
@@ -224,13 +226,14 @@
 			//#endif
 			// 获取汇总数据
 			getSummary() {
+				console.log('getSummary:')
 				uni.showLoading({
 					mask: true,
 					title: "数据加载中..."
 				})
 				const dataobj = {
 					range: "month",
-					token:this.Token,
+					token: this.Token,
 					yearMonth: this.nowdate.year + '-' + this.nowdate.month,
 					year: this.nowdate.year,
 					month: this.nowdate.month
@@ -253,18 +256,19 @@
 			},
 			//获取列表数据
 			getData() {
+				console.log('getData')
 				uni.showLoading({
 					mask: true,
 					title: "数据加载中..."
 				})
-				const _data={
-						token:this.Token,
-						pageNum: this.pageNum,
-						range: 'day',
-						year: this.nowdate.year,
-						month: this.nowdate.month,
-						day: this.nowdate.day
-					}
+				const _data = {
+					token: this.Token,
+					pageNum: this.pageNum,
+					range: 'day',
+					year: this.nowdate.year,
+					month: this.nowdate.month,
+					day: this.nowdate.day
+				}
 				uniCloud.callFunction({
 					name: 'get',
 					data: _data
@@ -321,7 +325,7 @@
 						yearMonth: nowmonth,
 						createTime: new Date(nowmonth).getTime(),
 						budgetTotal: this.budget,
-						token:this.Token,
+						token: this.Token,
 					};
 
 				if (this.summary.budgetId) {
@@ -366,7 +370,7 @@
 			//  点击某条记录
 			handleItem(Id) {
 				uni.navigateTo({
-					url:'./details?id=' + Id
+					url: './details?id=' + Id
 				});
 			},
 			// 长按某条记录，选择下一步操作
@@ -398,7 +402,7 @@
 								uniCloud.callFunction({
 									name: 'remove',
 									data: {
-										token:_this.Token,
+										token: _this.Token,
 										dataId: _this.opearObj._id
 									}
 								}).then((res) => {
@@ -429,7 +433,10 @@
 			},
 			//点击菜单按钮
 			openNavs() {
-				this.$refs.navs.open();
+				uni.navigateTo({
+					url: './annal'
+				});
+				// this.$refs.navs.open();
 			},
 			// 点击某个菜单跳转到相应页面
 			handleNav(item) {
@@ -446,11 +453,7 @@
 					uni.navigateTo({
 						url: './annal'
 					});
-				} else if (item.id == 4) {
-					uni.navigateTo({
-						url: './chart'
-					});
-				}
+				} 
 			}
 		}
 	}
@@ -558,10 +561,7 @@
 	}
 
 
-	.butbox {
-		width: 100%;
-		height: 100upx;
-	}
+	
 
 	.navsbox {
 		padding: 30upx;

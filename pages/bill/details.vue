@@ -36,7 +36,7 @@
 				<image class="pictureimg" :src="listdata.picture" mode="aspectFit"></image>
 			</view>
 		</view>
-		<!-- #ifdef APP-NVUE || H5 -->
+		<!-- #ifdef APP-PLUS || H5 -->
 
 		<view class="fixdbox" @click="editdata">编辑</view>
 
