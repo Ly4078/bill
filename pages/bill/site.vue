@@ -18,7 +18,6 @@
 			toback() {
 				uni.navigateBack({
 					delta: 1,
-					animationType: 'pop-out',
 					animationDuration: 200
 				});
 			}

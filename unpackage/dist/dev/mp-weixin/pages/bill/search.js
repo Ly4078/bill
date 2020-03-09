@@ -198,6 +198,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 var delayTimer;var _default =
 {
   components: {
@@ -225,6 +226,7 @@ var delayTimer;var _default =
       Token: uni.getStorageSync('userId') || '',
       isnull: false,
       isfocus: true,
+      issearch: true,
       issearch_log: true,
       opearObj: {},
       valueInput: "",
@@ -298,6 +300,7 @@ var delayTimer;var _default =
               // error
             }
             _this2.pageNum = 0;
+
             _this2.search();
           }
         }
@@ -305,6 +308,10 @@ var delayTimer;var _default =
     },
     // 搜索相关数据
     search: function search() {var _this3 = this;
+      if (!this.issearch) {
+        return;
+      }
+      this.issearch = false;
       this.isfocus = false;
       // this.$refs.picture.close();
       uni.showLoading({
@@ -320,6 +327,7 @@ var delayTimer;var _default =
       then(function (res) {
         uni.hideLoading();
         console.log(res);
+        _this3.issearch = true;
         _this3.showLoadMore = false;
         _this3.issearch_log = false;
         if (res.result.status == -1) {
@@ -348,6 +356,7 @@ var delayTimer;var _default =
         }
       }).catch(function (err) {
         uni.hideLoading();
+        _this3.issearch = true;
         _this3.isnull = false;
         uni.showToast({
           icon: 'none',

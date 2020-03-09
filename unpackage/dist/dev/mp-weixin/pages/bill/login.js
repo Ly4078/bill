@@ -185,6 +185,7 @@ var _vuex = __webpack_require__(/*! vuex */ 12);function ownKeys(object, enumera
 
   data: function data() {
     return {
+      tokenId: "",
       title: '登 录',
       iseye: false,
       isver: false,
@@ -192,8 +193,10 @@ var _vuex = __webpack_require__(/*! vuex */ 12);function ownKeys(object, enumera
       wxdata: {} };
 
   },
-  onLoad: function onLoad() {var _this = this;
+  onLoad: function onLoad(option) {var _this = this;
+    console.log('option:', option);
 
+    this.tokenId = option.id;
     uni.login({
       provider: 'weixin',
       success: function success(loginRes) {
@@ -204,6 +207,7 @@ var _vuex = __webpack_require__(/*! vuex */ 12);function ownKeys(object, enumera
 
         then(function (res) {
           _this.wxdata = res.result.data;
+          console.log('wxdata:', _this.wxdata);
         });
       } });
 

@@ -73,13 +73,25 @@
 				padding: 0 8%;
 				color: $uni-text-color;
 			},
+			.exbor{
+				color:$uni-color-exclass;
+				border-bottom: $uni-border-radius-base solid $uni-color-exclass;
+			}
+			.inbor{
+				color:$uni-color-inclass;
+				border-bottom: $uni-border-radius-base solid $uni-color-inclass;
+			}
 			.borbut{
 				color:$uni-color-primary;
 				border-bottom: $uni-border-radius-base solid $uni-color-primary;
 			}
 		}
+		.butbox {
+			width: 100%;
+			height: 100upx;
+		}
 		.addtypebut {
-			position: absolute;
+			position: fixed;
 			width: 50%;
 			left: 25%;
 			bottom: 30upx;

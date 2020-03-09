@@ -48,9 +48,16 @@ exports.main = async (event, context) => {
 			}
 		}
 		if (event.openid) {
-			return {
-				status: 0,
-				token: res.data[0]._id
+			if(res.data[0].phone){
+				return {
+					status: 0,
+					token: res.data[0]._id
+				}
+			}else{
+				return {
+					status: 1,
+					token: res.data[0]._id
+				}
 			}
 		}
 	} else {

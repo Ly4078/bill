@@ -12,10 +12,6 @@
 			"id":3,
 			"iconsClass":"iconweibiaoti15",
 			"value":"账单记录"
-		},{
-			"id":4,
-			"iconsClass":"iconweibiaoti--",
-			"value":"账单详情"
 		}
 	]
 }

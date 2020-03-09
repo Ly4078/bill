@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "uni-icons": "/node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-icons/uni-icons",
+    "uni-popup": "/node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-popup/uni-popup",
+    "uni-nav-bar": "/node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-nav-bar/uni-nav-bar"
+  }
+}

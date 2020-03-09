@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "uni-card": "/node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-card/uni-card",
+    "uni-icons": "/node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-icons/uni-icons",
+    "uni-nav-bar": "/node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-nav-bar/uni-nav-bar",
+    "histogram-chart": "/components/stan-ucharts/HistogramChart",
+    "pie-chart": "/components/stan-ucharts/PieChart"
+  }
+}

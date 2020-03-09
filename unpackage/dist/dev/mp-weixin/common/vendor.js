@@ -2787,7 +2787,7 @@ module.exports = {"typdIcons":[{"iconclass":"iconqiche"},{"iconclass":"iconhuoch
 /*! exports provided: navs, default */
 /***/ (function(module) {
 
-module.exports = {"navs":[{"id":1,"iconsClass":"iconguanyu","value":"关于"},{"id":2,"iconsClass":"iconshezhi1","value":"设置"},{"id":3,"iconsClass":"iconweibiaoti15","value":"账单记录"},{"id":4,"iconsClass":"iconweibiaoti--","value":"账单详情"}]};
+module.exports = {"navs":[{"id":1,"iconsClass":"iconguanyu","value":"关于"},{"id":2,"iconsClass":"iconshezhi1","value":"设置"},{"id":3,"iconsClass":"iconweibiaoti15","value":"账单记录"}]};
 
 /***/ }),
 

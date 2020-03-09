@@ -266,12 +266,24 @@ page .swipaction view {
       color: #333;
 }
 page .swipaction,
-    page .swipaction .borbut {
+    page .swipaction .exbor {
+      color: #f4605e;
+      border-bottom: 6rpx solid #f4605e;
+}
+page .swipaction .inbor {
+      color: #62b8fd;
+      border-bottom: 6rpx solid #62b8fd;
+}
+page .swipaction .borbut {
       color: #007aff;
       border-bottom: 6rpx solid #007aff;
 }
+page .butbox {
+    width: 100%;
+    height: 100rpx;
+}
 page .addtypebut {
-    position: absolute;
+    position: fixed;
     width: 50%;
     left: 25%;
     bottom: 30rpx;

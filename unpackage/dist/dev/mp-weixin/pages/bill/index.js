@@ -288,6 +288,7 @@ var _vuex = __webpack_require__(/*! vuex */ 12);function _toConsumableArray(arr)
   onShow: function onShow() {
     var userId = uni.getStorageSync('userId') || '';
     if (userId) {
+      console.log('userId:', userId);
       this.getSummary();
       this.getData();
     }
@@ -348,15 +349,16 @@ var _vuex = __webpack_require__(/*! vuex */ 12);function _toConsumableArray(arr)
           openid: openid } }).
 
       then(function (res) {
+        console.log('res:', res);
         if (res.result.status == 0) {
           _this3.login(res.result.token);
-          setTimeout(function () {
-            _this.getSummary();
-            _this.getData();
-          }, 200);
-        } else {
+          _this3.Token = res.result.token;
+          _this3.getSummary();
+          _this3.getData();
+        }
+        if (res.result.status == 1) {
           uni.reLaunch({
-            url: './login' });
+            url: './login?id=' + res.result.token });
 
         }
       });
@@ -364,6 +366,7 @@ var _vuex = __webpack_require__(/*! vuex */ 12);function _toConsumableArray(arr)
 
     // 获取汇总数据
     getSummary: function getSummary() {var _this4 = this;
+      console.log('getSummary:');
       uni.showLoading({
         mask: true,
         title: "数据加载中..." });
@@ -393,6 +396,7 @@ var _vuex = __webpack_require__(/*! vuex */ 12);function _toConsumableArray(arr)
     },
     //获取列表数据
     getData: function getData() {var _this5 = this;
+      console.log('getData');
       uni.showLoading({
         mask: true,
         title: "数据加载中..." });
@@ -585,10 +589,6 @@ var _vuex = __webpack_require__(/*! vuex */ 12);function _toConsumableArray(arr)
       } else if (item.id == 3) {
         uni.navigateTo({
           url: './annal' });
-
-      } else if (item.id == 4) {
-        uni.navigateTo({
-          url: './chart' });
 
       }
     } }) };exports.default = _default;

@@ -270,7 +270,6 @@
 			onshowproof(url) {
 				this.imgUrl = url;
 				this.$refs.picture.open();
-				console.log('imgUrl:', this.imgUrl)
 			},
 			//   点击某条数据查看详情
 			handleItem(Id) {

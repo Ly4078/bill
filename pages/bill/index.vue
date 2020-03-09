@@ -433,10 +433,10 @@
 			},
 			//点击菜单按钮
 			openNavs() {
-				uni.navigateTo({
-					url: './annal'
-				});
-				// this.$refs.navs.open();
+				// uni.navigateTo({
+				// 	url: './annal'
+				// });
+				this.$refs.navs.open();
 			},
 			// 点击某个菜单跳转到相应页面
 			handleNav(item) {
