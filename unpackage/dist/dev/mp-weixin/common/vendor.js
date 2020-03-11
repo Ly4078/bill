@@ -2503,7 +2503,7 @@ var index_esm = {
 
 /***/ }),
 
-/***/ 124:
+/***/ 120:
 /*!********************************************************************************************************!*\
   !*** D:/cloud/cloud_test/node_modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-icons/icons.js ***!
   \********************************************************************************************************/
@@ -2787,11 +2787,11 @@ module.exports = {"typdIcons":[{"iconclass":"iconqiche"},{"iconclass":"iconhuoch
 /*! exports provided: navs, default */
 /***/ (function(module) {
 
-module.exports = {"navs":[{"id":1,"iconsClass":"iconguanyu","value":"关于"},{"id":2,"iconsClass":"iconshezhi1","value":"设置"},{"id":3,"iconsClass":"iconweibiaoti15","value":"账单记录"}]};
+module.exports = {"navs":[{"id":1,"iconsClass":"iconguanyu","value":"关于"},{"id":3,"iconsClass":"iconweibiaoti15","value":"账单记录"}]};
 
 /***/ }),
 
-/***/ 174:
+/***/ 170:
 /*!*********************************************************************!*\
   !*** D:/cloud/cloud_test/plugins/stan-ucharts/u-charts/u-charts.js ***!
   \*********************************************************************/
@@ -16038,7 +16038,7 @@ module.exports = {"_from":"@dcloudio/uni-stat@2.0.0-alpha-26320200304005","_id":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/bill/index": {}, "pages/bill/login": {}, "pages/bill/typelist": {}, "pages/bill/addtype": {}, "pages/bill/details": {}, "pages/bill/search": {}, "pages/bill/edit": {}, "pages/bill/about": {}, "pages/bill/site": {}, "pages/bill/annal": {}, "pages/bill/chart": {} }, "globalStyle": { "navigationStyle": "custom", "navigationBarTextStyle": "black" } };exports.default = _default;
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/bill/index": {}, "pages/bill/login": {}, "pages/bill/typelist": {}, "pages/bill/addtype": {}, "pages/bill/details": {}, "pages/bill/search": {}, "pages/bill/edit": {}, "pages/bill/about": {}, "pages/bill/annal": {}, "pages/bill/chart": {} }, "globalStyle": { "navigationStyle": "custom", "navigationBarTextStyle": "black" } };exports.default = _default;
 
 /***/ }),
 

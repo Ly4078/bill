@@ -4,7 +4,7 @@
 		 background-color="#f1f1f1">
 		</uni-nav-bar>
 		<view class="addname">
-			<input type="text"  placeholder="请输入分类名称" maxlength="4" v-model="label" />
+			<input type="text"  placeholder="请输入分类名称" maxlength="3" v-model="label" />
 			<view :class="['iconfont',genre==1?'exclass':'inclass',iconclass]"></view>
 		</view>
 		<view class="listIcon">

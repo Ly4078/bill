@@ -91,20 +91,9 @@
 		},
 		data(){
 			return{
-				statusDay:"2020-03-02 0:0",
-				endDay:'2020-03-04 23:59',
-				startTime:'',
-				endTime:'',
-				second:86400000,
-				fives:18000000,
-				twenty:82800000,
-				executionNum:0,
 				Token:uni.getStorageSync('userId') || '',
-				isAgain:false,
-				ismodel:false,
 				ismolnum:1,
 				paytype:[],
-				idArr:[],
 				types: {
 					collect: [],
 					branch: []
@@ -126,7 +115,6 @@
 			
 			if(option.item){
 				let _dataobj = JSON.parse(option.item);
-				console.log('_dataobj:',_dataobj)
 				this.dataobj=_dataobj
 			}else{
 				this.dataobj.useDate=this.utils.Format(new Date());
@@ -148,72 +136,6 @@
 					});
 				}
 			},
-			
-			// 创建事件start
-			firstAgin(){
-				this.startTime=new Date();
-				this.first();
-			},
-			first(){
-				const _this=this;
-				let userdate=(new Date((new Date(this.statusDay).getTime()+this.second)))
-				this.statusDay=this.utils.Format(userdate);
-				console.log("=====================================",this.statusDay)
-				// console.log(new Date(this.endDay).getTime(),new Date(this.statusDay).getTime())
-				if(new Date(this.endDay).getTime()<new Date(this.statusDay).getTime()){
-					this.endTime=new Date();
-					let second = parseInt((new Date().getTime() - this.startTime.getTime()) / 1000);
-					let waste = this.utils.formatSeconds(second)
-					console.log("共执行"+this.executionNum+"次任务,耗时"+waste)
-					console.log(this.idArr)
-					uni.showModal({
-					    title: '提示',
-						mask:true,
-					    content: '任务完成',
-					    success: function (res) {
-					        if (res.confirm) {
-					            console.log('用户点击确定');
-					        } else if (res.cancel) {
-					            console.log('用户点击取消');
-					        }
-					    }
-					});
-				}else{
-					let _num = this.utils.randomNum(5,9),ind=0;
-					let t1=new Date(this.statusDay).getTime()+this.fives;
-					let t2=new Date(this.statusDay).getTime()+this.twenty;
-					
-					let timer= setInterval(()=>{
-						if(ind<_num){
-							ind++;
-							let useDate= this.utils.randomNum(t1,t2);
-							_this.start(new Date(useDate));
-						}else{
-							clearInterval(timer);
-							_this.first()
-						}
-					},1200)
-				}
-			},
-			start(useDate){
-				let val= this.utils.randomNum(1,2);
-				let num = this.utils.randomNum(1,13);
-				this.dataobj.genre=val;
-				// this.dataobj.createTime=useDate.getTime();
-				this.dataobj.amount=this.utils.randomNum(0.01,40.99);
-				this.dataobj.remarks=num>5?Math.random().toString(36).slice(-num):'';
-				this.dataobj.picture='../../static/fapiao.jpg';
-				if(val == 1){
-					this.dataobj.useType=this.types.collect[this.utils.randomNum(0,this.types.collect.length-1)];
-				}else{
-					this.dataobj.useType=this.types.branch[this.utils.randomNum(0,this.types.branch.length-1)];
-				}
-				this.dataobj.payType=this.paytype[this.utils.randomNum(0,this.paytype.length-1)];
-				this.dataobj.useDate=this.utils.Format(useDate);
-				this.saveData();
-			},
-			// 创建数据 end
-			
 			
 			//切换收入支出
 			handleexin(val){
@@ -258,9 +180,7 @@
 					if (res.result.status == 0) {
 						this.isnull = false;
 						let _data = [...res.result.list.data];
-						
 						 this.typeitems =[..._data,...more];
-						 console.log('typeitems:',this.typeitems)
 					} else {
 						this.typeitems = [...more];
 						uni.showToast({
@@ -377,8 +297,6 @@
 				  }).then((res) => {
 					  console.log(res)
 					  if(res.result.id){
-						  this.idArr.push(res.result.id);
-						    this.executionNum++;
 						  uni.hideLoading()
 						  uni.showToast({
 						  	title:'数据保存成功',

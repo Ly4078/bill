@@ -133,7 +133,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni, uniCloud) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance");}function _iterableToArray(iter) {if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;}}var _uniPopup = function _uniPopup() {return __webpack_require__.e(/*! import() | node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-popup/uni-popup */ "node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-popup/uni-popup").then(__webpack_require__.bind(null, /*! @dcloudio/uni-ui/lib/uni-popup/uni-popup */ 134));};var _uniNavBar = function _uniNavBar() {return __webpack_require__.e(/*! import() | node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-nav-bar/uni-nav-bar */ "node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-nav-bar/uni-nav-bar").then(__webpack_require__.bind(null, /*! @dcloudio/uni-ui/lib/uni-nav-bar/uni-nav-bar */ 105));};var _uniIcons = function _uniIcons() {return Promise.all(/*! import() | node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @dcloudio/uni-ui/lib/uni-icons/uni-icons */ 119));};var simpleDatetimePicker = function simpleDatetimePicker() {return __webpack_require__.e(/*! import() | node-modules/_@buuug7_uniapp-components@0.7.0@@buuug7/uniapp-components/lib/simple-datetime-picker/index */ "node-modules/_@buuug7_uniapp-components@0.7.0@@buuug7/uniapp-components/lib/simple-datetime-picker/index").then(__webpack_require__.bind(null, /*! @buuug7/uniapp-components/lib/simple-datetime-picker */ 162));};var _default =
+/* WEBPACK VAR INJECTION */(function(uni, uniCloud) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance");}function _iterableToArray(iter) {if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;}}var _uniPopup = function _uniPopup() {return __webpack_require__.e(/*! import() | node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-popup/uni-popup */ "node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-popup/uni-popup").then(__webpack_require__.bind(null, /*! @dcloudio/uni-ui/lib/uni-popup/uni-popup */ 130));};var _uniNavBar = function _uniNavBar() {return __webpack_require__.e(/*! import() | node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-nav-bar/uni-nav-bar */ "node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-nav-bar/uni-nav-bar").then(__webpack_require__.bind(null, /*! @dcloudio/uni-ui/lib/uni-nav-bar/uni-nav-bar */ 101));};var _uniIcons = function _uniIcons() {return Promise.all(/*! import() | node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @dcloudio/uni-ui/lib/uni-icons/uni-icons */ 115));};var simpleDatetimePicker = function simpleDatetimePicker() {return __webpack_require__.e(/*! import() | node-modules/_@buuug7_uniapp-components@0.7.0@@buuug7/uniapp-components/lib/simple-datetime-picker/index */ "node-modules/_@buuug7_uniapp-components@0.7.0@@buuug7/uniapp-components/lib/simple-datetime-picker/index").then(__webpack_require__.bind(null, /*! @buuug7/uniapp-components/lib/simple-datetime-picker */ 158));};var _default =
 
 
 
@@ -226,20 +226,9 @@ __webpack_require__.r(__webpack_exports__);
 
   data: function data() {
     return {
-      statusDay: "2020-03-02 0:0",
-      endDay: '2020-03-04 23:59',
-      startTime: '',
-      endTime: '',
-      second: 86400000,
-      fives: 18000000,
-      twenty: 82800000,
-      executionNum: 0,
       Token: uni.getStorageSync('userId') || '',
-      isAgain: false,
-      ismodel: false,
       ismolnum: 1,
       paytype: [],
-      idArr: [],
       types: {
         collect: [],
         branch: [] },
@@ -261,7 +250,6 @@ __webpack_require__.r(__webpack_exports__);
 
     if (option.item) {
       var _dataobj = JSON.parse(option.item);
-      console.log('_dataobj:', _dataobj);
       this.dataobj = _dataobj;
     } else {
       this.dataobj.useDate = this.utils.Format(new Date());
@@ -284,72 +272,6 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
 
-    // 创建事件start
-    firstAgin: function firstAgin() {
-      this.startTime = new Date();
-      this.first();
-    },
-    first: function first() {var _this2 = this;
-      var _this = this;
-      var userdate = new Date(new Date(this.statusDay).getTime() + this.second);
-      this.statusDay = this.utils.Format(userdate);
-      console.log("=====================================", this.statusDay);
-      // console.log(new Date(this.endDay).getTime(),new Date(this.statusDay).getTime())
-      if (new Date(this.endDay).getTime() < new Date(this.statusDay).getTime()) {
-        this.endTime = new Date();
-        var second = parseInt((new Date().getTime() - this.startTime.getTime()) / 1000);
-        var waste = this.utils.formatSeconds(second);
-        console.log("共执行" + this.executionNum + "次任务,耗时" + waste);
-        console.log(this.idArr);
-        uni.showModal({
-          title: '提示',
-          mask: true,
-          content: '任务完成',
-          success: function success(res) {
-            if (res.confirm) {
-              console.log('用户点击确定');
-            } else if (res.cancel) {
-              console.log('用户点击取消');
-            }
-          } });
-
-      } else {
-        var _num = this.utils.randomNum(5, 9),ind = 0;
-        var t1 = new Date(this.statusDay).getTime() + this.fives;
-        var t2 = new Date(this.statusDay).getTime() + this.twenty;
-
-        var timer = setInterval(function () {
-          if (ind < _num) {
-            ind++;
-            var useDate = _this2.utils.randomNum(t1, t2);
-            _this.start(new Date(useDate));
-          } else {
-            clearInterval(timer);
-            _this.first();
-          }
-        }, 1200);
-      }
-    },
-    start: function start(useDate) {
-      var val = this.utils.randomNum(1, 2);
-      var num = this.utils.randomNum(1, 13);
-      this.dataobj.genre = val;
-      // this.dataobj.createTime=useDate.getTime();
-      this.dataobj.amount = this.utils.randomNum(0.01, 40.99);
-      this.dataobj.remarks = num > 5 ? Math.random().toString(36).slice(-num) : '';
-      this.dataobj.picture = '../../static/fapiao.jpg';
-      if (val == 1) {
-        this.dataobj.useType = this.types.collect[this.utils.randomNum(0, this.types.collect.length - 1)];
-      } else {
-        this.dataobj.useType = this.types.branch[this.utils.randomNum(0, this.types.branch.length - 1)];
-      }
-      this.dataobj.payType = this.paytype[this.utils.randomNum(0, this.paytype.length - 1)];
-      this.dataobj.useDate = this.utils.Format(useDate);
-      this.saveData();
-    },
-    // 创建数据 end
-
-
     //切换收入支出
     handleexin: function handleexin(val) {
       this.$refs.popup.close();
@@ -371,7 +293,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     // 获取类别数据
-    gettypelist: function gettypelist() {var _this3 = this;
+    gettypelist: function gettypelist() {var _this2 = this;
       uni.showLoading({
         title: '数据加载中...',
         mask: true });
@@ -391,13 +313,11 @@ __webpack_require__.r(__webpack_exports__);
           isadd: true }];
 
         if (res.result.status == 0) {
-          _this3.isnull = false;
+          _this2.isnull = false;
           var _data = _toConsumableArray(res.result.list.data);
-
-          _this3.typeitems = [].concat(_toConsumableArray(_data), more);
-          console.log('typeitems:', _this3.typeitems);
+          _this2.typeitems = [].concat(_toConsumableArray(_data), more);
         } else {
-          _this3.typeitems = [].concat(more);
+          _this2.typeitems = [].concat(more);
           uni.showToast({
             title: res.result.msg,
             icon: 'none' });
@@ -417,7 +337,7 @@ __webpack_require__.r(__webpack_exports__);
       this.$refs.popup.open();
     },
     // 上传文件
-    upload: function upload() {var _this4 = this;
+    upload: function upload() {var _this3 = this;
       new Promise(function (resolve, reject) {
         uni.chooseImage({
           chooseImage: 1,
@@ -443,7 +363,7 @@ __webpack_require__.r(__webpack_exports__);
           title: '图片上传成功',
           mask: true });
 
-        _this4.dataobj.picture = res.fileID;
+        _this3.dataobj.picture = res.fileID;
       }).catch(function (err) {
         uni.hideLoading();
         console.log(err);
@@ -464,7 +384,7 @@ __webpack_require__.r(__webpack_exports__);
       this.dataobj.picture = '';
     },
     // 保存数据
-    saveData: function saveData() {var _this5 = this;
+    saveData: function saveData() {
 
       if (!this.dataobj.amount) {
         uni.showToast({
@@ -512,8 +432,6 @@ __webpack_require__.r(__webpack_exports__);
       then(function (res) {
         console.log(res);
         if (res.result.id) {
-          _this5.idArr.push(res.result.id);
-          _this5.executionNum++;
           uni.hideLoading();
           uni.showToast({
             title: '数据保存成功',

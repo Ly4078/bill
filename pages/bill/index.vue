@@ -148,7 +148,6 @@
 		onShow() {
 			const userId = uni.getStorageSync('userId') || '';
 			if (userId) {
-				console.log('userId:', userId)
 				this.getSummary();
 				this.getData();
 			}
@@ -209,7 +208,6 @@
 						openid: openid
 					}
 				}).then((res) => {
-					console.log('res:', res)
 					if (res.result.status == 0) {
 						this.login(res.result.token);
 						this.Token = res.result.token;
@@ -226,7 +224,6 @@
 			//#endif
 			// 获取汇总数据
 			getSummary() {
-				console.log('getSummary:')
 				uni.showLoading({
 					mask: true,
 					title: "数据加载中..."
@@ -256,7 +253,6 @@
 			},
 			//获取列表数据
 			getData() {
-				console.log('getData')
 				uni.showLoading({
 					mask: true,
 					title: "数据加载中..."

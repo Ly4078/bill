@@ -243,7 +243,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _vuex = __webpack_require__(/*! vuex */ 12);function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance");}function _iterableToArray(iter) {if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;}}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var _uniNavBar = function _uniNavBar() {return __webpack_require__.e(/*! import() | node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-nav-bar/uni-nav-bar */ "node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-nav-bar/uni-nav-bar").then(__webpack_require__.bind(null, /*! @dcloudio/uni-ui/lib/uni-nav-bar/uni-nav-bar */ 105));};var _uniPagination = function _uniPagination() {return __webpack_require__.e(/*! import() | node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-pagination/uni-pagination */ "node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-pagination/uni-pagination").then(__webpack_require__.bind(null, /*! @dcloudio/uni-ui/lib/uni-pagination/uni-pagination */ 112));};var _uniIcons = function _uniIcons() {return Promise.all(/*! import() | node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @dcloudio/uni-ui/lib/uni-icons/uni-icons */ 119));};var _uniListItem = function _uniListItem() {return __webpack_require__.e(/*! import() | node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-list-item/uni-list-item */ "node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-list-item/uni-list-item").then(__webpack_require__.bind(null, /*! @dcloudio/uni-ui/lib/uni-list-item/uni-list-item */ 127));};var _uniPopup = function _uniPopup() {return __webpack_require__.e(/*! import() | node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-popup/uni-popup */ "node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-popup/uni-popup").then(__webpack_require__.bind(null, /*! @dcloudio/uni-ui/lib/uni-popup/uni-popup */ 134));};var _uniList = function _uniList() {return __webpack_require__.e(/*! import() | node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-list/uni-list */ "node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-list/uni-list").then(__webpack_require__.bind(null, /*! @dcloudio/uni-ui/lib/uni-list/uni-list */ 141));};var _uniCard = function _uniCard() {return __webpack_require__.e(/*! import() | node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-card/uni-card */ "node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-card/uni-card").then(__webpack_require__.bind(null, /*! @dcloudio/uni-ui/lib/uni-card/uni-card */ 148));};var _default =
+var _vuex = __webpack_require__(/*! vuex */ 12);function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance");}function _iterableToArray(iter) {if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;}}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var _uniNavBar = function _uniNavBar() {return __webpack_require__.e(/*! import() | node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-nav-bar/uni-nav-bar */ "node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-nav-bar/uni-nav-bar").then(__webpack_require__.bind(null, /*! @dcloudio/uni-ui/lib/uni-nav-bar/uni-nav-bar */ 101));};var _uniPagination = function _uniPagination() {return __webpack_require__.e(/*! import() | node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-pagination/uni-pagination */ "node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-pagination/uni-pagination").then(__webpack_require__.bind(null, /*! @dcloudio/uni-ui/lib/uni-pagination/uni-pagination */ 108));};var _uniIcons = function _uniIcons() {return Promise.all(/*! import() | node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @dcloudio/uni-ui/lib/uni-icons/uni-icons */ 115));};var _uniListItem = function _uniListItem() {return __webpack_require__.e(/*! import() | node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-list-item/uni-list-item */ "node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-list-item/uni-list-item").then(__webpack_require__.bind(null, /*! @dcloudio/uni-ui/lib/uni-list-item/uni-list-item */ 123));};var _uniPopup = function _uniPopup() {return __webpack_require__.e(/*! import() | node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-popup/uni-popup */ "node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-popup/uni-popup").then(__webpack_require__.bind(null, /*! @dcloudio/uni-ui/lib/uni-popup/uni-popup */ 130));};var _uniList = function _uniList() {return __webpack_require__.e(/*! import() | node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-list/uni-list */ "node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-list/uni-list").then(__webpack_require__.bind(null, /*! @dcloudio/uni-ui/lib/uni-list/uni-list */ 137));};var _uniCard = function _uniCard() {return __webpack_require__.e(/*! import() | node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-card/uni-card */ "node-modules/_@dcloudio_uni-ui@1.1.8@@dcloudio/uni-ui/lib/uni-card/uni-card").then(__webpack_require__.bind(null, /*! @dcloudio/uni-ui/lib/uni-card/uni-card */ 144));};var _default =
 
 
 
@@ -288,7 +288,6 @@ var _vuex = __webpack_require__(/*! vuex */ 12);function _toConsumableArray(arr)
   onShow: function onShow() {
     var userId = uni.getStorageSync('userId') || '';
     if (userId) {
-      console.log('userId:', userId);
       this.getSummary();
       this.getData();
     }
@@ -349,7 +348,6 @@ var _vuex = __webpack_require__(/*! vuex */ 12);function _toConsumableArray(arr)
           openid: openid } }).
 
       then(function (res) {
-        console.log('res:', res);
         if (res.result.status == 0) {
           _this3.login(res.result.token);
           _this3.Token = res.result.token;
@@ -366,7 +364,6 @@ var _vuex = __webpack_require__(/*! vuex */ 12);function _toConsumableArray(arr)
 
     // 获取汇总数据
     getSummary: function getSummary() {var _this4 = this;
-      console.log('getSummary:');
       uni.showLoading({
         mask: true,
         title: "数据加载中..." });
@@ -396,7 +393,6 @@ var _vuex = __webpack_require__(/*! vuex */ 12);function _toConsumableArray(arr)
     },
     //获取列表数据
     getData: function getData() {var _this5 = this;
-      console.log('getData');
       uni.showLoading({
         mask: true,
         title: "数据加载中..." });
@@ -573,6 +569,9 @@ var _vuex = __webpack_require__(/*! vuex */ 12);function _toConsumableArray(arr)
     },
     //点击菜单按钮
     openNavs: function openNavs() {
+      // uni.navigateTo({
+      // 	url: './annal'
+      // });
       this.$refs.navs.open();
     },
     // 点击某个菜单跳转到相应页面

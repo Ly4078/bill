@@ -8,7 +8,6 @@
     "pages/bill/search",
     "pages/bill/edit",
     "pages/bill/about",
-    "pages/bill/site",
     "pages/bill/annal",
     "pages/bill/chart"
   ],
@@ -17,5 +16,6 @@
     "navigationStyle": "custom",
     "navigationBarTextStyle": "black"
   },
-  "usingComponents": {}
+  "usingComponents": {},
+  "sitemapLocation": "sitemap90.json"
 }
