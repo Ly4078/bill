@@ -27,6 +27,12 @@
 .bill.data-v-16fde1ba {
   background-color: #f1f1f1;
 }
+.textimg.data-v-16fde1ba {
+  width: 400rpx;
+  height: 400rpx;
+  margin-top: 400rpx;
+  margin-left: 200rpx;
+}
 .card-expen.data-v-16fde1ba {
   display: -webkit-box;
   display: -webkit-flex;

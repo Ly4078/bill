@@ -1,5 +1,7 @@
 <template>
 	<view class="bill">
+
+
 		<!-- #ifdef MP -->
 		<uni-nav-bar fixed="true" status-bar="true" left-icon="search" title="我的帐单儿" color="#333" @clickLeft="clickSearch"
 		 background-color="#f1f1f1">
@@ -124,30 +126,12 @@
 		},
 		//#endif
 		onLoad() {
-			const userId = uni.getStorageSync('userId') || '';
-			if (!userId) {
-				//#ifdef APP-PLUS || H5
-				uni.reLaunch({
-					url: './login'
-				})
-				//#endif
-				//#ifdef MP-WEIXIN
-				this.getOpenId();
-				//#endif
-			} else {
-				this.Token = userId;
-			}
-			this.navs = [...this.Navs.navs];
-			const myDate = new Date();
-			this.nowdate = {
-				year: String(myDate.getFullYear()),
-				month: String(Number(myDate.getMonth() + 1) < 10 ? '0' + (myDate.getMonth() + 1) : myDate.getMonth() + 1),
-				day: String(Number(myDate.getDate() + 1) < 10 ? '0' + myDate.getDate() : myDate.getDate())
-			}
+			this.init();
 		},
 		onShow() {
 			const userId = uni.getStorageSync('userId') || '';
 			if (userId) {
+				console.log("onshow-userId:",userId)
 				this.getSummary();
 				this.getData();
 			}
@@ -156,6 +140,7 @@
 			return {
 				navs: [],
 				Token: '',
+				Iversion: 0,
 				lists: [],
 				budget: '',
 				imgUrl: "",
@@ -181,8 +166,31 @@
 			}
 		},
 		methods: {
+			init() {
+				const userId = uni.getStorageSync('userId') || '';
+				if (!userId) {
+					//#ifdef APP-PLUS || H5
+					uni.reLaunch({
+						url: './login'
+					})
+					//#endif
+					//#ifdef MP-WEIXIN
+					this.getOpenId();
+					//#endif
+				} else {
+					this.Token = userId;
+				}
+				this.navs = [...this.Navs.navs];
+				const myDate = new Date();
+				this.nowdate = {
+					year: String(myDate.getFullYear()),
+					month: String(Number(myDate.getMonth() + 1) < 10 ? '0' + (myDate.getMonth() + 1) : myDate.getMonth() + 1),
+					day: String(Number(myDate.getDate() + 1) < 10 ? '0' + myDate.getDate() : myDate.getDate())
+				}
+			},
 			//#ifdef MP-WEIXIN
 			...mapMutations(['login']),
+
 			// 获取微信openid
 			getOpenId() {
 				uni.login({
@@ -201,6 +209,7 @@
 			},
 			// 微信登录
 			wxLogin(openid) {
+				console.log("wxlogin")
 				const _this = this;
 				uniCloud.callFunction({
 					name: 'login',
@@ -208,7 +217,9 @@
 						openid: openid
 					}
 				}).then((res) => {
+					console.log("resa:",res)
 					if (res.result.status == 0) {
+						console.log('token:',res.result.token)
 						this.login(res.result.token);
 						this.Token = res.result.token;
 						this.getSummary();
@@ -216,7 +227,7 @@
 					}
 					if (res.result.status == 1) {
 						uni.reLaunch({
-							url: './login?id='+res.result.token
+							url: './login?id=' + res.result.token
 						})
 					}
 				})
@@ -449,7 +460,7 @@
 					uni.navigateTo({
 						url: './annal'
 					});
-				} 
+				}
 			}
 		}
 	}
@@ -458,6 +469,13 @@
 <style lang="scss" scoped>
 	.bill {
 		background-color: $uni-bg-color-hover;
+	}
+
+	.textimg {
+		width: 400upx;
+		height: 400upx;
+		margin-top: 400upx;
+		margin-left: 200upx;
 	}
 
 	.card-expen {
@@ -557,7 +575,7 @@
 	}
 
 
-	
+
 
 	.navsbox {
 		padding: 30upx;

@@ -14,9 +14,6 @@
 				<input :type="iseye?'password':'text'" name="password" placeholder="登录密码" value="" />
 				<text :class="iseye?'iconfont iconyanjing':'iconfont iconyanjing1'" @click="iseye = !iseye"></text>
 			</view>
-			<!-- <view class="inputView">
-				<input type="text" name="versi"  placeholder="验证码" value="" />
-			</view> -->
 			<view class="uni-btn-v">
 				<button form-type="submit">{{title}}</button>
 			</view>
@@ -77,8 +74,7 @@
 			...mapMutations(['login']),
 			// 提交验证
 			formSubmit: function(e) {
-				console.log('form发生了submit事件，携带数据为：' + JSON.stringify(e.detail.value))
-				var formdata = e.detail.value;
+				let formdata = e.detail.value;
 				if (!this.utils.checkPhone(formdata.phone)) {
 					uni.showToast({
 						title: '手机号输入错误',
@@ -97,10 +93,14 @@
 				postData = { ...this.wxdata,
 					...formdata
 				}
+				if(this.wxdata && this.wxdata.openid){
+					postData.openid=this.wxdata.openid;
+				}
 				uniCloud.callFunction({
 					name: 'login',
 					data: postData
 				}).then((res) => {
+					console.log('res123:',res)
 					if (res.result.status == 0) {
 						this.login(res.result.token);
 						uni.reLaunch({

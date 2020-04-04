@@ -16,6 +16,8 @@
     "navigationStyle": "custom",
     "navigationBarTextStyle": "black"
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap90.json"
+  "navigateToMiniProgramAppIdList": [
+    "wx2d511b26367af3bc"
+  ],
+  "usingComponents": {}
 }

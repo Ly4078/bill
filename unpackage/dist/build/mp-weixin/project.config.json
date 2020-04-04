@@ -12,7 +12,7 @@
 	"compileType": "miniprogram",
 	"libVersion": "2.9.2",
 	"appid": "wxbf83b397b1fc28bc",
-	"projectname": "%E6%88%91%E7%9A%84%E8%B4%A6%E6%9C%AC%E5%84%BF",
+	"projectname": "我的账本儿",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
 	"condition": {

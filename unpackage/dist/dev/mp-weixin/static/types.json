@@ -1,5 +1,13 @@
 {
 	"typdIcons": [{
+		"iconclass": "iconyule"
+	}, {
+		"iconclass": "iconcanyincanju"
+	}, {
+		"iconclass": "icontang"
+	}, {
+		"iconclass": "iconshuidianmei"
+	}, {
 		"iconclass": "iconqiche"
 	}, {
 		"iconclass": "iconhuoche"
@@ -38,10 +46,6 @@
 	}, {
 		"iconclass": "iconrenminbi"
 	}, {
-		"iconclass": "icontang"
-	}, {
-		"iconclass": "iconyule"
-	}, {
 		"iconclass": "iconyunongtongqukuanfuwu"
 	}, {
 		"iconclass": "iconjiekuan"
@@ -50,13 +54,21 @@
 	}, {
 		"iconclass": "iconhongbao"
 	}, {
-		"iconclass": "iconjiaoyu"
-	}, {
 		"iconclass": "iconshenghuo-"
 	}, {
 		"iconclass": "iconshuaqiaqiapianyinhangqia"
 	}, {
 		"iconclass": "icontouzixiangmu"
+	}, {
+		"iconclass": "icondixiaofei"
+	}, {
+		"iconclass": "iconxiaofeikecheng"
+	}, {
+		"iconclass": "iconxiaofeizhuanjifen"
+	}, {
+		"iconclass": "iconshipin"
+	}, {
+		"iconclass": "iconxiaofeiweiquan"
 	}, {
 		"iconclass": "iconqita"
 	}, {
@@ -65,8 +77,6 @@
 		"iconclass": "iconshangdian"
 	}, {
 		"iconclass": "iconzijinzhuanzhang"
-	}, {
-		"iconclass": "iconcanyincanju"
 	}],
 	"paytype": [{
 			"value": 5,

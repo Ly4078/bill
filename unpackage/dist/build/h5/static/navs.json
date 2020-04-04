@@ -1,0 +1,13 @@
+{
+	"navs":[
+		{
+			"id":1,
+			"iconsClass":"iconguanyu",
+			"value":"关于"
+		},{
+			"id":3,
+			"iconsClass":"iconweibiaoti15",
+			"value":"账单记录"
+		}
+	]
+}

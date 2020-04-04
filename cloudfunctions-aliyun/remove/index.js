@@ -26,9 +26,10 @@ exports.main = async (event, context) => {
 	const res = await db.collection('listdata').where({
 		token: event.token,
 		_id: event.dataId
-	}).remove().then(function(res) {})
-	return {
-		status: 0,
-		msg: '删除成功'
-	}
+	}).remove().then(function(res) {
+		return {
+			status: 0,
+			msg: '删除成功'
+		}
+	})
 };

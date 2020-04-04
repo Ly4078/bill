@@ -111,6 +111,7 @@
     /* 小程序特有相关 */
     "mp-weixin" : {
         "appid" : "wxbf83b397b1fc28bc",
+        "navigateToMiniProgramAppIdList" : [ "wx2d511b26367af3bc" ],
         "setting" : {
             "urlCheck" : false,
             "postcss" : true,
@@ -127,5 +128,9 @@
     },
     "mp-toutiao" : {
         "usingComponents" : true
+    },
+    "h5" : {
+        "title" : "我的账本儿",
+        "domain" : "lunull.cn"
     }
 }
