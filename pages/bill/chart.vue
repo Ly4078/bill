@@ -33,7 +33,7 @@
 			</view>
 			<view class="carditem intotal">
 				<text>共{{summary.intotal}}笔收入，¥{{summary.inAmount}}</text>
-				<text class="surplus">结余¥{{summary.budgetotal-summary.exAmount}}</text>
+				<text class="surplus">结余¥{{(summary.budgetotal-summary.exAmount).toFixed(2)}}</text>
 			</view>
 		</uni-card>
 

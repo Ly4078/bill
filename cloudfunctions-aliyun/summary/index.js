@@ -116,5 +116,6 @@ exports.main = async (event, context) => {
 	}
 
 	//返回数据给客户端
+	resobj.exAmount=(resobj.exAmount).toFixed(2);
 	return resobj
 };

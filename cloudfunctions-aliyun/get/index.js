@@ -100,17 +100,17 @@ exports.main = async (event, context) => {
 	if (totalRes.total > 0) {
 		resultData.total = totalRes.total;
 		// 查询数据列表
-		const list = await collection.field({ 'token': false }).orderBy("useDategetTime", "desc").skip(event.pageNum * 100).limit(100).get();
+		const list = await collection.field({ 'token': false }).orderBy("useDategetTime", "asc").skip(event.pageNum * 100).limit(100).get();
 		if (list.affectedDocs > 0) {
 			resultData.status = 1;
-			resultData.affectedDocs = list.affectedDocs;
+			// resultData.affectedDocs = list.affectedDocs;
 			if (event.range == 'year') {
 				resultData.year = year;
 				// 数据分类分组
 				let dataArr = await uniCloud.callFunction({
 					name: "group",
 					data: {
-						arr: list.data,
+						arr: list.data.reverse(),
 						range: 'useMonth'
 					}
 				})
@@ -120,7 +120,6 @@ exports.main = async (event, context) => {
 				return resultData
 			}
 		}
-
 		return resultData
 	} else {
 		return {

@@ -24,7 +24,7 @@
 					本月收入<text>{{iseye?'****':`¥ ${summary.inAmount}`}}</text>
 				</view>
 				<view class="amout" @click="setbudget">
-					预算剩余<text>{{iseye?'****':`¥ ${summary.budgetotal-summary.exAmount}`}}</text>
+					预算剩余<text>{{iseye?'****':`¥ ${(summary.budgetotal-summary.exAmount).toFixed(2)}`}}</text>
 				</view>
 			</view>
 			<view class="chartsbut">
@@ -39,7 +39,7 @@
 				<uni-list-item class="dateitem" :title="item.datetime" :budget="item.budget" :show-arrow="false"></uni-list-item>
 				<uni-list-item v-for="(items,indexs) in item.listItem" :key="indexs" @click="handleItem(items._id)" @longpress="handleLong(items)"
 				 @onshowproof="onshowproof" :title="items.useType.label" :note="`${items.payType.label}`" :remarks="items.remarks"
-				 :amount="items.amount" :datetime="items.weekday" :icons="items.useType.iconclass" :picture="items.picture" :genre="items.genre"
+				 :amount="items.amount" :datetime="items.useDate" :icons="items.useType.iconclass" :picture="items.picture" :genre="items.genre"
 				 :show-arrow="false"></uni-list-item>
 			</uni-list>
 		</block>
@@ -286,7 +286,6 @@
 					if (res.result.total > 0) {
 						this.isnull = false;
 						res.result.list.forEach(el => {
-							el.weekday = this.utils.getMyDay(el.useDate);
 							if (el.genre == 1) {
 								extotal += Number(el.amount)
 							} else if (el.genre == 2) {

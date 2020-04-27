@@ -33,7 +33,7 @@
 				{{listdata.remarks}}
 			</view>
 			<view class="picture" v-if="listdata.picture">
-				<image class="pictureimg" :src="listdata.picture" mode="aspectFit"></image>
+				<image class="pictureimg" :src="listdata.picture" mode="aspectFit" @longpress="saveImg(listdata.picture)"></image>
 			</view>
 		</view>
 		<!-- #ifdef APP-PLUS || H5 -->
@@ -64,21 +64,6 @@
 	export default {
 		components: {
 			uniNavBar
-		},
-		onShow: function() {
-			try {
-				const value = uni.getStorageSync('editData');
-				if (value) {
-					this.listdata = value;
-					try {
-						uni.removeStorageSync('editData');
-					} catch (e) {
-						// error
-					}
-				}
-			} catch (e) {
-				// error
-			}
 		},
 		onLoad: function(option) {
 			if (option.id) {
@@ -168,12 +153,26 @@
 			// 修改数据
 			editdata() {
 				this.listdata.picture = this.listdata.picture ? this.listdata.picture : '';
-				console.log("this.listdata:",this.listdata)
 				delete this.listdata.uniCloudClientInfo;
 				delete this.listdata.useType.uniCloudClientInfo;
 				let _item = JSON.stringify(this.listdata)
 				uni.redirectTo({
 					url: './edit?item=' + _item
+				});
+			},
+			// 保存图片到本地
+			saveImg(Url){
+				console.log("Url:",Url)
+				uni.downloadFile({
+				    url:Url,
+				    success: (res) => {
+				        if (res.statusCode === 200) {
+							uni.showToast({
+							    title: '下载成功',
+							    duration: 2000
+							});
+				        }
+				    }
 				});
 			}
 		}
@@ -233,7 +232,7 @@
 
 		.picture {
 			width: 100%;
-
+			padding-top: 40upx;
 			.pictureimg {
 				width: 100%;
 			}

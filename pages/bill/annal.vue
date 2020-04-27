@@ -59,7 +59,9 @@
 				startTime: '',
 				imgUrl: "",
 				status: 'more',
-				listData: [],
+				listData: {
+					total:0
+				},
 				islong: true,
 				isnull: false,
 				opearObj: {},
@@ -68,6 +70,7 @@
 		},
 		onShow() {
 			this.startTime = new Date();
+			this.pageNum = 0;
 			this.getlistdata();
 		},
 		// 监听页面卸载
@@ -110,9 +113,12 @@
 			},
 			// 查询数据列表
 			getlistdata() {
-				uni.showLoading({
-					title: '数据加载中...'
-				})
+				
+				if(this.listData.total<1){
+					uni.showLoading({
+						title: '数据加载中...'
+					})
+				}
 				const _data={
 						token:this.Token,
 						pageNum: this.pageNum,
@@ -123,7 +129,10 @@
 					name: 'get',
 					data: _data
 				}).then((res) => {
-					uni.hideLoading();
+					
+					if(this.listData.total<1){
+						uni.hideLoading();
+					}
 					if (res.result.total > 0) {
 						this.isnull = false;
 						if (res.result.list.length > 0) {
@@ -136,7 +145,6 @@
 								this.listData.list = lastData;
 							}
 						} else {
-
 							if (this.pageNum == 0) {
 								this.listData = {};
 							}
@@ -241,7 +249,7 @@
 			onshowproof(url) {
 				this.imgUrl = url;
 				this.$refs.picture.open();
-			},
+			}
 		}
 	}
 </script>

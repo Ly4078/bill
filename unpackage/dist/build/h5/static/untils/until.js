@@ -1,5 +1,5 @@
 export default {
-	getMyDay(date) { //判断当前日期时间是星期几/上下午
+	getMyDay(date,val) { //判断当前日期时间是星期几/上下午
 		let arr = date.split(" "),
 			week = "",
 			oday = "";
@@ -51,9 +51,10 @@ export default {
 			if (_hours > 12) {
 				_hours = Number(_hours) - 12;
 			}
-			oday = _oday + _hours + ':' + _date[1]
+			oday = _oday + arr[1];
 		}
-		return week + ' ' + oday;
+		let Narr=arr[0].split('-');
+		return Number(Narr[1])+'-'+Number(Narr[2])+' '+week + ' ' + arr[1];
 	},
 	monthday(year, month) { //判断某年某月有多少天
 		let date = new Date(year, month, 1);

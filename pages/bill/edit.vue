@@ -16,7 +16,7 @@
 		<view class="box">
 			<view class="boxi">
 				<view class="boxleft amount">
-					<input type="number" v-model="dataobj.amount" placeholder="请输入金额" />元
+					<input type="number"  v-model.trim="dataobj.amount" @input="oninput"  placeholder="请输入金额" />元
 				</view>
 				<view class="boxright" @click="showModel(1)">
 					<view v-if="dataobj.useType.iconclass" :class="['iconfont',dataobj.genre==1?'exclass':'inclass',dataobj.useType.iconclass]"></view>
@@ -136,7 +136,6 @@
 					});
 				}
 			},
-			
 			//切换收入支出
 			handleexin(val){
 				this.$refs.popup.close();
@@ -159,10 +158,10 @@
 			},
 			// 获取类别数据
 			gettypelist() {
-				uni.showLoading({
-					title: '数据加载中...',
-					mask: true
-				})
+				// uni.showLoading({
+				// 	title: '数据加载中...',
+				// 	mask: true
+				// })
 				uniCloud.callFunction({
 					name: 'settype',
 					data: {
@@ -171,7 +170,7 @@
 						genre: this.dataobj.genre
 					}
 				}).then((res) => {
-					uni.hideLoading();
+					// uni.hideLoading();
 					let more=[{
 						iconclass: "iconjia",
 						label:'编辑',
@@ -333,6 +332,14 @@
 				    })
 				    console.error(err)
 				  })
+			},
+			 // 通过正则过滤小数点后两位
+			oninput(e) {
+				const _this=this;
+			    e.target.value = (e.target.value.match(/^\d*(\.?\d{0,2})/g)[0]) || null;
+				setTimeout(()=>{
+					_this.dataobj.amount=e.target.value;
+				},50)
 			},
 			//选择某个pay方式 
 			handlepay(item){

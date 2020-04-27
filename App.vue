@@ -26,6 +26,7 @@
 <style lang="scss">
 	
 	// @import './static/fonticon.css';
+	@import url('./static/fonticon.css'); 
 	/*每个页面公共css */
 	body{
 		background-color: $uni-bg-color-hover;
@@ -35,7 +36,6 @@
 		.inclass{
 			background-color: $uni-color-inclass;
 		}
-		
 		.operating {
 			width: 500upx;
 			padding: 20upx 30upx;
